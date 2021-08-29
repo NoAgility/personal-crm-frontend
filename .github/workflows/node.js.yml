@@ -34,7 +34,7 @@ jobs:
     needs: [continuous-integration]
     steps:
       - name: 'Deploy to Netlify'
-      - uses: netlify/actions/cli@master
+        uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.MY_TOKEN_SECRET }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
