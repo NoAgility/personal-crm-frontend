@@ -1,0 +1,36 @@
+.sidenav {
+    width: 240px;
+    position: fixed;
+    left: 0;
+    background-color: #535973;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    height: 100%;
+    max-width: 240px;
+}
+.icon {
+    margin-right: 5px;
+    vertical-align: bottom;
+    color: #ffffff;
+}
+.nav-list {
+    left: 0;
+    padding-inline-start: 0px;
+}
+.nav-item {
+    font-family: 'Montserrat Alternates', sans-serif;
+    list-style-type: none;
+    margin: 30px 0 30px 0;
+}
+.nav-link {
+    
+    color: #ffffff;
+    font-size: 25px;
+    
+    text-decoration: none;
+}
+
+.nav-link :hover {
+    color: #c4c9ff;
+}
