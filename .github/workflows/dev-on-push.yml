@@ -19,7 +19,7 @@ jobs:
 
     steps:
     # Step 1 - Check out dev branch of backend application
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
       with:
         name: NoAgility/personal-crm-backend
         ref: refs/heads/dev
