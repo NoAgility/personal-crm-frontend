@@ -1,0 +1,46 @@
+.sidenav {
+    width: 240px;
+    position: fixed;
+    left: 0;
+    background-color: #535973;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    height: 100%;
+    max-width: 240px;
+}
+.icon {
+    margin-right: 5px;
+    vertical-align: bottom;
+    color: #ffffff;
+}
+.registration-form {
+    width: 40%;
+    display: inline-block;
+    background-color: #535973;
+}
+.form-list {
+    font-family: 'Montserrat Alternates', sans-serif;
+    left: 0;
+    padding-inline-start: 0px;
+    text-align: center;
+}
+.form-item {
+    list-style-type: none;
+    margin: 30px 0 30px 0;
+    width: 100%
+}
+.form-input {
+    font-family: 'Montserrat Alternates', sans-serif;
+    margin: 0 0 0 10px;
+}
+.form-label {
+    text-align: auto;
+}
+.form-submit {
+    font-family: 'Montserrat Alternates', sans-serif;
+    border-width: 3px;
+    border-color: #ffffff;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
