@@ -8,7 +8,7 @@ const RegistrationSuccess = (props) => {
             <h1>
                 Registration Success
                 <div className="form-field-container">
-                    <button role="button" name="login" className="form-back" type="button" onClick={ () => {window.location.href = '/login' }}>Back to Login</button>
+                    <button name="login" className="form-back" type="button" onClick={ () => {window.location.href = '/login' }}>Back to Login</button>
                 </div>
             </h1>
         </div>
