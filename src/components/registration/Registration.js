@@ -1,78 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Registration.css';
-import Register, { CheckForUsername, CheckForPassword } from './RegistrationController';
+import Controller from './RegistrationController';
 const Registration = (props) => {
-    const [userName, setUserName] = useState("");
+    const [username, setUsername] = useState("");
     const [name, setName] = useState("");
-    const [passWord, setPassWord] = useState("");
+    const [password, setPassword] = useState("");
     const [DOB, setDOB] = useState("");
-    const [errorUserName, setErrorUserName] = useState("");
+    const [errorUsername, setErrorUsername] = useState("");
     const [errorName, setErrorName] = useState("");
-    const [errorPassWord, setErrorPassWord] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
     const [errorDOB, setErrorDOB] = useState("");
-    const onSubmit = (e) => {
-        e.preventDefault()
+    const [generalError, setGeneralError] = useState("");
 
-        CheckForUsername({
-            username: props.userName
-        });
-        if (!CheckForPassword({
-            password: props.passWord
-        })) {
-            props.errorUserName="Password must be at least 4 characters long";
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        setGeneralError("Loading...");
+        var userDetails = {
+            username: username,
+            password: password,
+            name: name,
+            dob: DOB
         }
-        Register({
-            username: props.userName,
-            password: props.passWord,
-            name: props.name,
-            dob: props.DOB
-        })
+        var errorFlag = false;
+        const chain = {
+            errorFunction: [setErrorUsername, setErrorUsername, setErrorName, setErrorPassword, setErrorDOB, setGeneralError],
+            command: [Controller.isValidUsername, Controller.isTakenUsername, Controller.isValidName, Controller.isValidPassword, Controller.isValidDOB, Controller.Register]
+        }
+        for (var i = 0; i < chain.errorFunction.length; i++) {
+            try {
+                await chain.command[i](userDetails);
+                chain.errorFunction[i]("");
+            } catch (err) {
+                chain.errorFunction[i](err.toString());
+                return;
+            }
+        }
+        setGeneralError("Done");
+        window.document.href = '/registration_success';
     }
-    
-    return (<div>
-        <form className="registration-form" onSubmit={onSubmit}>
-            <div className="form-content-container">
-                <div className="form-title">
+    return (
+        <div className="background">
+            <form className="registration-form" onSubmit={onSubmit}>
+                <h1>
                     Create An Account
+                </h1>
+                <div className="form-field-container">
+                    <div className='error'>{errorUsername}</div>
+                    <input data-testid="username" name="username" className="form-input" type="text" value={props.username} placeholder="Username" onChange={ (e) => setUsername(e.target.value) }/>
                 </div>
-                <ul className="form-list">
-                    <li className="form-item">
-                        <div className="form-field-container">
-                            <label className="form-label">Username</label><label className="form-error">{props.errorUserName}</label>
-                            <p/>
-                            <input name="userName" className="form-input" type="text" value={props.userName} onChange={ (e) => setUserName(e.target.value) }/>
-                        </div>
-                    </li>
-                    <li className="form-item">
-                        <div className="form-field-container">
-                            <label className="form-label">Name</label><label className="form-error">{props.errorName}</label>
-                            <p/>
-                            <input name="name" className="form-input" type="text" value={props.firstName} onChange={ (e) => setName(e.target.value) }/>
-                        </div>
-                    </li>
-                    <li className="form-item">
-                        <div className="form-field-container">
-                            <label className="form-label">Password</label><label className="form-error">{props.errorPassWord}</label>
-                            <p/>
-                            <input name="passWord" className="form-input" type="text" value={props.passWord} onChange={ (e) => setPassWord(e.target.value) }/>
-                        </div>
-                    </li>
-                    <li className="form-item">
-                        <div className="form-field-container">
-                            <label className="form-label">Date of Birth</label><label className="form-error">{props.errorDOB}</label>
-                            <p/>
-                            <input name="DOB" className="form-input" type="date" value={props.DOB} onChange={ (e) => setDOB(e.target.value) }/>
-                        </div>
-                    </li>
-                    <li className="form-item">
-                        <div className="form-field-container">
-                            <input name="submit" className="form-submit" type="submit" value="Submit"/>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </form>
-    </div>)
+                <div className="form-field-container">
+                <div className='error'>{errorName}</div>
+                    <input data-testid="name" name="name" className="form-input" type="text" value={props.firstName} placeholder="Name" onChange={ (e) => setName(e.target.value) }/>
+                </div>
+                <div className="form-field-container">
+                    <div className='error'>{errorPassword}</div>
+                    <input data-testid="password" name="password" className="form-input" type="text" value={props.password} placeholder="Password" onChange={ (e) => setPassword(e.target.value) }/>
+                </div>
+                <div className="form-field-container">
+                    <div className='error'>{errorDOB}</div>
+                    <input data-testid="DOB" name="DOB" className="form-input" type="date" value={props.DOB} onChange={ (e) => setDOB(e.target.value) }/>
+                </div>
+                <div className="form-field-container">
+                <div data-testid='error' className='error'>{generalError}</div>
+                    <button data-testid="submit" name="submit" className="form-submit" type="submit" onClick={ onSubmit.bind(this) }>Submit</button>
+                    <button data-testid="login" name="login" className="form-back" type="button" onClick={ () => {window.location.href = '/login' }}>Back to Login</button>
+                </div>
+            </form>
+        </div>
+    )
 }
 
 export default Registration;

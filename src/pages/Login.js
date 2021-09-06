@@ -41,7 +41,7 @@ const Login = () => {
                 </div>
                 <div className="buttons">
                     <button type="submit">Login</button>
-                    <button class="register" type="button">Register</button>
+                    <button class="register" type="button" onClick={ () => {window.location.href = '/register'} }>Register</button>
                 </div>
             </form>
         </div>
