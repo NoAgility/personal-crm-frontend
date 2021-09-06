@@ -7,15 +7,14 @@ const Controller = {
             password: userDetails.password,
             name: userDetails.name,
             dateOfBirth: userDetails.dob,
-        }).then(response => { console.log(response); return true; }).catch(err => {return fase;});
+        }).then(response => { return true; }).catch(err => {return false;});
         if (!flag) {
             throw new Error("Failed to create account, please try again later");
         }
     },
     isValidUsername : async (userDetails) => {
-        console.log("checking username");
 
-        if (userDetails.username === undefined) {
+        if (userDetails.username === undefined || userDetails.username.length === 0) {
             throw new Error('Username must be provided');
         }
         // Check for length
@@ -31,13 +30,12 @@ const Controller = {
     isTakenUsername : async (userDetails) => {
         //Check for existing username
         var response = await fetch(`/account/get?username=${userDetails.username}`).then(response => { return response; });
-        console.log(response);
         if (!(response.data === undefined || response.data.length === 0)) {
             throw new Error('Username is already taken');
         }
     },
     isValidPassword : (userDetails) => {
-        if (userDetails.password === undefined) {
+        if (userDetails.password === undefined || userDetails.password.length === 0) {
             throw new Error('Please provide a password');
         }
         if (userDetails.password.length < 4) {
@@ -45,15 +43,15 @@ const Controller = {
         }
     },
     isValidName : (userDetails) => {
-        if (userDetails.name === undefined) {
+        if (userDetails.name === undefined || userDetails.name.length === 0) {
             throw new Error('Name must not be empty!')
         }
-        if (userDetails.name.match(/^.*[^A-Za-z].*$/)) {
+        if (userDetails.name.match(/^.*[^A-Za-z ].*$/)) {
             throw new Error('Name must only contain letters')
         }
     },
     isValidDOB : (userDetails) => {
-        if (userDetails.dob === undefined) {
+        if (userDetails.dob === undefined || userDetails.dob.length === 0) {
             throw new Error('DOB must be set');
         }
     }
