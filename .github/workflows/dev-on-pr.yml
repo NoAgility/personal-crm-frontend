@@ -44,7 +44,7 @@ jobs:
     - run: npm ci
     - name: Build and run React JS application
       env:
-        BACKEND_IP_ADDRESS: 'localhost:8080'
+        REACT_APP_BACKEND_URL: 'localhost:8080'
       run: npm run build --if-present
     - name: Run integration and unit tests - React
       env:
