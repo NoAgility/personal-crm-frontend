@@ -62,6 +62,9 @@ input {
 	width: 80%;
 }
 
+input::placeholder {
+	color: #afafaf
+}
 button {
     background-color: var(--color-white);
 	font-family: var(--font);

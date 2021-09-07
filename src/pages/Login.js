@@ -1,7 +1,7 @@
 import "./Login.css";
 import { useState } from "react";
 import { BiHide, BiShow} from 'react-icons/bi';
-
+import { useHistory } from 'react-router-dom';
 
 function onSubmit() {
 	// TO DO: Implement function
@@ -9,6 +9,7 @@ function onSubmit() {
 
 const Login = () => {
 
+    const history = useHistory();
     const [passwordShown, setPasswordShown] = useState(false);
 
     const togglePassword = () => {
@@ -41,7 +42,7 @@ const Login = () => {
                 </div>
                 <div className="buttons">
                     <button type="submit">Login</button>
-                    <button class="register" type="button">Register</button>
+                    <button class="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
                 </div>
             </form>
         </div>
