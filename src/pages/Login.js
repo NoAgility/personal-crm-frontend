@@ -42,7 +42,7 @@ const Login = () => {
                 </div>
                 <div className="buttons">
                     <button type="submit">Login</button>
-                    <button class="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
+                    <button className="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
                 </div>
             </form>
         </div>
