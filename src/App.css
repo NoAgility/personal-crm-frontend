@@ -1,5 +1,29 @@
+:root {
+	--font: 'Montserrat', sans-serif;
+	--text-big: 25px;
+  --text-medium: 20px;
+  --text-small: 15px;
+	--text-xsmall: 12px;
+	--text-xxsmall: 10px;
+	--color-dark: #3a3b50;
+  --color-medium: #585c74;
+  --color-teal: #70d4cc;
+	--color-orange: #d4a46c;
+	--color-purple: #be8bfc;
+	--color-green: #5dbc94;
+	--color-blue: #54a3fb;
+	--color-white: #FFFFFF;
+  --color-offwhite: #8e91a5;
+	--color-black: #000000;
+}
+
+body {
+  background-color: var(--color-dark);
+}
+
 .App {
   text-align: center;
+  color: var(--color-white);
 }
 
 .App-logo {
@@ -35,4 +59,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.app-body {
+  margin-left:240px;
+  display: grid;
+  place-items: center;
+  padding: 50px;
 }

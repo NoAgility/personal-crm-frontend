@@ -8,6 +8,7 @@
     align-items: top;
     height: 100%;
     max-width: 240px;
+    z-index: -1;
 }
 .icon {
     margin-right: 5px;
@@ -24,10 +25,8 @@
     margin: 30px 0 30px 0;
 }
 .nav-link {
-    
     color: #ffffff;
     font-size: 25px;
-    
     text-decoration: none;
 }
 
