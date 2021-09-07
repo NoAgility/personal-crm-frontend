@@ -1,0 +1,107 @@
+:root {
+	--font: 'Montserrat', sans-serif;
+	--text-big: 25px;
+    --text-medium: 20px;
+    --text-small: 15px;
+	--text-xsmall: 12px;
+	--text-xxsmall: 10px;
+	--color-dark: #3a3b50;
+    --color-medium: #545c74;
+    --color-teal: #70d4cc;
+	--color-orange: #d4a46c;
+	--color-purple: #be8bfc;
+	--color-green: #5dbc94;
+	--color-blue: #54a3fb;
+	--color-white: #FFFFFF;
+	--color-black: #000000;
+}
+
+h1 {
+	font-size: var(--text-big);
+	font-weight: bold;
+    margin-bottom: 30px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1);
+}
+input[type="date"]::-webkit-datetime-edit {
+    cursor: pointer;
+}
+.icon {
+    margin-right: 5px;
+    vertical-align: bottom;
+    color: #ffffff;
+}
+.background {
+    display: grid;
+ 	place-items: center;
+	background-color: var(--color-dark);
+	font-size: 20px;
+	background-image: url("../../assests/background-image.png");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	color: white;
+	font-family: var(--font);
+}
+.registration-form {
+    background-color: var(--color-medium);
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 10px var(--color-black);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	margin: auto;
+	padding: 50px;
+	height: 500px;
+	width: 400px;
+}
+
+.form-field-container > p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+.form-field-container {
+    width: 70%;
+    margin: 10px auto 10px auto;
+    justify-content: left;
+}
+.form-input {
+    font-family: var(--font);
+	font-size: var(--text-small);
+	color: var(--color-white);
+	padding: 5px;
+	outline: none;
+	border-style: none;
+	border-bottom: solid var(--color-white);
+	border-width: 2px;
+	background-color: var(--color-medium);
+	width: 80%;
+}
+.form-input::placeholder {
+    color: #afafaf
+}
+.form-submit {
+    background-color: var(--color-white);
+	font-family: var(--font);
+	font-size: var(--text-small);
+	font-weight: bold;
+	color: var(--color-black);
+	border-radius: 8px;
+	border-style: none;
+	margin-bottom: 10px;
+	height: 48px;
+	width: 80%;
+	cursor: pointer;
+}
+.form-back {
+	background-color: var(--color-medium);
+	color: var(--color-white);
+}
+.error {
+    color: #ff335f;
+    font-size: var(--text-xsmall);
+}
