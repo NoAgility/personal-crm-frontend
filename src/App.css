@@ -16,7 +16,17 @@
   --color-offwhite: #8e91a5;
 	--color-black: #000000;
 }
-
+* {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
 body {
   background-color: var(--color-dark);
 }
