@@ -16,7 +16,7 @@ const Header = (props) => {
 
 			<div className="menu-dropdown">
 			<Dropdown >
-				<Dropdown.Toggle id="button-dropdown" class="dropdown-button" align="end">
+				<Dropdown.Toggle id="button-dropdown" className="dropdown-button" align="end">
 					<BiMenu className="menu-icon" size={40}/>
 				</Dropdown.Toggle>
 

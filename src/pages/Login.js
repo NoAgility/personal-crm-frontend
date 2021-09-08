@@ -20,7 +20,7 @@ const Login = () => {
     const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
 
 	return (
-        <div className="login">
+        <div className="login-container">
             <form onSubmit={onsubmit}>
                 <h1>Login</h1>
                 <div className="input">

@@ -1,4 +1,6 @@
+
 :root {
+  height: 100%;
 	--font: 'Montserrat', sans-serif;
 	--text-big: 25px;
   --text-medium: 20px;
@@ -27,10 +29,14 @@
      -moz-box-sizing: content-box;
           box-sizing: content-box;
 }
+html {
+  height: 100%;
+}
 body {
   background-color: var(--color-dark);
+  height: 100%;
+  text-align: center;
 }
-
 .App {
   text-align: center;
   color: var(--color-white);
@@ -72,8 +78,9 @@ body {
 }
 
 .app-body {
+  height: calc(100% - 130px);
   margin-left:240px;
   display: grid;
   place-items: center;
-  padding: 50px;
+  padding: 25px;
 }
