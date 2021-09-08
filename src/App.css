@@ -2,7 +2,7 @@
 	--font: 'Montserrat', sans-serif;
 	--text-big: 25px;
   --text-medium: 20px;
-  --text-small: 15px;
+  --text-small: 18px;
 	--text-xsmall: 12px;
 	--text-xxsmall: 10px;
 	--color-dark: #3a3b50;
@@ -27,12 +27,42 @@
      -moz-box-sizing: content-box;
           box-sizing: content-box;
 }
+
 body {
   background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+h1 {
+  font-size: var(--text-big);
+  font-weight: bold;
+}
+
+h2 {
+  font-size: var(--text-medium);
+  font-weight: bold;
+
+}
+
+h3 {
+  font-size: var(--text-small);
+  font-weight: bold;
+}
+
+p {
+  font-size: var(--text-xsmall);
+}
+
+button {
+  outline-style: none;
+  border:none;
+}
+
+.form-label .form-control{
+  font-size: var(--text-small);
 }
 
 .App {
-  text-align: center;
   color: var(--color-white);
 }
 
