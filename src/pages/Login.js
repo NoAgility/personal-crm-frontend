@@ -21,7 +21,7 @@ const Login = () => {
 
 	return (
         <div className="login">
-            <form onSubmit={onsubmit}>
+            <form className="login-form" onSubmit={onsubmit}>
                 <h1>Login</h1>
                 <div className="input">
                     <input
@@ -29,6 +29,7 @@ const Login = () => {
                         name="email"
                         id="email"
                         placeholder="Email"
+                        className="login-input"
                     />
                 </div>
                 <div className="input">
@@ -37,11 +38,12 @@ const Login = () => {
                         name="password"
                         id="password"
                         placeholder="Password"
+                        className="login-input"
                     />
                     {passwordShown ? show : hide}
                 </div>
                 <div className="buttons">
-                    <button type="submit">Login</button>
+                    <button className="login-button" type="submit">Login</button>
                     <button class="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
                 </div>
             </form>

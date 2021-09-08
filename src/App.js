@@ -13,10 +13,7 @@ function App() {
   return (
     <div className="App">
 
-      <Header />
-      <Navbar />
-      <div className="app-body">
-      </div>
+      <Registration/>
 
     </div>
   );
