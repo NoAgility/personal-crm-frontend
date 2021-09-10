@@ -2,6 +2,7 @@
 
 const AuthService = {
 
+	isLoggedIn : false,
 	setCookie : (name,value,days) => {
 		var expires = "";
 		if (days) {
