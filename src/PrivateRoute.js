@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { Component } from 'react'
 import AuthService from './pages/AuthService';
-const PrivateRoute = ({component : Component}) => {
+const PrivateRoute = ({path, component : Component}) => {
     
-    
-    return (<Route render={props => AuthService.isLoggedIn ? <Component/> : <Redirect to={"/login"}/>}/>);
+    const isLoggedIn = AuthService.isLoggedIn();
+    return (<Route path={path}render={props => { return isLoggedIn ? <Component/> : <Redirect to={"/login"}/>}}/>);
 }
 
 export default PrivateRoute;

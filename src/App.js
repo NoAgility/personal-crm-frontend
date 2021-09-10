@@ -18,7 +18,7 @@ function App() {
       <Route exact path="/login" component={Login}/>
       <Route exact path="/register" component = {Registration}/>
       <Route exact path="/registration_success" component={RegistrationSuccess}/>
-      <PrivateRoute path="/" component={() => { return (<div><Header/><Navbar/></div>);}}/>  
+      <PrivateRoute path="/home" component={() => { return (<div><Header/><Navbar/></div>);}}/>  
       <div className="app-body">
         <PrivateRoute path="/home" component={Calendar}/>
       </div>
