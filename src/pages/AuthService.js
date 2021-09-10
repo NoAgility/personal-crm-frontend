@@ -1,8 +1,5 @@
 const AuthService = {
 
-
-
-	
 	isLoggedIn: function(name) {
 		return this.getCookie("jwt") != null;
 	},
@@ -11,8 +8,8 @@ const AuthService = {
 		var cookies = document.cookie.split(';');
 		for (var i = 0; i < cookies.length; i++) {
 			var c = cookies[i];
-			while (c.charAt(0) == ' ') c = c.substring(1);
-			if (c.indexOf(name) == 0)
+			while (c.charAt(0) === ' ') c = c.substring(1);
+			if (c.indexOf(name) === 0)
 				return c.substring(name.length, c.length);
 		}
 		return null;
@@ -25,17 +22,6 @@ const AuthService = {
 			expires = "; expires=" + date.toUTCString();
 		}
 		document.cookie = name + "=" + (value || "") + expires + "; path=/";
-	},
-
-	getCookie: (name) => {
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(';');
-		for (var i = 0; i < ca.length; i++) {
-			var c = ca[i];
-			while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-			if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-		}
-		return null;
 	},
 
 	eraseCookie: (name) => {
