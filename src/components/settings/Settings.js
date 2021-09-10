@@ -2,26 +2,15 @@ import "./Settings.css";
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import SettingsController from "./SettingsController.js"
-
+import AuthService from './AuthService.js'
+import { Redirect } from "react-router-dom";
 
 const Settings = (props) => {
     const [generalError, setGeneralError] = useState("");
 
-
 	const onClick = async (e) => {
-        e.preventDefault();
-        setGeneralError("Loading...");
 
-		// TO DO: Change from hardcoded
-        let userDetails = {
-            id: 118
-        }
-
-		var errorFlag = false;
-        const chain = {
-            errorFunction: [],
-            command: []
-        }
+        let userDetails = AuthService.getUserId();
 
         try {
             SettingsController.deactivateAccount(userDetails);
@@ -30,8 +19,8 @@ const Settings = (props) => {
             return;
         }
 
-        setGeneralError("");
-
+		const state = { redirect: "/login" };
+		return <Redirect to={state.redirect} />
     }
 
 	return (
