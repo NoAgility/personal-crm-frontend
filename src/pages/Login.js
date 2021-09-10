@@ -7,20 +7,19 @@ import AuthService from './AuthService';
 import { Redirect } from "react-router-dom";
 
 const Login = () => {
-    const isLoggedIn = AuthService.isLoggedIn();
+    const [error, setError] = useState("");
     const history = useHistory();
     const [passwordShown, setPasswordShown] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [generalError, setGeneralError] = useState("");
-    const [redirect, setRedirect] = useState(isLoggedIn ? <Redirect to="/home"/> : "");
+    const [redirect, setRedirect] = useState("");
     const onSubmit = async (e) => {
         e.preventDefault();
-
-            LoginController.Login({
+            await LoginController.Login({
                 username: username,
                 password: password
-            }).then((jsx) => setRedirect(jsx)).catch(err => setRedirect(err.toString()));
+            }).then(() => history.push("/home")).catch(err => setError(err.toString()));
     };
 
     const togglePassword = () => {
@@ -29,19 +28,19 @@ const Login = () => {
 
     const show = <BiShow className="show-hide-icon" onClick={togglePassword}/>;
     const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
-
 	return (
-        <div className="login-container">
-            {redirect}
+        <div data-testid="container" className="login-container">
+            {error}
             <form className="login-form" onSubmit={onSubmit}>
                 <h1>Login</h1>
                 <div data-testid='general-error' className='error'>{generalError}</div>
                 <div className="input">
                     <input
                         type="text"
-                        name="email"
-                        id="email"
-                        placeholder="Email"
+                        name="username"
+                        id="username"
+                        value={username}
+                        placeholder="Username"
                         className="login-input"
                         onChange={event => {setUsername(event.target.value)}}
                     />
@@ -59,7 +58,7 @@ const Login = () => {
                     {passwordShown ? show : hide}
                 </div>
                 <div className="buttons">
-                    <button className="login-button" type="submit">Login</button>
+                    <button className="login-button" data-testid="submit" type="submit">Login</button>
                     <button className="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
                 </div>
             </form>

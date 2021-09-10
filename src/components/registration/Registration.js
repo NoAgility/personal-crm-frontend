@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { BiHide, BiShow} from 'react-icons/bi';
 import './Registration.css';
 import Controller from './RegistrationController';
 const Registration = (props) => {
@@ -15,7 +16,15 @@ const Registration = (props) => {
     const [errorPassword, setErrorPassword] = useState("");
     const [errorDOB, setErrorDOB] = useState("");
     const [generalError, setGeneralError] = useState("");
+    const [passwordShown, setPasswordShown] = useState(false);
+    
 
+    const togglePassword = () => {
+        setPasswordShown(!passwordShown);
+    };
+    const show = <BiShow className="show-hide-icon" onClick={togglePassword}/>;
+    const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
+    
     const onSubmit = async (e) => {
         e.preventDefault();
         setGeneralError("Loading...");
@@ -66,7 +75,8 @@ const Registration = (props) => {
                 </div>
                 <div className="form-field-container">
                     <div data-testid='password-error' className='error'>{errorPassword}</div>
-                    <input data-testid="password" name="password" className="form-input" type="text" value={props.password} placeholder="Password" onChange={ (e) => setPassword(e.target.value) }/>
+                    <input data-testid="password" name="password" className="form-input" type={passwordShown ? "text" : "password"} value={props.password} placeholder="Password" onChange={ (e) => setPassword(e.target.value) }/>
+                    {passwordShown ? show : hide}
                 </div>
                 <div className="form-field-container">
                     <div data-testid='dob-error'className='error'>{errorDOB}</div>

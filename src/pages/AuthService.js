@@ -1,8 +1,5 @@
 const AuthService = {
 
-
-
-	
 	isLoggedIn: function(name) {
 		return this.getCookie("jwt") != null;
 	},

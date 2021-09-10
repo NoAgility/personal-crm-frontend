@@ -15,7 +15,7 @@ const LoginController = {
 		}).then(response => {
 			data = response.data
 			return true;
-		}).catch(err => {return false;});
+		}).catch(err => {; return false;});
 
 		if (!flag) {
 			throw new Error("Incorrect username and or password");
@@ -30,7 +30,6 @@ const LoginController = {
 			}).catch(err => {return false;});
 
 			AuthService.userId = data.id;
-			AuthService.isLoggedIn = true;
 			const state = { redirect: "/home" };
 			return <Redirect to={state.redirect} />
 		}
