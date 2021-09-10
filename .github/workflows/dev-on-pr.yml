@@ -39,6 +39,4 @@ jobs:
         REACT_APP_BACKEND_URL: 'localhost'
       run: npm run build --if-present
     - name: Run integration and unit tests - React
-      env:
-        REACT_APP_BACKEND_URL: 'localhost'
       run: npm test
