@@ -3,9 +3,9 @@ h1 {
 	font-weight: bold;
 }
 
-.login {
+.login-container {
 	display: grid;
- 	place-items: center;
+	place-items: center;
 	background-color: var(--color-dark);
 	font-size: 20px;
 	background-image: url("../assests/background-image.png");
@@ -16,6 +16,7 @@ h1 {
 
 	color: white;
 	font-family: var(--font);
+	box-sizing: none;
 }
 
 .login-form {

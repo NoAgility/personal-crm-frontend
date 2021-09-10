@@ -1,4 +1,6 @@
+
 :root {
+  height: 100%;
 	--font: 'Montserrat', sans-serif;
 	--text-big: 25px;
   --text-medium: 20px;
@@ -62,7 +64,6 @@ button {
 .form-label .form-control{
   font-size: var(--text-small);
 }
-
 .App {
   color: var(--color-white);
 }
@@ -103,8 +104,9 @@ button {
 }
 
 .app-body {
+  height: calc(100% - 130px);
   margin-left:240px;
   display: grid;
   place-items: center;
-  padding: 50px;
+  padding: 25px;
 }
