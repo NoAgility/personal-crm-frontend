@@ -2,7 +2,7 @@ import "./Settings.css";
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import SettingsController from "./SettingsController.js"
-import AuthService from './AuthService.js'
+import AuthService from '../../pages/AuthService.js'
 import { Redirect } from "react-router-dom";
 
 const Settings = (props) => {
@@ -10,7 +10,7 @@ const Settings = (props) => {
 
 	const onClick = async (e) => {
 
-        let userDetails = AuthService.getUserId();
+        let userDetails = AuthService.userId;
 
         try {
             SettingsController.deactivateAccount(userDetails);
