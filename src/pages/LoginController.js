@@ -22,6 +22,16 @@ const LoginController = {
 				throw new Error("Incorrect username and or password");
 			} else {
 				AuthService.setCookie("jwt", data.token, data.expDate);
+				AuthService.username = user.username;
+
+				await post(`/account/get?username=${user.username}`, {}, {})
+				.then(response => {
+					data = response.data
+					return true;
+				}).catch(err => {return false;});
+
+				AuthService.userId = data.id;
+
 				const state = { redirect: "/" };
       			return <Redirect to={state.redirect} />
 			}

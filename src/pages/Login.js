@@ -30,17 +30,16 @@ const Login = () => {
 
 	return (
         <div className="login-container">
-            <form onSubmit={onSubmit}>
+            <form className="login-form" onSubmit={onsubmit}>
                 <h1>Login</h1>
                 <div data-testid='general-error' className='error'>{generalError}</div>
                 <div className="input">
                     <input
                         type="text"
-                        name="username"
-                        id="username"
-                        value={username}
-                        placeholder="Username"
-                        onChange={event => {setUsername(event.target.value)}}
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        className="login-input"
                     />
                 </div>
                 <div className="input">
@@ -50,14 +49,13 @@ const Login = () => {
                         id="password"
                         value={password}
                         placeholder="Password"
-                        onChange={event => {setPassword(event.target.value)}}
-
+                        className="login-input"
                     />
                     {passwordShown ? show : hide}
                 </div>
                 <div className="buttons">
-                    <button type="submit" >Login</button>
-                    <button className="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
+                    <button className="login-button" type="submit">Login</button>
+                    <button class="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
                 </div>
             </form>
         </div>

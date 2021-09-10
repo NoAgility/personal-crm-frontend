@@ -1,21 +1,3 @@
-:root {
-	--font: 'Montserrat', sans-serif;
-	--text-big: 25px;
-    --text-medium: 20px;
-    --text-small: 15px;
-	--text-xsmall: 12px;
-	--text-xxsmall: 10px;
-	--color-dark: #3a3b50;
-    --color-medium: #545c74;
-    --color-teal: #70d4cc;
-	--color-orange: #d4a46c;
-	--color-purple: #be8bfc;
-	--color-green: #5dbc94;
-	--color-blue: #54a3fb;
-	--color-white: #FFFFFF;
-	--color-black: #000000;
-}
-
 h1 {
 	font-size: var(--text-big);
 	font-weight: bold;

@@ -9,9 +9,9 @@
 	z-index: 0;
 }
 
-input {
+.search-input {
 	font-family: var(--font);
-	font-size: var(--text-medium);
+	font-size: var(--text-small);
 	color: var(--color-black);
 	padding: 5px;
 	padding-left: 10px;
@@ -22,7 +22,7 @@ input {
 
 .search-icon {
 	color: var(--color-medium);
-	padding:5px;
+	padding:2px;
 	margin-left: 10px;
 }
 
@@ -84,8 +84,9 @@ input {
 .dropdown-item {
 	color: var(--color-white);
 	border-radius: 2px;
+	width:auto;
 }
 
 .dropdown-item:active{
 	background-color: var(--color-dark);
-  }
+}
