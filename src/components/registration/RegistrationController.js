@@ -6,7 +6,7 @@ const Controller = {
             username: userDetails.username,
             password: userDetails.password,
             name: userDetails.name,
-            dateOfBirth: userDetails.dob,
+            dob: userDetails.dob,
         }).then(response => { return true; }).catch(err => {return false;});
         if (!flag) {
             throw new Error("Failed to create account, please try again later");
