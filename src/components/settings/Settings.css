@@ -1,0 +1,44 @@
+.settings {
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	border:solid;
+	border-color: var(--color-offwhite);
+	padding: 20px;
+	width:800px;
+	height: 500px;
+	border-radius: 10px;
+}
+
+.modal-content {
+	background-color: var(--color-dark);
+	border-style: solid;
+	border-color: var(--color-offwhite);
+}
+
+.modal-body div {
+	margin-bottom: 25px;
+	text-align:left;
+}
+
+.modal-body div *{
+	margin: 5px;
+}
+
+.close {
+	color: var(--color-white);
+}
+
+.close:hover {
+	color: var(--color-white);
+}
+
+.form-control {
+	background-color: var(--color-dark);
+	width: 400px;
+	border-color: var(--color-offwhite);
+	box-shadow: none;
+}
+
+.form-control :active {
+	background-color: var(--color-dark);
+}

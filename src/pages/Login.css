@@ -1,0 +1,79 @@
+h1 {
+	font-size: var(--text-big);
+	font-weight: bold;
+}
+
+.login-container {
+	display: grid;
+	place-items: center;
+	background-color: var(--color-dark);
+	font-size: 20px;
+	background-image: url("../assests/background-image.png");
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	color: white;
+	font-family: var(--font);
+	box-sizing: none;
+}
+
+.login-form {
+	background-color: var(--color-medium);
+	border-radius: 10px;
+	box-shadow: inset 0px 0px 10px var(--color-black);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	margin: auto;
+	padding: 50px;
+	height: 350px;
+	width: 400px;
+}
+
+.login-input {
+	font-family: var(--font);
+	font-size: var(--text-small);
+	color: var(--color-white);
+	padding: 5px;
+	outline: none;
+	border-style: none;
+	border-bottom: solid var(--color-white);
+	border-width: 2px;
+	background-color: var(--color-medium);
+	width: 80%;
+}
+
+input::placeholder {
+	color: #afafaf
+}
+.login-button {
+    background-color: var(--color-white);
+	font-family: var(--font);
+	font-size: var(--text-small);
+	font-weight: bold;
+	color: var(--color-black);
+	border-radius: 8px;
+	border-style: none;
+	margin-bottom: 10px;
+	height: 48px;
+	width: 80%;
+	cursor: pointer;
+}
+
+.login-button :hover {
+    background-color: var(--color-teal);
+}
+
+.register {
+	background-color: var(--color-medium);
+	color: var(--color-white);
+}
+
+.show-hide-icon {
+	vertical-align: baseline;
+	position: absolute;
+	cursor: pointer;
+}
+

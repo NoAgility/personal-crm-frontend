@@ -1,0 +1,7 @@
+
+
+.calendar {
+    height: calc(100%-130px);
+    width: 100%;
+    color: #ffffff;
+}
