@@ -12,11 +12,11 @@ To start up the app (Windows):
 2. Open CMD and navigate to the directory
 3. Create a ".env" file in the root folder and paste this in:
 
-  If you are running backend locally with the "local" profile:
+  If you are running backend Spring Boot locally with the "local" profile:
 ```
 REACT_APP_BACKEND_URL=http://localhost:8080
 ```
-  If you are running backend locally with "docker-compose-local.sh":
+  If you are running backend Spring Boot locally with "docker-compose-local.sh":
 ```
 REACT_APP_BACKEND_URL=http://localhost
 ```
