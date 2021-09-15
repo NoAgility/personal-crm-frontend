@@ -8,7 +8,7 @@ h1 {
 	place-items: center;
 	background-color: var(--color-dark);
 	font-size: 20px;
-	background-image: url("../assests/background-image.png");
+	background-image: url("../../assets/background-image.png");
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;

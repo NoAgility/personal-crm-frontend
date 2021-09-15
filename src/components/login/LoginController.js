@@ -1,5 +1,5 @@
-import { fetch, post } from '../SpringBootAdapter.js'
-import AuthService from './AuthService.js'
+import { fetch, post } from '../../util/SpringBootAdapter.js'
+import AuthService from '../../util/AuthService.js'
 import { Redirect } from "react-router-dom";
 
 const LoginController = {

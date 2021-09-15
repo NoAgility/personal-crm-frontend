@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import React, { Component } from 'react'
-import AuthService from './pages/AuthService';
+import AuthService from './AuthService';
 const PrivateRoute = ({path, component : Component}) => {
     
     const isLoggedIn = AuthService.isLoggedIn();

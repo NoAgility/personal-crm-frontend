@@ -1,4 +1,4 @@
-import { post } from '../../SpringBootAdapter'
+import { post } from '../../util/SpringBootAdapter'
 
 const SettingsController = {
 

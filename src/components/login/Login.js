@@ -3,8 +3,6 @@ import { useState } from "react";
 import { BiHide, BiShow} from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
 import LoginController from './LoginController';
-import AuthService from './AuthService';
-import { Redirect } from "react-router-dom";
 
 const Login = () => {
     const [error, setError] = useState("");
