@@ -1,7 +1,6 @@
-import {render, fireEvent, waitFor, screen, getByPlaceholderText, cleanup } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
+import {render, fireEvent, waitFor, screen, cleanup } from '@testing-library/react';
 import Registration from '../components/registration/Registration';
-import { MemoryRouter, Switch, Route } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 test("Integration Test - Successful registration", async () => {
