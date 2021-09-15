@@ -1,10 +1,9 @@
 import {render, fireEvent, waitFor, screen, getByPlaceholderText, cleanup } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import Registration from '../components/registration/Registration';
 import { MemoryRouter, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
-import Login from '../pages/Login';
+import Login from '../components/login/Login';
 test("Integration Test - Successful Login", async () => {
 
     axios.defaults.adapter = require('axios/lib/adapters/http');
