@@ -1,4 +1,4 @@
-import { fetch, post } from '../../SpringBootAdapter'
+import { fetch, post } from '../../util/SpringBootAdapter'
 
 const Controller = {
     Register : async (userDetails) => {

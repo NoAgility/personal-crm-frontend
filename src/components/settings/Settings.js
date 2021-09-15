@@ -2,7 +2,7 @@ import "./Settings.css";
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import SettingsController from "./SettingsController.js"
-import AuthService from '../../pages/AuthService.js'
+import AuthService from '../../util/AuthService.js'
 import { Redirect } from "react-router-dom";
 
 const Settings = (props) => {
@@ -28,8 +28,7 @@ const Settings = (props) => {
 			{...props}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
-			centered
-		>
+			centered>
 			<Modal.Header closeButton closeVariant="white">
 				<Modal.Title id="contained-modal-title-vcenter">
 					<h2>Account</h2>
