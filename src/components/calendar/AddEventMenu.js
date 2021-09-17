@@ -12,11 +12,11 @@ const AddEventMenu = () => {
     const closeForm = () => setForm(null);
     return (<div className="mini-menu">
         
-        {form == "newMeeting" ? <AddMeetingForm/> : ""}
-        {form == "newTask" ? <AddTaskForm/> : ""}
+        {form === "newMeeting" ? <AddMeetingForm/> : ""}
+        {form === "newTask" ? <AddTaskForm/> : ""}
         <ul className="menu-ul">
         
-        {form == null && expand ? 
+        {form === null && expand ? 
         <React.Fragment>
             <li>
                 <button className="menu-button" onClick={() => toggleForm("newTask")} style={{"backgroundColor": "#993399"}}>
@@ -29,9 +29,9 @@ const AddEventMenu = () => {
                 </button>
             </li>
         </React.Fragment> : ""}
-            <li>{form == null ? <button style={{"backgroundColor":"#339966"}}className="menu-button" onClick={toggleExpand}>
+            <li>{form === null ? <button style={{"backgroundColor":"#339966"}}className="menu-button" onClick={toggleExpand}>
             {expand ? <BiChevronDown className="menu-icon"/> 
-                : form == null ? <BiDotsVerticalRounded className="menu-icon"/> 
+                : form === null ? <BiDotsVerticalRounded className="menu-icon"/> 
                     : <BiMinus className="menu-icon"/>}
                 </button> 
                 : <button style={{"backgroundColor":"#339966"}}className="menu-button" onClick={closeForm}>

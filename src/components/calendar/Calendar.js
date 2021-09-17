@@ -12,7 +12,7 @@ export default function Calendar() {
   }] //EventController.fetchEvents();
 
   return ( <React.Fragment><div className = "calendar" >
-    <FullCalendar defaultView = "dayGridMonth"
+    <FullCalendar
     plugins = {
       [dayGridPlugin]
     }
