@@ -1,6 +1,6 @@
 import {render, fireEvent, waitFor, screen, getByPlaceholderText, cleanup } from '@testing-library/react';
 import Registration from '../components/registration/Registration';
-import { MemoryRouter, Switch, Route } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
 import Login from '../components/login/Login';

@@ -4,6 +4,7 @@ import React from "react";
 import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
 import Login from './components/login/Login';
+import Calendar from './components/calendar/Calendar';
 import Registration from './components/registration/Registration';
 import RegistrationSuccess from './components/registration/RegistrationSuccess';
 import axios from 'axios';
@@ -15,12 +16,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Redirect exact from="/" to="/login"/>
-        {AuthService.isLoggedIn() ? <Redirect exact from="/login" to="home"/> : ""}
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/register" component = {Registration}/>
-        <Route exact path="/registration_success" component={RegistrationSuccess}/>
-        <PrivateRoute path="/home" component={() => { return (<div><Header/><Navbar/></div>);}}/>  
+        
+        <Route path="/home" component={() => { return (<React.Fragment><Header/><Navbar/><div className="app-body"><Calendar/></div></React.Fragment>);}}/>  
       </Switch>
     </Router>
   );
