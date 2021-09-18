@@ -11,21 +11,35 @@ const getInitials = (name) => {
     } else return;
 
     return initials.toUpperCase();
-};
+}
 
 const getColor = (id) => {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(id * 16)];
+    console.log(id)
+    if (id % 6 === 0) {
+        return "#70d4cc";
     }
-    return color;
-};
+    if (id % 5 === 0) {
+        return "#d4a46c";
+    }
+    if (id % 4 === 0) {
+        return "#be8bfc";
+    }
+    if (id % 3 === 0) {
+        return "#5dbc94";
+    }
+    if (id % 2 === 0) {
+        return "#54a3fb";
+    }
+    else {
+        return "#fb5454";
+    }
+}
 
-function ProfilePicture( { name, id, size } ) {
+
+function ProfilePicture( { name, id } ) {
 	return (
 		<>
-		<div className="profile-pic">
+		<div className="profile-pic" style={{backgroundColor: getColor(id)}}>
 			<h1>
 				{getInitials(name)}
 			</h1>

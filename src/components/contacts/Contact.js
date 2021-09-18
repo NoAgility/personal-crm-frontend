@@ -5,15 +5,18 @@ import ProfilePicture from "./ProfilePicture"
 import { ListGroup } from 'react-bootstrap';
 
 
-const Contacts = (props) => {
+const Contact = (props) => {
 	return (
 		<>
 			<li variant="dark" className="contact-item" key={props.contactID} action>
-				<ProfilePicture name={props.name} id={props.contactID} size={500} />
+				<ProfilePicture
+					name={props.name}
+					id={props.id}
+				/>
 				<h2>{props.name}</h2>
 			</li>
 		</>
 	)
 }
 
-export default Contacts;
+export default Contact;
