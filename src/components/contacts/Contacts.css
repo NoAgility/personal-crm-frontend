@@ -1,0 +1,90 @@
+.contacts-page {
+	width:600px;
+}
+
+.contact-header {
+	display: flex;
+	flex-direction: row;
+	text-align: left;
+	width: 100%;
+}
+
+.contact-header h1{
+	margin: auto;
+	margin-left: 0px;
+}
+
+.contact-sub-header {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+#button-dropdown-body{
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	box-shadow: none;
+	border-style: none;
+}
+
+.filter-dropdown {
+	margin-right:15px;
+}
+
+.contact-box {
+	width:100%;
+}
+
+.contact-list-group {
+	padding: 0px;
+}
+
+.contact-item {
+	outline: none;
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	display: flex;
+	flex-direction: row;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.profile-pic {
+	background-color: var(--color-blue);
+	border-radius: 50%;
+	width: 75px;
+  	height: 75px;
+	display: grid;
+	place-items: center;
+}
+
+.contact-item h2{
+	align-self: center;
+	margin: 0px;
+	margin-left: 30px;
+}
+
+.profile-pic h1 {
+	margin: 0px
+}
+
+.create-contact-btn {
+	margin-left: auto;
+	background-color: var(--color-blue);
+	border-radius: 30px;
+	width: 90px;
+	height: 50px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	padding-left: auto;
+	padding-right: auto;
+
+}
+
+.create-contact-btn * {
+	margin: auto;
+	margin-left:0px;
+	margin-right:0px;
+
+}
