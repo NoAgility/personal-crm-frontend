@@ -1,0 +1,153 @@
+
+.modal-content {
+	width:fit-content;
+
+}
+
+.contact-details {
+	display: flex;
+	flex-direction: row;
+	place-items: center;
+}
+
+.contact-details-left {
+	display: flex;
+	flex-direction: row;
+	vertical-align: center;
+	place-items: center;
+	padding: 25px;
+
+}
+.contact-details-right {
+	margin: auto;
+	padding:50px;
+	padding-left: 0px;
+	padding-top: 0px;
+}
+
+
+.contact-details-right h1{
+	margin:20px;
+}
+
+.contact-details-right h4{
+	margin:20px;
+}
+
+.edit-contact-btn, .add-contact-btn, .cancel-add-contact-btn, .delete-contact-btn {
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: var(--color-medium);
+	background-color: var(--color-medium);
+	color: var(--color-white);
+	height: 35px;
+	width: 80px;
+	outline:none;
+	cursor: pointer;
+	margin:20px;
+	text-align: center;
+}
+.create-contact-btn {
+	border-radius: 10px;
+	background-color: var(--color-medium);
+	color: var(--color-white);
+	height: 50px;
+	width: 100px;
+	outline:none;
+	cursor: pointer;
+	margin:20px;
+	text-align: center;
+}
+
+.edit-contact-btn :focus {
+	border-style: solid;
+	border-color: var(--color-white);
+}
+
+/*Add Contact*/
+.contact-details-right form *{
+	margin: 10px;
+}
+
+.contact-input {
+	font-family: var(--font);
+	font-size: var(--text-small);
+	color: var(--color-white);
+	padding: 5px;
+	outline: none;
+	border-style: none;
+	border-bottom: solid var(--color-offwhite);
+	border-width: 1px;
+	background-color: var(--color-dark);
+	width: 80%;
+}
+
+.dob-selector {
+	display: flex;
+	flex-direction: row;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.dob-selector #day {
+	width:50px;
+}
+
+.dob-selector #year {
+	width:70px;
+}
+
+.dob-selector select {
+	width:100px;
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	border-radius: 10px;
+	padding:10px;
+	border-color: var(--color-offwhite);
+	border-style: solid;
+}
+
+.add-contact-btn {
+	background-color: var(--color-blue);
+	border-color: var(--color-blue);
+}
+
+.cancel-add-contact-btn {
+	background-color: var(--color-medium);
+	border-color: var(--color-medium);
+}
+
+.add-contact-btns {
+	display: flex;
+	flex-direction: row;
+}
+
+.username-selector input {
+	width:90%;
+}
+
+.edit-contact-options {
+	padding:15px;
+	cursor: pointer;
+}
+.contact-details-top .dropdown {
+	display: grid;
+	place-items: end;
+}
+
+#button-dropdown-body::before {
+	content: none;
+	display: none;
+}
+
