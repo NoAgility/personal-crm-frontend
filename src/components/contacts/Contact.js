@@ -2,18 +2,31 @@ import { isPropsEqual } from '@fullcalendar/common';
 import React, { useState } from 'react';
 import { BiFilter } from 'react-icons/bi';
 import ProfilePicture from "./ProfilePicture"
+import ContactDetails from "./ContactDetails"
 import { ListGroup } from 'react-bootstrap';
+import EditContact from './EditContact';
 
 
-const Contact = (props) => {
+
+const Contact = ({contact}) => {
+
+	const [modalShow, setModalShow] = React.useState(false);
+
 	return (
 		<>
-			<li variant="dark" className="contact-item" key={props.contactID} action>
+			<li className="contact-item" onClick={() => setModalShow(true)}>
 				<ProfilePicture
-					name={props.name}
-					id={props.id}
+					name={contact.name}
+					id={contact.contactID}
 				/>
-				<h2>{props.name}</h2>
+				<h4>{contact.name}</h4>
+
+				<EditContact
+					contact={contact}
+					show={modalShow}
+					onHide={() => setModalShow(false)}
+				/>
+
 			</li>
 		</>
 	)
