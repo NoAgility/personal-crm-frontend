@@ -14,7 +14,6 @@ const getInitials = (name) => {
 }
 
 const getColor = (id) => {
-    console.log(id)
     if (id % 6 === 0) {
         return "#70d4cc";
     }
