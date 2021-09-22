@@ -1,0 +1,29 @@
+.add-contact {
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.contact-search-result {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.close-add-contact {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.add-complete {
+	background-color: var(--color-medium);
+	border-color: var(--color-medium);
+}
