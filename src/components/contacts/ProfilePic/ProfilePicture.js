@@ -1,4 +1,7 @@
+import "./ProfilePic.css"
+
 const getInitials = (name) => {
+    if (!name) {return null;}
     let initials;
     const nameSplit = name.toString().split(" ");
     const nameLength = nameSplit.length;
@@ -34,12 +37,19 @@ const getColor = (id) => {
     }
 }
 
+ProfilePicture.defaultProps = {
+    name: "",
+    id: 2,
+    size: "md"
+}
 
-function ProfilePicture( { name, id } ) {
+
+function ProfilePicture( { name, id, size } ) {
+    // size : lg, md, sm
 	return (
 		<>
-		<div className="profile-pic" style={{backgroundColor: getColor(id)}}>
-			<h1>
+		<div className={`profile-pic profile-pic-${size}`} style={{backgroundColor: getColor(id)}}>
+			<h1 className={`pp-${size}`}>
 				{getInitials(name)}
 			</h1>
 		</div>

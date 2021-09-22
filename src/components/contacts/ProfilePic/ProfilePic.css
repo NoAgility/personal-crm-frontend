@@ -1,0 +1,36 @@
+.profile-pic {
+	border-radius: 50%;
+	display: grid;
+	place-items: center;
+}
+
+.profile-pic * {
+	margin: 0px;
+}
+
+.pp-lg {
+	font-size: var(--text-xbig);
+}
+
+.pp-md {
+	font-size: var(--text-big);
+}
+
+.pp-sm {
+	font-size: var(--text-medium);
+}
+
+.profile-pic-lg {
+	width: 150px;
+	height: 150px;
+}
+
+.profile-pic-md {
+	width: 75px;
+	height: 75px;
+}
+
+.profile-pic-sm {
+	width: 75px;
+	height: 75px;
+}
