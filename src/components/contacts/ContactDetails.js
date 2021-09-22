@@ -1,47 +1,46 @@
-import { isPropsEqual } from '@fullcalendar/common';
 import React, { useState } from 'react';
-import { BiChevronLeft } from 'react-icons/bi';
-import ProfilePicture from "./ProfilePicture"
-import { Modal, CLose } from 'react-bootstrap';
+import { MdClose } from 'react-icons/md';
+import ProfilePicture from "./ProfilePic/ProfilePicture"
+import { Modal } from 'react-bootstrap';
 import  './ContactDetails.css'
 
-import { ListGroup } from 'react-bootstrap';
-
-
-
-const ContactDetails = (props) => {
+const ContactDetails = ({contact, show, onHide}) => {
+	const handleClose = () => {
+		onHide(false);
+	}
 
 	return (
 		<>
 		<Modal
-			{...props}
+			show={show}
+			onHide={onHide}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
+			<div className="contact-details-top">
+				<MdClose className="edit-contact-options" onClick={handleClose} size={30}/>
+			</div>
+
 			<Modal.Body className="contact-details">
 				<div className="contact-details-left">
-					<BiChevronLeft closeButton size={40}/>
 					<ProfilePicture
-						name={props.contact.name}
-						id={props.contact.contactID}
+						name={contact.name}
+						id={contact.contactID}
+						size="lg"
 					/>
 				</div>
 				<div className="contact-details-right">
-					<h1>{props.contact.name}</h1>
+					<h1>{contact.name}</h1>
+					<h4>@{contact.username}</h4>
 					<h4>
-						{props.contact.dob[2]}
-						/{props.contact.dob[1]}
-						/{props.contact.dob[0]}
-						</h4>
-					<button className="edit-contact-btn">Edit</button>
-
-
+						{contact.dob[2]}
+						/{contact.dob[1]}
+						/{contact.dob[0]}
+					</h4>
 				</div>
 
 			</Modal.Body>
 		</Modal>
-
-
 		</>
 	)
 }

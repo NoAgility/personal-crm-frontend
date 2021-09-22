@@ -1,13 +1,12 @@
-
 .modal-content {
 	width:fit-content;
-
 }
 
 .contact-details {
 	display: flex;
 	flex-direction: row;
 	place-items: center;
+	margin: 50px;
 }
 
 .contact-details-left {
@@ -23,8 +22,8 @@
 	padding:50px;
 	padding-left: 0px;
 	padding-top: 0px;
+	width: max-content;
 }
-
 
 .contact-details-right h1{
 	margin:20px;
@@ -48,6 +47,7 @@
 	margin:20px;
 	text-align: center;
 }
+
 .create-contact-btn {
 	border-radius: 10px;
 	background-color: var(--color-medium);
@@ -65,7 +65,6 @@
 	border-color: var(--color-white);
 }
 
-/*Add Contact*/
 .contact-details-right form *{
 	margin: 10px;
 }
@@ -141,7 +140,7 @@ input[type=number] {
 	padding:15px;
 	cursor: pointer;
 }
-.contact-details-top .dropdown {
+.contact-details-top {
 	display: grid;
 	place-items: end;
 }
