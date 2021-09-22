@@ -1,46 +1,59 @@
-// import { fetch, post } from "../../util/SpringBootAdapter";
-import React from 'react';
+import { fetch, post } from "../../util/SpringBootAdapter";
 
 const ContactController = {
 
+	// Fetch all contacts of the user
 	fetchContacts: async () => {
-		const res = await fetch ("http://localhost:5000/contactIDs");
-		return await res.json();
+		try{
+			await fetch("/contact/read").then(
+				response => { return response; }
+			);
+		} catch (err) {
+			console.log(err)
+		}
 	},
 
+	// Fetch a contact's data by their contactID
 	fetchContactData: async (user) => {
-		const res = await fetch (`http://localhost:5000/contactData/${user.contactID}`);
-		const data = await res.json();
-		data.contactCreatedOn = user.contactCreatedOn;
-		return data;
+		try {
+			await fetch (`/account/get?id=${user.contactID}`).then(
+				response => {
+					const data = response;
+					data.contactCreatedOn = user.contactCreatedOn;
+					return response;
+				}
+			);
+		} catch (err) {
+			console.log(err)
+		}
 	},
 
+	// Fetch a contact's data by their username
 	fetchUserByUsername: async (user) => {
-		const res = await fetch (`http://localhost:5000/contactData/9`);
-		const data = await res.json();
-		return data;
+		try {
+			await fetch (`/account/get?username=${user.username}`).then(
+				response => { return response; }
+			);
+		} catch (err) {
+			console.log(err)
+		}
 	},
 
+	// Delete a contact using their contactID
 	deleteContact: async (user) => {
-		await fetch (`http://localhost:5000/contactData/${user.contactID}`
-		, {method: 'DELETE'});
-		await fetch (`http://localhost:5000/contactIDs/${user.contactID}`
-		, {method: 'DELETE'});
+		try {
+			await post ("/contact/create", "", {"contact": user.username})
+		} catch (err) {
+			console.log(err)
+		}
 	},
 
 	addContact: async (user) => {
-		const res = await fetch (`http://localhost:5000/contactData/${user.contactID}`
-		, {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json'
-			},
-			body: JSON.stringify(user)
-		})
-
-		const data= res.json()
-		// return [...contacts, data]
-
+		try {
+			await post ("/contact/create", "", {"contact": user.username})
+		} catch (err) {
+			console.log(err)
+		}
 	},
 
 
