@@ -1,14 +1,8 @@
-import { isPropsEqual } from '@fullcalendar/common';
 import React, { useState } from 'react';
-import { BiFilter } from 'react-icons/bi';
 import ProfilePicture from "./ProfilePic/ProfilePicture"
 import ContactDetails from "./ContactDetails"
 import { Dropdown } from 'react-bootstrap';
-import EditContact from './EditContact';
 import { FiMoreHorizontal } from 'react-icons/fi';
-
-
-
 
 const Contact = ({contact, onDelete}) => {
 
