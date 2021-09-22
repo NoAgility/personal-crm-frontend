@@ -2,6 +2,7 @@
 :root {
   height: 100%;
 	--font: 'Montserrat', sans-serif;
+	--text-xbig: 35px;
 	--text-big: 25px;
   --text-medium: 20px;
   --text-small: 18px;
