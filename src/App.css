@@ -2,6 +2,7 @@
 :root {
   height: 100%;
 	--font: 'Montserrat', sans-serif;
+	--text-xbig: 35px;
 	--text-big: 25px;
   --text-medium: 20px;
   --text-small: 18px;
@@ -50,6 +51,10 @@ h2 {
 h3 {
   font-size: var(--text-small);
   font-weight: bold;
+}
+
+h4 {
+  font-size: var(--text-medium);
 }
 
 p {
