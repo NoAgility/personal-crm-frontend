@@ -2,25 +2,14 @@ import axios from 'axios';
 
 
 const fetch = (aUrl, headers) => {
-    return axios({
-        method: 'GET',
-        url: process.env.REACT_APP_BACKEND_URL + aUrl,
-        headers: headers
-    })
+    return axios.get(process.env.REACT_APP_BACKEND_URL + aUrl, {withCredentials: true})
 };
 
 const post = (aUrl, headers, body) => {
 
-    var aHeaders = {
-        'Content-Type': 'application/json',
-    };
-    aHeaders = headers !== null ? Object.assign(headers, aHeaders) : aHeaders;
-    return axios({
-        method: 'POST',
-        url: process.env.REACT_APP_BACKEND_URL + aUrl,
-        headers: aHeaders,
-        data: body
-    })
+    return axios.post(process.env.REACT_APP_BACKEND_URL + aUrl,
+         body,
+         {withCredentials: true})
 }
 
 
