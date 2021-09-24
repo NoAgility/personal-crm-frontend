@@ -10,6 +10,7 @@ import RegistrationSuccess from './components/registration/RegistrationSuccess';
 import axios from 'axios';
 import PrivateRoute from './util/PrivateRoute';
 import AuthService from './util/AuthService';
+import TaskPage from './components/tasks/Task';
 function App() {
   axios.defaults.adapter = require('axios/lib/adapters/http');
 
@@ -17,7 +18,7 @@ function App() {
     <Router>
       <Switch>
         
-        <Route path="/home" component={() => { return (<React.Fragment><Header/><Navbar/><div className="app-body"><Calendar/></div></React.Fragment>);}}/>  
+        <Route path="/" component={() => { return (<React.Fragment><Header/><Navbar/><div className="app-body"><Calendar/></div></React.Fragment>);}}/>  
       </Switch>
     </Router>
   );
