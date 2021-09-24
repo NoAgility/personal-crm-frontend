@@ -40,7 +40,9 @@
 	margin:auto;
 	width: 500px;
 }
-
+.spacer {
+	width: 240px;
+}
 .menu-dropdown {
 	display: grid;
 	place-items: center;

@@ -10,7 +10,7 @@ const Header = (props) => {
 
 	return (
 		<div className="header">
-
+			<div className="spacer"/>
 			<div className="search-box">
 				<div className="search-button">
 					<BiSearch className="search-icon" size={25}/>

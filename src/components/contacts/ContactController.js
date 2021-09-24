@@ -5,24 +5,24 @@ const ContactController = {
 	// Fetch all contacts of the user
 	fetchContacts: async () => {
 		try{
-			await fetch("/contact/read").then(
+			const res = await fetch("/contact/read").then(
 				response => { return response; }
 			);
+			return res;
 		} catch (err) {
 			console.log(err)
 		}
 	},
 
 	// Fetch a contact's data by their contactID
-	fetchContactData: async (user) => {
+	fetchContactData: async (contactID) => {
 		try {
-			await fetch (`/account/get?id=${user.contactID}`).then(
+			const res = await fetch (`/account/get?id=${contactID}`).then(
 				response => {
-					const data = response;
-					data.contactCreatedOn = user.contactCreatedOn;
 					return response;
 				}
 			);
+			return res;
 		} catch (err) {
 			console.log(err)
 		}
@@ -31,9 +31,10 @@ const ContactController = {
 	// Fetch a contact's data by their username
 	fetchUserByUsername: async (user) => {
 		try {
-			await fetch (`/account/get?username=${user.username}`).then(
+			const res = await fetch (`/account/get?username=${user}`).then(
 				response => { return response; }
 			);
+			return res;
 		} catch (err) {
 			console.log(err)
 		}
@@ -42,7 +43,8 @@ const ContactController = {
 	// Delete a contact using their contactID
 	deleteContact: async (user) => {
 		try {
-			await post ("/contact/create", "", {"contact": user.username})
+			const res = await post ("/contact/create", "", {"contact": user});
+			return res;
 		} catch (err) {
 			console.log(err)
 		}
@@ -50,7 +52,8 @@ const ContactController = {
 
 	addContact: async (user) => {
 		try {
-			await post ("/contact/create", "", {"contact": user.username})
+			const res = await post ("/contact/create", "", {"contact": user});
+			return res;
 		} catch (err) {
 			console.log(err)
 		}

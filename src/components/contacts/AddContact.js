@@ -33,7 +33,8 @@ const AddContact = ({show, onHide, onAdd}) => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		// search for username
-		const contact = await ContactController.fetchUserByUsername(usernameSearch)
+		const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
+			return res.data;});
 		if (contact) {
 			setQueryFound(true);
 			setResult(contact);

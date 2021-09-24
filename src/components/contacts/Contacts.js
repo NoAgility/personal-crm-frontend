@@ -22,7 +22,7 @@ const Contacts = (props) => {
 	// Add a contact
 	const addContact = async (contact) => {
 		setContacts([...contacts, contact]) // Added to the front-end
-		await ContactController.addContact(contact); // Added to the back-end
+		await ContactController.addContact(contact.accountUsername); // Added to the back-end
 	}
 
 	// Sort Contacts alphabetically or by date added
@@ -44,11 +44,13 @@ const Contacts = (props) => {
 		const getContacts = async () => {
 			const ids =  await ContactController.fetchContacts();
 			let cs =  [];
-			for (const id of ids) {
-				let contactData = await ContactController.fetchContactData(id);
-				cs.push(contactData);
+			if (ids !== undefined) {
+				for (const id of ids) {
+					let contactData = await ContactController.fetchContactData(id);
+					cs.push(contactData);
+				}
+				setContacts(cs)
 			}
-			setContacts(cs)
 		}
 		getContacts();
 	}, [])

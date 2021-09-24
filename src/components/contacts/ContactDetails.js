@@ -30,13 +30,7 @@ const ContactDetails = ({contact, show, onHide}) => {
 					/>
 				</div>
 				<div className="contact-details-right">
-					<h1>{contact.name}</h1>
-					<h4>@{contact.username}</h4>
-					<h4>
-						{contact.dob[2]}
-						/{contact.dob[1]}
-						/{contact.dob[0]}
-					</h4>
+					
 				</div>
 
 			</Modal.Body>
@@ -44,5 +38,14 @@ const ContactDetails = ({contact, show, onHide}) => {
 		</>
 	)
 }
+/*
+					<h1>{contact.name}</h1>
+					<h4>@{contact.username}</h4>
+					<h4>
+						{contact.dob[2]}
+						/{contact.dob[1]}
+						/{contact.dob[0]}
+					</h4>
+					*/
 
 export default ContactDetails;
