@@ -8,7 +8,6 @@ const ContactDetails = ({contact, show, onHide}) => {
 	const handleClose = () => {
 		onHide(false);
 	}
-
 	return (
 		<>
 		<Modal
@@ -24,13 +23,17 @@ const ContactDetails = ({contact, show, onHide}) => {
 			<Modal.Body className="contact-details">
 				<div className="contact-details-left">
 					<ProfilePicture
-						name={contact.name}
-						id={contact.contactID}
+						name={contact.accountName}
+						id={contact.accountID}
 						size="lg"
 					/>
 				</div>
 				<div className="contact-details-right">
-					
+					<h1>{contact.accountName}</h1>
+						<h4>@{contact.accountUsername}</h4>
+						<h4>
+						{contact.accountDOB}
+					</h4>
 				</div>
 
 			</Modal.Body>
@@ -38,14 +41,5 @@ const ContactDetails = ({contact, show, onHide}) => {
 		</>
 	)
 }
-/*
-					<h1>{contact.name}</h1>
-					<h4>@{contact.username}</h4>
-					<h4>
-						{contact.dob[2]}
-						/{contact.dob[1]}
-						/{contact.dob[0]}
-					</h4>
-					*/
 
 export default ContactDetails;
