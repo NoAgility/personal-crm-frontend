@@ -10,14 +10,14 @@ const Contact = ({contact, onDelete}) => {
 
 	return (
 		<>
-			<li className="contact-item" >
+			<li className="contact-item" data-testid="contact" >
 				<div className="contact-info" onClick={() => setModalShow(true)}>
 					<ProfilePicture
-						name={contact.name}
-						id={contact.contactID}
+						name={contact.accountUsername}
+						id={contact.accountID}
 						size="md"
 					/>
-					<h4>{contact.name}</h4>
+					<h4>{contact.accountName}</h4>
 				</div>
 
 				<Dropdown className="contact-options">

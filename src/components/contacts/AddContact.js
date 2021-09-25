@@ -55,6 +55,7 @@ const AddContact = ({show, onHide, onAdd}) => {
 				</div>
 
 				<button
+					data-testid='add'
 					className={`add-contact-btn ${isAdded ? 'add-complete' : ''}`}
 					onClick={handleAdd}
 					disabled={isAdded}
@@ -82,6 +83,7 @@ const AddContact = ({show, onHide, onAdd}) => {
 				<h1>Search for a Contact</h1>
 
 				<SearchBar
+					data-testid="contact-search"
 					name="username"
 					colorMode="light"
 					width="md"

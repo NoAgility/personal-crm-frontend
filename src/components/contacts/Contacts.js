@@ -22,11 +22,11 @@ const Contacts = (props) => {
 	// Add a contact
 	const addContact = async (contact) => {
 		setContacts([...contacts, contact]) // Added to the front-end
-		await ContactController.addContact(contact.accountUsername); // Added to the back-end
+		await ContactController.addContact(contact); // Added to the back-end
 	}
 
 	// Sort Contacts alphabetically or by date added
-	const sortByName = (x,y) => x.name > y.name
+	const sortByName = (x,y) => x.accountName > y.accountName
 	const sortByDate = (x,y) => x.contactCreatedOn > y.contactCreatedOn
 	const toggleSortName = () => setSortType('name')
 	const toggleSortDate = () => setSortType('date')
@@ -42,13 +42,15 @@ const Contacts = (props) => {
 	// Load all contacts from back-end
 	useEffect(() => {
 		const getContacts = async () => {
-			const ids =  await ContactController.fetchContacts();
+			const ids = await ContactController.fetchContacts();
+			console.log(ids);
 			let cs =  [];
-			if (ids !== undefined) {
+			if (ids !== undefined && ids.length > 0) {
 				for (const id of ids) {
 					let contactData = await ContactController.fetchContactData(id);
 					cs.push(contactData);
 				}
+				console.log(cs);
 				setContacts(cs)
 			}
 		}
@@ -59,7 +61,7 @@ const Contacts = (props) => {
 		<div className="contacts-page">
 			<div className="contact-header">
 				<h1>Contacts</h1>
-				<button className="create-contact-btn" onClick={() => setModalShow(true)}>
+				<button data-testid="add-contact" className="create-contact-btn" onClick={() => setModalShow(true)}>
 					<MdAdd size={22}/>
 					<h4>Add</h4>
 				</button>
@@ -101,7 +103,7 @@ const Contacts = (props) => {
 								.sort(contactOrder())
 								.map((contact) => (
 								<Contact
-									key={contact.contactID}
+									key={contact.accountID}
 									contact={contact}
 									onDelete={deleteContact}
 								/>

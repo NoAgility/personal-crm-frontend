@@ -2,11 +2,11 @@ import { fetch, post } from "../../util/SpringBootAdapter";
 
 const ContactController = {
 
-	// Fetch all contacts of the user
+	// Fetch all contacts of the contact
 	fetchContacts: async () => {
 		try{
 			const res = await fetch("/contact/read").then(
-				response => { return response; }
+				response => { return response.data; }
 			);
 			return res;
 		} catch (err) {
@@ -15,11 +15,13 @@ const ContactController = {
 	},
 
 	// Fetch a contact's data by their contactID
-	fetchContactData: async (contactID) => {
+	fetchContactData: async (contact) => {
 		try {
-			const res = await fetch (`/account/get?id=${contactID}`).then(
+			const res = await fetch (`/account/get?id=${contact.contactID}`).then(
 				response => {
-					return response;
+					const data = response.data;
+					data.contactCreatedOn = contact.contactCreatedOn;
+					return data;
 				}
 			);
 			return res;
@@ -28,10 +30,10 @@ const ContactController = {
 		}
 	},
 
-	// Fetch a contact's data by their username
-	fetchUserByUsername: async (user) => {
+	// Fetch a contact's data by their contactname
+	fetchUserByUsername: async (contact) => {
 		try {
-			const res = await fetch (`/account/get?username=${user}`).then(
+			const res = await fetch (`/account/get?username=${contact}`).then(
 				response => { return response; }
 			);
 			return res;
@@ -41,18 +43,18 @@ const ContactController = {
 	},
 
 	// Delete a contact using their contactID
-	deleteContact: async (user) => {
+	deleteContact: async (contact) => {
 		try {
-			const res = await post ("/contact/create", "", {"contact": user});
+			const res = await post ("/contact/delete", "", {"contact": contact.accountUsername});
 			return res;
 		} catch (err) {
 			console.log(err)
 		}
 	},
 
-	addContact: async (user) => {
+	addContact: async (contact) => {
 		try {
-			const res = await post ("/contact/create", "", {"contact": user});
+			const res = await post ("/contact/create", "", {"contact": contact.accountUsername});
 			return res;
 		} catch (err) {
 			console.log(err)
