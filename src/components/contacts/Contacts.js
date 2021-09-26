@@ -4,9 +4,10 @@ import { MdAdd } from 'react-icons/md';
 import ContactController from './ContactController.js'
 import Contact from './Contact.js'
 import AddContact from './AddContact.js'
-import { Dropdown} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import  './Contacts.css'
 import { get } from 'jquery';
+import Filter from '../UIComponents/filter/Filter.js';
 
 const Contacts = (props) => {
 
@@ -33,6 +34,16 @@ const Contacts = (props) => {
 	const sortByDate = (x,y) => x.contactCreatedOn > y.contactCreatedOn
 	const toggleSortName = () => setSortType('name')
 	const toggleSortDate = () => setSortType('date')
+	const sortTypes = [
+		{
+			label:"Sort alphabetically",
+			sortFunction: toggleSortName,
+		},
+		{
+			label:"Sort by date added",
+			sortFunction: toggleSortDate,
+		},
+	]
 
 	const contactOrder = () => {
 		if (sortType === 'name') {
@@ -84,24 +95,9 @@ const Contacts = (props) => {
 
 			<div className="contact-sub-header">
 				<div className="filter-dropdown">
-					<Dropdown >
-						<Dropdown.Toggle
-							id="button-dropdown-body"
-							className="dropdown-button"
-							align="end"
-						>
-							<BiFilter className="menu-icon" size={40}/>
-						</Dropdown.Toggle>
-
-						<Dropdown.Menu variant="dark">
-							<Dropdown.Item onClick={toggleSortName}>
-								Sort alphabetically
-							</Dropdown.Item>
-							<Dropdown.Item  onClick={toggleSortDate}>
-								Sort by date added
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
+					<Filter
+						sortTypes={sortTypes}
+					/>
 				</div>
 			</div>
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MdClose } from 'react-icons/md';
-import ProfilePicture from "./ProfilePic/ProfilePicture"
-import SearchBar from "../searchbar/SearchBar"
+import ProfilePicture from "../UIComponents/ProfilePic/ProfilePicture"
+import SearchBar from "../UIComponents/searchbar/SearchBar"
 import { Modal } from 'react-bootstrap';
 import  './ContactDetails.css'
 import  './AddContact.css'

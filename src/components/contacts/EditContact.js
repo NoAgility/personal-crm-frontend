@@ -1,7 +1,7 @@
 import { isPropsEqual } from '@fullcalendar/common';
 import React, { useState } from 'react';
 import { FiMoreHorizontal } from 'react-icons/fi';
-import ProfilePicture from "./ProfilePicture"
+import ProfilePicture from "../UIComponents/ProfilePicture"
 import { Modal, Dropdown } from 'react-bootstrap';
 import  './ContactDetails.css'
 import { useHistory } from "react-router-dom";

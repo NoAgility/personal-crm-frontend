@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ProfilePicture from "./ProfilePic/ProfilePicture"
+import ProfilePicture from "../UIComponents/ProfilePic/ProfilePicture"
 import ContactDetails from "./ContactDetails"
 import { Dropdown } from 'react-bootstrap';
 import { FiMoreHorizontal } from 'react-icons/fi';
