@@ -126,11 +126,11 @@ button {
 }
 
 .app-body {
-  height: calc(100vh - 130px);
-  margin-left:240px;
-  display: grid;
-  align-items: start;
-  justify-items: center;
-  padding: 25px;
-  margin-top: 80px;
+    height: calc(100vh - 130px);
+    margin-left:280px;
+    display: grid;
+    align-items: start;
+    justify-items: center;
+    padding: 25px;
+    margin-top: 80px;
 }
