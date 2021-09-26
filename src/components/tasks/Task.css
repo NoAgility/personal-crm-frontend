@@ -1,4 +1,4 @@
-.label {
+.task-label {
     height: 20px;
     margin-right: 10px;
     width: 20px;
@@ -6,7 +6,7 @@
     border: 1.5px solid;
     border-color: var(--color-purple);
 }
-.label-2 {
+.task-label-2 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,20 +21,20 @@
     text-align: top;
     font-size: 28px;
 }
-.add-icon {
+.task-add-icon {
     width: 30px;
     height: 30px;
     margin-right: 10px;
     vertical-align: center;
     color: var(--color-purple);
 }
-.scroll-container {
-    overflow: scroll;
+.task-container {
     width: 55%;
     height: 70vh;
     max-width: 500px;
     min-width: 350px;
 }
+
 .tasks-container {
     font-family: var(--font);
     font-size: var(--text-small);
@@ -44,7 +44,7 @@
     margin-bottom: 20px;
 }
 
-.submit {
+.task-submit {
     box-shadow: 2px 2px var(--color-medium);
     border: 2px solid var(--color-purple);
     background-color: var(--color-purple);
@@ -52,7 +52,7 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.cancel {
+.task-cancel {
     color: var(--color-white);
     box-shadow: 2px 2px var(--color-medium);
     border: 2px solid var(--color-offwhite);
@@ -61,7 +61,7 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.buttons {
+.task-buttons {
     margin-top: 5px;
     width: 55%;
     display: flex;
@@ -70,7 +70,7 @@
     max-width: 500px;
     min-width: 350px;
 }
-.form-container {
+.task-form-container {
     display: flex;
     background-color: var(--color-medium);
     border-radius: 10px;
@@ -81,7 +81,7 @@
     max-width: 500px;
     min-width: 350px;
 }
-.form-date-input {
+.task-form-date-input {
 	font-family: var(--font);
 	font-size: var(--text-msmall);
 	color: var(--color-offwhite);
@@ -93,13 +93,13 @@
 	background-color: var(--color-medium);
 	width: 35%;
 }
-.form-input {
+.task-form-input {
     font-size: var(--text-msmall);
     color: var(--color-offwhite);
     border-color: var(--color-offwhite);
     height: 15px;
 }
-.form-time-input {
+.task-form-time-input {
 	font-family: var(--font);
 	font-size: var(--text-msmall);
 	color: var(--color-offwhite);
@@ -112,7 +112,7 @@
 	width: 25%;
     margin-right: 2%;
 }
-.form-label {
+.task-form-label {
     padding: 5px 5px 5px 5px;
     color: var(--color-offwhite);
     font-size: var(--text-msmall);
@@ -149,7 +149,7 @@
 }
 .task-alias {
     display: flex;
-    
+
     align-items: left;
     color: var(--color-white);
     width: 25%;

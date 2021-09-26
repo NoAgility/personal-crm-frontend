@@ -4,11 +4,11 @@ import { BiPlusCircle } from 'react-icons/bi'
 import AddTaskForm from './AddTaskForm';
 const Task = (props) => {
     return <div className="task">
-        <span className="label"/>Task
+        <span className="task-label"/>Task
     </div>
 }
 const TaskList = (props) => {
-    
+
     return (<div className="tasks-container">
         <div className="task-title">
             <div className="task-alias">{props.name}</div> <div className="task-date">{props.date}</div>
@@ -30,7 +30,7 @@ const AddTask = (props) => {
     return <React.Fragment>
         {open ? <AddTaskForm submit={addTask} cancel={closeForm}/>:
         <div className="task-add">
-            <div className="label-2" onClick={openForm}>+</div>Add Task
+            <div className="task-label-2" onClick={openForm}>+</div>Add Task
         </div>}
     </React.Fragment>
 }
@@ -42,7 +42,7 @@ const TaskPage = (props) => {
 
     var tommorow = new Date();
     tommorow.setDate(tommorow.getDate() + 1);
-    return (<React.Fragment><div className="scroll-container">
+    return (<React.Fragment><div className="task-container">
         <TaskList name="Today" date={new Date().toLocaleDateString("en-US", options)}/>
         <TaskList name="Tommorow" date={tommorow.toLocaleDateString("en-US", options)}/>
         <TaskList name="" date={tommorow.toLocaleDateString("en-US", options)}/>

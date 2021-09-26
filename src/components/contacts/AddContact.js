@@ -9,7 +9,7 @@ import  './AddContact.css'
 import { useHistory } from "react-router-dom";
 import ContactController from './ContactController.js'
 
-const AddContact = ({show, onHide, onAdd}) => {
+const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 	const [usernameSearch, setUsernameSearch] = useState("");
     const [queryFound, setQueryFound] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
@@ -23,23 +23,33 @@ const AddContact = ({show, onHide, onAdd}) => {
 		setQueryFound(false);
 		setAddComplete(false);
 		onHide(false);
+		setHasSearched(false);
 	}
 
 	const handleAdd = (e) => {
 		setAddComplete(true);
 		onAdd(result);
+		contactIDs.push(result.accountID);
 	}
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		// reset search results
+		setQueryFound(false);
+		setResult({});
+
 		// search for username
 		const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
 			return res.data;});
 		if (contact) {
 			setQueryFound(true);
 			setResult(contact);
+			if (contactIDs.includes(contact.accountID)) {
+				setAddComplete(true);
+			}
+		} else {
+			setHasSearched(true);
 		}
-		setHasSearched(true);
 	}
 
 	const queryResult = (name, username, id) => {
@@ -51,7 +61,7 @@ const AddContact = ({show, onHide, onAdd}) => {
 				/>
 				<div className="column">
 					<h4>{name}</h4>
-					<p>@{username}</p>
+					<h6>@{username}</h6>
 				</div>
 
 				<button
@@ -65,7 +75,7 @@ const AddContact = ({show, onHide, onAdd}) => {
 		}
 
 	const noResult = () => {
-		if (hasSearched) return <h4>Not found</h4>
+		if (hasSearched) return <h5>Not found</h5>
 	}
 
 	return (
@@ -93,7 +103,7 @@ const AddContact = ({show, onHide, onAdd}) => {
 					onChange={event => {setUsernameSearch(event.target.value)}}
 				/>
 
-				{queryFound ? queryResult(result.name, result.username, result.contactID) : noResult}
+				{queryFound ? queryResult(result.accountName, result.accountUsername, result.accountID) : noResult()}
 
 			</Modal.Body>
 		</Modal>

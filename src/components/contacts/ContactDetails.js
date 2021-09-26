@@ -30,10 +30,10 @@ const ContactDetails = ({contact, show, onHide}) => {
 				</div>
 				<div className="contact-details-right">
 					<h1>{contact.accountName}</h1>
-						<h4>@{contact.accountUsername}</h4>
-						<h4>
+						<h5>@{contact.accountUsername}</h5>
+						<h5>
 						{contact.accountDOB}
-					</h4>
+					</h5>
 				</div>
 
 			</Modal.Body>

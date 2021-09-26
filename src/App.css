@@ -9,6 +9,7 @@
   --text-msmall: 15px;
 	--text-xsmall: 12px;
 	--text-xxsmall: 10px;
+	--color-xdark: #262736;
 	--color-dark: #3a3b50;
   --color-medium: #585c74;
   --color-teal: #70d4cc;
@@ -32,6 +33,10 @@
           box-sizing: content-box;
 }
 
+*{
+  transition: 0.4s;
+}
+
 body {
   background-color: var(--color-dark);
   color: var(--color-white);
@@ -46,7 +51,6 @@ h1 {
 h2 {
   font-size: var(--text-medium);
   font-weight: bold;
-
 }
 
 h3 {
@@ -55,7 +59,15 @@ h3 {
 }
 
 h4 {
+  font-size: var(--text-big);
+}
+
+h5 {
   font-size: var(--text-medium);
+}
+
+h6 {
+  font-size: var(--text-small);
 }
 
 p {
@@ -65,6 +77,10 @@ p {
 button {
   outline-style: none;
   border:none;
+}
+
+.scroll-container {
+  overflow: auto;
 }
 
 .form-label .form-control{
@@ -110,9 +126,11 @@ button {
 }
 
 .app-body {
-  height: calc(100% - 130px);
-  margin-left:240px;
-  display: grid;
-  place-items: center;
-  padding: 25px;
+    height: calc(100vh - 130px);
+    margin-left:280px;
+    display: grid;
+    align-items: start;
+    justify-items: center;
+    padding: 25px;
+    margin-top: 80px;
 }

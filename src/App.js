@@ -24,10 +24,10 @@ function App() {
         <PrivateRoute path="/home" component={() => { return (<React.Fragment>
                                                                 <Header/>
                                                                 <Navbar/>
-                                                                  <div className="app-body">
+                                                                  <div className="app-body scroll-container">
                                                                     <Dashboard/>
                                                                   </div>
-                                                                </React.Fragment>);}}/>  
+                                                                </React.Fragment>);}}/>
       </Switch>
     </Router>
   );
