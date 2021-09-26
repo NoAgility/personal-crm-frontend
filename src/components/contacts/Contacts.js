@@ -6,10 +6,12 @@ import Contact from './Contact.js'
 import AddContact from './AddContact.js'
 import { Dropdown} from 'react-bootstrap';
 import  './Contacts.css'
+import { get } from 'jquery';
 
 const Contacts = (props) => {
 
 	const [contacts, setContacts] = useState([]);
+	const [contactIDs, setContactIDs] = useState([]);
 	const [modalShow, setModalShow] = React.useState(false);
 	const [sortType, setSortType] = useState('name');
 
@@ -17,6 +19,7 @@ const Contacts = (props) => {
 	const deleteContact = async (contact) => {
 		setContacts(contacts.filter((c) => c.contactID !== contact.contactID)) // delete from front-end
 		await ContactController.deleteContact(contact); // delete from back-end
+		getContacts();
 	}
 
 	// Add a contact
@@ -39,21 +42,26 @@ const Contacts = (props) => {
 		}
 	}
 
+	const getContacts = async () => {
+		const ids = await ContactController.fetchContacts();
+		console.log(ids);
+		let cs =  [];
+		let cIDs = [];
+		if (ids !== undefined && ids.length > 0) {
+			for (const id of ids) {
+				let contactData = await ContactController.fetchContactData(id);
+				cs.push(contactData);
+				cIDs.push(contactData.accountID);
+			}
+			console.log(cIDs);
+			setContacts(cs);
+			setContactIDs(cIDs);
+		}
+	}
+
 	// Load all contacts from back-end
 	useEffect(() => {
-		const getContacts = async () => {
-			const ids = await ContactController.fetchContacts();
-			console.log(ids);
-			let cs =  [];
-			if (ids !== undefined && ids.length > 0) {
-				for (const id of ids) {
-					let contactData = await ContactController.fetchContactData(id);
-					cs.push(contactData);
-				}
-				console.log(cs);
-				setContacts(cs)
-			}
-		}
+
 		getContacts();
 	}, [])
 
@@ -71,6 +79,7 @@ const Contacts = (props) => {
 				show={modalShow}
 				onHide={() => setModalShow(false)}
 				onAdd={addContact}
+				contactIDs={contactIDs}
 			/>
 
 			<div className="contact-sub-header">
