@@ -28,13 +28,13 @@
     vertical-align: center;
     color: var(--color-purple);
 }
-.task-scroll-container {
-    overflow: scroll;
+.task-container {
     width: 55%;
     height: 70vh;
     max-width: 500px;
     min-width: 350px;
 }
+
 .tasks-container {
     font-family: var(--font);
     font-size: var(--text-small);

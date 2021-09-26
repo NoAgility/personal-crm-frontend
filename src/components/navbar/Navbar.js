@@ -12,33 +12,33 @@ const Navbar = (props) => {
         <Router>
             <ul className="nav-list">
                 <li className="nav-item">
-                    <button onClick={() => {history.push("/home/tasks")}} className="nav-button">
-                        <BiTask className="icon" size={32}/>
-                        Tasks
+                    <button onClick={() => {history.push("/home/tasks")}} className="nav-button tasks-nav-btn">
+                        <BiTask className="icon" size={30}/>
+                        <h4>Tasks</h4>
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button onClick={() => {history.push("/home/index.html")}} className="nav-button">
-                        <BiPhone className="icon" size={32}/>
-                        Meetings
+                    <button onClick={() => {history.push("/home/index.html")}} className="nav-button meetings-nav-btn">
+                        <BiPhone className="icon" size={30}/>
+                        <h4>Meetings</h4>
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button onClick={() => {history.push("/home/calendar")}} className="nav-button">
-                        <BiCalendar className="icon" size={32}/>
-                        Calendar
+                    <button onClick={() => {history.push("/home/calendar")}} className="nav-button calendar-nav-btn">
+                        <BiCalendar className="icon" size={30}/>
+                        <h4>Calendar</h4>
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button onClick={() => {history.push("index.html")}} className="nav-button">
-                        <BiMailSend className="icon" size={32}/>
-                        Inbox
+                    <button onClick={() => {history.push("index.html")}} className="nav-button inbox-nav-btn">
+                        <BiMailSend className="icon" size={30}/>
+                        <h4>Inbox</h4>
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button onClick={() => {history.push("/home/contacts")}} className="nav-button">
-                        <BiBook className="icon" size={32}/>
-                        Contacts
+                    <button onClick={() => {history.push("/home/contacts")}} className="nav-button contacts-nav-btn">
+                        <BiBook className="icon" size={30}/>
+                        <h4>Contacts</h4>
                     </button>
                 </li>
             </ul>

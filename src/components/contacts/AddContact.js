@@ -61,7 +61,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 				/>
 				<div className="column">
 					<h4>{name}</h4>
-					<p>@{username}</p>
+					<h6>@{username}</h6>
 				</div>
 
 				<button
@@ -75,7 +75,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 		}
 
 	const noResult = () => {
-		if (hasSearched) return <h4>Not found</h4>
+		if (hasSearched) return <h5>Not found</h5>
 	}
 
 	return (

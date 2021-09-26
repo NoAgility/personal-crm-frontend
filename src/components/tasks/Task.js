@@ -42,7 +42,7 @@ const TaskPage = (props) => {
 
     var tommorow = new Date();
     tommorow.setDate(tommorow.getDate() + 1);
-    return (<React.Fragment><div className="task-scroll-container">
+    return (<React.Fragment><div className="task-container">
         <TaskList name="Today" date={new Date().toLocaleDateString("en-US", options)}/>
         <TaskList name="Tommorow" date={tommorow.toLocaleDateString("en-US", options)}/>
         <TaskList name="" date={tommorow.toLocaleDateString("en-US", options)}/>

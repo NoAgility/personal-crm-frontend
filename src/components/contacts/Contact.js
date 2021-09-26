@@ -17,7 +17,7 @@ const Contact = ({contact, onDelete}) => {
 						id={contact.accountID}
 						size="md"
 					/>
-					<h4>{contact.accountName}</h4>
+					<h5>{contact.accountName}</h5>
 				</div>
 
 				<Dropdown className="contact-options">
