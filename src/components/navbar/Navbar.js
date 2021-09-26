@@ -30,7 +30,7 @@ const Navbar = (props) => {
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button onClick={() => {history.push("index.html")}} className="nav-button inbox-nav-btn">
+                    <button onClick={() => {history.push("/home/inbox")}} className="nav-button inbox-nav-btn">
                         <BiMailSend className="icon" size={30}/>
                         <h4>Inbox</h4>
                     </button>

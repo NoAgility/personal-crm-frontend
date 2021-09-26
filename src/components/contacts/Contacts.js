@@ -95,9 +95,7 @@ const Contacts = (props) => {
 
 			<div className="contact-sub-header">
 				<div className="filter-dropdown">
-					<Filter
-						sortTypes={sortTypes}
-					/>
+					<Filter	sortTypes={sortTypes} />
 				</div>
 			</div>
 

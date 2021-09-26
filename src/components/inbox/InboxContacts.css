@@ -1,0 +1,21 @@
+.inbox-contacts {
+	width: 380px;
+	height: 100%;
+	border-right-style: solid;
+	border-color: var(--color-offwhite);
+	border-width: 2px;
+	padding-right: 20px;
+}
+
+.inbox-contact-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.inbox-ul {
+	padding:25px;
+	padding-left: 0px;
+	margin: 0px;
+	width:100%;
+}
