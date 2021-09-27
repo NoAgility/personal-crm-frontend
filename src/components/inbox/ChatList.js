@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { BiFilter } from 'react-icons/bi';
 import { MdAdd } from 'react-icons/md';
-import Filter from '../UIComponents/filter/Filter.js';
+import Filter from '../UIComponents/sort/Sort.js';
 import SearchBar from '../UIComponents/searchbar/SearchBar.js';
 import ContactController from '../contacts/ContactController.js'
-import InboxContact from './InboxContact.js'
+import ChatItem from './ChatItem.js'
+import  './ChatList.css'
 
-
-import  './InboxContacts.css'
-
-const InboxContacts = ({contactIDs, contacts}) => {
+const ChatList = ({ contactIDs, chats, createChat, openChat, onDelete }) => {
 	const [sortType, setSortType] = useState('name');
 	const [usernameSearch, setUsernameSearch] = useState("");
     const [queryFound, setQueryFound] = useState(false);
@@ -17,14 +15,9 @@ const InboxContacts = ({contactIDs, contacts}) => {
     const [isAdded, setAddComplete] = useState(false);
 	const [result, setResult] = useState({});
 
-	const openChat = () => {
 
-	}
-
-
-	const sortByName = (x,y) => x.accountName > y.accountName
-	//TO DO: Sort this date last contacted
-	const sortByDate = (x,y) => x.accountName > y.accountName
+	const sortByName = (x,y) => x.chatParticipants[0] > y.chatParticipants[0]
+	const sortByDate = (x,y) => x.chatCreation > y.chatCreation
 	const toggleSortName = () => setSortType('name')
 	const toggleSortDate = () => setSortType('date')
 	const sortTypes = [
@@ -33,12 +26,12 @@ const InboxContacts = ({contactIDs, contacts}) => {
 			sortFunction: toggleSortName,
 		},
 		{
-			label:"Sort by last contacted",
+			label:"Sort by chat age",
 			sortFunction: toggleSortDate,
 		},
 	]
 
-	const contactOrder = () => {
+	const chatOrder = () => {
 		if (sortType === 'name') {
 			return sortByName;
 		} else {
@@ -69,11 +62,17 @@ const InboxContacts = ({contactIDs, contacts}) => {
 	return (
 		<div className="inbox-contacts">
 			<div className="inbox-contact-header">
-				<h1>Inbox</h1>
-				<Filter sortTypes={sortTypes}/>
-			</div>
+				<div className="inbox-contact-header-top">
+					<h1>Inbox</h1>
+					<div className="chat-btns row">
+						<Filter sortTypes={sortTypes}/>
+						<button className="add-chat-btn" onClick={createChat}>
+							<MdAdd size={25}/>
+						</button>
+					</div>
+				</div>
 
-			<SearchBar
+				<SearchBar
 				name="username"
 				colorMode="dark"
 				width="md"
@@ -81,18 +80,22 @@ const InboxContacts = ({contactIDs, contacts}) => {
 				value={usernameSearch}
 				onChange={event => {setUsernameSearch(event.target.value)}}
 			/>
+			</div>
+
+
 
 			<div className="inbox-contact-list">
-				{contacts.length > 0 ? (
+				{(chats !== undefined && chats.length > 0) ? (
 					<ul className="inbox-ul">
-							{contacts
-								.sort(contactOrder())
-								.map((contact) => (
-								<InboxContact
-									key={contact.accountID}
-									contact={contact}
-									lastMessage={""}
+							{chats
+								.sort(chatOrder())
+								.map((chat) => (
+								<ChatItem
+									key={chat.chatID}
+									chat={chat}
+									lastMessage={chat.messages[chat.length - 1]}
 									openChat={openChat}
+									onDelete={onDelete}
 								/>
 							))}
 					</ul>
@@ -104,4 +107,4 @@ const InboxContacts = ({contactIDs, contacts}) => {
 	)
 }
 
-export default InboxContacts;
+export default ChatList;

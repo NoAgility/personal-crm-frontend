@@ -10,7 +10,7 @@ import ContactController from '../contacts/ContactController.js'
 
 import  './ClosedChat.css'
 
-const ClosedChat = ({contact, value, createChat }) => {
+const ClosedChat = ({ contact, value, createChat }) => {
 
 	const [usernameSearch, setUsernameSearch] = useState("");
     const [queryFound, setQueryFound] = useState(false);

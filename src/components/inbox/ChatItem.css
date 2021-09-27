@@ -1,7 +1,6 @@
 .inbox-contact-item h6{
 	align-self: center;
 	margin: 0px;
-	margin-left: 30px;
 }
 
 .inbox-contact-item {
@@ -18,4 +17,15 @@
 	color: var(--color-white);
 	display: flex;
 	flex-direction: row;
+}
+
+.chat-description {
+	display: grid;
+	align-items: center;
+	justify-items: start ;
+	padding-left: 20px;
+}
+
+.chat-description *{
+	margin:0px;
 }

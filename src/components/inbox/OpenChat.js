@@ -38,7 +38,6 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 
 	// deletes the message in the front-end before deleting it in the backend
 	const onDelete = (chat, message) => {
-		console.log(userID)
 		setMessages(messages.filter((m) => m.messageText !== message.messageText))
 		deleteMessage(chat, message);
 
@@ -68,7 +67,6 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 					(messages)
 						.map((message) => (
 							<Message
-								userID={userID}
 								chat={chat}
 								message={message}
 								onDelete={onDelete}
