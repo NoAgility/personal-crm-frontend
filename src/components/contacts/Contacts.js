@@ -7,7 +7,7 @@ import AddContact from './AddContact.js'
 import { Dropdown } from 'react-bootstrap';
 import  './Contacts.css'
 import { get } from 'jquery';
-import Filter from '../UIComponents/filter/Filter.js';
+import Filter from '../UIComponents/sort/Sort.js';
 
 const Contacts = (props) => {
 
@@ -55,7 +55,6 @@ const Contacts = (props) => {
 
 	const getContacts = async () => {
 		const ids = await ContactController.fetchContacts();
-		console.log(ids);
 		let cs =  [];
 		let cIDs = [];
 		if (ids !== undefined && ids.length > 0) {
@@ -64,7 +63,6 @@ const Contacts = (props) => {
 				cs.push(contactData);
 				cIDs.push(contactData.accountID);
 			}
-			console.log(cIDs);
 			setContacts(cs);
 			setContactIDs(cIDs);
 		}
@@ -72,7 +70,6 @@ const Contacts = (props) => {
 
 	// Load all contacts from back-end
 	useEffect(() => {
-
 		getContacts();
 	}, [])
 

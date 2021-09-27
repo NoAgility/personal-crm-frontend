@@ -83,6 +83,16 @@ button {
   overflow: auto;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.super-center {
+  display: grid;
+	place-items: center;
+}
+
 .form-label .form-control{
   font-size: var(--text-small);
 }

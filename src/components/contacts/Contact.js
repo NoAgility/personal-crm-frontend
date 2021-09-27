@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import ProfilePicture from "../UIComponents/ProfilePic/ProfilePicture"
+import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
+import DeleteItem from "../UIComponents/deleteItem/DeleteItem"
 import ContactDetails from "./ContactDetails"
 import { Dropdown } from 'react-bootstrap';
 import { FiMoreHorizontal } from 'react-icons/fi';
@@ -20,15 +21,7 @@ const Contact = ({contact, onDelete}) => {
 					<h5>{contact.accountName}</h5>
 				</div>
 
-				<Dropdown className="contact-options">
-					<Dropdown.Toggle id="button-dropdown-body"  className="dropdown-button" >
-						<FiMoreHorizontal className="edit-contact-options" size={30}/>
-					</Dropdown.Toggle>
-
-					<Dropdown.Menu className="contact-options-dropdown" variant="dark">
-						<Dropdown.Item onClick={() => onDelete(contact)}>Delete</Dropdown.Item>
-					</Dropdown.Menu>
-				</Dropdown>
+				<DeleteItem item={contact} onDelete={onDelete}/>
 
 				<ContactDetails
 					contact={contact}
