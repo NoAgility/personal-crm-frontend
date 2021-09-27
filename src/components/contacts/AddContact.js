@@ -5,7 +5,7 @@ import SearchBar from "../searchbar/SearchBar"
 import { Modal } from 'react-bootstrap';
 import  './ContactDetails.css'
 import  './AddContact.css'
-
+import '../form.css';
 import { useHistory } from "react-router-dom";
 import ContactController from './ContactController.js'
 
@@ -86,10 +86,10 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
-			<div className="close-add-contact">
-				<MdClose className="edit-contact-options" onClick={handleClose} size={30}/>
+			<div className="close-add-form">
+				<MdClose className="close-button" onClick={handleClose} size={30}/>
 			</div>
-			<Modal.Body className="add-contact">
+			<Modal.Body className="add-form">
 				<h1>Search for a Contact</h1>
 
 				<SearchBar

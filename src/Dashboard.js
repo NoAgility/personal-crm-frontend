@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Redirect, Route, withRouter} from 'rea
 import React from 'react';
 import Contacts from './components/contacts/Contacts';
 import Calendar from './components/calendar/Calendar';
-import TaskPage from './components/tasks/Task';
+import TaskPage from './components/tasks/Tasks';
 const Dashboard = () => {
 
     return <React.Fragment>
