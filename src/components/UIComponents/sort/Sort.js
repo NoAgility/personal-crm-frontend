@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BiFilter } from 'react-icons/bi';
 import { Dropdown } from 'react-bootstrap';
-import  './Filter.css'
+import  './Sort.css'
 
-const Filter = ({sortTypes}) => {
+const Sort = ({sortTypes}) => {
 	return (
 		<Dropdown >
 			<Dropdown.Toggle
@@ -26,4 +26,4 @@ const Filter = ({sortTypes}) => {
 	)
 }
 
-export default Filter;
+export default Sort;
