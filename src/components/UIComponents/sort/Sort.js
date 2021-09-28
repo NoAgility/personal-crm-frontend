@@ -3,7 +3,7 @@ import { BiFilter } from 'react-icons/bi';
 import { Dropdown } from 'react-bootstrap';
 import  './Sort.css'
 
-const Sort = ({sortTypes}) => {
+const Sort = ({ sortTypes }) => {
 	return (
 		<Dropdown >
 			<Dropdown.Toggle

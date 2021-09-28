@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Message from "./Message"
 import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
 import SearchBar from '../UIComponents/searchbar/SearchBar';
-import AuthService from '../../util/AuthService';
+import Cookies from 'js-cookie';
 import  './OpenChat.css'
 
 const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
@@ -13,68 +13,71 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 	// Sends the message in the front-end before passing the message to the backend
 	const onSend = (e) => {
 		e.preventDefault()
-		// setMessages([...messages, {messageID : AuthService.userID, messageText:newMessage}])
 		sendMessage(chat, newMessage)
 		setNewMessage('')
 	}
 
-	// when the user searches for something in a chat, this function is called
+	// when the user searches for a message in a chat, this function is called
 	const onSearch = (e) => {
 		e.preventDefault();
-		// search for 'messageSearch' in the 'contact' chat
-		setMessageSearch('')
 	}
 
-	// Edits the message in the front-end before passing the message on to the backend
-	const onEdit = (chat, message, editedMessage) => {
-		const foundIndex = messages.findIndex(x => x.messageID === message.messageID)
-		message.messageText = editedMessage
-		let ms = messages
-		const m = {...message, messageText: editedMessage}
-		ms[foundIndex] = m
-		setMessages(ms)
-		editMessage(chat, message, editedMessage);
-	}
+	// Finds a participant in the chat that is not the user
+	const findFirstParticipant = useCallback(() => {
+		for (let p in chat.chatParticipants) {
+			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
+				return chat.chatParticipants[p];
+			}
+		}
+		return {"accountUserName": '', "accountID": -1,"accountName": ''};
+	}, [chat.chatParticipants])
 
-	// deletes the message in the front-end before deleting it in the backend
-	const onDelete = (chat, message) => {
-		setMessages(messages.filter((m) => m.messageText !== message.messageText))
-		deleteMessage(chat, message);
+	const [firstParticipant, setFirstParticipant] = useState(findFirstParticipant());
 
-	}
+	// Update the chat when the activeChat changes
+	useEffect(() => {
+		setMessages(chat.messages);
+		setFirstParticipant(findFirstParticipant())
+	}, [chat, messages, firstParticipant, findFirstParticipant])
 
 	return (
 		<div className="chat">
 			<div className="chat-header">
 				<ProfilePicture
-					name={chat.chatParticipants[0].accountUsername}
-					id={chat.chatParticipants[0].accountID}
+					name={firstParticipant.accountUsername}
+					id={firstParticipant.accountID}
 					size="md"
 				/>
-				<h1 className="name">{chat.chatParticipants[0].accountName}</h1>
+				<h1 className="name">{firstParticipant.accountName}</h1>
 				<SearchBar
-				name="username"
-				colorMode="dark"
-				width="md"
-				onSearch={onSearch}
-				value={messageSearch}
-				placeholder="Search in converstion"
-				onChange={event => {setMessageSearch(event.target.value)}}
-			/>
+					name="username"
+					colorMode="dark"
+					width="md"
+					onSearch={onSearch}
+					value={messageSearch}
+					placeholder="Search in converstion"
+					onChange={event => {setMessageSearch(event.target.value)}}
+				/>
 			</div>
 			<div className="chat-body">
-				{messages.length > 0 ? (
-					(messages)
+				{(chat.messages.length > 0) ? (
+					(chat.messages)
+					.filter((message) => {
+						if (message.messageText.toLowerCase().includes(messageSearch.toLowerCase() )) {
+							return message
+						} return null
+					})
 						.map((message) => (
 							<Message
+								key={message.messageID}
 								chat={chat}
 								message={message}
-								onDelete={onDelete}
-								onEdit={onEdit}
+								onDelete={deleteMessage}
+								onEdit={editMessage}
 							/>
 						))
 				):(
-					<h4>No messages to display</h4>
+					<></>
 				)}
 			</div>
 			<form className="chat-form" onSubmit={onSend}>

@@ -23,6 +23,8 @@
 	padding-left: 0px;
 	margin: 0px;
 	width:100%;
+	overflow:auto;
+	height: 65vh;
 }
 
 .add-chat-btn {
@@ -34,10 +36,4 @@
 	cursor: pointer;
 	display: grid;
 	place-items: center;
-}
-
-.inbox-ul {
-	overflow:auto;
-	height: 65vh;
-	/* overflow-x: hidden; */
 }

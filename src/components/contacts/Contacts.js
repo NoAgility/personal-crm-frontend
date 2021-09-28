@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BiFilter } from 'react-icons/bi';
 import { MdAdd } from 'react-icons/md';
 import ContactController from './ContactController.js'
 import Contact from './Contact.js'
 import AddContact from './AddContact.js'
-import { Dropdown } from 'react-bootstrap';
 import  './Contacts.css'
-import { get } from 'jquery';
-import Filter from '../UIComponents/sort/Sort.js';
+import Sort from '../UIComponents/sort/Sort.js';
 
 const Contacts = (props) => {
 
@@ -92,7 +89,7 @@ const Contacts = (props) => {
 
 			<div className="contact-sub-header">
 				<div className="filter-dropdown">
-					<Filter	sortTypes={sortTypes} />
+					<Sort	sortTypes={sortTypes} />
 				</div>
 			</div>
 

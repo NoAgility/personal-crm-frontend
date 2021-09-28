@@ -55,6 +55,22 @@ const ChatController = {
 		}
 	},
 
+	// Delete a chat
+	deleteChat: async (chatID) => {
+		try{
+			const res = await post('/chat/leaveChat','',
+					{
+						"chatID": chatID,
+					})
+				.then(
+					response => { return response.data; }
+				);
+			return res;
+		} catch (err) {
+			console.log(err)
+		}
+	},
+
 	// Edit a message
 	editMessage: async (chatID, messageID, newText) => {
 		try{

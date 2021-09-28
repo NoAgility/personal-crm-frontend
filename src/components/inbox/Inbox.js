@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BiFilter } from 'react-icons/bi';
-import { MdAdd } from 'react-icons/md';
-import { Dropdown } from 'react-bootstrap';
 import ChatList from "./ChatList"
 import ChatController from './ChatController.js'
 import ClosedChat from "./ClosedChat"
@@ -11,16 +8,8 @@ import  './Inbox.css'
 const Inbox = () => {
 
 	const [chatOpen, setChatOpen] = useState(false);
-	const [activeChat, setActiveChat] = useState({});
+	const [activeChat, setActiveChat] = useState();
 	const [chats, setChats] = useState([]);
-
-	// read in all the chats from the backend
-	const getChats = async () => {
-		const cs = await ChatController.fetchChats();
-		if (cs !== undefined && cs.length > 0) {
-			setChats(cs);
-		}
-	}
 
 	// Opens a window to create a new chat
 	const initiateCreateChat = () => {
@@ -29,41 +18,40 @@ const Inbox = () => {
 
 	// Opens an existing chat in the chat window
 	const openChat = (e, chat) => {
-		e.preventDefault();
+		// e.preventDefault();
 		setChatOpen(true);
 		setActiveChat(chat);
+		getChats();
 	}
 
 	// creates a new chat with a contact
 	const createChat = async (contact) => {
 		if (contact) {
-			setChatOpen(true);
-			setActiveChat(contact);
-			const cs = await ChatController.createChat([contact.accountID, 3]);
-			// setChats([...chats, cs]);
+			await ChatController.createChat([contact.accountID]);
+			console.log(chats)
 			getChats();
 		}
 	}
 
-	// deletes a chat : BROKEN BECAUSE NOT IMPLEMENTED IN BACKEND
+	// deletes a chat
 	const deleteChat = async (chat) => {
+		setChatOpen(false)
 		if (chat) {
 			if (chat.chatID === activeChat.chatID) {
 				setChatOpen(false);
 				setActiveChat({});
 			}
-
 			await ChatController.deleteChat(chat.chatID);
 			getChats();
 		}
 	}
 
+	// sends a message
 	const sendMessage = async (chat, message) => {
 		if (message && chat) {
 			await ChatController.sendMessage(chat.chatID, message)
 			getChats();
 		}
-
 	}
 
 	// deletes a message
@@ -74,20 +62,40 @@ const Inbox = () => {
 		}
 	}
 
-	// deletes a message
+	// edits a message
 	const editMessage = async (chat, message, editedMessage) => {
 		if (chat && message && editedMessage) {
-			console.log(chat)
 			await ChatController.editMessage(chat.chatID, message.messageID, editedMessage);
 			getChats();
 		}
 	}
 
-	// Load all the chats upon loading the page
+	// read in all the chats from the backend
+	const getChats = async () => {
+		const cs = await ChatController.fetchChats();
+		if (cs !== undefined && cs.length > 0) {
+			setChats(cs);
+			return cs;
+		}
+	}
+
+	// call getChats() upon loading the page
 	useEffect(() => {
 		getChats();
-
 	}, [])
+
+	// Update the active chat when it is updated
+	useEffect(() => {
+		if (activeChat !== undefined) {
+			const chat = chats.find(chat => chat.chatID === activeChat.chatID)
+			setActiveChat(chat)
+		}
+	}, [chats, activeChat])
+
+	// call getChats() the a chat is opened up
+	useEffect(() => {
+		getChats();
+	}, [chatOpen])
 
 	return (
 		<div className="inbox-page">

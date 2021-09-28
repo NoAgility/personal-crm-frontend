@@ -1,62 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import { BiFilter } from 'react-icons/bi';
 import { MdAdd } from 'react-icons/md';
-import Filter from '../UIComponents/sort/Sort.js';
+import Sort from '../UIComponents/sort/Sort.js';
 import SearchBar from '../UIComponents/searchbar/SearchBar.js';
-import ContactController from '../contacts/ContactController.js'
 import ChatItem from './ChatItem.js'
+import Cookies from 'js-cookie';
 import  './ChatList.css'
 
-const ChatList = ({ contactIDs, chats, createChat, openChat, onDelete }) => {
-	const [sortType, setSortType] = useState('name');
-	const [usernameSearch, setUsernameSearch] = useState("");
-    const [queryFound, setQueryFound] = useState(false);
-    const [hasSearched, setHasSearched] = useState(false);
-    const [isAdded, setAddComplete] = useState(false);
-	const [result, setResult] = useState({});
+const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 
+	const [sortType, setSortType] = useState('contacted');
+	const [chatSearch, setChatSearch] = useState("");
 
-	const sortByName = (x,y) => x.chatParticipants[0] > y.chatParticipants[0]
-	const sortByDate = (x,y) => x.chatCreation > y.chatCreation
+	// functions for sorting the chats
+	const sortByName = (x,y) => getFirstParticipant(x).accountName > getFirstParticipant(y).accountName
+	const sortByContacted = (x,y) => getLastMessage(x).messageTime < getLastMessage(y).messageTime
+	const sortByAge = (x,y) => x.chatCreation < y.chatCreation
 	const toggleSortName = () => setSortType('name')
-	const toggleSortDate = () => setSortType('date')
+	const toggleSortContacted = () => setSortType('contacted')
+	const toggleSortAge = () => setSortType('age')
+
 	const sortTypes = [
 		{
-			label:"Sort alphabetically",
+			label:"Sort by name",
 			sortFunction: toggleSortName,
 		},
 		{
+			label:"Sort by last contacted",
+			sortFunction: toggleSortContacted,
+		},
+		{
 			label:"Sort by chat age",
-			sortFunction: toggleSortDate,
+			sortFunction: toggleSortAge,
 		},
 	]
 
 	const chatOrder = () => {
 		if (sortType === 'name') {
 			return sortByName;
+		} else if (sortType === 'contacted') {
+			return sortByContacted;
 		} else {
-			return sortByDate;
+			return sortByAge;
 		}
+	}
+
+	// gets the most recent message
+	const getLastMessage = (chat) => {
+		if (chat.messages.length > 0) {
+			return chat.messages[chat.messages.length - 1]
+		} else {
+			return {"messageText": '',
+				"messageTime": 0}
+		}
+	}
+
+	const getFirstParticipant = (chat) => {
+		for (let p in chat.chatParticipants) {
+			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
+				return chat.chatParticipants[p];
+			}
+		}
+		return null;
 	}
 
 	const onSearch = async (e) => {
 		e.preventDefault();
-		// reset search results
-		setQueryFound(false);
-		setResult({});
-
-		// search for username
-		const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
-			return res.data;});
-		if (contact) {
-			setQueryFound(true);
-			setResult(contact);
-			if (contactIDs.includes(contact.accountID)) {
-				setAddComplete(true);
-			}
-		} else {
-			setHasSearched(true);
-		}
 	}
 
 	return (
@@ -65,7 +73,7 @@ const ChatList = ({ contactIDs, chats, createChat, openChat, onDelete }) => {
 				<div className="inbox-contact-header-top">
 					<h1>Inbox</h1>
 					<div className="chat-btns row">
-						<Filter sortTypes={sortTypes}/>
+						<Sort sortTypes={sortTypes}/>
 						<button className="add-chat-btn" onClick={createChat}>
 							<MdAdd size={25}/>
 						</button>
@@ -76,24 +84,27 @@ const ChatList = ({ contactIDs, chats, createChat, openChat, onDelete }) => {
 				name="username"
 				colorMode="dark"
 				width="md"
-				onSearch={onSearch}
-				value={usernameSearch}
-				onChange={event => {setUsernameSearch(event.target.value)}}
+				onSubmit={onSearch}
+				value={chatSearch}
+				onChange={event => {setChatSearch(event.target.value)}}
 			/>
 			</div>
-
-
-
 			<div className="inbox-contact-list">
 				{(chats !== undefined && chats.length > 0) ? (
 					<ul className="inbox-ul">
 							{chats
 								.sort(chatOrder())
+								.filter((chat) => {
+									if(chatSearch === ""
+										|| getFirstParticipant(chat).accountName.toLowerCase().includes(chatSearch.toLowerCase())) {
+										return chat
+									}
+								})
 								.map((chat) => (
 								<ChatItem
 									key={chat.chatID}
 									chat={chat}
-									lastMessage={chat.messages[chat.length - 1]}
+									lastMessage={getLastMessage(chat).messageText}
 									openChat={openChat}
 									onDelete={onDelete}
 								/>

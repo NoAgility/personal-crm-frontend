@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
+import Cookies from 'js-cookie';
 import  './Message.css';
 
 const Message = ({ chat, message, onDelete, onEdit }) => {
@@ -16,7 +17,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 
 	// flags a message as by the 'user' or by a 'contact'
 	const sender = () => {
-		return (message.accountID === 3) ? 'user' : 'contact'
+		return (message.accountID === parseInt(Cookies.get('accountID'))) ? 'user' : 'contact'
 	}
 
 	const popover = (props) => (
@@ -76,7 +77,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 			}}
 		>
 			<div className='message-options-container' style={{display: `${visibility}`}}>
-				{(message.accountID === 3) ? overlay : <></>}
+				{(message.accountID === parseInt(Cookies.get('accountID'))) ? overlay : <></>}
 			</div>
 			<div className={`message message-${sender()}`}>
 				{isEditing ? editMessage : <h6>{editedMessage}</h6>}

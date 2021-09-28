@@ -1,27 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { BiFilter } from 'react-icons/bi';
-import { MdAdd } from 'react-icons/md';
-import { Dropdown } from 'react-bootstrap';
-import Message from "./Message"
 import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
 import SearchBar from '../UIComponents/searchbar/SearchBar';
-import ChatController from './ChatController.js'
 import ContactController from '../contacts/ContactController.js'
-
 import  './ClosedChat.css'
 
-const ClosedChat = ({ contact, value, createChat }) => {
+const ClosedChat = ({ createChat }) => {
 
 	const [usernameSearch, setUsernameSearch] = useState("");
     const [queryFound, setQueryFound] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
 	const [result, setResult] = useState({});
-	const [contactIDs, setContactIDs] = useState([]);
 
-	const handleAdd = (e) => {
-		// onAdd(result);
-		// setContactIDs(...contactIDs, [result.accountID]);
-		// console.log(contactIDs)
+	const handleAdd = () => {
 		createChat(result);
 	}
 
@@ -46,7 +36,8 @@ const ClosedChat = ({ contact, value, createChat }) => {
 		if (hasSearched) return <h5>Not found</h5>
 	}
 
-	const onSubmit = async (e) => {
+	// searches for contacts to add to a new chat
+	const onSearch = async (e) => {
 		e.preventDefault();
 		// reset search results
 		setQueryFound(false);
@@ -58,10 +49,6 @@ const ClosedChat = ({ contact, value, createChat }) => {
 		if (contact) {
 			setQueryFound(true);
 			setResult(contact);
-			console.log(contactIDs)
-			// if (contactIDs.includes(contact.accountID)) {
-			// 	setAddComplete(true);
-			// }
 		} else {
 			setHasSearched(true);
 		}
@@ -77,7 +64,7 @@ const ClosedChat = ({ contact, value, createChat }) => {
 					name="username"
 					colorMode="light"
 					width="lg"
-					onSubmit={onSubmit}
+					onSubmit={onSearch}
 					placeholder="Find contacts"
 					value={usernameSearch}
 					onChange={event => {setUsernameSearch(event.target.value)}}
