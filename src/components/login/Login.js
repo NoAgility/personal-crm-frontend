@@ -2,7 +2,7 @@ import "./Login.css";
 import { useState } from "react";
 import { BiHide, BiShow} from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
-import LoginController from './LoginController';
+import LoginControllerWrapper from './LoginControllerWrapper';
 
 const Login = () => {
     const [error, setError] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
     const [redirect, setRedirect] = useState("");
     const onSubmit = async (e) => {
         e.preventDefault();
-            await LoginController.Login({
+            await LoginControllerWrapper.Login({
                 username: username,
                 password: password
             }).then(() => history.push("/home")).catch(err => setError(err.toString()));

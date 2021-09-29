@@ -12,7 +12,7 @@ import AuthService from './util/AuthService';
 import Dashboard from './Dashboard';
 function App() {
   axios.defaults.adapter = require('axios/lib/adapters/http');
-
+  
   return (
     <Router>
       <Switch>

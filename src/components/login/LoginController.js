@@ -1,34 +1,10 @@
-import { fetch, post } from '../../util/SpringBootAdapter.js'
-import AuthService from '../../util/AuthService.js'
-import { Redirect } from "react-router-dom";
 
-const LoginController = {
-	Login : async (user) => {
-		if (!user.username || !user.password) {
-			throw new Error("Please provide an username and a password");
-		}
+function LoginController() {
 
-		var data;
-		var flag = await post(`/authenticate/login`, {}, {
-			username: user.username,
-			password: user.password
-		}).then(response => {
-			data = response.data
-			return true;
-		}).catch(err => {; return false;});
+}
 
-		if (!flag) {
-			throw new Error("Incorrect username and or password");
-		} else {
-			await fetch(`/account/get?username=${user.username}`, {}, {})
-			.then(response => {
-				data = response.data
-				return true;
-			}).catch(err => {return false;});
-			const state = { redirect: "/home" };
-			return <Redirect to={state.redirect} />
-		}
-	}
+LoginController.prototype.login = () => {
+	throw new Error("Abstract method!");
 }
 
 export default LoginController;

@@ -1,9 +1,9 @@
-import {fetch, post} from '../../util/SpringBootAdapter';
+import SpringBootAdapterWrapper from '../../util/SpringBootAdapterWrapper';
 
 const TaskController = {
     fetchTasks: async () => {
         try {
-            const data = await fetch('/task/readTasks').then(res => { return res.data; } )
+            const data = await SpringBootAdapterWrapper.get('/task/readTasks').then(res => { return res.data; } )
                 .catch(err => { throw err; });
             return data;
         } catch (err) {
@@ -13,7 +13,7 @@ const TaskController = {
     addTask: async (task) => {
         try {
             console.log(task);
-            const data = await post('/task/createTask', "", task).then(res => { return res.data; } )
+            const data = await SpringBootAdapterWrapper.post('/task/createTask', "", task).then(res => { return res.data; } )
                 .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to create task");
@@ -22,7 +22,7 @@ const TaskController = {
     deleteTask: async (task) => {
         try {
             const jsonTaskID = { "taskID" : task.taskID };
-            await post('/task/createTask', "",  jsonTaskID).then(res => { return res.data; } )
+            await SpringBootAdapterWrapper.post('/task/createTask', "",  jsonTaskID).then(res => { return res.data; } )
                 .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to create task");

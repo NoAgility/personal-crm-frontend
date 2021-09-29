@@ -79,7 +79,6 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 	}
 
 	return (
-		<>
 		<Modal
 			show={show}
 			onHide={onHide}
@@ -93,6 +92,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 				<h1>Search for a Contact</h1>
 
 				<SearchBar
+					className="search-bar"
 					data-testid="contact-search"
 					name="username"
 					colorMode="light"
@@ -107,7 +107,6 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 
 			</Modal.Body>
 		</Modal>
-		</>
 	)
 }
 
