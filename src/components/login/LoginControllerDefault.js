@@ -1,7 +1,7 @@
 import SpringBootAdapterWrapper from '../../util/SpringBootAdapterWrapper'
 import { Redirect } from "react-router-dom";
 import LoginController from "./LoginController"
-const LoginControllerDefault = new Object(LoginController);
+const LoginControllerDefault = LoginController();
 
 LoginControllerDefault.login = async (user) => {
 	if (!user.username || !user.password) {

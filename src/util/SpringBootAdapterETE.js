@@ -2,7 +2,7 @@ import axios from 'axios';
 import CookieManager from './CookieManager';
 import SpringBootAdapter from './SpringBootAdapter';
 
-const SpringBootAdapterETE = new Object(SpringBootAdapter);
+const SpringBootAdapterETE = SpringBootAdapter();
 
 SpringBootAdapterETE.get = (aUrl, aHeaders) => {
     const defaultHeaders = {

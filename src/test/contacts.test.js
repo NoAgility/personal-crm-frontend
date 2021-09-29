@@ -26,7 +26,8 @@ beforeAll(() => {
         value: 'status=active',
     });
 
-    CookieManager.eraseCookie("jwt");
+    CookieManager.eraseCookies();
+    
 });
 test("ETE Test - Register -> Login -> Add Contact -> See Contact", async () => {
 

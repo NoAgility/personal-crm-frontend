@@ -1,16 +1,18 @@
 import axios from 'axios';
 import CookieManager from './CookieManager';
 
-function SpringBootAdaptor() {
-
+const SpringBootAdaptor = () => {
+    return {
+        get: () => {
+            throw new Error("Abstract method");
+        },
+        post: () => {
+            throw new Error("Abstract method");
+        }
+    }
 };
 
-SpringBootAdaptor.prototype.get = () => {
-    throw new Error("Abstract method");
-}
-SpringBootAdaptor.prototype.post = () => {
-    throw new Error("Abstract method");
-}
+
 
 
 export default SpringBootAdaptor;

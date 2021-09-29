@@ -1,7 +1,7 @@
 import LoginController from './LoginController';
 
 const LoginControllerWrapper = {
-	loginController: new LoginController(),
+	loginController: LoginController(),
 	loginControllerIsSet: false,
 	Login(user) {
 		return this.loginControllerIsSet && this.loginController.login(user);

@@ -37,21 +37,16 @@ const TaskPage = (props) => {
     var rows = [];
 
     const [tasksByDate, setTasksByDate] = useState([]);
-    const fetchTasks = async () => {
-        const tasks = await TaskController.fetchTasks();
-       
-        if (tasks === undefined || tasks.length === 0) return;
-        sortByDate(tasks);
-        setTasksByDate(groupByDate(tasks));
-    };
     const addTask = async (task) => {
         const data = {
             "taskName": task.name,
             "deadline": task.date || ""
         }
-        await TaskController.addTask(data);
-        fetchTasks();
-    }
+        const tasks = await TaskController.addTask(data);
+        await TaskController.fetchTasks(data);
+        sortByDate(tasks);
+        setTasksByDate(groupByDate(tasks));
+    };
     const groupByDate = (tasks) => { 
         const reduced = {}; 
         tasks.forEach((task) => {(
@@ -69,7 +64,15 @@ const TaskPage = (props) => {
             return 0;
         }
     )};
-    useEffect(fetchTasks, []);
+    useEffect(() => {
+        const fetchTasks = async () => {
+            const tasks = await TaskController.fetchTasks();
+           
+            if (tasks === undefined || tasks.length === 0) return;
+            sortByDate(tasks);
+            setTasksByDate(groupByDate(tasks));
+        };
+    fetchTasks();}, []);
     
     return (<React.Fragment><div className="task-container">
         

@@ -1,6 +1,6 @@
 import SpringBootAdapter from './SpringBootAdapter';
 const SpringBootAdapterWrapper = {
-	springBootAdapter: new SpringBootAdapter(),
+	springBootAdapter: SpringBootAdapter(),
 	springBootAdapterIsSet: false,
 	get(aUrl, headers) {
 		return this.springBootAdapterIsSet && this.springBootAdapter.get(aUrl, headers);

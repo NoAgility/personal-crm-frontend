@@ -1,7 +1,7 @@
 import axios from 'axios';
 import CookieManager from './CookieManager';
 import SpringBootAdapter from './SpringBootAdapter';
-const SpringBootAdapterDefault = new Object(SpringBootAdapter);
+const SpringBootAdapterDefault = SpringBootAdapter();
 
 SpringBootAdapterDefault.get = (aUrl, aHeaders) => {
     return axios.get(process.env.REACT_APP_BACKEND_URL + aUrl, 

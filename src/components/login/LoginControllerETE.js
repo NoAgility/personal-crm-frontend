@@ -2,14 +2,14 @@ import SpringBootAdapterWrapper from '../../util/SpringBootAdapterWrapper';
 import { Redirect } from "react-router-dom";
 import CookieManager from '../../util/CookieManager';
 import LoginController from './LoginController';
-const LoginControllerETE = new Object(LoginController);
+const LoginControllerETE = LoginController();
 LoginControllerETE.login = async (user) => {
 	if (!user.username || !user.password) {
 		throw new Error("Please provide an username and a password");
 	}
 
 	var data;
-		var flag = await SpringBootAdapterWrapper.post(`/authenticate/login_ete`, {}, {
+		var flag = await SpringBootAdapterWrapper.post(`/authenticate/login`, {}, {
 			username: user.username,
 			password: user.password
 		}).then(response => {
