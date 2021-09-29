@@ -27,11 +27,6 @@
 	flex-direction: column;
 }
 
-.close-add-contact {
-	display: flex;
-	justify-content: flex-end;
-}
-
 .add-complete {
 	background-color: var(--color-medium);
 	border-color: var(--color-medium);

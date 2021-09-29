@@ -26,7 +26,7 @@ const Contact = ({contact, onDelete}) => {
 					</Dropdown.Toggle>
 
 					<Dropdown.Menu className="contact-options-dropdown" variant="dark">
-						<Dropdown.Item onClick={() => onDelete(contact)}>Delete</Dropdown.Item>
+						<Dropdown.Item className="delete-btn" onClick={() => onDelete(contact)}>Delete</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
 

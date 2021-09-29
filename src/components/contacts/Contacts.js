@@ -44,7 +44,6 @@ const Contacts = (props) => {
 
 	const getContacts = async () => {
 		const ids = await ContactController.fetchContacts();
-		console.log(ids);
 		let cs =  [];
 		let cIDs = [];
 		if (ids !== undefined && ids.length > 0) {

@@ -135,11 +135,6 @@ input[type=number] {
 .username-selector input {
 	width:90%;
 }
-
-.edit-contact-options {
-	padding:15px;
-	cursor: pointer;
-}
 .contact-details-top {
 	display: grid;
 	place-items: end;

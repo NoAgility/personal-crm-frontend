@@ -1,9 +1,9 @@
-import { post } from '../../util/SpringBootAdapter'
+import SpringBootAdapterWrapper from '../../util/SpringBootAdapterWrapper'
 
 const SettingsController = {
 
 	deactivateAccount : async (userDetails) => {
-		var flag = await post(`/account/deactivate`, {}, {
+		var flag = await SpringBootAdapterWrapper.post(`/account/deactivate`, {}, {
 			username: userDetails.id
 		}).then(response => { return true; }).catch(err => {return false;});
 		if (!flag) {

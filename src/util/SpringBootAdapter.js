@@ -1,16 +1,18 @@
 import axios from 'axios';
+import CookieManager from './CookieManager';
 
-
-const fetch = (aUrl, headers) => {
-    return axios.get(process.env.REACT_APP_BACKEND_URL + aUrl, {withCredentials: true})
+const SpringBootAdaptor = () => {
+    return {
+        get: () => {
+            throw new Error("Abstract method");
+        },
+        post: () => {
+            throw new Error("Abstract method");
+        }
+    }
 };
 
-const post = (aUrl, headers, body) => {
-
-    return axios.post(process.env.REACT_APP_BACKEND_URL + aUrl,
-         body,
-         {withCredentials: true})
-}
 
 
-export { fetch, post };
+
+export default SpringBootAdaptor;

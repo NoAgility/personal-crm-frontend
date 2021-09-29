@@ -1,8 +1,8 @@
-import { fetch, post } from '../../util/SpringBootAdapter'
+import SpringBootAdapterWrapper from '../../util/SpringBootAdapterWrapper'
 
 const Controller = {
     Register : async (userDetails) => {
-        var flag = await post(`/account/create`, {}, {
+        var flag = await SpringBootAdapterWrapper.post(`/account/create`, {}, {
             username: userDetails.username,
             password: userDetails.password,
             name: userDetails.name,
@@ -29,7 +29,7 @@ const Controller = {
     },
     isTakenUsername : async (userDetails) => {
         //Check for existing username
-        var response = await fetch(`/account/get?username=${userDetails.username}`).then(response => { return response; });
+        var response = await SpringBootAdapterWrapper.get(`/account/get?username=${userDetails.username}`).then(response => { return response; }).catch(err => { return err; });
         if (!(response.data === undefined || response.data.length === 0)) {
             throw new Error('Username is already taken');
         }
