@@ -8,7 +8,7 @@ import  './ChatList.css'
 
 const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 
-	const [sortType, setSortType] = useState('contacted');
+	const [sortType, setSortType] = useState('age');
 	const [chatSearch, setChatSearch] = useState("");
 
 	// functions for sorting the chats
@@ -75,7 +75,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 					<div className="chat-btns row">
 						<Sort sortTypes={sortTypes}/>
 						<button className="add-chat-btn" onClick={createChat}>
-							<MdAdd size={25}/>
+							<MdAdd size={25} color={'white'}/>
 						</button>
 					</div>
 				</div>
@@ -98,7 +98,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 									if(chatSearch === ""
 										|| getFirstParticipant(chat).accountName.toLowerCase().includes(chatSearch.toLowerCase())) {
 										return chat
-									}
+									} return null
 								})
 								.map((chat) => (
 								<ChatItem

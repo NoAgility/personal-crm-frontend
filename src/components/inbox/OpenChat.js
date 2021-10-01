@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Message from "./Message"
-import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
+import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
 import SearchBar from '../UIComponents/searchbar/SearchBar';
 import Cookies from 'js-cookie';
 import  './OpenChat.css'
@@ -18,7 +18,7 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 	}
 
 	// when the user searches for a message in a chat, this function is called
-	const onSearch = (e) => {
+	const onSearch = async (e) => {
 		e.preventDefault();
 	}
 
@@ -53,7 +53,6 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 					name="username"
 					colorMode="dark"
 					width="md"
-					onSearch={onSearch}
 					value={messageSearch}
 					placeholder="Search in converstion"
 					onChange={event => {setMessageSearch(event.target.value)}}

@@ -17,8 +17,7 @@ const Inbox = () => {
 	}
 
 	// Opens an existing chat in the chat window
-	const openChat = (e, chat) => {
-		// e.preventDefault();
+	const openChat = (chat) => {
 		setChatOpen(true);
 		setActiveChat(chat);
 		getChats();
@@ -35,9 +34,8 @@ const Inbox = () => {
 
 	// deletes a chat
 	const deleteChat = async (chat) => {
-		setChatOpen(false)
 		if (chat) {
-			if (chat.chatID === activeChat.chatID) {
+			if (activeChat !== undefined && chat.chatID === activeChat.chatID) {
 				setChatOpen(false);
 				setActiveChat({});
 			}

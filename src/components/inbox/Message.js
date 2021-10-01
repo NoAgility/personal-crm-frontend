@@ -80,7 +80,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 				{(message.accountID === parseInt(Cookies.get('accountID'))) ? overlay : <></>}
 			</div>
 			<div className={`message message-${sender()}`}>
-				{isEditing ? editMessage : <h6>{editedMessage}</h6>}
+				{isEditing ? editMessage : <h6 className="message-text">{editedMessage}</h6>}
 			</div>
 		</div>
 	)

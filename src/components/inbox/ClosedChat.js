@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
+import ProfilePic from "../UIComponents/profilePic/ProfilePic"
 import SearchBar from '../UIComponents/searchbar/SearchBar';
 import ContactController from '../contacts/ContactController.js'
 import  './ClosedChat.css'
@@ -17,7 +17,7 @@ const ClosedChat = ({ createChat }) => {
 
 	const queryResult = (name, username, id) => {
 		return (<div className="contact-search-result">
-			<ProfilePicture
+			<ProfilePic
 				name={name}
 				id={id}
 				size="md"

@@ -24,15 +24,14 @@
 	margin: 0px;
 	width:100%;
 	overflow:auto;
-	height: 65vh;
+	height: 68vh;
 }
 
 .add-chat-btn {
 	background-color: var(--color-blue);
 	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-
+	width: 30px;
+	height: 35px;
 	cursor: pointer;
 	display: grid;
 	place-items: center;

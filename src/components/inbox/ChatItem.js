@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
+import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
 import DeleteItem from "../UIComponents/deleteItem/DeleteItem"
 import Cookies from 'js-cookie';
 import './ChatItem.css'
@@ -18,8 +18,8 @@ const ChatItem = ({ chat, lastMessage, openChat, onDelete }) => {
 
 	return (
 		<>
-			<li className="inbox-contact-item" onClick={(e) => openChat(e,chat)}>
-				<div className="inbox-contact-item-info">
+			<li className="inbox-contact-item" >
+				<div className="inbox-contact-item-info" onClick={() => openChat(chat)}>
 					<ProfilePicture
 						name={firstParticipant.accountUsername}
 						id={firstParticipant.accountID}

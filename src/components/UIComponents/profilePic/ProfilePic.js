@@ -37,14 +37,14 @@ const getColor = (id) => {
     }
 }
 
-ProfilePicture.defaultProps = {
+ProfilePic.defaultProps = {
     name: "",
     id: 2,
     size: "md"
 }
 
 
-function ProfilePicture( { name, id, size } ) {
+function ProfilePic( { name, id, size } ) {
     // size : lg, md, sm
 	return (
 		<>
@@ -57,4 +57,4 @@ function ProfilePicture( { name, id, size } ) {
 	);
 }
 
-export default ProfilePicture;
+export default ProfilePic;

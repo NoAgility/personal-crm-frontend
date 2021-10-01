@@ -1,5 +1,6 @@
 .chat {
 	width:100%;
+	height: 88vh;
 }
 
 .chat-header {
@@ -22,7 +23,7 @@
 	display: grid;
 	align-content: start;
 	padding: 10px;
-	height: 65vh;
+	height: 70vh;
 	overflow: auto;
 }
 
@@ -37,7 +38,6 @@
 
 .chat-form {
 	margin: 10px;
-
 }
 
 .send-btn-container {

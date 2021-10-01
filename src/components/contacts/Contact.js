@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
+import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
 import DeleteItem from "../UIComponents/deleteItem/DeleteItem"
 import ContactDetails from "./ContactDetails"
 import { Dropdown } from 'react-bootstrap';

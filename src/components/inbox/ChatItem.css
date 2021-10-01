@@ -32,4 +32,5 @@
 .inbox-contact-item-info {
 	display: flex;
 	flex-direction: row;
+	width:100%;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MdClose } from 'react-icons/md';
-import ProfilePicture from "../UIComponents/profilePic/ProfilePicture"
+import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
 import { Modal } from 'react-bootstrap';
 import  './ContactDetails.css'
 
