@@ -3,6 +3,15 @@ import Registration from '../components/registration/Registration';
 import { MemoryRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
+import LoginControllerWrapper from '../components/login/LoginControllerWrapper';
+import LoginControllerETE from '../components/login/LoginControllerETE';
+import SpringBootAdapterWrapper from '../util/SpringBootAdapterWrapper';
+import SpringBootAdapterETE from '../util/SpringBootAdapterETE';
+jest.setTimeout(20000);
+beforeAll(() => { 
+    LoginControllerWrapper.setController(LoginControllerETE);
+    SpringBootAdapterWrapper.setAdapter(SpringBootAdapterETE);
+});
 test("Integration Test - Successful registration", async () => {
 
     axios.defaults.adapter = require('axios/lib/adapters/http');
@@ -90,7 +99,15 @@ test("Integration Test - Username Taken", async () => {
         await waitFor(() => expect(testLocation.pathname).toBe('/registration_success'));
 
         cleanup();
-        render(<Registration/>);
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
 
         await new Promise(r => setTimeout(r, 2000));
         //Attempt a registration with the same username

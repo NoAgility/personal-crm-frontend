@@ -93,12 +93,6 @@
 	background-color: var(--color-medium);
 	width: 35%;
 }
-.task-form-input {
-    font-size: var(--text-msmall);
-    color: var(--color-offwhite);
-    border-color: var(--color-offwhite);
-    height: 15px;
-}
 .task-form-time-input {
 	font-family: var(--font);
 	font-size: var(--text-msmall);
@@ -165,23 +159,4 @@
     text-align: right;
     font-size: var(--text-msmall);
     font-family: var(--font);
-}
-::-webkit-scrollbar {
-    width: 10px;
-    border-radius: 25%;
-}
-::-webkit-scrollbar-track {
-    background: var(--color-dark);
-}
-  /* Handle */
-::-webkit-scrollbar-thumb {
-    background: var(--color-medium);
-    border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--color-offwhite);
-}
-::-webkit-scrollbar-corner {
-    background: var(--color-dark);
-    border-radius: 25px;
 }

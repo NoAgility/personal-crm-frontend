@@ -1,11 +1,11 @@
-import { fetch, post } from "../../util/SpringBootAdapter";
+import SpringBootAdapterWrapper from "../../util/SpringBootAdapterWrapper";
 
 const ContactController = {
 
 	// Fetch all contacts of the contact
 	fetchContacts: async () => {
 		try{
-			const res = await fetch("/contact/read").then(
+			const res = await SpringBootAdapterWrapper.get("/contact/read").then(
 				response => { return response.data; }
 			);
 			return res;
@@ -17,7 +17,7 @@ const ContactController = {
 	// Fetch a contact's data by their contactID
 	fetchContactData: async (contact) => {
 		try {
-			const res = await fetch (`/account/get?id=${contact.contactID}`).then(
+			const res = await SpringBootAdapterWrapper.get(`/account/get?id=${contact.contactID}`).then(
 				response => {
 					const data = response.data;
 					data.contactCreatedOn = contact.contactCreatedOn;
@@ -30,10 +30,10 @@ const ContactController = {
 		}
 	},
 
-	// Fetch a contact's data by their contactname
+	// Fetch a contact's data by their username
 	fetchUserByUsername: async (contact) => {
 		try {
-			const res = await fetch (`/account/get?username=${contact}`).then(
+			const res = await SpringBootAdapterWrapper.get(`/account/get?username=${contact}`).then(
 				response => { return response; }
 			);
 			return res;
@@ -45,7 +45,7 @@ const ContactController = {
 	// Delete a contact using their contactID
 	deleteContact: async (contact) => {
 		try {
-			const res = await post ("/contact/delete", "", {"contact": contact.accountUsername});
+			const res = await SpringBootAdapterWrapper.post("/contact/delete", "", {"contact": contact.accountUsername});
 			return res;
 		} catch (err) {
 			console.log(err)
@@ -54,7 +54,7 @@ const ContactController = {
 
 	addContact: async (contact) => {
 		try {
-			const res = await post ("/contact/create", "", {"contact": contact.accountUsername});
+			const res = await SpringBootAdapterWrapper.post("/contact/create", "", {"contact": contact.accountUsername});
 			return res;
 		} catch (err) {
 			console.log(err)
