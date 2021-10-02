@@ -1,11 +1,11 @@
-import { fetch, post } from "../../util/SpringBootAdapter";
+import SpringBootAdapterWrapper from "../../util/SpringBootAdapterWrapper";
 
 const ChatController = {
 
 	// Fetch all chats that the user is in
 	fetchChats: async () => {
 		try{
-			const res = await fetch("/chat/getAccountChats").then(
+			const res = await SpringBootAdapterWrapper.get("/chat/getAccountChats").then(
 				response => { return response.data; }
 			);
 			return res;
@@ -17,7 +17,7 @@ const ChatController = {
 	// Fetch a chat by it's chatID
 	fetchChatsByChatID: async (chatID) => {
 		try{
-			const res = await fetch(`/chat/getChatByID/${chatID}`).then(
+			const res = await SpringBootAdapterWrapper.post(`/chat/getChatByID/${chatID}`).then(
 				response => { return response.data; }
 			);
 			return res;
@@ -29,7 +29,7 @@ const ChatController = {
 	// Create a chat
 	createChat: async (contactIDs) => {
 		try{
-			const res = await post('/chat/createChat', '', {"accountIDs": contactIDs}).then(
+			const res = await SpringBootAdapterWrapper.post('/chat/createChat', '', {"accountIDs": contactIDs}).then(
 				response => { return response.data; }
 			);
 			return res;
@@ -41,7 +41,7 @@ const ChatController = {
 	// Delete a message
 	deleteMessage: async (chatID, messageID) => {
 		try{
-			const res = await post('/chat/deleteMessage','',
+			const res = await SpringBootAdapterWrapper.post('/chat/deleteMessage','',
 					{
 						"chatID": chatID,
 						"messageID": messageID
@@ -58,7 +58,7 @@ const ChatController = {
 	// Delete a chat
 	deleteChat: async (chatID) => {
 		try{
-			const res = await post('/chat/leaveChat','',
+			const res = await SpringBootAdapterWrapper.post('/chat/leaveChat','',
 					{
 						"chatID": chatID,
 					})
@@ -74,7 +74,7 @@ const ChatController = {
 	// Edit a message
 	editMessage: async (chatID, messageID, newText) => {
 		try{
-			const res = await post('/chat/editMessage',
+			const res = await SpringBootAdapterWrapper.post('/chat/editMessage',
 					'',
 					{
 						"chatID": chatID,
@@ -92,7 +92,7 @@ const ChatController = {
 	// Send a message to a chat
 	sendMessage: async (chatID, messageText) => {
 		try{
-			const res = await post(
+			const res = await SpringBootAdapterWrapper.post(
 					'/chat/sendMessage',
 					'',
 					{

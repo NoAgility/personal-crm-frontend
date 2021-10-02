@@ -90,7 +90,7 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 							</button>
 						</div>
 						<input
-							className={"search-input"}
+							className="message-input"
 							type="text"
 							name="newMessage"
 							id="newMessage"
