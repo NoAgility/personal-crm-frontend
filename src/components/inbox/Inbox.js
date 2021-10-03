@@ -21,7 +21,7 @@ const Inbox = () => {
 	const openChat = (chat) => {
 		setChatOpen(true);
 		setActiveChat(chat);
-		getChats();
+		// getChats();
 	}
 
 	// creates a new chat with a contact
@@ -48,6 +48,7 @@ const Inbox = () => {
 	const sendMessage = async (chat, message) => {
 		if (message && chat) {
 			await ChatController.sendMessage(chat.chatID, message);
+			// TO DO: replace getChats() with getChatByID() to improve performance
 			getChats();
 		}
 	}
@@ -56,6 +57,7 @@ const Inbox = () => {
 	const deleteMessage = async (chat, message) => {
 		if (chat && message) {
 			await ChatController.deleteMessage(chat.chatID, message.messageID);
+			// TO DO: replace getChats() with getChatByID() to improve performance
 			getChats();
 		}
 	}
@@ -64,6 +66,7 @@ const Inbox = () => {
 	const editMessage = async (chat, message, editedMessage) => {
 		if (chat && message && editedMessage) {
 			await ChatController.editMessage(chat.chatID, message.messageID, editedMessage);
+			// TO DO: replace getChats() with getChatByID() to improve performance
 			getChats();
 		}
 	}
@@ -99,11 +102,6 @@ const Inbox = () => {
 			setActiveChat(chat);
 		}
 	}, [chats, activeChat])
-
-	// call getChats() the a chat is opened up
-	useEffect(() => {
-		getChats();
-	}, [chatOpen])
 
 	return (
 		<div className="inbox-page">

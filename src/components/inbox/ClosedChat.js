@@ -33,7 +33,7 @@ const ClosedChat = ({ createChat }) => {
 	}
 
 	const noResult = () => {
-		if (hasSearched) return <h5>Not found</h5>
+		if (hasSearched) return <h5 data-testid="contact-search-null-result">Not found</h5>
 	}
 
 	// searches for contacts to add to a new chat

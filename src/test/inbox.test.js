@@ -4,8 +4,8 @@ import ReactDOM from "react-dom";
 import Registration from '../components/registration/Registration';
 import { MemoryRouter, Route } from 'react-router-dom';
 import Contacts from '../components/contacts/Contacts';
-
 import Inbox from '../components/inbox/Inbox';
+import ChatController from '../components/inbox/ChatController';
 import AddContact from '../components/contacts/AddContact';
 import React from 'react';
 import axios from 'axios';
@@ -518,32 +518,5 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
 
         await waitFor(() => expect(inbox_container.querySelector(".message-text")).toBeNull());
         unmount();
-    });
-});
-
-test("Unit Test - DOB not inputted", async () => {
-
-    axios.defaults.adapter = require('axios/lib/adapters/http');
-
-    await act( async () => {
-        render(<Registration/>);
-        const username = screen.getByPlaceholderText('Username');
-        const password = screen.getByPlaceholderText('Password');
-        const name = screen.getByPlaceholderText('Name');
-        const dobError = screen.getByTestId('dob-error');
-        const generalError = screen.getByTestId('general-error');
-
-        fireEvent.change(username, {target: {value: 'testusername'}});
-        fireEvent.change(password, {target: {value: 'testpassword'}});
-        fireEvent.change(name, {target: {value: 'testname123'}});
-
-        await waitFor(() => expect(username).toHaveValue('testusername'));
-        await waitFor(() => expect(password).toHaveValue('testpassword'));
-        await waitFor(() => expect(name).toHaveValue('testname123'));
-
-        const submit = screen.getByTestId('submit');
-        fireEvent.click(submit);
-        await waitFor(() => expect(dobError).toHaveTextContent('DOB must be set'));
-        await waitFor(() => expect(generalError).toHaveTextContent('Failed'));
     });
 });
