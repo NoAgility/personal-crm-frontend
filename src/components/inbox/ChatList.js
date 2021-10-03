@@ -6,6 +6,11 @@ import ChatItem from './ChatItem.js'
 import  './ChatList.css'
 
 const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant }) => {
+	// chats : an array of all chat objects
+	// createChat : a function to create a new chat
+	// openChat : a function to open a chat in the chat window
+	// onDelete : a funciton to delete a chat
+	// findFirstParticipant : a function to find the contact in a chat that isnt the user
 
 	const [sortType, setSortType] = useState('age');
 	const [chatSearch, setChatSearch] = useState("");
@@ -56,6 +61,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 		}
 	}
 
+	// prevents the page from reloading when a chat is searched for
 	const onSearch = async (e) => {
 		e.preventDefault();
 	}

@@ -6,6 +6,12 @@ import Cookies from 'js-cookie';
 import  './OpenChat.css'
 
 const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMessage }) => {
+	// chat : the chat object
+	// firstParticipant : the contact in the chat that isnt the user
+	// deleteMessage : a function to delete a message
+	// sendMessage : a function to send a message
+	// editMessage :  a function to edit a message
+
 	const [newMessage, setNewMessage] = useState("");
 	const [messageSearch, setMessageSearch] = useState("");
 

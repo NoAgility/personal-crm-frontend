@@ -4,6 +4,8 @@ import { Dropdown } from 'react-bootstrap';
 import  './Sort.css'
 
 const Sort = ({ sortTypes }) => {
+	// sortTypes : an array of a sortTypes objects consisting of a label and sort function
+
 	return (
 		<Dropdown >
 			<Dropdown.Toggle

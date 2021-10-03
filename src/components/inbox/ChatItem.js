@@ -4,6 +4,11 @@ import DeleteItem from "../UIComponents/deleteItem/DeleteItem"
 import './ChatItem.css'
 
 const ChatItem = ({ chat, lastMessage, openChat, onDelete, firstParticipant }) => {
+	// chat : the chat object
+	// lastMessage : The most recent message sent into the chat
+	// openChat : a function to open the chat in the chat window
+	// onDelete : a function to delete the the chat
+	// firstParticipant : the user object of the other contact in the chat
 
 	return (
 		<>

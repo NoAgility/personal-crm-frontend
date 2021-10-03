@@ -52,6 +52,7 @@ const ContactController = {
 		}
 	},
 
+	// Add a contact
 	addContact: async (contact) => {
 		try {
 			const res = await SpringBootAdapterWrapper.post("/contact/create", "", {"contact": contact.accountUsername});

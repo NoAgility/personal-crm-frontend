@@ -17,7 +17,7 @@ import LoginControllerETE from '../components/login/LoginControllerETE';
 import SpringBootAdapterETE from '../util/SpringBootAdapterETE';
 import CookieManager from '../util/CookieManager';
 import { useEffect } from 'react';
-jest.setTimeout(30000);
+jest.setTimeout(3000000);
 jest.unmock('../components/contacts/Contacts');
 jest.unmock('../components/inbox/Inbox');
 

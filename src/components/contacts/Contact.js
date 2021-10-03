@@ -5,7 +5,9 @@ import ContactDetails from "./ContactDetails"
 import { Dropdown } from 'react-bootstrap';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
-const Contact = ({contact, onDelete}) => {
+const Contact = ({ contact, onDelete }) => {
+	// contact: the contact object
+	// onDelete: a function to delete a contact
 
 	const [modalShow, setModalShow] = React.useState(false);
 

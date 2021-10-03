@@ -5,16 +5,14 @@ import ContactController from '../contacts/ContactController.js'
 import  './ClosedChat.css'
 
 const ClosedChat = ({ createChat }) => {
+	// createChat : a function to create a chat
 
 	const [usernameSearch, setUsernameSearch] = useState("");
     const [queryFound, setQueryFound] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
 	const [result, setResult] = useState({});
 
-	const handleAdd = () => {
-		createChat(result);
-	}
-
+	// a component that displays a contact search result
 	const queryResult = (name, username, id) => {
 		return (<div className="contact-search-result">
 			<ProfilePic
@@ -26,12 +24,13 @@ const ClosedChat = ({ createChat }) => {
 				<h4>{name}</h4>
 				<h6>@{username}</h6>
 			</div>
-			<button	className="add-contact-btn" onClick={handleAdd}>
+			<button	className="add-contact-btn" onClick={() => {createChat(result)}}>
 				Create
 			</button>
 		</div>)
 	}
 
+	// A component to display when no componenet has been found
 	const noResult = () => {
 		if (hasSearched) return <h5 data-testid="contact-search-null-result">Not found</h5>
 	}

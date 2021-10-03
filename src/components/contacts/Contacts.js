@@ -42,6 +42,7 @@ const Contacts = (props) => {
 		},
 	]
 
+	// Sets the sort order based on the state
 	const contactOrder = () => {
 		if (sortType === 'name') {
 			return sortByName;
@@ -50,6 +51,7 @@ const Contacts = (props) => {
 		}
 	}
 
+	// Gets all the contacts from the backend
 	const getContacts = async () => {
 		const ids = await ContactController.fetchContacts();
 		let cs =  [];

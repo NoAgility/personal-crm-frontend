@@ -6,22 +6,26 @@ import { Modal, Dropdown } from 'react-bootstrap';
 import  './ContactDetails.css'
 import { useHistory } from "react-router-dom";
 
-const EditContact = (props) => {
-	const [username, setUsername] = useState(props.contact.name);
+const EditContact = ({ onShow, onHide, contact }) => {
+	// show : open/closed state for the add contact modal
+	// onHide : function to close the add contact modal
+	// contact : the contact object
+	const [username, setUsername] = useState(contact.name);
 	const [dob, setDOB] = useState("");
-	const [day, setDay] = useState(props.contact.dob[2]);
-	const [month, setMonth] = useState(props.contact.dob[1]);
-	const [year, setYear] = useState(props.contact.dob[0]);
+	const [day, setDay] = useState(contact.dob[2]);
+	const [month, setMonth] = useState(contact.dob[1]);
+	const [year, setYear] = useState(contact.dob[0]);
 	const [modalShow, setModalShow] = React.useState(false);
-
 
 	const history = useHistory();
 
+	// handles the close of the edit contact modal
 	const handleClose = (e) => {
 		e.preventDefault();
 		history.goBack();
 	}
 
+	// handles the delete of a contact
 	const handleDelete = (e) => {
 		e.preventDefault();
 		history.goBack();
@@ -30,8 +34,8 @@ const EditContact = (props) => {
 	return (
 		<>
 		<Modal
-
-			{...props}
+			onShow={onShow}
+			onHide={onHide}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
@@ -47,7 +51,6 @@ const EditContact = (props) => {
 				</Dropdown>
 			</div>
 
-
 			<Modal.Body className="contact-details">
 				<div className="contact-details-left">
 					<ProfilePicture
@@ -56,8 +59,6 @@ const EditContact = (props) => {
 					/>
 				</div>
 				<div className="contact-details-right">
-
-
 					<form>
 						<div className="username-selector">
 							<input
@@ -114,15 +115,10 @@ const EditContact = (props) => {
 							<button className="cancel-add-contact-btn" onClick={handleClose}>Cancel</button>
 							<button className="add-contact-btn" type="submit">Save</button>
 						</div>
-
 					</form>
-
 				</div>
-
 			</Modal.Body>
 		</Modal>
-
-
 		</>
 	)
 }

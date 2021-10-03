@@ -1,5 +1,6 @@
 import "./ProfilePic.css"
 
+// extracts the initials from an accountName
 const getInitials = (name) => {
     if (!name) {return null;}
     let initials;
@@ -16,6 +17,7 @@ const getInitials = (name) => {
     return initials.toUpperCase();
 }
 
+// sets the background color pseudo randomly based on accountID number
 const getColor = (id) => {
     if (id % 6 === 0) {
         return "#70d4cc";
@@ -42,7 +44,6 @@ ProfilePic.defaultProps = {
     id: 2,
     size: "md"
 }
-
 
 function ProfilePic( { name, id, size } ) {
     // size : lg, md, sm
