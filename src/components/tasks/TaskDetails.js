@@ -14,6 +14,22 @@ const TaskContact = (contact) => {
 }
 const TaskDetails = ({task, show, onHide, onUpdate}) => {
 
+	
+
+	const [contacts, setContacts] = useState([]);
+	const [taskPriority, setTaskPriority] = useState(task.taskPriority);
+	
+	const [contactsChanged, setContactsChanged] = useState(false);
+	const [taskPriorityChanged, setTaskPriorityChanged] = useState(false);
+	const [taskDeadlineChanged, setTaskDeadlineChanged] = useState(false);
+	const [selectedContactIDs, setSelectedContactIDs] = useState(task.taskContactAccounts.map(data => data.contactID));
+	const [trigger, setTrigger] = useState(true);
+
+	/**
+	 * Function for formatting a date to be valid for date input (ISO)
+	 * @param {Date} date The date to be formatted
+	 * @returns The ISO formatted date
+	 */
 	const dateFormat = (date) => {
 		const day = date.getDate().toString().padStart(2, "0"),
 		month = date.getMonth().toString().padStart(2, "0"),
@@ -21,15 +37,7 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 
 		return year + "-" + month + "-" + day;
 	}
-
-	const [contacts, setContacts] = useState([]);
-	const [taskPriority, setTaskPriority] = useState(task.taskPriority);
 	const [taskDeadline, setTaskDeadline] = useState(dateFormat(new Date(task.taskDeadline)));
-	const [contactsChanged, setContactsChanged] = useState(false);
-	const [taskPriorityChanged, setTaskPriorityChanged] = useState(false);
-	const [taskDeadlineChanged, setTaskDeadlineChanged] = useState(false);
-	const [selectedContactIDs, setSelectedContactIDs] = useState(task.taskContactAccounts.map(data => data.contactID));
-	const [trigger, setTrigger] = useState(true);
 
 	const handleClose = () => {
 		setTaskPriority(task.taskPriority);
