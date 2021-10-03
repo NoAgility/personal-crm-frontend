@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import TaskDetails from './TaskDetails';
-import Dropdown from 'react-bootstrap/dropdown';
+import { Dropdown } from 'react-bootstrap';
 import {FiMoreHorizontal} from 'react-icons/fi';
 import "./Tasks.css";
 const TaskItem = ({task, onUpdate, onDelete}) => {
