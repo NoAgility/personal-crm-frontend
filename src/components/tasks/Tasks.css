@@ -1,3 +1,13 @@
+
+.tasks-page {
+	width: 600px;
+}
+.tasks-header {
+	display: flex;
+	flex-direction: row;
+	text-align: left;
+	width: 100%;
+}
 .task-label {
     height: 20px;
     margin-right: 10px;
@@ -21,6 +31,21 @@
     text-align: top;
     font-size: 28px;
 }
+.create-task-btn {
+    color: var(--color-white);
+	margin-left: auto;
+	background-color: var(--color-blue);
+	border-radius: 30px;
+	width: 90px;
+	height: 50px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+    align-items: center;
+	padding-left: 5px;
+	padding-right: 12px;
+}
 .task-add-icon {
     width: 30px;
     height: 30px;
@@ -28,29 +53,50 @@
     vertical-align: center;
     color: var(--color-purple);
 }
-.task-container {
-    width: 55%;
+.edit-task-btn, .add-task-btn, .cancel-add-task-btn, .delete-task-btn {
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: var(--color-medium);
+	background-color: var(--color-medium);
+	color: var(--color-white);
+	height: 35px;
+	width: 80px;
+	outline:none;
+	cursor: pointer;
+	margin:20px;
+	text-align: center;
+}
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     height: 70vh;
-    max-width: 500px;
+    max-width: 600px;
     min-width: 350px;
+    overflow: auto;
 }
 
-.tasks-container {
+.tasks-section-container {
+    display: flex;
+    flex-direction: column;
     font-family: var(--font);
     font-size: var(--text-small);
     color: var(--color-medium);
     width: 100%;
-    height: 200px;
     margin-bottom: 20px;
 }
 
 .task-submit {
-    box-shadow: 2px 2px var(--color-medium);
-    border: 2px solid var(--color-purple);
+    height: 40px;
+    width: 100px;
+    border: none;
     background-color: var(--color-purple);
     margin-right: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    font-family: var(--font);
+    color: var(--color-white);
 }
 .task-cancel {
     color: var(--color-white);
@@ -90,23 +136,13 @@
 	border-style: none;
 	border-bottom: solid var(--color-offwhite);
 	border-width: 2px;
-	background-color: var(--color-medium);
-	width: 35%;
-}
-.task-form-time-input {
-	font-family: var(--font);
-	font-size: var(--text-msmall);
-	color: var(--color-offwhite);
-	padding: 5px;
-	outline: none;
-	border-style: none;
-	border-bottom: solid var(--color-offwhite);
-	border-width: 2px;
-	background-color: var(--color-medium);
-	width: 25%;
-    margin-right: 2%;
+	background-color: var(--color-dark);
+	width: 50%;
 }
 .task-form-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 5px 5px 5px 5px;
     color: var(--color-offwhite);
     font-size: var(--text-msmall);
@@ -114,16 +150,23 @@
     margin-top: 10px;
     margin-right: 5px;
     margin-bottom: 0;
+    width: 100%;
+}
+.task-container-left {
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
 }
 .task {
     color: var(--color-offwhite);
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     border-bottom: solid;
     border-color: var(--color-offwhite);
     border-width: 1px;
     margin-bottom: 20px;
     width: 90%;
+    
 }
 .task-add {
     border-top: solid;
@@ -143,20 +186,40 @@
 }
 .task-alias {
     display: flex;
-
     align-items: left;
     color: var(--color-white);
     width: 25%;
 }
 .task-title {
     display: flex;
-    align-items: left;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 .task-date {
     width: 65%;
     display: flex;
-    text-align: right;
+    justify-content: center;
     font-size: var(--text-msmall);
     font-family: var(--font);
+    font-weight: bold;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 25px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-dark);
+}
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-medium);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-offwhite);
+}
+::-webkit-scrollbar-corner {
+    background: var(--color-dark);
+    border-radius: 25px;
 }

@@ -7,8 +7,21 @@ const AddEventMenu = () => {
 
     const [expand, setExpand] = useState(false);
     const [form, setForm] = useState(null);
+
+    /**
+     * Toggles expansion of popup menu
+     */
     const toggleExpand = () => {setExpand(!expand);};
+    
+    /**
+     * Toggles active form
+     * THIS NEEDS TO BE REDONE
+     * @param {*} formName The form type
+     */
     const toggleForm = (formName) => {setForm(formName);}
+    /**
+     * Closes active form
+     */
     const closeForm = () => setForm(null);
     return (<div className="mini-menu">
         

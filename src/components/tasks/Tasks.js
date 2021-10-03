@@ -1,52 +1,73 @@
-import "./Tasks.css";
+
 import React, { useEffect, useState } from 'react';
 import { MdAdd } from 'react-icons/md';
-import { BiPlusCircle } from 'react-icons/bi'
 import AddTaskForm from './AddTaskForm';
 import TaskController from './TaskController';
-const Task = (props) => {
-    return <div className="task">
-        <span className="task-label"/>{props.name}
-    </div>
-}
-const TaskList = ({tasks}) => {
-
-    const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-    var tommorow = new Date();
-    tommorow.setDate(tommorow.getDate() + 1);
-    return (<div className="tasks-container">
-        <div className="task-title">
-            <div className="task-alias">{tasks[0].taskDeadline === new Date() ? "Today" : ""}</div> 
-            <div className="task-date">{new Date(tasks[0].taskDeadline).toLocaleDateString("en-US", options)}</div>
-        </div>
-        {tasks.map(t => <Task name={t.taskName}/>)}
-    </div>)
-}
-const AddTask = (props) => {
-
-    
-    
-}
+import TaskList from './TaskList';
+import "./Tasks.css";
 const TaskPage = (props) => {
 
     const [modalShow, setModalShow] = useState(false);
 
     const openModal = () => {setModalShow(true)};
     const hideModal = () => {setModalShow(false)};
-
-    var rows = [];
-
     const [tasksByDate, setTasksByDate] = useState([]);
-    const addTask = async (task) => {
-        const data = {
-            "taskName": task.name,
-            "deadline": task.date || ""
+
+    /**
+     * Function for wrapping an update task call to the backend
+     * @param {*} task The new task details
+     * @param {*} changes The attributes that have changed
+     */
+    const updateTask = async (task, changes) => {
+        if (changes.taskName) {
+            await TaskController.updateTaskName(task);
         }
-        const tasks = await TaskController.addTask(data);
-        await TaskController.fetchTasks(data);
-        sortByDate(tasks);
-        setTasksByDate(groupByDate(tasks));
+        if (changes.taskDeadline) {
+            await TaskController.updateTaskDeadline(task);
+        }
+        if (changes.taskPriority) {
+            await TaskController.updatePriority(task);
+        }
+        if (changes.taskNotes) {
+            //Backend needs to fix this
+        }
+        getTasks();
+    }
+    
+    
+    /**
+     * Function to call to the backend to delete task for user
+     * @param {*} task Task to be deleted
+     */
+    const deleteTask = async (task) => {
+        await TaskController.deleteTask(task);
+        getTasks();
+    }
+    /**
+     * Call to backend to add task for user
+     * @param {*} task Task to be added
+     */
+    const addTask = async (task) => {
+        
+        await TaskController.addTask(task);
+        getTasks();
+        
     };
+    /**
+     * Fetch the tasks from the backend and set tasks into component state
+     */
+    const getTasks = async () => {
+        const tasks = await TaskController.fetchTasks();
+        if (tasks !== undefined) {
+            sortByDate(tasks);
+            setTasksByDate(groupByDate(tasks));
+        }
+    }
+    /**
+     * Groups tasks by dates
+     * @param {*} tasks Tasks to be grouped
+     * @returns Array of groups of tasks by date
+     */
     const groupByDate = (tasks) => { 
         const reduced = {}; 
         tasks.forEach((task) => {(
@@ -54,16 +75,25 @@ const TaskPage = (props) => {
         })
         return reduced;
     };
+    /**
+     * Custom sorter for tasks, sorts by dates closest to Today
+     * null Dates or 1970 January 1 will always be last
+     * @param {*} tasks Tasks to be sorted
+     */
     const sortByDate = (tasks) => {
         tasks.sort((a, b) => {
             var dateA = new Date(a.taskDeadline);
             var dateB = new Date(b.taskDeadline);
-
-            if (dateA < dateB) return 1;
-            if (dateA > dateB) return -1;
+            if (dateA.toLocaleDateString() === new Date(0).toLocaleDateString()) return 1;
+            if (dateB.toLocaleDateString() === new Date(0).toLocaleDateString()) return -1;
+            if (dateA < dateB) return -1;
+            if (dateA > dateB) return 1;
             return 0;
         }
     )};
+    /**
+     * On render, fetch existing tasks to display to the user.
+     */
     useEffect(() => {
         const fetchTasks = async () => {
             const tasks = await TaskController.fetchTasks();
@@ -72,21 +102,30 @@ const TaskPage = (props) => {
             sortByDate(tasks);
             setTasksByDate(groupByDate(tasks));
         };
-    fetchTasks();}, []);
+        fetchTasks();
+    }, []);
     
-    return (<React.Fragment><div className="task-container">
-        
-        <div className="contact-header">
-				<h1>Contacts</h1>
-				<button data-testid="add-contact" className="create-contact-btn" onClick={() => { openModal() }}>
-					<MdAdd size={22}/>
-					<h4>Add</h4>
-				</button>
-			</div>
-        {Object.keys(tasksByDate).map(key => <TaskList tasks={tasksByDate[key]}/>)}
-        {modalShow ? <AddTaskForm submit={addTask} show={openModal} onHide={hideModal}/> : ""}
+    return (<React.Fragment>
+        <div className="tasks-page">
+            <div className="tasks-header">
+                    <h1>Tasks</h1>
+                    <button data-testid="add-task" className="create-task-btn" onClick={() => { openModal() }}>
+                        <MdAdd size={22}/>
+                        <h4>Add</h4>
+                    </button>
+                </div>
+            <div className="tasks-container">
+                {Object.keys(tasksByDate)
+                    .map(key => { 
+                        return <TaskList 
+                            key={tasksByDate[key][0].taskDeadline}
+                            tasks={tasksByDate[key]}
+                            editOptions={{update: updateTask, delete: deleteTask}}/>
+                            })}
+            {modalShow ? <AddTaskForm submit={addTask} show={openModal} onHide={hideModal}/> : ""}
+            </div>
         </div>
-        </React.Fragment>)
+    </React.Fragment>)
 }
 
 export default TaskPage;

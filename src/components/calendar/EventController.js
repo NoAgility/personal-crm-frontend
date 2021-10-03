@@ -2,9 +2,16 @@ import { fetch, post } from "../../util/SpringBootAdapter";
 
 const EventController = {
     
+    /**
+     * Method to fetch events
+     */
     fetchEvents: () => {
-        //fetch("/")
+        //get
     },
+    /**
+     * Method to create event
+     * @param {*} event The event to be created
+     */
     postEvent: (event) => {
         //post
     }

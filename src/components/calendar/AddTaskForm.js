@@ -7,6 +7,11 @@ const AddTaskForm = (props) => {
     const [notes, setNotes] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
+
+    /**
+     * Submit function, called when the user submits the form
+     * @param {*} e The triggering event
+     */
     const onSubmit = (e) => {
         e.preventDefault();
     }
