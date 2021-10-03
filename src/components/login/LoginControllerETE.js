@@ -20,7 +20,6 @@ LoginControllerETE.login = async (user) => {
 		throw new Error("Please provide an username and a password");
 	}
 
-	var data;
 	var flag = await SpringBootAdapterWrapper.post(`/authenticate/login`, {}, {
 		username: user.username,
 		password: user.password
@@ -28,7 +27,7 @@ LoginControllerETE.login = async (user) => {
 		CookieManager.setCookieRaw(response.data);
 		return true;
 	}).catch(err => { return false;});
-
+  
 	if (!flag) {
 		throw new Error("Incorrect username and or password");
 	} else {

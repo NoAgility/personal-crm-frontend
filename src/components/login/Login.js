@@ -12,14 +12,17 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [generalError, setGeneralError] = useState("");
     const [redirect, setRedirect] = useState("");
+
+    // submits the login information
     const onSubmit = async (e) => {
         e.preventDefault();
-            await LoginControllerWrapper.Login({
-                username: username,
-                password: password
-            }).then(() => history.push("/home")).catch(err => setError(err.toString()));
+        await LoginControllerWrapper.Login({
+            username: username,
+            password: password
+        }).then(() => history.push("/home")).catch(err => setError(err.toString()));
     };
 
+    // toggles the visibility of the password
     const togglePassword = () => {
         setPasswordShown(!passwordShown);
     };
@@ -53,11 +56,13 @@ const Login = () => {
                         className="login-input"
                         onChange={event => {setPassword(event.target.value)}}
                     />
-                    {passwordShown ? show : hide}
+                    <div>{passwordShown ? show : hide}</div>
                 </div>
                 <div className="buttons">
                     <button className="login-button" data-testid="submit" type="submit">Login</button>
-                    <button className="register" type="button" onClick={ () => { history.push('register') } }>Register</button>
+                    <button className="register" type="button" onClick={ () => { history.push('register') } }>
+                        Register
+                    </button>
                 </div>
             </form>
         </div>

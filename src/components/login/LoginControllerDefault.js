@@ -24,7 +24,6 @@ LoginControllerDefault.login = async (user) => {
 		username: user.username,
 		password: user.password
 	}).then(response => {
-		data = response.data
 		return true;
 	}).catch(err => {; return false;});
 

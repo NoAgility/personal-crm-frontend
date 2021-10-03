@@ -1,8 +1,10 @@
 import "./Header.css";
 import {BiMenu, BiSearch} from 'react-icons/bi';
 import { Dropdown } from 'react-bootstrap';
-import Settings from  "../settings/Settings"
-import AuthService from "../../util/AuthService"
+import AuthService from "../../util/AuthService.js"
+import Settings from  "../settings/Settings.js"
+import SearchBar from  "../UIComponents/searchbar/SearchBar.js"
+
 import React, { useState } from 'react';
 
 const Header = (props) => {
