@@ -13,7 +13,7 @@ LoginControllerETE.login = async (user) => {
 			username: user.username,
 			password: user.password
 		}).then(response => {
-			CookieManager.setCookie(response.data.name, response.data.value, response.data.maxAge);
+			CookieManager.setCookieRaw(response.data);
 			return true;
 		}).catch(err => { return false;});
 	if (!flag) {

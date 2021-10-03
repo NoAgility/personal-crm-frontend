@@ -18,6 +18,9 @@ const CookieManager = {
         }
         return null;
     },
+    setCookieRaw : (value) => {
+        document.cookie = value;
+    },
     eraseCookies : (name) => {   
         document.cookie = '';
     }

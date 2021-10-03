@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import ProfilePicture from "./ProfilePic/ProfilePicture"
+import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
+import DeleteItem from "../UIComponents/deleteItem/DeleteItem"
 import ContactDetails from "./ContactDetails"
 import { Dropdown } from 'react-bootstrap';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
-const Contact = ({contact, onDelete}) => {
+const Contact = ({ contact, onDelete }) => {
+	// contact: the contact object
+	// onDelete: a function to delete a contact
 
 	const [modalShow, setModalShow] = React.useState(false);
 
@@ -20,15 +23,7 @@ const Contact = ({contact, onDelete}) => {
 					<h5>{contact.accountName}</h5>
 				</div>
 
-				<Dropdown className="contact-options">
-					<Dropdown.Toggle id="button-dropdown-body"  className="dropdown-button" >
-						<FiMoreHorizontal className="edit-contact-options" size={30}/>
-					</Dropdown.Toggle>
-
-					<Dropdown.Menu className="contact-options-dropdown" variant="dark">
-						<Dropdown.Item className="delete-btn" onClick={() => onDelete(contact)}>Delete</Dropdown.Item>
-					</Dropdown.Menu>
-				</Dropdown>
+				<DeleteItem item={contact} onDelete={onDelete}/>
 
 				<ContactDetails
 					contact={contact}

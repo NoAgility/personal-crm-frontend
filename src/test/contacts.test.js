@@ -130,6 +130,8 @@ test("ETE Test - Register -> Login -> Add Contact -> See Contact", async () => {
         await waitFor(() => expect(searchBar).toHaveValue("target1"));
 
         const search = await container.querySelector(".search-icon");
+
+        await waitFor(() => expect(search).not.toBeNull());
         fireEvent.click(search);
         await new Promise(r => setTimeout(r, 500));
         const addContactBtn = await container.querySelector(".add-contact-btn");
@@ -255,13 +257,15 @@ test("ETE - Register -> Login -> Add Contact -> See Contact -> Remove Contact", 
         await waitFor(() => expect(dropdownBtn).toBeInTheDocument());
 
         fireEvent.click(dropdownBtn);
-        const deleteBtn = container.querySelector(".delete-btn")
+        const deleteBtn = getByText("Delete")
         await waitFor(() => expect(deleteBtn).toBeInTheDocument());
 
         fireEvent.click(deleteBtn);
 
         item = container.getElementsByClassName("contact-item");
         await waitFor(() => expect(item.length).toBe(0));
+
+        await new Promise(r => setTimeout(r, 2000));
         unmount();
     });
 });

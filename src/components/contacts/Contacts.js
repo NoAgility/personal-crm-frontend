@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BiFilter } from 'react-icons/bi';
 import { MdAdd } from 'react-icons/md';
 import ContactController from './ContactController.js'
 import Contact from './Contact.js'
 import AddContact from './AddContact.js'
-import { Dropdown} from 'react-bootstrap';
 import  './Contacts.css'
-import { get } from 'jquery';
+import Sort from '../UIComponents/sort/Sort.js';
 
 const Contacts = (props) => {
 
@@ -18,14 +16,15 @@ const Contacts = (props) => {
 	// Delete a contact
 	const deleteContact = async (contact) => {
 		setContacts(contacts.filter((c) => c.contactID !== contact.contactID)) // delete from front-end
+		setContactIDs(contactIDs.filter((c) => c.contactID !== contact.contactID)) // delete id from front-end
 		await ContactController.deleteContact(contact); // delete from back-end
 		getContacts();
 	}
 
 	// Add a contact
 	const addContact = async (contact) => {
-		setContacts([...contacts, contact]) // Added to the front-end
 		await ContactController.addContact(contact); // Added to the back-end
+		getContacts();
 	}
 
 	// Sort Contacts alphabetically or by date added
@@ -33,7 +32,18 @@ const Contacts = (props) => {
 	const sortByDate = (x,y) => x.contactCreatedOn > y.contactCreatedOn
 	const toggleSortName = () => setSortType('name')
 	const toggleSortDate = () => setSortType('date')
+	const sortTypes = [
+		{
+			label:"Sort alphabetically",
+			sortFunction: toggleSortName,
+		},
+		{
+			label:"Sort by date added",
+			sortFunction: toggleSortDate,
+		},
+	]
 
+	// Sets the sort order based on the state
 	const contactOrder = () => {
 		if (sortType === 'name') {
 			return sortByName;
@@ -42,6 +52,7 @@ const Contacts = (props) => {
 		}
 	}
 
+	// Gets all the contacts from the backend
 	const getContacts = async () => {
 		const ids = await ContactController.fetchContacts();
 		let cs =  [];
@@ -52,7 +63,6 @@ const Contacts = (props) => {
 				cs.push(contactData);
 				cIDs.push(contactData.accountID);
 			}
-			console.log(cIDs);
 			setContacts(cs);
 			setContactIDs(cIDs);
 		}
@@ -60,7 +70,6 @@ const Contacts = (props) => {
 
 	// Load all contacts from back-end
 	useEffect(() => {
-
 		getContacts();
 	}, [])
 
@@ -83,24 +92,7 @@ const Contacts = (props) => {
 
 			<div className="contact-sub-header">
 				<div className="filter-dropdown">
-					<Dropdown >
-						<Dropdown.Toggle
-							id="button-dropdown-body"
-							className="dropdown-button"
-							align="end"
-						>
-							<BiFilter className="menu-icon" size={40}/>
-						</Dropdown.Toggle>
-
-						<Dropdown.Menu variant="dark">
-							<Dropdown.Item onClick={toggleSortName}>
-								Sort alphabetically
-							</Dropdown.Item>
-							<Dropdown.Item  onClick={toggleSortDate}>
-								Sort by date added
-							</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
+					<Sort	sortTypes={sortTypes} />
 				</div>
 			</div>
 

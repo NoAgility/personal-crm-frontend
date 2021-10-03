@@ -1,7 +1,7 @@
 import axios from 'axios';
 import CookieManager from './CookieManager';
 
-const SpringBootAdaptor = () => {
+const SpringBootAdapter = () => {
     return {
         get: () => {
             throw new Error("Abstract method");
@@ -15,4 +15,4 @@ const SpringBootAdaptor = () => {
 
 
 
-export default SpringBootAdaptor;
+export default SpringBootAdapter;
