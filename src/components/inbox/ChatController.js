@@ -10,7 +10,7 @@ const ChatController = {
 			);
 			return res;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	},
 
@@ -22,7 +22,7 @@ const ChatController = {
 			);
 			return res;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	},
 
@@ -34,7 +34,7 @@ const ChatController = {
 			);
 			return res;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	},
 
@@ -51,7 +51,7 @@ const ChatController = {
 				);
 			return res;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	},
 
@@ -67,7 +67,7 @@ const ChatController = {
 				);
 			return res;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	},
 
@@ -85,7 +85,7 @@ const ChatController = {
 			);
 			return res;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	},
 
@@ -104,7 +104,7 @@ const ChatController = {
 			);
 			return res;
 		} catch (err) {
-			console.log(err)
+			console.log(err);
 		}
 	},
 }

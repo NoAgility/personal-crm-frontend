@@ -5,40 +5,21 @@ import SearchBar from '../UIComponents/searchbar/SearchBar';
 import Cookies from 'js-cookie';
 import  './OpenChat.css'
 
-const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
+const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMessage }) => {
 	const [newMessage, setNewMessage] = useState("");
 	const [messageSearch, setMessageSearch] = useState("");
-	const [messages, setMessages] = useState(chat.messages);
 
-	// Sends the message in the front-end before passing the message to the backend
+	// Sends the message
 	const onSend = (e) => {
-		e.preventDefault()
-		sendMessage(chat, newMessage)
-		setNewMessage('')
+		e.preventDefault();
+		sendMessage(chat, newMessage);
+		setNewMessage('');
 	}
 
-	// when the user searches for a message in a chat, this function is called
+	// when the user searches for a message, prevent page reload
 	const onSearch = async (e) => {
 		e.preventDefault();
 	}
-
-	// Finds a participant in the chat that is not the user
-	const findFirstParticipant = useCallback(() => {
-		for (let p in chat.chatParticipants) {
-			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
-				return chat.chatParticipants[p];
-			}
-		}
-		return {"accountUserName": '', "accountID": -1,"accountName": ''};
-	}, [chat.chatParticipants])
-
-	const [firstParticipant, setFirstParticipant] = useState(findFirstParticipant());
-
-	// Update the chat when the activeChat changes
-	useEffect(() => {
-		setMessages(chat.messages);
-		setFirstParticipant(findFirstParticipant())
-	}, [chat, messages, firstParticipant, findFirstParticipant])
 
 	return (
 		<div className="chat">
@@ -53,6 +34,7 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 					name="username"
 					colorMode="dark"
 					width="md"
+					onSubmit={onSearch}
 					value={messageSearch}
 					placeholder="Search in converstion"
 					onChange={event => {setMessageSearch(event.target.value)}}
@@ -62,9 +44,9 @@ const OpenChat = ({ chat, deleteMessage, sendMessage, editMessage }) => {
 				{(chat.messages.length > 0) ? (
 					(chat.messages)
 					.filter((message) => {
-						if (message.messageText.toLowerCase().includes(messageSearch.toLowerCase() )) {
-							return message
-						} return null
+						if ( message.messageText.toLowerCase().includes(messageSearch.toLowerCase()) ) {
+							return message;
+						} return null;
 					})
 						.map((message) => (
 							<Message

@@ -45,7 +45,6 @@ const ClosedChat = ({ createChat }) => {
 
 		// search for username
 		const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
-			console.log("WHAT THE FUCK");
 			return res.data;});
 		if (contact) {
 			setQueryFound(true);

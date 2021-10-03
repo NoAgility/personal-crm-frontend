@@ -15,11 +15,25 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedMessage, setEditedMessage] = useState(message.messageText);
 
-	// flags a message as by the 'user' or by a 'contact'
+	// flags a message as 'user' or 'contact'
 	const sender = () => {
-		return (message.accountID === parseInt(CookieManager.getCookie('accountID'))) ? 'user' : 'contact'
+		return (message.accountID === parseInt(CookieManager.getCookie('accountID'))) ? 'user' : 'contact';
 	}
 
+	// Called when the edited message is submitted
+	const onSubmit = (e) => {
+		e.preventDefault();
+		onEdit(chat, message, editedMessage);
+		setIsEditing(false);
+	}
+
+	// Called when editing a message is cancelled
+	const onCancel = (e) => {
+		e.preventDefault();
+		setIsEditing(false);
+	}
+
+	// A popover component containing the options to edit and delete a message
 	const popover = (props) => (
 		<Popover {...props} id="popover-basic">
 			<Popover.Content>
@@ -33,6 +47,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 		</Popover>
 	);
 
+	// A button component that to open the popover
 	const overlay = (
 		<OverlayTrigger trigger="focus" placement="left" overlay={popover}>
 			<button className="message-options">
@@ -41,17 +56,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 		</OverlayTrigger>
 	);
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		onEdit(chat, message, editedMessage)
-		setIsEditing(false);
-	}
-
-	const onCancel = (e) => {
-		e.preventDefault();
-		setIsEditing(false);
-	}
-
+	// An input component in which the user can retype their message
 	const editMessage = (
 		<form className="row" onSubmit={onSubmit} onCancel={onCancel}>
 			<input
@@ -73,7 +78,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 				setVisibility('grid');
 			}}
 			onMouseLeave={e => {
-				setVisibility('none')
+				setVisibility('none');
 			}}
 		>
 			<div className='message-options-container' style={{display: `${visibility}`}}>

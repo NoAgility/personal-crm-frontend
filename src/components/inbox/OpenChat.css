@@ -53,3 +53,10 @@
 	height: 80%;
 	width: 70px;
 }
+
+.message-input {
+	width: 85%;
+	border:none;
+	padding:5px;
+
+}

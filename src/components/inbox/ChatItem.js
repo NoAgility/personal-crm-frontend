@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
 import DeleteItem from "../UIComponents/deleteItem/DeleteItem"
-import Cookies from 'js-cookie';
 import './ChatItem.css'
 
-const ChatItem = ({ chat, lastMessage, openChat, onDelete }) => {
-
-	const findFirstParticipant = () => {
-		for (let p in chat.chatParticipants) {
-			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
-				return chat.chatParticipants[p];
-			}
-		}
-		return null;
-	}
-	const [firstParticipant, setFirstParticipant] = useState(findFirstParticipant());
+const ChatItem = ({ chat, lastMessage, openChat, onDelete, firstParticipant }) => {
 
 	return (
 		<>

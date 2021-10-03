@@ -3,21 +3,20 @@ import { MdAdd } from 'react-icons/md';
 import Sort from '../UIComponents/sort/Sort.js';
 import SearchBar from '../UIComponents/searchbar/SearchBar.js';
 import ChatItem from './ChatItem.js'
-import Cookies from 'js-cookie';
 import  './ChatList.css'
 
-const ChatList = ({ chats, createChat, openChat, onDelete }) => {
+const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant }) => {
 
 	const [sortType, setSortType] = useState('age');
 	const [chatSearch, setChatSearch] = useState("");
 
 	// functions for sorting the chats
-	const sortByName = (x,y) => getFirstParticipant(x).accountName > getFirstParticipant(y).accountName
-	const sortByContacted = (x,y) => getLastMessage(x).messageTime < getLastMessage(y).messageTime
-	const sortByAge = (x,y) => x.chatCreation < y.chatCreation
-	const toggleSortName = () => setSortType('name')
-	const toggleSortContacted = () => setSortType('contacted')
-	const toggleSortAge = () => setSortType('age')
+	const sortByName = (x,y) => findFirstParticipant(x).accountName > findFirstParticipant(y).accountName;
+	const sortByContacted = (x,y) => getLastMessage(x).messageTime < getLastMessage(y).messageTime;
+	const sortByAge = (x,y) => x.chatCreation < y.chatCreation;
+	const toggleSortName = () => setSortType('name');
+	const toggleSortContacted = () => setSortType('contacted');
+	const toggleSortAge = () => setSortType('age');
 
 	const sortTypes = [
 		{
@@ -32,8 +31,9 @@ const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 			label:"Sort by chat age",
 			sortFunction: toggleSortAge,
 		},
-	]
+	];
 
+	// sets the sortType based on the state
 	const chatOrder = () => {
 		if (sortType === 'name') {
 			return sortByName;
@@ -47,20 +47,13 @@ const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 	// gets the most recent message
 	const getLastMessage = (chat) => {
 		if (chat.messages.length > 0) {
-			return chat.messages[chat.messages.length - 1]
+			return chat.messages[chat.messages.length - 1];
 		} else {
-			return {"messageText": '',
-				"messageTime": 0}
+			return {
+				"messageText": '',
+				"messageTime": 0
+			};
 		}
-	}
-
-	const getFirstParticipant = (chat) => {
-		for (let p in chat.chatParticipants) {
-			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
-				return chat.chatParticipants[p];
-			}
-		}
-		return null;
 	}
 
 	const onSearch = async (e) => {
@@ -96,9 +89,9 @@ const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 								.sort(chatOrder())
 								.filter((chat) => {
 									if(chatSearch === ""
-										|| getFirstParticipant(chat).accountName.toLowerCase().includes(chatSearch.toLowerCase())) {
-										return chat
-									} return null
+										|| findFirstParticipant(chat).accountName.toLowerCase().includes(chatSearch.toLowerCase())) {
+										return chat;
+									} return null;
 								})
 								.map((chat) => (
 								<ChatItem
@@ -107,6 +100,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete }) => {
 									lastMessage={getLastMessage(chat).messageText}
 									openChat={openChat}
 									onDelete={onDelete}
+									firstParticipant={findFirstParticipant(chat)}
 								/>
 							))}
 					</ul>

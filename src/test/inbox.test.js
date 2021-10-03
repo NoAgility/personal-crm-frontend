@@ -168,9 +168,9 @@ test("ETE Test - Register -> Login -> create chat", async () => {
         await waitFor(() => expect(addContactBtn).not.toBeNull());
 
         fireEvent.click(addContactBtn);
-        
+
         await waitFor(() => expect(inbox_container.getElementsByClassName("inbox-contact-item").length).toBe(1));
-        
+
     });
 });
 test("ETE Test - Register -> Login -> create chat -> send message", async () => {
@@ -307,7 +307,7 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
         await waitFor(() => expect(addContactBtn).not.toBeNull());
 
         fireEvent.click(addContactBtn);
-        
+
         //Expect new chat to be added to list
         await waitFor(() => expect(inbox_container.getElementsByClassName("inbox-contact-item").length).toBe(1));
 
@@ -469,7 +469,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         await waitFor(() => expect(addContactBtn).not.toBeNull());
 
         fireEvent.click(addContactBtn);
-        
+
         //Expect new chat to be added to list
         await waitFor(() => expect(inbox_container.getElementsByClassName("inbox-contact-item").length).toBe(1));
 
@@ -495,7 +495,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
 		const sentMessage = await inbox_container.getElementsByClassName("message-container-user")[0];
 		await waitFor(() => expect(sentMessage).not.toBeNull());
 
-        
+
         const containerMessage = await inbox_container.querySelector(".message-options");
 		await waitFor(() => expect(containerMessage).not.toBeNull());
 
@@ -518,5 +518,32 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
 
         await waitFor(() => expect(inbox_container.querySelector(".message-text")).toBeNull());
         unmount();
+    });
+});
+
+test("Unit Test - DOB not inputted", async () => {
+
+    axios.defaults.adapter = require('axios/lib/adapters/http');
+
+    await act( async () => {
+        render(<Registration/>);
+        const username = screen.getByPlaceholderText('Username');
+        const password = screen.getByPlaceholderText('Password');
+        const name = screen.getByPlaceholderText('Name');
+        const dobError = screen.getByTestId('dob-error');
+        const generalError = screen.getByTestId('general-error');
+
+        fireEvent.change(username, {target: {value: 'testusername'}});
+        fireEvent.change(password, {target: {value: 'testpassword'}});
+        fireEvent.change(name, {target: {value: 'testname123'}});
+
+        await waitFor(() => expect(username).toHaveValue('testusername'));
+        await waitFor(() => expect(password).toHaveValue('testpassword'));
+        await waitFor(() => expect(name).toHaveValue('testname123'));
+
+        const submit = screen.getByTestId('submit');
+        fireEvent.click(submit);
+        await waitFor(() => expect(dobError).toHaveTextContent('DOB must be set'));
+        await waitFor(() => expect(generalError).toHaveTextContent('Failed'));
     });
 });

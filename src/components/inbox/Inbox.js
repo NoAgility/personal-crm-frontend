@@ -3,6 +3,7 @@ import ChatList from "./ChatList"
 import ChatController from './ChatController.js'
 import ClosedChat from "./ClosedChat"
 import OpenChat from "./OpenChat"
+import Cookies from 'js-cookie';
 import  './Inbox.css'
 
 const Inbox = () => {
@@ -27,7 +28,6 @@ const Inbox = () => {
 	const createChat = async (contact) => {
 		if (contact) {
 			await ChatController.createChat([contact.accountID]);
-			console.log(chats)
 			getChats();
 		}
 	}
@@ -47,7 +47,7 @@ const Inbox = () => {
 	// sends a message
 	const sendMessage = async (chat, message) => {
 		if (message && chat) {
-			await ChatController.sendMessage(chat.chatID, message)
+			await ChatController.sendMessage(chat.chatID, message);
 			getChats();
 		}
 	}
@@ -77,6 +77,16 @@ const Inbox = () => {
 		}
 	}
 
+	// Finds the first participant in a chat that is not the user
+	const findFirstParticipant = (chat) => {
+		for (let p in chat.chatParticipants) {
+			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
+				return chat.chatParticipants[p];
+			}
+		}
+		return null;
+	}
+
 	// call getChats() upon loading the page
 	useEffect(() => {
 		getChats();
@@ -85,8 +95,8 @@ const Inbox = () => {
 	// Update the active chat when it is updated
 	useEffect(() => {
 		if (activeChat !== undefined) {
-			const chat = chats.find(chat => chat.chatID === activeChat.chatID)
-			setActiveChat(chat)
+			const chat = chats.find(chat => chat.chatID === activeChat.chatID);
+			setActiveChat(chat);
 		}
 	}, [chats, activeChat])
 
@@ -102,10 +112,12 @@ const Inbox = () => {
 				createChat={initiateCreateChat}
 				openChat={openChat}
 				onDelete={deleteChat}
+				findFirstParticipant={findFirstParticipant}
 			/>
 			{chatOpen ? (
 				<OpenChat
 					chat={activeChat}
+					firstParticipant={findFirstParticipant(activeChat)}
 					deleteMessage={deleteMessage}
 					sendMessage={sendMessage}
 					editMessage={editMessage}
