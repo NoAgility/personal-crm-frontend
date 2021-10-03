@@ -1,4 +1,4 @@
-import Dropdown from 'react-bootstrap/dropdown';
+import { Dropdown } from 'react-bootstrap';
 import ContactMenuItem from './ContactMenuItem';
 
 const TaskContactDropdown = ({contactItems, add, remove}) => {
