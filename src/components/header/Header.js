@@ -1,6 +1,7 @@
 import "./Header.css";
 import {BiMenu, BiSearch} from 'react-icons/bi';
 import { Dropdown } from 'react-bootstrap';
+import AuthService from "../../util/AuthService.js"
 import Settings from  "../settings/Settings.js"
 import SearchBar from  "../UIComponents/searchbar/SearchBar.js"
 
@@ -41,7 +42,7 @@ const Header = (props) => {
 					/>
 
 					<Dropdown.Divider />
-					<Dropdown.Item href="/">Log Out</Dropdown.Item>
+					<Dropdown.Item onClick={AuthService.logOut}>Log Out</Dropdown.Item>
 				</Dropdown.Menu>
 			</Dropdown>
 			</div>

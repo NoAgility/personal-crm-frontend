@@ -1,8 +1,7 @@
 import './Registration.css'
 
 const RegistrationSuccess = (props) => {
-
-
+    
     return (
         <div className="background">
             <h1>

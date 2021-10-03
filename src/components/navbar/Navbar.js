@@ -14,7 +14,7 @@ const Navbar = (props) => {
 
     const history = useHistory();
     /**
-     * Replace `/index.html` with other navigation buttons.
+     * Navigation sidebar providing functionality to change app content
      */
     return (<div className="sidenav">
         <Router>
