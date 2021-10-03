@@ -14,16 +14,31 @@ const TaskContact = (contact) => {
 }
 const TaskDetails = ({task, show, onHide, onUpdate}) => {
 
+	
+
 	const [contacts, setContacts] = useState([]);
 	const [taskPriority, setTaskPriority] = useState(task.taskPriority);
-	const [taskDeadline, setTaskDeadline] = useState(task.taskDeadline);
-
+	
 	const [contactsChanged, setContactsChanged] = useState(false);
 	const [taskPriorityChanged, setTaskPriorityChanged] = useState(false);
 	const [taskDeadlineChanged, setTaskDeadlineChanged] = useState(false);
 	const [selectedContactIDs, setSelectedContactIDs] = useState(task.taskContactAccounts.map(data => data.contactID));
-
 	const [trigger, setTrigger] = useState(true);
+
+	/**
+	 * Function for formatting a date to be valid for date input (ISO)
+	 * @param {Date} date The date to be formatted
+	 * @returns The ISO formatted date
+	 */
+	const dateFormat = (date) => {
+		const day = date.getDate().toString().padStart(2, "0"),
+		month = date.getMonth().toString().padStart(2, "0"),
+		year = date.getFullYear();
+
+		return year + "-" + month + "-" + day;
+	}
+	const [taskDeadline, setTaskDeadline] = useState(dateFormat(new Date(task.taskDeadline)));
+
 	const handleClose = () => {
 		setTaskPriority(task.taskPriority);
 		setTaskDeadline(task.taskDeadline);
@@ -153,7 +168,12 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 
 			</Modal.Body>
 			<div className="task-details-bottom">
-				<button className="task-submit" onClick={() => onUpdateWrapper()}>Save</button>
+				<button className="task-submit" onClick={
+					() => {
+						onUpdateWrapper()
+						onHide();
+					}
+				}>Save</button>
 			</div>
 			
 		</Modal>
