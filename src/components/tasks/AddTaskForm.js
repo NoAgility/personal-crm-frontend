@@ -117,6 +117,7 @@ const AddMeetingForm = ({submit, show, onHide}) => {
                             className="task-submit" 
                             onClick={(e) => {
                                 e.preventDefault();
+                                onHide();
                                 submit({taskName: taskName, taskPriority: taskPriority, taskDeadline: taskDate, contactIDs: selectedContactIDs})
                                 }}>
                             Submit

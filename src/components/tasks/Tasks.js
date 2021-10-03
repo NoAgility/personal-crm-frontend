@@ -122,7 +122,7 @@ const TaskPage = (props) => {
                             tasks={tasksByDate[key]}
                             editOptions={{update: updateTask, delete: deleteTask}}/>
                             })}
-            {modalShow ? <AddTaskForm submit={addTask} show={openModal} onHide={hideModal}/> : ""}
+            {modalShow ? <AddTaskForm submit={addTask} show={modalShow} onHide={hideModal}/> : ""}
             </div>
         </div>
     </React.Fragment>)
