@@ -15,8 +15,8 @@
 	vertical-align: center;
 	place-items: center;
 	padding: 25px;
-
 }
+
 .contact-details-right {
 	margin: auto;
 	padding:50px;
@@ -135,6 +135,7 @@ input[type=number] {
 .username-selector input {
 	width:90%;
 }
+
 .contact-details-top {
 	display: grid;
 	place-items: end;

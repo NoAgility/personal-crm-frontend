@@ -12,10 +12,10 @@
 	--color-xdark: #262736;
 	--color-dark: #3a3b50;
   --color-medium: #585c74;
-  --color-teal: #70d4cc;
+  --color-teal: #62bbb3;
 	--color-orange: #d4a46c;
 	--color-purple: #be8bfc;
-	--color-green: #5dbc94;
+	--color-green: #62b96d;
 	--color-blue: #54a3fb;
 	--color-white: #FFFFFF;
   --color-offwhite: #8e91a5;
@@ -83,54 +83,27 @@ button {
   overflow: auto;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.super-center {
+  display: grid;
+	place-items: center;
+}
+
 .form-label .form-control{
   font-size: var(--text-small);
 }
-.App {
-  color: var(--color-white);
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .app-body {
-    height: calc(100vh - 130px);
+    height: calc(100vh - 105px);
     margin-left:280px;
     display: grid;
     align-items: start;
     justify-items: center;
     padding: 25px;
+    padding-bottom: 0px;
     margin-top: 80px;
 }

@@ -1,0 +1,9 @@
+.create-chat-result {
+	padding: 25px;
+	display: grid;
+	justify-content: center;
+}
+
+.contact-search-result {
+	width: 500px;
+}
