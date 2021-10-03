@@ -51,22 +51,22 @@
     background-color: var(--color-dark);
 }
 
-.tasks-nav-btn:focus {
+.tasks-nav-btn-active, .tasks-nav-btn-active:hover {
     background-color: var(--color-purple);
 }
 
-.meetings-nav-btn:focus {
+.meetings-nav-btn-active, .meetings-nav-btn-active:hover {
     background-color: var(--color-orange);
 }
 
-.calendar-nav-btn:focus {
+.calendar-nav-btn-active, .calendar-nav-btn-active:hover {
     background-color: var(--color-green);
 }
 
-.inbox-nav-btn:focus {
+.inbox-nav-btn-active, .inbox-nav-btn-active:hover {
     background-color: var(--color-blue);
 }
 
-.contacts-nav-btn:focus {
-    background-color: var(--color-blue);
+.contacts-nav-btn-active, .contacts-nav-btn-active:hover {
+    background-color: var(--color-teal);
 }
