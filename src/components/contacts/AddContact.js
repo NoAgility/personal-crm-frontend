@@ -105,14 +105,14 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 					data-testid="contact-search"
 					name="username"
 					colorMode="light"
-					width="md"
+					width="lg"
 					onSubmit={onSubmit}
 					placeholder="Username"
 					value={usernameSearch}
 					onChange={event => {setUsernameSearch(event.target.value)}}
 				/>
 
-				{queryFound ? queryResult(result.accountName, result.accountUsername, result.accountID) : noResult()}
+				<div>{queryFound ? queryResult(result.accountName, result.accountUsername, result.accountID) : noResult()}</div>
 
 			</Modal.Body>
 		</Modal>

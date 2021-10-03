@@ -16,14 +16,15 @@ const Contacts = (props) => {
 	// Delete a contact
 	const deleteContact = async (contact) => {
 		setContacts(contacts.filter((c) => c.contactID !== contact.contactID)) // delete from front-end
+		setContactIDs(contactIDs.filter((c) => c.contactID !== contact.contactID)) // delete id from front-end
 		await ContactController.deleteContact(contact); // delete from back-end
 		getContacts();
 	}
 
 	// Add a contact
 	const addContact = async (contact) => {
-		setContacts([...contacts, contact]) // Added to the front-end
 		await ContactController.addContact(contact); // Added to the back-end
+		getContacts();
 	}
 
 	// Sort Contacts alphabetically or by date added
