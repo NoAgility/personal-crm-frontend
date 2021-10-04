@@ -70,7 +70,7 @@ const TaskPage = (props) => {
     const getTasks = async () => {
         const data = await TaskController.fetchTasks();
         setTasks(data);
-        if (data === undefined || data.length === 0) return;
+        if (data === undefined) return;
 
         // Use data due to asyncronous nature
         if (activeSort === 'date') {
@@ -192,6 +192,7 @@ const TaskPage = (props) => {
                                 editOptions={{update: updateTask, delete: deleteTask}}/>
                                 })}
                 {modalShow ? <AddTaskForm submit={addTask} show={modalShow} onHide={hideModal}/> : ""}
+                <p/>
             </div>
         </div>
     </React.Fragment>)
