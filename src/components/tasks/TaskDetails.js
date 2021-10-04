@@ -31,15 +31,16 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 	 * @returns The ISO formatted date
 	 */
 	const dateFormat = (date) => {
-		console.log(date);
 		const day = date.getDate().toString().padStart(2, "0"),
 		month = (date.getMonth() + 1).toString().padStart(2, "0"),
 		year = date.getFullYear();
-		console.log(year + "-" + month + "-" + day);
 		return year + "-" + month + "-" + day;
 	}
 	const [taskDeadline, setTaskDeadline] = useState(dateFormat(new Date(task.taskDeadline)));
 
+	/**
+	 * Function to be called on Modal close
+	 */
 	const handleClose = () => {
 		setTaskPriority(task.taskPriority);
 		setTaskDeadline(dateFormat(new Date(task.taskDeadline)));
@@ -48,9 +49,17 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 		setContactsChanged(false);
 		onHide();
 	}
+	/**
+	 * Add contact to selection
+	 * @param {*} contact The contact to be added
+	 */
 	const addContactSelection = (contact) => {
         setSelectedContactIDs([...selectedContactIDs, contact.accountID]);
     }
+	/**
+	 * Remove contact from selection
+	 * @param {*} contact The contact to be added
+	 */
     const removeContactSelection = (contact) => {
         const index = selectedContactIDs.indexOf(contact.accountID);
         selectedContactIDs.splice(index, 1);
