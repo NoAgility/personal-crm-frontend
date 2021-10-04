@@ -26,7 +26,7 @@ const Navbar = (props) => {
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button onClick={() => {onClick("/home/index.html")}} className={`nav-button meetings-nav-btn${active === "index.html" ? "-active" : ""}`}>
+                    <button onClick={() => {onClick("/home/meetings")}} className={`nav-button meetings-nav-btn${active === "index.html" ? "-active" : ""}`}>
                         <BiPhone className="icon" size={30}/>
                         <h4>Meetings</h4>
                     </button>

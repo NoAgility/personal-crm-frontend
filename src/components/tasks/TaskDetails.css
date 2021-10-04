@@ -4,12 +4,6 @@
 	place-items: center;
 	margin: 25px 50px 25px 50px;
 }
-.tasks-header {
-	display: flex;
-	flex-direction: row;
-	text-align: left;
-	width: 100%;
-}
 .task-details-top {
 	display: grid;
 	place-items: end;
@@ -20,12 +14,13 @@
 	margin-bottom: 20px;
 }
 .task-contact-container {
-	scrollbar-color: dark;
 	border-radius: 10px;
 	display: flex;
-	overflow: scroll;
+	flex-direction: column;
+	overflow: auto;
 	width: 40%;
 	min-width: 160px;
+	max-height: 240px;
 	min-height: 200px;
 	background-color: var(--color-offwhite);
 }
@@ -48,13 +43,14 @@
 }
   /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--color-medium);
-    border-radius: 5px;
+	background: var(--color-medium);
+	border-color: var(--color-medium);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-offwhite);
+    background: var(--color-dark);
 }
 ::-webkit-scrollbar-corner {
     background: var(--color-dark);
-    border-radius: 25px;
+	border-color: var(--color-dark);
+	border-radius: 0px;
 }
