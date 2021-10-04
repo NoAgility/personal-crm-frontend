@@ -34,6 +34,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - run: ls
     - name: Build and run React JS application
       run: npm run build:development --if-present
     - name: Run integration and unit tests - React
