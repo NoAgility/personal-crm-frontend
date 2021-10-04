@@ -1,8 +1,8 @@
 # personal-crm-frontend
 
-Development environment url: https://friendly-babbage-c6da98.netlify.app
+Development environment url: https://dev.noagility-personal-crm.com
 
-Production environment url: https://noagility-personal-crm.com
+Production environment url: https://app.noagility-personal-crm.com
 
 # Starting up the app
 

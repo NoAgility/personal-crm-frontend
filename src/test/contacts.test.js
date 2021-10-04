@@ -15,7 +15,7 @@ import SpringBootAdapterWrapper from '../util/SpringBootAdapterWrapper';
 import SpringBootAdapterETE from '../util/SpringBootAdapterETE';
 import CookieManager from '../util/CookieManager';
 import { useEffect } from 'react';
-jest.setTimeout(20000);
+jest.setTimeout(25000);
 jest.unmock('../components/contacts/Contacts');
 beforeAll(() => { 
     LoginControllerWrapper.setController(LoginControllerETE);
@@ -228,7 +228,7 @@ test("ETE - Register -> Login -> Add Contact -> See Contact -> Remove Contact", 
 
         submit = screen.getByTestId("submit");
         fireEvent.click(submit);
-
+        await new Promise(r => setTimeout(r, 2000));
         await waitFor(() => expect(testLocation.pathname).toBe('/home'));
         await cleanup();
         
