@@ -31,17 +31,18 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 	 * @returns The ISO formatted date
 	 */
 	const dateFormat = (date) => {
+		console.log(date);
 		const day = date.getDate().toString().padStart(2, "0"),
-		month = date.getMonth().toString().padStart(2, "0"),
+		month = (date.getMonth() + 1).toString().padStart(2, "0"),
 		year = date.getFullYear();
-
+		console.log(year + "-" + month + "-" + day);
 		return year + "-" + month + "-" + day;
 	}
 	const [taskDeadline, setTaskDeadline] = useState(dateFormat(new Date(task.taskDeadline)));
 
 	const handleClose = () => {
 		setTaskPriority(task.taskPriority);
-		setTaskDeadline(task.taskDeadline);
+		setTaskDeadline(dateFormat(new Date(task.taskDeadline)));
 		setTaskPriorityChanged(false);
 		setTaskDeadlineChanged(false);
 		setContactsChanged(false);
