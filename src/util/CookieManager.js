@@ -22,7 +22,9 @@ const CookieManager = {
         document.cookie = value;
     },
     eraseCookies : (name) => {   
-        document.cookie = '';
+        console.log(document.cookie);
+        document.cookie = `jwt=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${process.env.REACT_APP_MAIN_DOMAIN}`;
+        document.cookie = `accountID=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${process.env.REACT_APP_MAIN_DOMAIN}`
     }
 }
 

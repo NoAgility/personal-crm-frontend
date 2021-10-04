@@ -33,7 +33,7 @@
 }
 .create-task-btn {
     color: var(--color-white);
-	margin-left: auto;
+    margin: 20px 0px 20px auto;
 	background-color: var(--color-blue);
 	border-radius: 30px;
 	width: 90px;
@@ -42,9 +42,22 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-    align-items: center;
 	padding-left: 5px;
 	padding-right: 12px;
+}
+.create-task-btn * {
+	margin: auto;
+	text-align: center;
+	font-size: var(--text-small);
+}
+.tasks-sub-header {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+.tasks-header h1{
+	margin: 20px auto 20px 0px;
+	margin-left: 0px;
 }
 .task-add-icon {
     width: 30px;
@@ -71,8 +84,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 70vh;
     max-width: 600px;
+    min-height: 400px;
     min-width: 350px;
     overflow: auto;
 }
@@ -165,7 +178,7 @@
     border-color: var(--color-offwhite);
     border-width: 1px;
     margin-bottom: 20px;
-    width: 90%;
+    width: 100%;
     
 }
 .task-add {

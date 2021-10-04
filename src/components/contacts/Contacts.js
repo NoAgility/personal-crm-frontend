@@ -77,7 +77,10 @@ const Contacts = (props) => {
 		<div className="contacts-page">
 			<div className="contact-header">
 				<h1>Contacts</h1>
-				<button data-testid="add-contact" className="create-contact-btn" onClick={() => setModalShow(true)}>
+				<button 
+					data-testid="add-contact" 
+					className="create-contact-btn" 
+					onClick={() => setModalShow(true)}>
 					<MdAdd size={22}/>
 					<h4>Add</h4>
 				</button>

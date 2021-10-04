@@ -5,14 +5,25 @@ import AddTaskForm from './AddTaskForm';
 import TaskController from './TaskController';
 import TaskList from './TaskList';
 import "./Tasks.css";
+import Sort from '../UIComponents/sort/Sort.js';
 const TaskPage = (props) => {
 
     const [modalShow, setModalShow] = useState(false);
 
     const openModal = () => {setModalShow(true)};
     const hideModal = () => {setModalShow(false)};
-    const [tasksByDate, setTasksByDate] = useState([]);
+    const [tasks, setTasks] = useState([]);
+    const [tasksByGroup, setTasksByGroup] = useState([]);
+    const [activeSort, setActiveSort] = useState("date");
 
+    const setSortByDate = () => {
+        setActiveSort("date");
+        dateGroupSort();
+    };
+    const setSortByPriority = () => {
+        setActiveSort("priority"); 
+        priorityGroupSort();
+    };
     /**
      * Function for wrapping an update task call to the backend
      * @param {*} task The new task details
@@ -57,10 +68,15 @@ const TaskPage = (props) => {
      * Fetch the tasks from the backend and set tasks into component state
      */
     const getTasks = async () => {
-        const tasks = await TaskController.fetchTasks();
-        if (tasks !== undefined) {
-            sortByDate(tasks);
-            setTasksByDate(groupByDate(tasks));
+        const data = await TaskController.fetchTasks();
+        setTasks(data);
+        if (data === undefined) return;
+
+        // Use data due to asyncronous nature
+        if (activeSort === 'date') {
+            dateGroupSort(data);
+        } else {
+            priorityGroupSort(data);
         }
     }
     /**
@@ -91,38 +107,92 @@ const TaskPage = (props) => {
             return 0;
         }
     )};
+    const sortByPriority = (tasks) => {
+        tasks.sort((a, b) => {
+            if (a.taskPriority > b.taskPriority) return -1;
+            if (a.taskPriority < b.taskPriority) return 1;
+            return 0;
+        }
+    )};
+    const groupByPriority = (tasks) => { 
+        const reduced = {}; 
+        tasks.forEach((task) => {(
+            reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task); 
+        })
+        return reduced;
+    };
+    const dateGroupSort = (data) => {
+        let toSort = data !== undefined ? data : tasks !== null ? tasks : [];
+        setActiveSort("date");
+        sortByDate(toSort);
+        setTasksByGroup(groupByDate(toSort));
+    }
+    const priorityGroupSort = (data) => {
+        let toSort = data !== undefined ? data : tasks !== null ? tasks : [];
+        setActiveSort("priority");
+        sortByPriority(toSort);
+        setTasksByGroup(groupByPriority(toSort));
+        
+    }
+    const sortTypes = [
+        {
+            label:"Sort by date",
+            sortFunction: setSortByDate
+        },
+        {
+            label:"Sort by priority",
+            sortFunction: setSortByPriority
+        }
+    ]
     /**
      * On render, fetch existing tasks to display to the user.
      */
     useEffect(() => {
         const fetchTasks = async () => {
-            const tasks = await TaskController.fetchTasks();
-           
-            if (tasks === undefined || tasks.length === 0) return;
-            sortByDate(tasks);
-            setTasksByDate(groupByDate(tasks));
+            const data = await TaskController.fetchTasks();
+            setTasks(data);
+            if (data === undefined || data.length === 0) return;
+
+            dateGroupSortAlt(data);
         };
+
+        //React throws a warning if I don't encapsulate the dependencies inside useEffect
+        //Hence two similar functions
+        const dateGroupSortAlt = (data) => {
+            sortByDate(data);
+            setTasksByGroup(groupByDate(data));
+        }
         fetchTasks();
     }, []);
     
     return (<React.Fragment>
-        <div className="tasks-page">
-            <div className="tasks-header">
+            <div className="tasks-page">
+                <div className="tasks-header">
                     <h1>Tasks</h1>
-                    <button data-testid="add-task" className="create-task-btn" onClick={() => { openModal() }}>
+                    <button 
+                        data-testid="add-task" 
+                        className="create-task-btn" 
+                        onClick={() => { openModal() }}>
                         <MdAdd size={22}/>
                         <h4>Add</h4>
                     </button>
                 </div>
-            <div className="tasks-container">
-                {Object.keys(tasksByDate)
-                    .map(key => { 
-                        return <TaskList 
-                            key={tasksByDate[key][0].taskDeadline}
-                            tasks={tasksByDate[key]}
-                            editOptions={{update: updateTask, delete: deleteTask}}/>
-                            })}
-            {modalShow ? <AddTaskForm submit={addTask} show={modalShow} onHide={hideModal}/> : ""}
+                <div className="tasks-sub-header">
+                    <div className="filter-dropdown">
+                        <Sort sortTypes={sortTypes}/>
+                    </div>
+                </div>
+                <div className="tasks-container">
+                    {Object.keys(tasksByGroup)
+                        .map(key => { 
+                            return <TaskList 
+                                key={key}
+                                label={activeSort}
+                                tasks={tasksByGroup[key]}
+                                editOptions={{update: updateTask, delete: deleteTask}}/>
+                                })}
+                {modalShow ? <AddTaskForm submit={addTask} show={modalShow} onHide={hideModal}/> : ""}
+                <p/>
             </div>
         </div>
     </React.Fragment>)

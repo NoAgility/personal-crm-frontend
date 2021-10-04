@@ -10,7 +10,7 @@
 }
 
 .contact-header h1{
-	margin: auto;
+	margin: 20px auto 20px 0px;
 	margin-left: 0px;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .create-contact-btn {
-	margin-left: auto;
+	margin: 20px 0px 20px auto;
 	background-color: var(--color-blue);
 	border-radius: 30px;
 	width: 90px;

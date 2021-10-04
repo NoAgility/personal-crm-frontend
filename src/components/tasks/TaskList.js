@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import TaskItem from './TaskItem';
 import "./Tasks.css";
-const TaskList = ({tasks, editOptions}) => {
+const TaskList = ({tasks, label, editOptions}) => {
 
     const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
     
-    const date = new Date(tasks[0].taskDeadline).toLocaleDateString("en-US", options);
+    
 
     /**
      * Date formatter to change the date to an alias, eg. Today
@@ -21,9 +21,23 @@ const TaskList = ({tasks, editOptions}) => {
         formattedDate = new Date().toLocaleDateString("en-US", options) === date ? "Today" : formattedDate;
         return formattedDate;
     }
+
+    const formatPriority = (priority) => {
+        let p = priority.toString();
+        return p === "-1" ? "No Priority Set" : "Priority: " + p;
+    }
+
+    const getLabel = () => {
+        if (label === "date") {
+            let date = new Date(tasks[0].taskDeadline).toLocaleDateString("en-US", options);
+            return formatDate(date)
+        } else if (label === "priority") {
+            return formatPriority(tasks[0].taskPriority);
+        }
+    }
     return (<div className="tasks-section-container">
         <div className="task-title">
-            <div className="task-date">{formatDate(date)}</div>
+            <div className="task-date">{getLabel()}</div>
         </div>
         {tasks.map(t => <TaskItem key={t.taskID} onUpdate={editOptions.update} onDelete={editOptions.delete} task={t}/>)}
     </div>)

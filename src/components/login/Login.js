@@ -56,7 +56,7 @@ const Login = () => {
                         className="login-input"
                         onChange={event => {setPassword(event.target.value)}}
                     />
-                    <div>{passwordShown ? show : hide}</div>
+                    {passwordShown ? show : hide}
                 </div>
                 <div className="buttons">
                     <button className="login-button" data-testid="submit" type="submit">Login</button>
