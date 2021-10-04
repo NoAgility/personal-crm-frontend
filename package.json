@@ -28,8 +28,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "sh -ac '. .env.${REACT_APP_ENV}; react-scripts build'",
-    "build:development": "SET REACT_APP_ENV=dev npm run build",
-    "build:production": "SET REACT_APP_ENV=prod npm run build",
+    "build:development": "REACT_APP_ENV=dev npm run build",
+    "build:production": "REACT_APP_ENV=prod npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
