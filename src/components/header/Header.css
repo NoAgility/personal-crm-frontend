@@ -6,7 +6,8 @@
  	flex-direction: row;
 	top:0;
 	width: 100%;
-	z-index: 0;
+	position: fixed;
+	z-index: 2;
 }
 
 .search-input {
@@ -40,7 +41,9 @@
 	margin:auto;
 	width: 500px;
 }
-
+.spacer {
+	width: 240px;
+}
 .menu-dropdown {
 	display: grid;
 	place-items: center;

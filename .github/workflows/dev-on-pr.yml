@@ -25,7 +25,7 @@ jobs:
         ref: refs/heads/dev
       # Step 2
     - name: Build and run Backend application
-      run: docker-compose --env-file config/dev.env up -d 
+      run: docker-compose --file docker-compose-springboot.yml --env-file config/ete.env up -d 
       
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -35,8 +35,6 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - name: Build and run React JS application
-      env:
-        REACT_APP_BACKEND_URL: 'localhost'
       run: npm run build --if-present
     - name: Run integration and unit tests - React
       run: npm test

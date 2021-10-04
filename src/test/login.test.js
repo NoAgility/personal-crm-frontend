@@ -1,15 +1,28 @@
 import {render, fireEvent, waitFor, screen, getByPlaceholderText, cleanup } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import Registration from '../components/registration/Registration';
-import { MemoryRouter, Switch, Route } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import axios from 'axios';
 import { act } from 'react-dom/test-utils';
-import Login from '../pages/Login';
+import Login from '../components/login/Login';
+import LoginControllerWrapper from '../components/login/LoginControllerWrapper';
+import LoginControllerETE from '../components/login/LoginControllerETE';
+import SpringBootAdapterWrapper from '../util/SpringBootAdapterWrapper';
+import SpringBootAdapterETE from '../util/SpringBootAdapterETE';
+jest.setTimeout(20000);
+beforeAll(() => { 
+    LoginControllerWrapper.setController(LoginControllerETE);
+    SpringBootAdapterWrapper.setAdapter(SpringBootAdapterETE);
+    Object.defineProperty(document, 'cookie', {
+        writable: true,
+        value: 'status=active',
+    });
+})
+
 test("Integration Test - Successful Login", async () => {
 
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
-
+    
     
     await act( async () => {
         let testHistory, testLocation;

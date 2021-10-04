@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BiHide, BiShow} from 'react-icons/bi';
 import './Registration.css';
-import Controller from './RegistrationController';
+import RegistrationController from './RegistrationController';
 const Registration = (props) => {
 
     const history = useHistory();
@@ -18,13 +18,22 @@ const Registration = (props) => {
     const [generalError, setGeneralError] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
     
-
+    /**
+     * Function to make password visible
+     */
     const togglePassword = () => {
         setPasswordShown(!passwordShown);
     };
+    /**
+     * Password show toggle icons
+     */
     const show = <BiShow className="show-hide-icon" onClick={togglePassword}/>;
     const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
     
+    /**
+     * Function called on submission of registration form
+     * @param {*} e The triggering event
+     */
     const onSubmit = async (e) => {
         e.preventDefault();
         setGeneralError("Loading...");
@@ -35,9 +44,13 @@ const Registration = (props) => {
             dob: DOB
         }
         var errorFlag = false;
+
+        /**
+         * Collect all the possible username checks and call them against the user input
+         */
         const chain = {
             errorFunction: [setErrorUsername, setErrorUsername, setErrorName, setErrorPassword, setErrorDOB],
-            command: [Controller.isValidUsername, Controller.isTakenUsername, Controller.isValidName, Controller.isValidPassword, Controller.isValidDOB]
+            command: [RegistrationController.isValidUsername, RegistrationController.isTakenUsername, RegistrationController.isValidName, RegistrationController.isValidPassword, RegistrationController.isValidDOB]
         }
         for (var i = 0; i < chain.errorFunction.length; i++) {
             try {
@@ -49,14 +62,19 @@ const Registration = (props) => {
             }
         }
         if (errorFlag) { setGeneralError("Failed"); return; }
+
+        /**
+         * If the user gets to this stage, checks have completed, so register
+         */
         try {
-            Controller.Register(userDetails);
+            RegistrationController.Register(userDetails);
         } catch (err) {
             setGeneralError(err)
             return;
         }
         
         setGeneralError("Done");
+        
         history.push('/registration_success');
     }
     return (

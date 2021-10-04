@@ -1,0 +1,60 @@
+.task-details {
+	display: flex;
+	flex-direction: row;
+	place-items: center;
+	margin: 25px 50px 25px 50px;
+}
+.tasks-header {
+	display: flex;
+	flex-direction: row;
+	text-align: left;
+	width: 100%;
+}
+.task-details-top {
+	display: grid;
+	place-items: end;
+}
+.task-details-bottom {
+	display: grid;
+	place-items: center;
+	margin-bottom: 20px;
+}
+.task-contact-container {
+	scrollbar-color: dark;
+	border-radius: 10px;
+	display: flex;
+	overflow: scroll;
+	width: 40%;
+	min-width: 160px;
+	min-height: 200px;
+	background-color: var(--color-offwhite);
+}
+.task-details-left {
+	display: flex;
+	flex-direction: column;
+}
+.task-details-right {
+	display: flex;
+	flex-direction: column;
+	margin-left: 50px;
+	width: 50%;
+}
+*::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 25%;
+}
+*::-webkit-scrollbar-track {
+    background: var(--color-dark);
+}
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-medium);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-offwhite);
+}
+::-webkit-scrollbar-corner {
+    background: var(--color-dark);
+    border-radius: 25px;
+}

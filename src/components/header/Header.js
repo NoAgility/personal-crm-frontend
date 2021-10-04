@@ -1,7 +1,10 @@
 import "./Header.css";
 import {BiMenu, BiSearch} from 'react-icons/bi';
 import { Dropdown } from 'react-bootstrap';
+import AuthService from "../../util/AuthService.js"
 import Settings from  "../settings/Settings.js"
+import SearchBar from  "../UIComponents/searchbar/SearchBar.js"
+
 import React, { useState } from 'react';
 
 const Header = (props) => {
@@ -10,12 +13,18 @@ const Header = (props) => {
 
 	return (
 		<div className="header">
-
+			<div className="spacer"/>
 			<div className="search-box">
-				<div className="search-button">
-					<BiSearch className="search-icon" size={25}/>
-				</div>
-				<input className="search-input" type="text" />
+				{/* <SearchBar
+					data-testid="contact-search"
+					name="username"
+					colorMode="light"
+					width="lg"
+					onSubmit=""
+					placeholder="Username"
+					value=""
+					onChange=""
+				/> */}
 			</div>
 
 			<div className="menu-dropdown">
@@ -33,7 +42,7 @@ const Header = (props) => {
 					/>
 
 					<Dropdown.Divider />
-					<Dropdown.Item href="/">Log Out</Dropdown.Item>
+					<Dropdown.Item onClick={AuthService.logOut}>Log Out</Dropdown.Item>
 				</Dropdown.Menu>
 			</Dropdown>
 			</div>

@@ -4,12 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import dotenv from 'dotenv';
-
+import LoginControllerWrapper from './components/login/LoginControllerWrapper';
+import LoginControllerDefault from './components/login/LoginControllerDefault';
+import SpringBootAdapterWrapper from './util/SpringBootAdapterWrapper';
+import SpringBootAdapterDefault from './util/SpringBootAdapterDefault';
 dotenv.config();
+
+LoginControllerWrapper.setController(LoginControllerDefault);
+SpringBootAdapterWrapper.setAdapter(SpringBootAdapterDefault);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 

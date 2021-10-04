@@ -1,0 +1,36 @@
+.inbox-contact-item h6{
+	align-self: center;
+	margin: 0px;
+}
+
+.inbox-contact-item {
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 25px;
+	list-style: none;
+	outline: none;
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	display: flex;
+	flex-direction: row;
+}
+
+.chat-description {
+	display: grid;
+	align-items: center;
+	justify-items: start ;
+	padding-left: 20px;
+}
+
+.chat-description *{
+	margin:0px;
+}
+
+.inbox-contact-item-info {
+	display: flex;
+	flex-direction: row;
+	width:100%;
+}

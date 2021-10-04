@@ -4,4 +4,60 @@
     height: calc(100%-130px);
     width: 100%;
     color: #ffffff;
+    z-index: -1;
+}
+
+.mini-menu {
+    z-index: 3;
+    position: absolute;
+    right: 5%;
+    bottom: 0%;
+    
+}
+li:not(:first-child) {
+    margin-top: 15px;
+}
+.menu-ul {
+    padding-left: 0;
+    background-color: rgb(155,155,155,0.5);
+    border-radius: 50px;
+    list-style-type: none;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 3px 3px 3px 3px;
+}
+.menu-button:active {
+    outline: none;
+    color: #8b8b8b;
+}
+.menu-button:focus {
+    outline: none;
+}
+.menu-button {
+    position: relative;
+    z-index: 3;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    padding: 0 0 0 0;
+    cursor: pointer;
+}
+.menu-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: bottom;
+    color: #ffffff;
+}
+.popup-container {
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-offwhite);
+    border-radius: 30px;
+    position: absolute;
+    width: 500px;
+    height: 250px;
+    bottom: 20%;
+    right: 0%
 }

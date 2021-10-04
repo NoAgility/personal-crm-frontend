@@ -1,0 +1,93 @@
+.contacts-page {
+	width:600px;
+}
+
+.contact-header {
+	display: flex;
+	flex-direction: row;
+	text-align: left;
+	width: 100%;
+}
+
+.contact-header h1{
+	margin: auto;
+	margin-left: 0px;
+}
+
+.contact-sub-header {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+#button-dropdown-body{
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	box-shadow: none;
+	border-style: none;
+}
+
+.filter-dropdown {
+	margin-right:15px;
+}
+
+.contact-box {
+	width:100%;
+}
+
+.contact-list-group {
+	padding: 0px;
+}
+
+.contact-item {
+	outline: none;
+	background-color: var(--color-dark);
+	color: var(--color-white);
+	display: flex;
+	flex-direction: row;
+	border-bottom: solid;
+	border-width: 1px;
+	border-color:var(--color-offwhite);
+	border-end-end-radius: 2px;
+	padding-bottom: 10px;
+}
+
+.contact-info h5{
+	align-self: center;
+	margin: 0px;
+	margin-left: 30px;
+}
+
+.create-contact-btn {
+	margin-left: auto;
+	background-color: var(--color-blue);
+	border-radius: 30px;
+	width: 90px;
+	height: 50px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding-left: 5px;
+	padding-right: 12px;
+}
+
+.create-contact-btn * {
+	margin: auto;
+	text-align: center;
+	font-size: var(--text-small);
+}
+
+.contact-info {
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	cursor: pointer;
+	width: 100%;
+}
+
+.contact-options {
+	display: flex;
+	justify-content: flex-end;
+}
