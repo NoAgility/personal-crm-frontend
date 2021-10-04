@@ -153,13 +153,15 @@ const TaskPage = (props) => {
             setTasks(data);
             if (data === undefined || data.length === 0) return;
 
-            // Use data due to asyncronous nature
-            if (activeSort === 'date') {
-                dateGroupSort(data);
-            } else {
-                priorityGroupSort(data);
-            }
+            dateGroupSortAlt(data);
         };
+
+        //React throws a warning if I don't encapsulate the dependencies inside useEffect
+        //Hence two similar functions
+        const dateGroupSortAlt = (data) => {
+            sortByDate(data);
+            setTasksByGroup(groupByDate(data));
+        }
         fetchTasks();
     }, []);
     
