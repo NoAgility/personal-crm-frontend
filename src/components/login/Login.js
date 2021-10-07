@@ -31,8 +31,9 @@ const Login = () => {
     const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
 	return (
         <div data-testid="container" className="login-container">
-            {error}
+
             <form className="login-form" onSubmit={onSubmit}>
+                <h6>{error}</h6>
                 <h1>Login</h1>
                 <div data-testid='general-error' className='error'>{generalError}</div>
                 <div className="input">

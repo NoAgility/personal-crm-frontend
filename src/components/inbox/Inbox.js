@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ChatList from "./ChatList"
 import ChatController from './ChatController.js'
+import ContactController from '../contacts/ContactController.js'
 import ClosedChat from "./ClosedChat"
 import OpenChat from "./OpenChat"
 import Cookies from 'js-cookie';
@@ -81,13 +82,14 @@ const Inbox = () => {
 	}
 
 	// Finds the first participant in a chat that is not the user
-	const findFirstParticipant = (chat) => {
+	const findFirstParticipant = async (chat) => {
 		for (let p in chat.chatParticipants) {
 			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
 				return chat.chatParticipants[p];
 			}
 		}
-		return null;
+		const data = await ContactController.fetchUserByID(parseInt(Cookies.get('accountID')));
+		return data;
 	}
 
 	// call getChats() upon loading the page

@@ -1,17 +1,18 @@
 import React, { useState, useEffect, componentDidMount } from 'react';
-import "./Tasks.css";
+import "./AddMeetingForm.css";
 import "../form.css";
 import { MdClose } from 'react-icons/md';
-import TaskController from './TaskController';
+import MeetingController from './MeetingController';
 import { Modal } from 'react-bootstrap';
-import TaskContactDropdown from './TaskContactDropdown';
+import TaskContactDropdown from '../tasks/TaskContactDropdown';
 import ContactController from '../contacts/ContactController';
 
-const AddTaskForm = ({submit, show, onHide}) => {
+const AddMeetingForm = ({submit, show, onHide}) => {
 
-    const [taskName, setTaskName] = useState("");
-    const [taskPriority, setTaskPriority] = useState("");
-    const [taskDate, setTaskDate] = useState("");
+    const [meetingName, setMeetingName] = useState("");
+    const [meetingDescription, setMeetingDescription] = useState("");
+    const [meetingStart, setMeetingStart] = useState("");
+    const [meetingEnd, setMeetingEnd] = useState("");
     const [contacts, setContacts] = useState([]);
     const [selectedContactIDs, setSelectedContactIDs] = useState([]);
 
@@ -22,6 +23,7 @@ const AddTaskForm = ({submit, show, onHide}) => {
     const addContactSelection = (contact) => {
         setSelectedContactIDs([...selectedContactIDs, contact.accountID]);
     }
+
     /**
      * Function to remove contact from the selection
      * @param {*} contact The contact to be removed
@@ -30,27 +32,20 @@ const AddTaskForm = ({submit, show, onHide}) => {
         const index = selectedContactIDs.indexOf(contact.accountID);
         selectedContactIDs.splice(index, 1);
     }
+
     /**
      * Wrapper for onHide function to reset all state
      * @param {*} e The event being triggered
      */
     const handleClose = (e) => {
 		e.preventDefault();
-		setTaskName("");
-        setTaskPriority("");
-        setTaskDate("");
+		setMeetingName("");
+        setMeetingStart("");
+        setMeetingEnd("");
 		onHide();
 	};
 
-    //For Firefox (64.0) users
-    const preventNonNumericalInput = (e) => {
-        e = e || window.event;
-        var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
-        var charStr = String.fromCharCode(charCode);
 
-        if (!charStr.match(/^[0-9]+$/))
-            e.preventDefault();
-    }
     /**
      * On render, load contacts for them to be addable to the form
      */
@@ -81,32 +76,39 @@ const AddTaskForm = ({submit, show, onHide}) => {
 				<MdClose className="close-button" onClick={handleClose} size={30}/>
 			</div>
             <Modal.Body>
-
-                <h1>Add a Task</h1>
-
                 <div className="add-form">
                     <form className="form-container">
                         <input
                             type="text"
                             className="form-input"
-                            value={taskName}
-                            placeholder="Task Name"
-                            onChange={event => setTaskName(event.target.value)}
+                            value={meetingName}
+                            placeholder="Add Meeting Name"
+                            onChange={event => setMeetingName(event.target.value)}
                         />
-                        <input
-                            type="number"
+						<input
+                            type="text"
                             className="form-input"
-                            onKeyPress={preventNonNumericalInput}
-                            value={taskPriority} placeholder="Priority"
-                            onChange={event => setTaskPriority(event.target.value)}
+                            value={meetingDescription}
+                            placeholder="Add Description"
+                            onChange={event => setMeetingDescription(event.target.value)}
                         />
-                        <label className="task-form-label">
-                            Deadline
+
+                        <label className="meeting-form-label">
+                            Start
                             <input
                                 className="form-date-input"
                                 type="date"
-                                value={taskDate}
-                                onChange={event => setTaskDate(event.target.value)}
+                                value={meetingStart}
+                                onChange={event => setMeetingStart(event.target.value)}
+                            />
+                        </label>
+						<label className="meeting-form-label">
+                            End
+                            <input
+                                className="form-date-input"
+                                type="date"
+                                value={meetingEnd}
+                                onChange={event => setMeetingEnd(event.target.value)}
                             />
                         </label>
                         <TaskContactDropdown
@@ -114,11 +116,11 @@ const AddTaskForm = ({submit, show, onHide}) => {
                             add={addContactSelection}
                             remove={removeContactSelection}/>
                         <button
-                            className="task-submit"
+                            className="meeting-submit"
                             onClick={(e) => {
                                 e.preventDefault();
                                 onHide();
-                                submit({taskName: taskName, taskPriority: taskPriority, taskDeadline: taskDate, contactIDs: selectedContactIDs})
+                                submit({meetingName: meetingName,meetingStart: meetingStart, meetingEnd: meetingEnd, contactIDs: selectedContactIDs})
                                 }}>
                             Submit
                         </button>
@@ -129,4 +131,4 @@ const AddTaskForm = ({submit, show, onHide}) => {
     )
 }
 
-export default AddTaskForm;
+export default AddMeetingForm;

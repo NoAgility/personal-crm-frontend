@@ -10,9 +10,68 @@ const MeetingController = {
      */
     fetchMeetings: async () => {
         try {
-            const data = await SpringBootAdapterWrapper.get('/meeting/getAccountMeetings')
-				.then(res => { return res.data; } )
-                .catch(err => { throw err; });
+            // const data = await SpringBootAdapterWrapper.get('/meeting/getAccountMeetings')
+			// 	.then(res => { return res.data; } )
+            //     .catch(err => { throw err; });
+            // return data;
+            const data = [{
+                "meetingID": 1,
+                "meetingCreator": 1,
+                "meetingName": "Example meeting",
+                "meetingDescription": "Example description",
+                "meetingStart": "2021-12-20 04:30:00",
+                "meetingEnd": "2021-12-20 04:30:00",
+                "meetingParticipants": [1, 2],
+                "meetingMinutes": [
+                    {
+                        "meetingID": 1,
+                        "accountID": 1,
+                        "minuteID": 1,
+                        "minuteTime": "2021-12-20 04:30:00",
+                        "minuteText": "Example minute"
+                    }
+                ],
+                "meetingAccepted": true
+            },
+            {
+                "meetingID": 2,
+                "meetingCreator": 1,
+                "meetingName": "Other meeting",
+                "meetingDescription": "Example description",
+                "meetingStart": "2021-12-20 04:30:00",
+                "meetingEnd": "2021-12-20 04:30:00",
+                "meetingParticipants": [1, 3],
+                "meetingMinutes": [
+                    {
+                        "meetingID": 1,
+                        "accountID": 1,
+                        "minuteID": 1,
+                        "minuteTime": "2021-12-20 04:30:00",
+                        "minuteText": "Example minute"
+                    }
+                ],
+                "meetingAccepted": true
+            },
+            {
+                "meetingID": 3,
+                "meetingCreator": 1,
+                "meetingName": "Other meeting",
+                "meetingDescription": "Example description",
+                "meetingStart": "2021-12-20 04:30:00",
+                "meetingEnd": "2021-12-20 04:30:00",
+                "meetingParticipants": [1, 2],
+                "meetingMinutes": [
+                    {
+                        "meetingID": 1,
+                        "accountID": 1,
+                        "minuteID": 1,
+                        "minuteTime": "2021-12-20 04:30:00",
+                        "minuteText": "Example minute"
+                    }
+                ],
+                "meetingAccepted": false
+            }
+            ]
             return data;
         } catch (err) {
             alert("Failed to fetch meetings");

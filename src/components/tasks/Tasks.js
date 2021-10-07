@@ -21,7 +21,7 @@ const TaskPage = (props) => {
         dateGroupSort();
     };
     const setSortByPriority = () => {
-        setActiveSort("priority"); 
+        setActiveSort("priority");
         priorityGroupSort();
     };
     /**
@@ -44,8 +44,8 @@ const TaskPage = (props) => {
         }
         getTasks();
     }
-    
-    
+
+
     /**
      * Function to call to the backend to delete task for user
      * @param {*} task Task to be deleted
@@ -59,10 +59,10 @@ const TaskPage = (props) => {
      * @param {*} task Task to be added
      */
     const addTask = async (task) => {
-        
+
         await TaskController.addTask(task);
         getTasks();
-        
+
     };
     /**
      * Fetch the tasks from the backend and set tasks into component state
@@ -84,10 +84,10 @@ const TaskPage = (props) => {
      * @param {*} tasks Tasks to be grouped
      * @returns Array of groups of tasks by date
      */
-    const groupByDate = (tasks) => { 
-        const reduced = {}; 
+    const groupByDate = (tasks) => {
+        const reduced = {};
         tasks.forEach((task) => {(
-            reduced[task.taskDeadline] = reduced[task.taskDeadline] || [] ).push(task); 
+            reduced[task.taskDeadline] = reduced[task.taskDeadline] || [] ).push(task);
         })
         return reduced;
     };
@@ -114,10 +114,10 @@ const TaskPage = (props) => {
             return 0;
         }
     )};
-    const groupByPriority = (tasks) => { 
-        const reduced = {}; 
+    const groupByPriority = (tasks) => {
+        const reduced = {};
         tasks.forEach((task) => {(
-            reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task); 
+            reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task);
         })
         return reduced;
     };
@@ -132,7 +132,7 @@ const TaskPage = (props) => {
         setActiveSort("priority");
         sortByPriority(toSort);
         setTasksByGroup(groupByPriority(toSort));
-        
+
     }
     const sortTypes = [
         {
@@ -164,14 +164,14 @@ const TaskPage = (props) => {
         }
         fetchTasks();
     }, []);
-    
+
     return (<React.Fragment>
             <div className="tasks-page">
                 <div className="tasks-header">
                     <h1>Tasks</h1>
-                    <button 
-                        data-testid="add-task" 
-                        className="create-task-btn" 
+                    <button
+                        data-testid="add-task"
+                        className="create-task-btn"
                         onClick={() => { openModal() }}>
                         <MdAdd size={22}/>
                         <h4>Add</h4>
@@ -184,8 +184,8 @@ const TaskPage = (props) => {
                 </div>
                 <div className="tasks-container">
                     {Object.keys(tasksByGroup)
-                        .map(key => { 
-                            return <TaskList 
+                        .map(key => {
+                            return <TaskList
                                 key={key}
                                 label={activeSort}
                                 tasks={tasksByGroup[key]}

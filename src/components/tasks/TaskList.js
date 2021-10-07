@@ -5,8 +5,8 @@ import "./Tasks.css";
 const TaskList = ({tasks, label, editOptions}) => {
 
     const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-    
-    
+
+
 
     /**
      * Date formatter to change the date to an alias, eg. Today
@@ -29,6 +29,7 @@ const TaskList = ({tasks, label, editOptions}) => {
 
     const getLabel = () => {
         if (label === "date") {
+            console.log(tasks[0].taskDeadline)
             let date = new Date(tasks[0].taskDeadline).toLocaleDateString("en-US", options);
             return formatDate(date)
         } else if (label === "priority") {

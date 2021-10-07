@@ -1,0 +1,52 @@
+.meeting-form-container {
+    display: flex;
+    background-color: var(--color-medium);
+    border-radius: 10px;
+    justify-content:flex-start;
+    align-items:center;
+    width: 55%;
+    padding-bottom: 10px;
+    max-width: 500px;
+    min-width: 350px;
+}
+.meeting-form-date-input {
+	font-family: var(--font);
+	font-size: var(--text-msmall);
+	color: var(--color-offwhite);
+	padding: 5px;
+	outline: none;
+	border-style: none;
+	border-bottom: solid var(--color-offwhite);
+	border-width: 2px;
+	background-color: var(--color-dark);
+	width: 50%;
+}
+.meeting-form-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px 5px 5px;
+    color: var(--color-offwhite);
+    font-size: var(--text-msmall);
+    font-family: var(--font);
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.meeting-submit {
+    height: 40px;
+    width: 100px;
+    border: none;
+    background-color: var(--color-orange);
+    margin-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: var(--font);
+    color: var(--color-white);
+}
+
+.add-meeting-time {
+    width: max-content;
+}

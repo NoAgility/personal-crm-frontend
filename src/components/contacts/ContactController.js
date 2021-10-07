@@ -30,6 +30,21 @@ const ContactController = {
 		}
 	},
 
+	// Fetch a user by their accountID
+	fetchUserByID: async (accountID) => {
+		try {
+			const res = await SpringBootAdapterWrapper.get(`/account/get?id=${accountID}`).then(
+				response => {
+					const data = response.data;
+					return data;
+				}
+			);
+			return res;
+		} catch (err) {
+			console.log(err)
+		}
+	},
+
 	// Fetch a contact's data by their username
 	fetchUserByUsername: async (contact) => {
 		try {

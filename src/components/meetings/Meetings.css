@@ -1,0 +1,201 @@
+
+.meetings-page {
+	width: 600px;
+}
+.meetings-header {
+	display: flex;
+	flex-direction: row;
+	text-align: left;
+	width: 100%;
+}
+.meeting-label {
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    border-color: var(--color-purple);
+}
+.meeting-label-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-purple);
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    border-color: var(--color-purple);
+    color: var(--color-dark);
+    text-align: top;
+    font-size: 28px;
+}
+
+.meeting-btn {
+	background-color: var(--color-orange);
+	border-color: var(--color-orange);
+
+}
+
+.add-btn {
+    color: var(--color-white);
+    margin: 20px 0px 20px auto;
+	border-radius: 30px;
+	width: 90px;
+	height: 50px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding-left: 5px;
+	padding-right: 12px;
+	filter: brightness(90%);
+	border-style: solid;
+	border-width: 2px;
+}
+
+.add-btn:hover {
+	filter: brightness(100%);
+	border-color: var(--color-white);
+}
+
+.add-btn:active {
+	filter: brightness(60%);
+}
+
+.add-btn:focus {
+	outline: none;
+}
+
+.add-btn * {
+	margin: auto;
+	text-align: center;
+	font-size: var(--text-small);
+}
+.meetings-sub-header {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+.meetings-header h1{
+	margin: 20px auto 20px 0px;
+	margin-left: 0px;
+}
+.meeting-add-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: center;
+    color: var(--color-purple);
+}
+.edit-meeting-btn, .add-meeting-btn, .cancel-add-meeting-btn, .delete-meeting-btn {
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: var(--color-medium);
+	background-color: var(--color-medium);
+	color: var(--color-white);
+	height: 35px;
+	width: 80px;
+	outline:none;
+	cursor: pointer;
+	margin:20px;
+	text-align: center;
+}
+.meetings-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    min-height: 400px;
+    min-width: 350px;
+    overflow: auto;
+}
+
+.meetings-section-container {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font);
+    font-size: var(--text-small);
+    color: var(--color-medium);
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.meeting-cancel {
+    color: var(--color-white);
+    box-shadow: 2px 2px var(--color-medium);
+    border: 2px solid var(--color-offwhite);
+    background-color: var(--color-dark);
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.meeting-buttons {
+    margin-top: 5px;
+    width: 55%;
+    display: flex;
+    justify-content:flex-start;
+    align-items:center;
+    max-width: 500px;
+    min-width: 350px;
+}
+
+
+
+.meeting-add {
+    border-top: solid;
+    border-color: var(--color-offwhite);
+    border-width: 1px;
+    margin-right: 6.5%;
+    padding-top: 2px;
+    display: flex;
+    justify-content: flex-start;
+    color: var(--color-offwhite);
+    font-size: var(--text-small);
+    font-family: var(--font);
+    width: 48.5%;
+    max-width: 500px;
+    min-width: 350px;
+    align-items: center;
+}
+.meeting-alias {
+    display: flex;
+    align-items: left;
+    color: var(--color-white);
+    width: 25%;
+}
+.meeting-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.meeting-date {
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    font-size: var(--text-msmall);
+    font-family: var(--font);
+    font-weight: bold;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 25px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-dark);
+}
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-medium);
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-offwhite);
+}
+::-webkit-scrollbar-corner {
+    background: var(--color-dark);
+    border-radius: 25px;
+}

@@ -17,8 +17,8 @@ const ContactDetails = ({ contact, show, onHide }) => {
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
-			<div className="contact-details-top">
-				<MdClose className="edit-contact-options" onClick={() => {onHide(false)}} size={30}/>
+			<div className="modal-top">
+				<MdClose className="modal-close-button" onClick={() => {onHide(false)}} size={30}/>
 			</div>
 
 			<Modal.Body className="contact-details">

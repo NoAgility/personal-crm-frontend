@@ -1,0 +1,26 @@
+.meeting-container-left {
+    width: 100%;
+    cursor: pointer;
+	display: grid;
+	justify-content: start;
+}
+
+.meeting-participants-container {
+	padding-left: 10px;
+}
+
+.meeting-participants-container div{
+	margin: 5px;
+}
+
+.meeting {
+    color: var(--color-white);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-color: var(--color-offwhite);
+    border-width: 1px;
+    margin-bottom: 20px;
+    width: 100%;
+
+}
