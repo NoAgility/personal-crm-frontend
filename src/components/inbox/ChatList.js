@@ -96,6 +96,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 								.filter((chat) => {
 									if(chatSearch === ""
 										|| findFirstParticipant(chat).accountName.toLowerCase().includes(chatSearch.toLowerCase())) {
+											console.log(findFirstParticipant(chat))
 										return chat;
 									} return null;
 								})
