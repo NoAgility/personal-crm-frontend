@@ -6,11 +6,11 @@ import TaskController from './TaskController';
 import { Modal } from 'react-bootstrap';
 import TaskContactDropdown from './TaskContactDropdown';
 import ContactController from '../contacts/ContactController';
-
+import TaskPriorityDropdown from './TaskPriorityDropdown';
 const AddMeetingForm = ({submit, show, onHide}) => {
 
     const [taskName, setTaskName] = useState("");
-    const [taskPriority, setTaskPriority] = useState("");
+    const [taskPriority, setTaskPriority] = useState(-1);
     const [taskDate, setTaskDate] = useState("");
     const [contacts, setContacts] = useState([]);
     const [selectedContactIDs, setSelectedContactIDs] = useState([]);
@@ -37,7 +37,7 @@ const AddMeetingForm = ({submit, show, onHide}) => {
     const handleClose = (e) => {
 		e.preventDefault();
 		setTaskName("");
-        setTaskPriority("");
+        setTaskPriority(-1);
         setTaskDate("");
 		onHide();
 	};
@@ -93,13 +93,6 @@ const AddMeetingForm = ({submit, show, onHide}) => {
                             placeholder="Task Name" 
                             onChange={event => setTaskName(event.target.value)}
                         />
-                        <input 
-                            type="number" 
-                            className="form-input" 
-                            onKeyPress={preventNonNumericalInput} 
-                            value={taskPriority} placeholder="Priority" 
-                            onChange={event => setTaskPriority(event.target.value)}
-                        />
                         <label className="task-form-label">
                             Deadline
                             <input 
@@ -109,6 +102,10 @@ const AddMeetingForm = ({submit, show, onHide}) => {
                                 onChange={event => setTaskDate(event.target.value)}
                             />
                         </label>
+                        <TaskPriorityDropdown 
+                            change={setTaskPriority} 
+                            defaultPriority={taskPriority}
+                        />
                         <TaskContactDropdown 
                             contactItems={contacts} 
                             add={addContactSelection} 

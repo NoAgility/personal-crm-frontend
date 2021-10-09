@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import TaskItem from './TaskItem';
 import "./Tasks.css";
-const TaskList = ({tasks, label, editOptions}) => {
+const TaskList = ({tasks, contacts, label, editOptions}) => {
 
     const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
     
@@ -39,7 +39,13 @@ const TaskList = ({tasks, label, editOptions}) => {
         <div className="task-title">
             <div className="task-date">{getLabel()}</div>
         </div>
-        {tasks.map(t => <TaskItem key={t.taskID} onUpdate={editOptions.update} onDelete={editOptions.delete} task={t}/>)}
+        {tasks.map(t => <TaskItem 
+            key={t.taskID} 
+            onUpdate={editOptions.update} 
+            onDelete={editOptions.delete} 
+            task={t}
+            contacts={contacts}
+            />)}
     </div>)
 }
 

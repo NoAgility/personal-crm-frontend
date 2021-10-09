@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { MdAdd } from 'react-icons/md';
 import AddTaskForm from './AddTaskForm';
 import TaskController from './TaskController';
+import ContactController from '../contacts/ContactController';
 import TaskList from './TaskList';
 import "./Tasks.css";
 import Sort from '../UIComponents/sort/Sort.js';
@@ -12,6 +13,7 @@ const TaskPage = (props) => {
 
     const openModal = () => {setModalShow(true)};
     const hideModal = () => {setModalShow(false)};
+    const [contacts, setContacts] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [tasksByGroup, setTasksByGroup] = useState([]);
     const [activeSort, setActiveSort] = useState("date");
@@ -30,6 +32,7 @@ const TaskPage = (props) => {
      * @param {*} changes The attributes that have changed
      */
     const updateTask = async (task, changes) => {
+        console.log(changes.taskContactIDsAdded);
         if (changes.taskName) {
             await TaskController.updateTaskName(task);
         }
@@ -39,8 +42,30 @@ const TaskPage = (props) => {
         if (changes.taskPriority) {
             await TaskController.updatePriority(task);
         }
-        if (changes.taskNotes) {
-            //Backend needs to fix this
+        if (changes.taskNotesAdded.length > 0) {
+            for (var i = 0; i < changes.taskNotesAdded.length; i++) {
+                await TaskController.addTaskNote(changes.taskNotesAdded[i]);
+            }
+        }
+        if (changes.taskNotesRemoved.length > 0) {
+            for (var i = 0; i < changes.taskNotesRemoved.length; i++) {
+                await TaskController.deleteTaskNote(changes.taskNotesRemoved[i]);
+            }
+        }
+        if (changes.taskNotesChanged.length > 0) {
+            for (var i = 0; i < changes.taskNotesChanged.length; i++) {
+                await TaskController.updateTaskNote(changes.taskNotesChanged[i]);
+            }
+        }
+        if (changes.taskContactIDsAdded.length > 0) {
+            for (var i = 0; i < changes.taskContactIDsAdded.length; i++) {
+                await TaskController.addTaskContact(task, changes.taskContactIDsAdded[i]);
+            }
+        }
+        if (changes.taskContactIDsRemoved.length > 0) {
+            for (var i = 0; i < changes.taskContactIDsRemoved.length; i++) {
+                await TaskController.deleteTaskContact(task, changes.taskContactIDsRemoved[i]);
+            }
         }
         getTasks();
     }
@@ -59,10 +84,9 @@ const TaskPage = (props) => {
      * @param {*} task Task to be added
      */
     const addTask = async (task) => {
-        
         await TaskController.addTask(task);
         getTasks();
-        
+        getContacts();
     };
     /**
      * Fetch the tasks from the backend and set tasks into component state
@@ -77,6 +101,18 @@ const TaskPage = (props) => {
             dateGroupSort(data);
         } else {
             priorityGroupSort(data);
+        }
+    }
+    const getContacts = async () => {
+        const ids = await ContactController.fetchContacts();
+        let activeCs = [];
+        let cs =  [];
+        if (ids !== undefined && ids.length > 0) {
+            for (const id of ids) {
+                let contactData = await ContactController.fetchContactData(id);
+                cs.push(contactData);
+            }
+            setContacts(cs);
         }
     }
     /**
@@ -155,7 +191,18 @@ const TaskPage = (props) => {
 
             dateGroupSortAlt(data);
         };
-
+        const fetchContacts = async () => {
+            const ids = await ContactController.fetchContacts();
+			let activeCs = [];
+            let cs =  [];
+            if (ids !== undefined && ids.length > 0) {
+                for (const id of ids) {
+                    let contactData = await ContactController.fetchContactData(id);
+                    cs.push(contactData);
+                }
+				setContacts(cs);
+            }
+        }
         //React throws a warning if I don't encapsulate the dependencies inside useEffect
         //Hence two similar functions
         const dateGroupSortAlt = (data) => {
@@ -163,6 +210,7 @@ const TaskPage = (props) => {
             setTasksByGroup(groupByDate(data));
         }
         fetchTasks();
+        fetchContacts();
     }, []);
     
     return (<React.Fragment>
@@ -187,11 +235,17 @@ const TaskPage = (props) => {
                         .map(key => { 
                             return <TaskList 
                                 key={key}
+                                contacts={contacts}
                                 label={activeSort}
                                 tasks={tasksByGroup[key]}
                                 editOptions={{update: updateTask, delete: deleteTask}}/>
                                 })}
-                {modalShow ? <AddTaskForm submit={addTask} show={modalShow} onHide={hideModal}/> : ""}
+                    {modalShow ? <AddTaskForm 
+                        submit={addTask} 
+                        show={modalShow} 
+                        onHide={hideModal}
+                        /> : ""
+                    }
                 <p/>
             </div>
         </div>

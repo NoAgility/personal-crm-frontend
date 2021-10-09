@@ -4,11 +4,12 @@ import TaskDetails from './TaskDetails';
 import { Dropdown } from 'react-bootstrap';
 import {FiMoreHorizontal} from 'react-icons/fi';
 import "./Tasks.css";
-const TaskItem = ({task, onUpdate, onDelete}) => {
+const TaskItem = ({task, contacts, onUpdate, onDelete}) => {
     const [modalShow, setModalShow] = useState(false);
     return <div className="task">
         <TaskDetails 
             task={task}
+            contacts={contacts}
             show={modalShow}
             onUpdate={onUpdate}
 			onHide={() => {setModalShow(false);}}/>
