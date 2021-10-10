@@ -1,8 +1,8 @@
 import "./Navbar.css";
-import React, { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import { BiTask , BiCalendar, BiPhone, BiMailSend, BiBook} from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
-import { useState } from "react";
+import React, { useState } from "react";
 const Navbar = (props) => {
     const [active, setActive] = useState("/home/calendar");
 

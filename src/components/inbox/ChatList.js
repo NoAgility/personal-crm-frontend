@@ -3,6 +3,8 @@ import { MdAdd } from 'react-icons/md';
 import Sort from '../UIComponents/sort/Sort.js';
 import SearchBar from '../UIComponents/searchbar/SearchBar.js';
 import ChatItem from './ChatItem.js'
+import { Dropdown } from 'react-bootstrap';
+
 import  './ChatList.css'
 
 const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant }) => {
@@ -73,9 +75,29 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 					<h1>Inbox</h1>
 					<div className="chat-btns row">
 						<Sort sortTypes={sortTypes}/>
-						<button className="add-chat-btn" onClick={createChat}>
-							<MdAdd size={25} color={'white'}/>
-						</button>
+
+
+								<button className="add-chat-btn" onClick={() => {console.log("trying to create chat")} }>
+									<MdAdd size={25} color={'white'}/>
+								</button>
+
+
+
+								{/* <div className="create-chat">
+									<h5>Find contacts</h5>
+									<p>You can add {1} more.</p>
+									<input
+										placeholder="Find contacts">
+									</input>
+									<div className="create-chat-contacts">
+
+									</div>
+									<button className="add-btn contact-btn" onClick={() => {console.log("Create Chat")}}>
+										Create Chat
+									</button>
+								</div> */}
+
+
 					</div>
 				</div>
 

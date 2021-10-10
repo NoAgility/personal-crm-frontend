@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Message from "./Message"
 import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
 import SearchBar from '../UIComponents/searchbar/SearchBar';
@@ -21,6 +21,21 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
 		sendMessage(chat, newMessage);
 		setNewMessage('');
 	}
+
+	const messagesEndRef = useRef(null)
+
+ 	 const scrollToBottom = () => {
+    	messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+  	}
+
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [])
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [chat])
 
 	// when the user searches for a message, prevent page reload
 	const onSearch = async (e) => {
@@ -66,6 +81,7 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
 				):(
 					<></>
 				)}
+				<div ref={messagesEndRef}/>
 			</div>
 			<form className="chat-form" onSubmit={onSend}>
 					<div className="chat-input-container">

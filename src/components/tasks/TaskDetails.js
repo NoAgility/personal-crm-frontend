@@ -6,19 +6,19 @@ import  './TaskDetails.css';
 import './Tasks.css';
 import "../form.css";
 import ContactMenuItem from './ContactMenuItem';
-const TaskContact = (contact) => {
-	<div className="task-contact">
-		{contact.accountUsername};
-		<MdClose/>
-	</div>
-}
+
 const TaskDetails = ({task, show, onHide, onUpdate}) => {
 
-	
+	const TaskContact = (contact) => {
+		<div className="task-contact">
+			{contact.accountUsername};
+			<MdClose/>
+		</div>
+	}
 
 	const [contacts, setContacts] = useState([]);
 	const [taskPriority, setTaskPriority] = useState(task.taskPriority);
-	
+
 	const [contactsChanged, setContactsChanged] = useState(false);
 	const [taskPriorityChanged, setTaskPriorityChanged] = useState(false);
 	const [taskDeadlineChanged, setTaskDeadlineChanged] = useState(false);
@@ -128,22 +128,22 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 			</div>
 			<h1>{task.taskName}</h1>
 			<Modal.Body className="task-details">
-                
+
 				<div className="task-details-left">
 					<label className="form-label">
 						Task Notes
-						<textarea 
-							value={task.taskNotes} 
+						<textarea
+							value={task.taskNotes}
 							onChange={(e) => {task.taskNotes = e.target.value;}}
 						/>
 					</label>
 					<label className="form-label">
 						Priority
-						<input className="form-input" 
-							type="number" 
+						<input className="form-input"
+							type="number"
 							placeholder="Enter a number"
-							value={taskPriority !== -1 ? taskPriority : "" } 
-							onKeyPress={preventNonNumericalInput} 
+							value={taskPriority !== -1 ? taskPriority : "" }
+							onKeyPress={preventNonNumericalInput}
 							onChange={(e) => {
 								setTaskPriority(e.target.value);
 								setTaskPriorityChanged(true);
@@ -152,9 +152,9 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 					</label>
 					<label className="form-label">
 						Deadline
-						<input className="form-date-input" 
-							type="date" 
-							value={taskDeadline || "" } 
+						<input className="form-date-input"
+							type="date"
+							value={taskDeadline || "" }
 							onChange={(e) => {
 								setTaskDeadline(e.target.value);
 								setTaskDeadlineChanged(true);
@@ -165,16 +165,16 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 				<div className="task-details-right">
 					<label className="form-label">Contacts</label>
 					<div className="task-contact-container">
-						{contacts.map(contact => 
-							<ContactMenuItem 
-								active={isSelected(contact)} 
+						{contacts.map(contact =>
+							<ContactMenuItem
+								active={isSelected(contact)}
 								key={contact.accountID}
-								contactItem={contact} 
-								add={addContactSelection} 
+								contactItem={contact}
+								add={addContactSelection}
 								remove={removeContactSelection}/>)}
 					</div>
 				</div>
-				
+
 
 			</Modal.Body>
 			<div className="task-details-bottom">
@@ -185,7 +185,7 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 					}
 				}>Save</button>
 			</div>
-			
+
 		</Modal>
 		</>
 	)

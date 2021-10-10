@@ -1,5 +1,7 @@
 import "./SearchBar.css";
 import {BiSearch} from 'react-icons/bi';
+import React from 'react';
+
 
 const SearchBar = ({ name, width, colorMode, onSubmit, placeholder, value, onChange }) => {
 	// name: name of search query

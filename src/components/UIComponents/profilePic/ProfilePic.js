@@ -1,5 +1,7 @@
 import "./ProfilePic.css"
 import { GrGroup } from 'react-icons/gr';
+import React from 'react';
+
 
 // extracts the initials from an accountName
 const getInitials = (name) => {

@@ -127,7 +127,7 @@ const Inbox = () => {
 					sendMessage={sendMessage}
 					editMessage={editMessage}
 				/>
-			) : (<ClosedChat createChat={createChat} />)}
+			) : <></>}
 		</div>
 	)
 }
