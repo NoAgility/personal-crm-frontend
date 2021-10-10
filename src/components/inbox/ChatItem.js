@@ -23,7 +23,7 @@ const ChatItem = ({ chat, lastMessage, openChat, onDelete, firstParticipant }) =
 					/>
 					<div className="column chat-description">
 						<h5>{firstParticipant.accountName}</h5>
-						<p>{lastMessage}</p>
+						<p>{lastMessage.length < 25 ? lastMessage : lastMessage.substring(0,25).concat(" ...")}</p>
 					</div>
 				</div>
 

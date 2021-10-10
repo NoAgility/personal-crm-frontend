@@ -36,3 +36,7 @@
 	display: grid;
 	place-items: center;
 }
+
+.add-chat-btn:active {
+	filter: brightness(50%);
+}
