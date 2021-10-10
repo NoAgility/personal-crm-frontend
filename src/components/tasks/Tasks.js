@@ -125,8 +125,14 @@ const TaskPage = (props) => {
      */
     const groupByDate = (tasks) => { 
         const reduced = {}; 
-        tasks.forEach((task) => {(
-            reduced[task.taskDeadline] = reduced[task.taskDeadline] || [] ).push(task); 
+        tasks.forEach((task) => {
+            if (new Date() > new Date(task.taskDeadline) && !task.taskComplete) {
+                (reduced["overdue"] = reduced["overdue"] || []).push(task);
+            } else if (task.taskComplete) {
+                (reduced["complete"] = reduced["complete"] || []).push(task);
+            } else {
+                (reduced[task.taskDeadline] = reduced[task.taskDeadline] || []).push(task); 
+            }
         })
         return reduced;
     };
@@ -155,8 +161,14 @@ const TaskPage = (props) => {
     )};
     const groupByPriority = (tasks) => { 
         const reduced = {}; 
-        tasks.forEach((task) => {(
-            reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task); 
+        tasks.forEach((task) => {
+            if (new Date() > new Date(task.taskDeadline) && !task.taskComplete) {
+                (reduced["overdue"] = reduced["overdue"] || []).push(task);
+            } else if (task.taskComplete) {
+                (reduced["complete"] = reduced["complete"] || []).push(task);
+            } else {
+                (reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task); 
+            }
         })
         return reduced;
     };
@@ -171,7 +183,7 @@ const TaskPage = (props) => {
         setActiveSort("priority");
         sortByPriority(toSort);
         setTasksByGroup(groupByPriority(toSort));
-        
+        console.log(tasksByGroup);
     }
     const sortTypes = [
         {
@@ -196,7 +208,6 @@ const TaskPage = (props) => {
         };
         const fetchContacts = async () => {
             const ids = await ContactController.fetchContacts();
-			let activeCs = [];
             let cs =  [];
             if (ids !== undefined && ids.length > 0) {
                 for (const id of ids) {
@@ -234,15 +245,27 @@ const TaskPage = (props) => {
                     </div>
                 </div>
                 <div className="tasks-container">
-                    {Object.keys(tasksByGroup)
+                    {Object.keys(tasksByGroup).filter(key => key !== "complete")
                         .map(key => { 
                             return <TaskList 
                                 key={key}
                                 contacts={contacts}
                                 label={activeSort}
                                 tasks={tasksByGroup[key]}
-                                editOptions={{update: updateTask, delete: deleteTask}}/>
+                                editOptions={{update: updateTask, delete: deleteTask}}
+                                isComplete={false}
+                                isOverdue={key === "overdue"}/>
                                 })}
+                    {Object.keys(tasksByGroup).includes("complete") ? 
+                        <TaskList 
+                            key="complete"
+                            contacts={contacts}
+                            label={activeSort}
+                            tasks={tasksByGroup["complete"]}
+                            editOptions={{update: updateTask, delete: deleteTask}}
+                            isComplete={true}
+                            isOverdue={false}/>
+                        : ""}
                     {modalShow ? <AddTaskForm 
                         submit={addTask} 
                         show={modalShow} 
