@@ -2,6 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import TaskItem from './TaskItem';
 import "./Tasks.css";
+
+const priorities = {
+    "High": 1,
+    "Medium": 2,
+    "Low": 3,
+    "None": -1
+}
+
 const TaskList = ({tasks, contacts, label, editOptions}) => {
 
     const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -32,15 +40,15 @@ const TaskList = ({tasks, contacts, label, editOptions}) => {
             let date = new Date(tasks[0].taskDeadline).toLocaleDateString("en-US", options);
             return formatDate(date)
         } else if (label === "priority") {
-            return formatPriority(tasks[0].taskPriority);
+            return formatPriority(Object.entries(priorities).filter(p => p[1] === tasks[0].taskPriority)[0][0]);
         }
     }
     return (<div className="tasks-section-container">
         <div className="task-title">
-            <div className="task-date">{getLabel()}</div>
+            <div className="task-label">{getLabel()}</div>
         </div>
         {tasks.map(t => <TaskItem 
-            key={t.taskID} 
+            key={t.taskID}
             onUpdate={editOptions.update} 
             onDelete={editOptions.delete} 
             task={t}

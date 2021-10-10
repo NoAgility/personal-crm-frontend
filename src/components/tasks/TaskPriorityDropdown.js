@@ -1,5 +1,6 @@
 import { Dropdown } from 'react-bootstrap';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import "./TaskMisc.css";
 
 const priorities = {
     "High": 1,
@@ -7,11 +8,13 @@ const priorities = {
     "Low": 3,
     "None": -1
 }
-const TaskPriorityDropdown = ({change, defaultPriority}) => {
+const TaskPriorityDropdown = ({change, defaultPriority, owner}) => {
 
     const [priority, setPriority] = useState(Object.entries(priorities).filter(p => p[1] === defaultPriority)[0][0]);
-    return (<Dropdown className="d-inline mx-2">
-        <Dropdown.Toggle id="dropdown-autoclose-outside">
+    return (<Dropdown className="dropdown d-inline mx-2">
+
+        {owner ? <React.Fragment>
+            <Dropdown.Toggle id="dropdown-autoclose-outside">
             Priority: {priority}
         </Dropdown.Toggle>
 
@@ -28,6 +31,9 @@ const TaskPriorityDropdown = ({change, defaultPriority}) => {
                 </Dropdown.Item>
             )}
         </Dropdown.Menu>
+        </React.Fragment> : <div className="unselectable-input"><h5>Priority</h5> <div>{priority}</div></div>
+        }
+        
     </Dropdown>);
 }
 

@@ -105,6 +105,7 @@ const AddMeetingForm = ({submit, show, onHide}) => {
                         <TaskPriorityDropdown 
                             change={setTaskPriority} 
                             defaultPriority={taskPriority}
+                            owner={true}
                         />
                         <TaskContactDropdown 
                             contactItems={contacts} 

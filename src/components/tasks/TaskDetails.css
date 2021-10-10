@@ -2,7 +2,51 @@
 	display: flex;
 	flex-direction: row;
 	place-items: center;
+	min-width: 700px;
 	margin: 0px 25px 0px 25px;
+}
+.task-accordion {
+	width: 100%;
+}
+.accordion-header {
+	width: 100%;
+	border-radius: 10px;
+	background-color: var(--color-offwhite);
+}
+.accordion-header > button {
+	background-color: var(--color-offwhite);
+	color: var(--color-white);
+	cursor: pointer;
+}
+.accordion-header > button:focus {
+	outline: none;
+	box-shadow: none;
+}
+.accordion-body {
+	margin-bottom: 25px;
+}
+.task-notes-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+.add-note-btn{
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 2px;
+	border-color: var(--color-medium);
+	background-color: var(--color-medium);
+	color: var(--color-white);
+	height: 30px;
+	width: 60px;
+	outline:none;
+	cursor: pointer;
+	margin: 10px;
+	text-align: center;
+}
+.unselectable-task-priority {
+	background-color: var(--color-offwhite);
 }
 .task-details-top {
 	display: grid;
@@ -15,22 +59,25 @@
 }
 .task-notes-section {
 	border-radius: 10px;
-    background-color: var(--color-offwhite);
-    padding: 10px 5px 10px 5px;
+    background-color: var(--color-dark);
     overflow: auto;
-    max-height: 200px;
-	width: 230px;
+    max-height: 240px;
+}
+.task-details-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 .task-contact-container {
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
 	overflow: auto;
-	width: 40%;
+	width: 100%;
 	min-width: 160px;
 	max-height: 240px;
 	min-height: 200px;
-	background-color: var(--color-offwhite);
+	background-color: var(--color-dark);
 }
 .task-note-add {
 	display: flex;
@@ -39,17 +86,21 @@
 .task-details-left {
 	display: flex;
 	flex-direction: column;
+	width: 40%;
 }
 .task-details-middle {
-	margin-left: 50px;
+	margin-left: 25px;
+	margin-right: 25px;
+	width: 20%;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 .task-details-right {
 	display: flex;
 	flex-direction: column;
-	margin-left: 50px;
-	width: 50%;
+	width: 40%;
 }
 *::-webkit-scrollbar {
     width: 10px;
@@ -64,7 +115,7 @@
 	border-color: var(--color-medium);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-dark);
+    background: var(--color-xdark);
 }
 ::-webkit-scrollbar-corner {
     background: var(--color-dark);

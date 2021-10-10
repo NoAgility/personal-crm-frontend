@@ -10,9 +10,18 @@ const TaskController = {
      */
     fetchTasks: async () => {
         try {
-            const data = await SpringBootAdapterWrapper.get('/task/readTasks').then(res => { return res.data; } )
+            const data = await SpringBootAdapterWrapper.get('/task/readAllTasks').then(res => { return res.data; } )
                 .catch(err => { throw err; });
             return data;
+        } catch (err) {
+            alert("Failed to fetch tasks");
+        }
+    },
+    completeTask: async (task) => {
+        try {
+            const data = {"taskID": task.taskID}
+            const res = await SpringBootAdapterWrapper.post('/task/completeTask', "", data).then(res => { return res.data; } )
+                .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to fetch tasks");
         }

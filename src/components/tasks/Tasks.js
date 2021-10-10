@@ -32,7 +32,7 @@ const TaskPage = (props) => {
      * @param {*} changes The attributes that have changed
      */
     const updateTask = async (task, changes) => {
-        console.log(changes.taskContactIDsAdded);
+        console.log(changes);
         if (changes.taskName) {
             await TaskController.updateTaskName(task);
         }
@@ -66,6 +66,9 @@ const TaskPage = (props) => {
             for (var i = 0; i < changes.taskContactIDsRemoved.length; i++) {
                 await TaskController.deleteTaskContact(task, changes.taskContactIDsRemoved[i]);
             }
+        }
+        if (changes.taskComplete) {
+            await TaskController.completeTask(task);
         }
         getTasks();
     }

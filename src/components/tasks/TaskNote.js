@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MdDelete } from 'react-icons/md';
 import './TaskNote.css';
+
 const TaskNote = ({note, onChange, onDelete}) => {
 
     const [desc, setDesc] = useState(note.note);
