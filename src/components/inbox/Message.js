@@ -14,6 +14,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 	const [visibility, setVisibility] = useState('none');
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedMessage, setEditedMessage] = useState(message.messageText);
+	const isGroupChat = chat.chatParticipants.length > 2 ? true : false;
 
 	// flags a message as 'user' or 'contact'
 	const sender = () => {
@@ -85,6 +86,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 				{(message.accountID === parseInt(CookieManager.getCookie('accountID'))) ? overlay : <></>}
 			</div>
 			<div className={`message message-${sender()}`}>
+				{isGroupChat && message.accountID !== parseInt(CookieManager.getCookie('accountID')) ? <p>name</p> : <></> }
 				{isEditing ? editMessage : <h6 className="message-text">{editedMessage}</h6>}
 			</div>
 		</div>
