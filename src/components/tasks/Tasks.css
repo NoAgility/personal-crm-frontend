@@ -76,18 +76,6 @@
     width: 100%;
     margin-bottom: 20px;
 }
-
-.task-submit {
-    height: 40px;
-    width: 100px;
-    border: none;
-    background-color: var(--color-purple);
-    margin-right: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: var(--font);
-    color: var(--color-white);
-}
 .task-cancel {
     color: var(--color-white);
     box-shadow: 2px 2px var(--color-medium);
@@ -141,22 +129,6 @@
     margin-right: 5px;
     margin-bottom: 0;
     width: 100%;
-}
-.task-container-left {
-    display: flex;
-    justify-content: flex-start;
-    cursor: pointer;
-}
-.task {
-    color: var(--color-offwhite);
-    display: flex;
-    justify-content: space-between;
-    border-bottom: solid;
-    border-color: var(--color-offwhite);
-    border-width: 1px;
-    margin-bottom: 20px;
-    width: 100%;
-    
 }
 .task-add {
     border-top: solid;

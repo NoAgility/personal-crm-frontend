@@ -26,51 +26,48 @@ const TaskPage = (props) => {
         setActiveSort("priority"); 
         priorityGroupSort();
     };
+    
+    const completeTask = async(task) => {
+        await TaskController.completeTask(task);
+        getTasks();
+    }
     /**
      * Function for wrapping an update task call to the backend
      * @param {*} task The new task details
      * @param {*} changes The attributes that have changed
      */
+    
     const updateTask = async (task, changes) => {
-        console.log(changes);
+        var requests = []
         if (changes.taskName) {
-            await TaskController.updateTaskName(task);
+            requests.push(TaskController.updateTaskName(task));
         }
         if (changes.taskDeadline) {
-            await TaskController.updateTaskDeadline(task);
+            requests.push(TaskController.updateTaskDeadline(task));
         }
         if (changes.taskPriority) {
-            await TaskController.updatePriority(task);
+            requests.push(TaskController.updatePriority(task));
         }
         if (changes.taskNotesAdded.length > 0) {
-            for (var i = 0; i < changes.taskNotesAdded.length; i++) {
-                await TaskController.addTaskNote(changes.taskNotesAdded[i]);
-            }
+            changes.taskNotesAdded.forEach((i) => {requests.push(TaskController.addTaskNote(i))});
         }
         if (changes.taskNotesRemoved.length > 0) {
-            for (var i = 0; i < changes.taskNotesRemoved.length; i++) {
-                await TaskController.deleteTaskNote(changes.taskNotesRemoved[i]);
-            }
+            changes.taskNotesRemoved.forEach((i) => {requests.push(TaskController.deleteTaskNote(i))});
         }
         if (changes.taskNotesChanged.length > 0) {
-            for (var i = 0; i < changes.taskNotesChanged.length; i++) {
-                await TaskController.updateTaskNote(changes.taskNotesChanged[i]);
-            }
+            changes.taskNotesChanged.forEach((i) => {requests.push(TaskController.updateTaskNote(i))});
         }
         if (changes.taskContactIDsAdded.length > 0) {
-            for (var i = 0; i < changes.taskContactIDsAdded.length; i++) {
-                await TaskController.addTaskContact(task, changes.taskContactIDsAdded[i]);
-            }
+            changes.taskContactIDsAdded.forEach((i) => {requests.push(TaskController.addTaskContact(task, i))});
         }
         if (changes.taskContactIDsRemoved.length > 0) {
-            for (var i = 0; i < changes.taskContactIDsRemoved.length; i++) {
-                await TaskController.deleteTaskContact(task, changes.taskContactIDsRemoved[i]);
-            }
+            changes.taskContactIDsRemoved.forEach((i) => {requests.push(TaskController.deleteTaskContact(task, i))});
         }
         if (changes.taskComplete) {
-            await TaskController.completeTask(task);
+            requests.push(TaskController.completeTask(task));
         }
-        getTasks();
+        await Promise.all(requests).then(() => {getTasks();});
+        
     }
     
     
@@ -126,10 +123,12 @@ const TaskPage = (props) => {
     const groupByDate = (tasks) => { 
         const reduced = {}; 
         tasks.forEach((task) => {
-            if (new Date() > new Date(task.taskDeadline) && !task.taskComplete) {
-                (reduced["overdue"] = reduced["overdue"] || []).push(task);
-            } else if (task.taskComplete) {
+            if (task.taskComplete) {
                 (reduced["complete"] = reduced["complete"] || []).push(task);
+            } else if (!task.taskDeadline) {
+                (reduced["no-deadline"] = reduced["no-deadline"] || []).push(task);
+            } else if (new Date() > new Date(task.taskDeadline) && !task.taskComplete) {
+                (reduced["overdue"] = reduced["overdue"] || []).push(task);
             } else {
                 (reduced[task.taskDeadline] = reduced[task.taskDeadline] || []).push(task); 
             }
@@ -162,9 +161,7 @@ const TaskPage = (props) => {
     const groupByPriority = (tasks) => { 
         const reduced = {}; 
         tasks.forEach((task) => {
-            if (new Date() > new Date(task.taskDeadline) && !task.taskComplete) {
-                (reduced["overdue"] = reduced["overdue"] || []).push(task);
-            } else if (task.taskComplete) {
+            if (task.taskComplete) {
                 (reduced["complete"] = reduced["complete"] || []).push(task);
             } else {
                 (reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task); 
@@ -183,7 +180,6 @@ const TaskPage = (props) => {
         setActiveSort("priority");
         sortByPriority(toSort);
         setTasksByGroup(groupByPriority(toSort));
-        console.log(tasksByGroup);
     }
     const sortTypes = [
         {
@@ -252,7 +248,7 @@ const TaskPage = (props) => {
                                 contacts={contacts}
                                 label={activeSort}
                                 tasks={tasksByGroup[key]}
-                                editOptions={{update: updateTask, delete: deleteTask}}
+                                editOptions={{update: updateTask, delete: deleteTask, complete: completeTask}}
                                 isComplete={false}
                                 isOverdue={key === "overdue"}/>
                                 })}
@@ -262,7 +258,7 @@ const TaskPage = (props) => {
                             contacts={contacts}
                             label={activeSort}
                             tasks={tasksByGroup["complete"]}
-                            editOptions={{update: updateTask, delete: deleteTask}}
+                            editOptions={{update: updateTask, delete: deleteTask, complete: completeTask}}
                             isComplete={true}
                             isOverdue={false}/>
                         : ""}

@@ -69,6 +69,7 @@ input::placeholder {
 .register {
 	background-color: var(--color-medium);
 	color: var(--color-white);
+	cursor: pointer;
 }
 
 .show-hide-icon {

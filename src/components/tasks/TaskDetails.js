@@ -106,7 +106,7 @@ const TaskDetails = ({task, contacts, show, onHide, onUpdate}) => {
 		await onUpdateWrapper({taskComplete: true})
 		
 	}
-	const onUpdateWrapper = ({taskComplete}) => {
+	const onUpdateWrapper = (taskComplete) => {
 		const newTask = {}; //
 		Object.assign(newTask, task);
 
@@ -132,6 +132,8 @@ const TaskDetails = ({task, contacts, show, onHide, onUpdate}) => {
 	}
 
 	useEffect(() => {
+		setTaskPriority(task.taskPriority);
+		setTaskDeadline(dateFormat(new Date(task.taskDeadline)));
 		setAvailableContacts(contacts);
 		setNotes(task.taskNoteList);
 		setContactIDsSelected(task.taskContactAccounts.map((c) => c.contactID));
@@ -140,7 +142,7 @@ const TaskDetails = ({task, contacts, show, onHide, onUpdate}) => {
 		<>
 		<Modal
 			show={show}
-			onHide={handleClose}
+			onHide={onHide}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
@@ -149,34 +151,41 @@ const TaskDetails = ({task, contacts, show, onHide, onUpdate}) => {
 			</div>
 			<h1>{task.taskName}</h1>
 			<Modal.Body className="task-details">
+				<h1>Task Details</h1>
 			<Accordion className="task-accordion" defaultActiveKey="0">
 				<Accordion.Item eventKey="0">
-					<Accordion.Header className="accordion-header">Task Details</Accordion.Header>
+					<Accordion.Header className="accordion-header">Basic Details</Accordion.Header>
 					<Accordion.Body>
 						<div className="task-details-section">
-					<TaskPriorityDropdown 
-					change={(p) => {
-						setTaskPriority(p); 
-						setTaskPriorityChanged(true);
-					}} 
-					defaultPriority={taskPriority}
-					owner={task.owner}
-				/>
-				{task.owner ? 
-				<label className="form-label super-center">
-					Deadline
-
-					<input className="form-date-input" 
-						type="date" 
-						value={taskDeadline || "" } 
-						onChange={(e) => {
-							setTaskDeadline(e.target.value);
-							setTaskDeadlineChanged(true);
-						}}
-					/> 
-				{!taskComplete ? <button type="checkbox" onClick={completeTask}>Complete Task</button> : <div>Task Completed</div>}
-				</label> : <div className="unselectable-input"><h5>Deadline</h5> <div>{taskDeadline || "No Deadline"}</div></div>}
-				</div>
+							<TaskPriorityDropdown 
+								change={(p) => {
+									setTaskPriority(p); 
+									setTaskPriorityChanged(true);
+								}} 
+								defaultPriority={taskPriority}
+								owner={task.owner}
+							/>
+							{task.owner ? 
+							<label className="form-label super-center">
+								Deadline
+								<input className="form-date-input" 
+									type="date" 
+									value={taskDeadline || "" } 
+									onChange={(e) => {
+										setTaskDeadline(e.target.value);
+										setTaskDeadlineChanged(true);
+									}}
+								/> 
+							</label> : 
+							<div className="unselectable-input">
+								<h5>Deadline</h5> 
+								<div>
+									{taskDeadline || "No Deadline"}
+								</div>
+							</div>
+							}
+							{!taskComplete ? <button type="checkbox" className="task-complete-btn" onClick={completeTask}>Complete Task</button> : <div>Task Completed</div>}
+						</div>
 					</Accordion.Body>
 				</Accordion.Item>
 				<Accordion.Item eventKey="1">

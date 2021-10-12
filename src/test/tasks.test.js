@@ -36,7 +36,7 @@ test("Unit Test - TasksPage Component renders", async () => {
     await waitFor(() => expect(createTaskButton).not.toBeNull());
 });
 test("Unit Test - TaskList, TaskItem Component renders", async () => {
-    const { container } = render(<TaskList tasks={[{taskName: "Test Task", taskDeadline: new Date(), taskContactAccounts: []}]} label={"date"} editOptions={{update: jest.fn(), delete: jest.fn()}}/>);
+    const { container } = render(<TaskList tasks={[{taskName: "Test Task", taskPriority: -1, taskDeadline: new Date(), taskContactAccounts: [], taskNoteList: []}]} label={"date"} editOptions={{update: jest.fn(), delete: jest.fn()}}/>);
     await waitFor(() => expect(container).toHaveTextContent("Test Task"));
     await waitFor(() => expect(container).toHaveTextContent("Today"));
 });
@@ -115,13 +115,10 @@ test("ETE Test - Register -> Login -> Create Task -> See Task", async () => {
         fireEvent.click(addTaskBtn);
 
         const taskNameInput = getByPlaceholderText("Task Name");
-        const taskPriorityInput = getByPlaceholderText("Priority");
 
         fireEvent.change(taskNameInput, {target: {value: "Task 1"}});
-        fireEvent.change(taskPriorityInput, {target: {value: "2"}});
 
         await waitFor(() => expect(taskNameInput).toHaveValue("Task 1"));
-        await waitFor(() => expect(taskPriorityInput).toHaveValue(2));
 
         const taskSubmit = container.querySelector(".task-submit");
         await waitFor(() => expect(taskSubmit).not.toBeNull());
@@ -205,13 +202,10 @@ test("ETE - Register -> Login -> Create Task -> See Task -> Delete Task", async 
         fireEvent.click(addTaskBtn);
 
         const taskNameInput = getByPlaceholderText("Task Name");
-        const taskPriorityInput = getByPlaceholderText("Priority");
 
         fireEvent.change(taskNameInput, {target: {value: "Task 1"}});
-        fireEvent.change(taskPriorityInput, {target: {value: "2"}});
 
         await waitFor(() => expect(taskNameInput).toHaveValue("Task 1"));
-        await waitFor(() => expect(taskPriorityInput).toHaveValue(2));
 
         const taskSubmit = container.querySelector(".task-submit");
         await waitFor(() => expect(taskSubmit).not.toBeNull());

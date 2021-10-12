@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TaskItem from './TaskItem';
 import "./Tasks.css";
 
@@ -13,7 +13,6 @@ const priorities = {
 const TaskList = ({tasks, contacts, label, editOptions, isComplete, isOverdue}) => {
 
     const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-    
     /**
      * Date formatter to change the date to an alias, eg. Today
      * @param {*} date The date to be formatted
@@ -54,6 +53,7 @@ const TaskList = ({tasks, contacts, label, editOptions, isComplete, isOverdue}) 
             key={t.taskID}
             onUpdate={editOptions.update} 
             onDelete={editOptions.delete} 
+            onComplete={editOptions.complete}
             task={t}
             contacts={contacts}
             />)}
