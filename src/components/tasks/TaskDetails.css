@@ -8,6 +8,9 @@
 .task-accordion {
 	width: 100%;
 }
+.modal-content {
+    width: fit-content;
+}
 .accordion-header {
 	width: 100%;
 	border-radius: 10px;
@@ -22,14 +25,27 @@
 	outline: none;
 	box-shadow: none;
 }
-.accordion-body {
-	margin-bottom: 25px;
-}
 .task-notes-header {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
+}
+.task-contact-owner {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	font-size: var(--text-msmall);
+}
+.task-contact-owner > svg {
+	width: 20px;
+	height: 20px;
+}
+.edit-task-name-btn {
+	margin: 5px;
+	size: 32px;
+	width: 20px;
+	height: 20px;
 }
 .add-note-btn{
 	border-radius: 10px;
@@ -64,7 +80,6 @@
 .task-details-bottom {
 	display: grid;
 	place-items: center;
-	margin-bottom: 20px;
 }
 .task-notes-section {
 	border-radius: 10px;
@@ -89,28 +104,22 @@
 	min-height: 200px;
 	background-color: var(--color-dark);
 }
+.task-contact-viewer-list {
+	list-style: none;
+	padding-left: 0px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	width: 90%;
+	min-width: 160px;
+	max-height: 240px;
+	min-height: 200px;
+	background-color: var(--color-dark);
+}
 .task-note-add {
 	display: flex;
 	justify-content: flex-end;
-}
-.task-details-left {
-	display: flex;
-	flex-direction: column;
-	width: 40%;
-}
-.task-details-middle {
-	margin-left: 25px;
-	margin-right: 25px;
-	width: 20%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-}
-.task-details-right {
-	display: flex;
-	flex-direction: column;
-	width: 40%;
 }
 .task-submit {
     height: 40px;
@@ -122,6 +131,35 @@
     cursor: pointer;
     font-family: var(--font);
     color: var(--color-white);
+}
+.task-name {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.task-name-h1 {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0px;
+}
+.task-name-input {
+	overflow: auto;
+	max-width: 80%;
+	background-color: var(--color-medium);
+	border-radius: 5px;
+	color: var(--color-white);
+	text-align: center;
+	font-size: var(--text-big);
+  	font-weight: bold;
+}
+.task-contact-search-bar {
+	height: 40px;
+}
+.task-section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-height: 50px;
 }
 *::-webkit-scrollbar {
     width: 10px;

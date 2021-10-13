@@ -61,8 +61,19 @@
 .box-sm {
 	width: 250px;
 }
+.box-xsm {
+	display: flex;
+	align-items: center;
+	width: 250px;
+	height: 40px;
+}
 
 .search-sm {
 	width: 150px;
+	font-size: var(--text-xsmall);
+}
+.search-xsm {
+	width: 150px;
+	height: 25px;
 	font-size: var(--text-xsmall);
 }

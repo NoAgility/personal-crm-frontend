@@ -20,7 +20,9 @@ const TaskNote = ({note, onChange, onDelete}) => {
                     onChange(note);
                     setChanged(true);
                 }
-            }}>
+            }}
+            maxLength="500"
+            >
 
         </textarea>
         <MdDelete className="task-note-delete" onClick={() => {onDelete(note);}}/>

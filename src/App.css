@@ -108,3 +108,10 @@ button {
     padding-bottom: 0px;
     margin-top: 80px;
 }
+.divider {
+  border-top: 3px solid var(--color-offwhite);
+  border-radius: 5px;
+}
+.dropdown-item {
+  cursor: pointer;
+}

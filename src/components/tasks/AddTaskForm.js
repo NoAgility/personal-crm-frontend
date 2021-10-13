@@ -2,10 +2,10 @@ import React, { useState, useEffect, componentDidMount } from 'react';
 import "./Tasks.css";
 import "../form.css";
 import { MdClose } from 'react-icons/md';
-import TaskController from './TaskController';
-import { Modal } from 'react-bootstrap';
-import TaskContactDropdown from './TaskContactDropdown';
+import { Modal, Accordion } from 'react-bootstrap';
+import "./AddTaskForm.css";
 import ContactController from '../contacts/ContactController';
+import ContactMenuItem from './ContactMenuItem';
 import TaskPriorityDropdown from './TaskPriorityDropdown';
 const AddMeetingForm = ({submit, show, onHide}) => {
 
@@ -80,48 +80,68 @@ const AddMeetingForm = ({submit, show, onHide}) => {
             <div className="close-add-form">
 				<MdClose className="close-button" onClick={handleClose} size={30}/>
 			</div>
-            <Modal.Body>
-
+            <Modal.Body className="task-add">
                 <h1>Add a Task</h1>
-            
-                <div className="add-form">
-                    <form className="form-container">
-                        <input 
-                            type="text" 
-                            className="form-input" 
-                            value={taskName} 
-                            placeholder="Task Name" 
-                            onChange={event => setTaskName(event.target.value)}
-                        />
-                        <label className="task-form-label">
-                            Deadline
+                <Accordion className="task-accordion" defaultActiveKey="0">
+				<Accordion.Item eventKey="0">
+					<Accordion.Header className="accordion-header">Basic Details</Accordion.Header>
+					<Accordion.Body>
+						<div className="task-details-section">
                             <input 
-                                className="form-date-input" 
-                                type="date" 
-                                value={taskDate} 
-                                onChange={event => setTaskDate(event.target.value)}
+                                type="text" 
+                                className="form-input" 
+                                value={taskName} 
+                                placeholder="Task Name" 
+                                onChange={event => setTaskName(event.target.value)}
                             />
-                        </label>
-                        <TaskPriorityDropdown 
-                            change={setTaskPriority} 
-                            defaultPriority={taskPriority}
-                            owner={true}
-                        />
-                        <TaskContactDropdown 
-                            contactItems={contacts} 
-                            add={addContactSelection} 
-                            remove={removeContactSelection}/>
-                        <button 
-                            className="task-submit" 
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onHide();
-                                submit({taskName: taskName, taskPriority: taskPriority, taskDeadline: taskDate, contactIDs: selectedContactIDs})
-                                }}>
-                            Submit
-                        </button>
-                    </form>
-                </div>
+                            <div className="divider"/>
+                            <TaskPriorityDropdown 
+                                change={setTaskPriority} 
+                                defaultPriority={taskPriority}
+                                owner={true}
+                            />
+							<label className="form-label super-center">
+								Deadline
+								<input 
+                                    className="form-date-input" 
+                                    type="date" 
+                                    value={taskDate} 
+                                    onChange={event => setTaskDate(event.target.value)}
+                                />
+							</label>
+						</div>
+					</Accordion.Body>
+				</Accordion.Item>
+				<Accordion.Item eventKey="1">
+					<Accordion.Header className="accordion-header">Contacts</Accordion.Header>
+					<Accordion.Body>
+					<div className="accordion-body">
+
+							<div className="task-contact-container">
+                                {contacts.length > 0 ? contacts.map(contact => 
+									<ContactMenuItem
+										key={contact.accountID}
+										contactItem={contact} 
+										add={addContactSelection} 
+                                        remove={removeContactSelection}
+                                    />)
+                                : <h5>No Contacts Available</h5>}
+								
+							</div>
+						</div>
+                        
+					</Accordion.Body>
+				</Accordion.Item>
+			</Accordion>
+            <button 
+                className="task-submit" 
+                onClick={(e) => {
+                    e.preventDefault();
+                    onHide();
+                    submit({taskName: taskName, taskPriority: taskPriority, taskDeadline: taskDate, contactIDs: selectedContactIDs})
+                    }}>
+                Submit
+            </button>
             </Modal.Body>
         </Modal>
     )

@@ -62,10 +62,10 @@ const TaskController = {
      * Updates a task name for a user
      * @param {*} task The task to be updated
      */
-    updateTaskName: async (task) => {
+    updateTaskName: async (task, newName) => {
         try {
-            const data = { "taskID" : task.taskID, "newTaskName": task.taskName };
-            await SpringBootAdapterWrapper.post('/task/updateTaskNote', "",  data).then(res => { return res.data; } )
+            const data = { "taskID" : task.taskID, "newTaskName": newName };
+            await SpringBootAdapterWrapper.post('/task/updateTask', "",  data).then(res => { return res.data; } )
                 .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to update task note");

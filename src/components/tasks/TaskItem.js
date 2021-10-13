@@ -13,11 +13,12 @@ const prioritiesColorMap = {
     "-1": "purple-circle"
 }
 
-const TaskItem = ({task, contacts, onUpdate, onDelete, onComplete}) => {
+const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, searchContact}) => {
     const [modalShow, setModalShow] = useState(false);
     const [completeConfirmShow, setCompleteConfirmShow] = useState(false);
     const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
     const priority = Object.entries(prioritiesColorMap).filter(p => p[0] === task.taskPriority.toString())[0][0]
+
     return <div className="task">
         <Confirmation
             show={completeConfirmShow}
@@ -34,9 +35,11 @@ const TaskItem = ({task, contacts, onUpdate, onDelete, onComplete}) => {
         <TaskDetails 
             task={task}
             contacts={contacts}
+            allContacts={allContacts}
             show={modalShow}
             onUpdate={onUpdate}
-			onHide={() => {setModalShow(false);}}/>
+			onHide={() => {setModalShow(false);}}
+            searchContact={searchContact}/>
             <span className={prioritiesColorMap[priority]} onClick={() => { task.taskComplete || setCompleteConfirmShow(true)}}>{task.taskComplete ? <MdCheck className="tick-icon"/> : ""}</span>
         <div className="task-container-left" >
             <div className="task-name" onClick={() => {if (!modalShow) setModalShow(true)}}>

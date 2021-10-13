@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MdAdd } from 'react-icons/md';
 import AddTaskForm from './AddTaskForm';
 import TaskController from './TaskController';
@@ -9,11 +9,13 @@ import "./Tasks.css";
 import Sort from '../UIComponents/sort/Sort.js';
 const TaskPage = (props) => {
 
+    const didMount = useRef(false);
     const [modalShow, setModalShow] = useState(false);
 
     const openModal = () => {setModalShow(true)};
     const hideModal = () => {setModalShow(false)};
     const [contacts, setContacts] = useState([]);
+    const [allContacts, setAllContacts] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [tasksByGroup, setTasksByGroup] = useState([]);
     const [activeSort, setActiveSort] = useState("date");
@@ -40,7 +42,7 @@ const TaskPage = (props) => {
     const updateTask = async (task, changes) => {
         var requests = []
         if (changes.taskName) {
-            requests.push(TaskController.updateTaskName(task));
+            requests.push(TaskController.updateTaskName(task, changes.taskName));
         }
         if (changes.taskDeadline) {
             requests.push(TaskController.updateTaskDeadline(task));
@@ -192,18 +194,29 @@ const TaskPage = (props) => {
         }
     ]
     /**
+     * Method for caching contacts so TaskDetails does not need to query backend API each task.
+     * @param {String} contactID The contactID to be added
+     */
+    const insertContact = (contactID) => {
+        ContactController.fetchContactData(contactID).then((contactData) => {
+            setContacts([...contacts, contactData]);
+        });
+    }
+    /**
      * On render, fetch existing tasks to display to the user.
      */
     useEffect(() => {
-        const fetchTasks = async () => {
+        const promises = [];
+        const fetchTasks = async (promises) => {
             const data = await TaskController.fetchTasks();
             setTasks(data);
             if (data === undefined || data.length === 0) return;
 
             dateGroupSortAlt(data);
         };
-        const fetchContacts = async () => {
+        const fetchContacts = async (promises) => {
             const ids = await ContactController.fetchContacts();
+            
             let cs =  [];
             if (ids !== undefined && ids.length > 0) {
                 for (const id of ids) {
@@ -219,10 +232,44 @@ const TaskPage = (props) => {
             sortByDate(data);
             setTasksByGroup(groupByDate(data));
         }
-        fetchTasks();
-        fetchContacts();
+        
+        //Fetch contacts first for 2nd Degree contact search to not cause concurrency issues.
+        fetchContacts().then(() => fetchTasks());
     }, []);
-    
+
+    /**
+     * Add an event listener to tasks so when fetchTasks is called or changes to the task objects,
+     * fetch 2nd degree contacts and update contacts array accordingly
+     * 
+     * This way, 2nd degree contacts will also show up in the task participants.
+     */
+    useEffect(() => {
+        const checkAllContacts = async () => {
+            //Filter out duplicate fetches
+            const uniqueContacts = (contacts) => {
+                var seen = {};
+                return contacts.filter((contact) => {
+                    return seen.hasOwnProperty(contact.accountID) ? false : (seen[contact.accountID] = true);
+                });
+            }
+            let cs = [];
+            let promises = [];
+            for (const task of tasks) {
+                for (const contact of task.taskContactAccounts) {
+                    promises.push(ContactController.fetchContactData({contactID: contact.contactID}).then(res => cs.push(res)));
+                }
+                promises.push(ContactController.fetchContactData({contactID: task.accountID}).then(res => cs.push(res)));
+            }
+            
+            //Combine 2nd degree contacts with first degree contacts for them to show up in task details.
+            Promise.all(promises).then(() => {setAllContacts(uniqueContacts(cs))});
+        }
+        checkAllContacts();
+    }, [tasks]);
+
+    if (allContacts === undefined) {
+        return null;
+    }
     return (<React.Fragment>
             <div className="tasks-page">
                 <div className="tasks-header">
@@ -246,9 +293,10 @@ const TaskPage = (props) => {
                             return <TaskList 
                                 key={key}
                                 contacts={contacts}
+                                allContacts={allContacts}
                                 label={activeSort}
                                 tasks={tasksByGroup[key]}
-                                editOptions={{update: updateTask, delete: deleteTask, complete: completeTask}}
+                                editOptions={{update: updateTask, delete: deleteTask, complete: completeTask, searchContact: insertContact}}
                                 isComplete={false}
                                 isOverdue={key === "overdue"}/>
                                 })}
@@ -256,9 +304,10 @@ const TaskPage = (props) => {
                         <TaskList 
                             key="complete"
                             contacts={contacts}
+                            allContacts={allContacts}
                             label={activeSort}
                             tasks={tasksByGroup["complete"]}
-                            editOptions={{update: updateTask, delete: deleteTask, complete: completeTask}}
+                            editOptions={{update: updateTask, delete: deleteTask, complete: completeTask, searchContact: insertContact}}
                             isComplete={true}
                             isOverdue={false}/>
                         : ""}

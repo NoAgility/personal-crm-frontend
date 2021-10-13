@@ -10,7 +10,7 @@ const priorities = {
     "None": -1
 }
 
-const TaskList = ({tasks, contacts, label, editOptions, isComplete, isOverdue}) => {
+const TaskList = ({tasks, contacts, allContacts, label, editOptions, isComplete, isOverdue}) => {
 
     const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
     /**
@@ -54,8 +54,10 @@ const TaskList = ({tasks, contacts, label, editOptions, isComplete, isOverdue}) 
             onUpdate={editOptions.update} 
             onDelete={editOptions.delete} 
             onComplete={editOptions.complete}
+            searchContact={editOptions.searchContact}
             task={t}
             contacts={contacts}
+            allContacts={allContacts || []}
             />)}
     </div>)
 }
