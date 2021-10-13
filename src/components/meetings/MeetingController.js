@@ -10,68 +10,9 @@ const MeetingController = {
      */
     fetchMeetings: async () => {
         try {
-            // const data = await SpringBootAdapterWrapper.get('/meeting/getAccountMeetings')
-			// 	.then(res => { return res.data; } )
-            //     .catch(err => { throw err; });
-            // return data;
-            const data = [{
-                "meetingID": 1,
-                "meetingCreator": 1,
-                "meetingName": "Example meeting",
-                "meetingDescription": "Example description",
-                "meetingStart": "2021-12-20 04:30:00",
-                "meetingEnd": "2021-12-20 04:30:00",
-                "meetingParticipants": [1, 2],
-                "meetingMinutes": [
-                    {
-                        "meetingID": 1,
-                        "accountID": 1,
-                        "minuteID": 1,
-                        "minuteTime": "2021-12-20 04:30:00",
-                        "minuteText": "Example minute"
-                    }
-                ],
-                "meetingAccepted": true
-            },
-            {
-                "meetingID": 2,
-                "meetingCreator": 1,
-                "meetingName": "Other meeting",
-                "meetingDescription": "Example description",
-                "meetingStart": "2021-12-20 04:30:00",
-                "meetingEnd": "2021-12-20 04:30:00",
-                "meetingParticipants": [1, 3],
-                "meetingMinutes": [
-                    {
-                        "meetingID": 1,
-                        "accountID": 1,
-                        "minuteID": 1,
-                        "minuteTime": "2021-12-20 04:30:00",
-                        "minuteText": "Example minute"
-                    }
-                ],
-                "meetingAccepted": true
-            },
-            {
-                "meetingID": 3,
-                "meetingCreator": 1,
-                "meetingName": "Other meeting",
-                "meetingDescription": "Example description",
-                "meetingStart": "2021-12-20 04:30:00",
-                "meetingEnd": "2021-12-20 04:30:00",
-                "meetingParticipants": [1, 2],
-                "meetingMinutes": [
-                    {
-                        "meetingID": 1,
-                        "accountID": 1,
-                        "minuteID": 1,
-                        "minuteTime": "2021-12-20 04:30:00",
-                        "minuteText": "Example minute"
-                    }
-                ],
-                "meetingAccepted": false
-            }
-            ]
+            const data = await SpringBootAdapterWrapper.get('/meeting/getAccountMeetings')
+				.then(res => { return res.data; } )
+                .catch(err => { throw err; });
             return data;
         } catch (err) {
             alert("Failed to fetch meetings");
@@ -100,7 +41,7 @@ const MeetingController = {
     addMeeting: async (meeting) => {
         try {
             const data = {
-                "accountIDs": meeting.contactIDs.length !== 0 ? meeting.contactIDs : [],
+                "accountIDs": meeting.accountIDs.length !== 0 ? meeting.accountIDs : [],
                 "meetingName": meeting.meetingName,
                 "meetingDescription": meeting.meetingDescription,
                 "meetingStart": meeting.meetingStart,
@@ -133,10 +74,10 @@ const MeetingController = {
     },
 
 	/**
-     * Updates a meeting
-     * @param {*} meeting The meeting to be updated
+     * Edits a meeting
+     * @param {*} meeting The meeting to be edited
      */
-	 updateMeeting: async (meeting) => {
+	 editMeeting: async (meeting) => {
         try {
             const data = {
                 "accountIDs": meeting.contactIDs.length !== 0 ? meeting.contactIDs : [],
@@ -144,9 +85,6 @@ const MeetingController = {
                 "meetingDescription": meeting.meetingDescription,
                 "meetingStart": meeting.meetingStart,
                 "meetingEnd": meeting.meetingEnd,
-                // "meetingMinutes": meeting.meetingMinutes,
-                // ...(meeting.meetingDeadline !== null) && {"deadline": meeting.meetingDeadline},
-                // ...(meeting.meetingPriority !== null && meeting.meetingPriority.length > 0) && {"priority": parseInt(meeting.meetingPriority)},
             }
             await SpringBootAdapterWrapper.post('/meeting/editMeeting', "",  data)
 				.then(res => { return res.data; } )
@@ -162,7 +100,7 @@ const MeetingController = {
      * @param {*} meeting The meeting to receive minutes
      * @param {*} minutes The meeting minutes to be added
      */
-	 addMinutes: async (meeting, minuteText) => {
+	 addMinute: async (meeting, minuteText) => {
         try {
             const data = {
 				"meetingID" : meeting.meetingID,
@@ -179,13 +117,13 @@ const MeetingController = {
 	/**
      * Delete meeting minutes for a meeting
      * @param {*} meeting The meeting to delete minutes from
-     * @param {*} minuteID The meeting minutes ID to be deleted
+     * @param {*} minute The meeting minutes to be deleted
      */
-	 deleteMinutes: async (meeting, minuteID) => {
+	 deleteMinute: async (meeting, minute) => {
         try {
             const data = {
 				"meetingID" : meeting.meetingID,
-				"minuteID" : minuteID
+				"minuteID" : minute.minuteID
 			};
             await SpringBootAdapterWrapper.post('/meeting/deleteMinute', "",  data)
 				.then(res => { return res.data; } )
@@ -198,15 +136,14 @@ const MeetingController = {
 	/**
      * Edit meeting minutes for a meeting
      * @param {*} meeting The meeting to edit minutes from
-     * @param {*} minuteID The meeting minutes ID to be edited
-     * @param {*} minuteText The updated meeting mintues
+     * @param {*} minute The meeting minutes to be edited
      */
-	 editMinutes: async (meeting, minuteID, minuteText) => {
+	 editMinute: async (meeting, minute) => {
         try {
             const data = {
 				"meetingID" : meeting.meetingID,
-				"minuteID" : minuteID,
-				"minuteText" : minuteText
+				"minuteID" : minute.minuteID,
+				"minuteText" : minute.minuteText
 			};
             await SpringBootAdapterWrapper.post('/meeting/editMinute', "",  data)
 				.then(res => { return res.data; } )
@@ -218,12 +155,12 @@ const MeetingController = {
 
     /**
      * Accepts an invitation to a meeting
-     * @param {*} meetingID The meeting to be updated
+     * @param {*} meeting The meeting to be accepted
      */
-	 acceptMeetingInvite: async (meetingID) => {
+	 acceptMeetingInvite: async (meeting) => {
         try {
             const data = {
-                "meetingID": meetingID,
+                "meetingID": meeting.meetingID,
             }
             await SpringBootAdapterWrapper.post('/meeting/acceptMeeting', "",  data)
 				.then(res => { return res.data; } )
@@ -234,13 +171,13 @@ const MeetingController = {
     },
 
 	/**
-     * Accepts an invitation to a meeting
-     * @param {*} meetingID The meeting to be updated
+     * Declines an invitation to a meeting
+     * @param {*} meeting The meeting to be declined
      */
-	 declineMeetingInvite: async (meetingID) => {
+	 declineMeetingInvite: async (meeting) => {
         try {
             const data = {
-                "meetingID": meetingID,
+                "meetingID": meeting.meetingID,
             }
             await SpringBootAdapterWrapper.post('/meeting/declineMeeting', "",  data)
 				.then(res => { return res.data; } )
