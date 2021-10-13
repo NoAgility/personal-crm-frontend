@@ -223,7 +223,13 @@ test("ETE - Register -> Login -> Create Task -> See Task -> Delete Task", async 
         await waitFor(() => expect(taskDelete).not.toBeNull());
 
         fireEvent.click(taskDelete);
-        await new Promise(r => setTimeout(r, 2000));
+
+        await new Promise(r => setTimeout(r, 1000));
+        const confirmationAccept = container.querySelector(".confirmation-accept");
+        await waitFor(() => expect(confirmationAccept).not.toBeNull());
+
+        fireEvent.click(confirmationAccept);
+        await new Promise(r => setTimeout(r, 1000));
         const task = container.querySelector(".task");
 
         await waitFor(() => expect(task).toBeNull());

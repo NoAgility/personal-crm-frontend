@@ -36,14 +36,14 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 	// A popover component containing the options to edit and delete a message
 	const popover = (props) => (
 		<Popover {...props} id="popover-basic">
-			<Popover.Content>
+			<Popover.Body>
 				<button className='message-options-btn' onClick={() => {setIsEditing(true)}}>
 					Edit
 				</button>
 				<button className='message-options-btn' onClick={() => {onDelete(chat, message)}}>
 					Delete
 				</button>
-			</Popover.Content>
+			</Popover.Body>
 		</Popover>
 	);
 
