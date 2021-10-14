@@ -1,12 +1,15 @@
 
 
 .calendar {
-    height: calc(100%-130px);
+    display:grid;
+    height: 100%;
     width: 100%;
     color: #ffffff;
-    z-index: -1;
+    z-index: 1;
 }
-
+.fc .fc-scrollgrid-section-body table {
+    height: 79vh !important;
+}
 .mini-menu {
     z-index: 3;
     position: absolute;
