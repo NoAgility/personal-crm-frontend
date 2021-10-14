@@ -7,6 +7,7 @@ import "./AddTaskForm.css";
 import ContactController from '../contacts/ContactController';
 import ContactMenuItem from './ContactMenuItem';
 import TaskPriorityDropdown from './TaskPriorityDropdown';
+import SearchBar from '../UIComponents/searchbar/SearchBar';
 const AddMeetingForm = ({submit, show, onHide}) => {
 
     const [taskName, setTaskName] = useState("");
@@ -14,7 +15,9 @@ const AddMeetingForm = ({submit, show, onHide}) => {
     const [taskDate, setTaskDate] = useState("");
     const [contacts, setContacts] = useState([]);
     const [selectedContactIDs, setSelectedContactIDs] = useState([]);
+    const [filteredAvailableContacts, setFilteredAvailableContacts] = useState([]);
 
+    const [searchBarInput, setSearchBarInput] = useState("");
     /**
      * Function to add contact to selection
      * @param {*} contact The contact to be added
@@ -42,15 +45,15 @@ const AddMeetingForm = ({submit, show, onHide}) => {
 		onHide();
 	};
 
-    //For Firefox (64.0) users
-    const preventNonNumericalInput = (e) => {
-        e = e || window.event;
-        var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
-        var charStr = String.fromCharCode(charCode);
-
-        if (!charStr.match(/^[0-9]+$/))
-            e.preventDefault();
-    }
+    const changeContactSearchFilter = (filter) => {
+		setSearchBarInput(filter);
+		if (filter === null || filter.length === 0) {
+			setFilteredAvailableContacts(contacts);
+		} else {
+			setFilteredAvailableContacts(contacts.filter((contact) => contact.accountName.includes(filter)));
+			
+		}
+	}
     /**
      * On render, load contacts for them to be addable to the form
      */
@@ -65,6 +68,7 @@ const AddMeetingForm = ({submit, show, onHide}) => {
                     cs.push(contactData);
                 }
                 setContacts(cs);
+                setFilteredAvailableContacts(cs);
             }
         }
         
@@ -116,9 +120,19 @@ const AddMeetingForm = ({submit, show, onHide}) => {
 					<Accordion.Header className="accordion-header">Contacts</Accordion.Header>
 					<Accordion.Body>
 					<div className="accordion-body">
-
-							<div className="task-contact-container">
-                                {contacts.length > 0 ? contacts.map(contact => 
+						<div className="task-contact-container">
+                            <div className="task-section-header"><h5>Add or remove a contact</h5>
+                            
+                            <SearchBar 
+                                name="contact" 
+                                width="xsm" 
+                                colorMode="light" 
+                                onSubmit={(e) => { e.preventDefault();}} 
+                                value={searchBarInput} 
+                                placeHolder="Contact Name" 
+                                onChange={(e) => { changeContactSearchFilter(e.target.value);}}/>
+                            </div>
+                                {contacts.length > 0 ? filteredAvailableContacts.map(contact => 
 									<ContactMenuItem
 										key={contact.accountID}
 										contactItem={contact} 

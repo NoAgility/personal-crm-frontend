@@ -130,22 +130,6 @@
     margin-bottom: 0;
     width: 100%;
 }
-.task-add {
-    border-top: solid;
-    border-color: var(--color-offwhite);
-    border-width: 1px;
-    margin-right: 6.5%;
-    padding-top: 2px;
-    display: flex;
-    justify-content: flex-start;
-    color: var(--color-offwhite);
-    font-size: var(--text-small);
-    font-family: var(--font);
-    width: 48.5%;
-    max-width: 500px;
-    min-width: 350px;
-    align-items: center;
-}
 .task-alias {
     display: flex;
     align-items: left;

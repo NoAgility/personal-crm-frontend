@@ -54,6 +54,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 	 * Function to be called on Modal close
 	 */
 	const handleClose = () => {
+		setEditingName(false);
 		setTaskPriority(task.taskPriority);
 		setTaskDeadline(dateFormat(new Date(task.taskDeadline)));
 		setTaskPriorityChanged(false);
@@ -174,9 +175,9 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 	const changeContactSearchFilterViewer = (filter) => {
 		setSearchBarInput(filter);
 		if (filter === null || filter.length === 0) {
-			setFilteredContactsViewer(contacts);
+			setFilteredContactsViewer(allContacts);
 		} else {
-			setFilteredContactsViewer(contacts.filter((contact) => contact.accountName.includes(filter)));
+			setFilteredContactsViewer(allContacts.filter((contact) => contact.accountName.includes(filter)));
 			
 		}
 	}
@@ -202,12 +203,11 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 		setSearchBarInput("");
 	}, [contacts, allContacts, task]);
 
-	console.log(filteredContactsViewer);
 	return (
 		<>
 		<Modal
 			show={show}
-			onHide={onHide}
+			onHide={handleClose}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
@@ -226,7 +226,6 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 			</div>
 			
 			<Modal.Body className="task-details">
-				<h1>Task Details</h1>
 			<Accordion className="task-accordion" defaultActiveKey="0">
 				<Accordion.Item eventKey="0">
 					<Accordion.Header className="accordion-header">Basic Details</Accordion.Header>
