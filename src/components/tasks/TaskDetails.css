@@ -181,3 +181,10 @@
 	border-color: var(--color-dark);
 	border-radius: 0px;
 }
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1);
+}
+input[type="datetime-local"]::-webkit-datetime-edit {
+    cursor: pointer;
+}

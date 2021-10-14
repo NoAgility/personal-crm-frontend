@@ -33,6 +33,9 @@ const AddMeetingForm = ({submit, show, onHide}) => {
         const index = selectedContactIDs.indexOf(contact.accountID);
         selectedContactIDs.splice(index, 1);
     }
+    const isSelected = (contact) => {
+        return selectedContactIDs.includes(contact.accountID);
+    }
     /**
      * Wrapper for onHide function to reset all state
      * @param {*} e The event being triggered
@@ -108,7 +111,7 @@ const AddMeetingForm = ({submit, show, onHide}) => {
 								Deadline
 								<input 
                                     className="form-date-input" 
-                                    type="date" 
+                                    type="datetime-local" 
                                     value={taskDate} 
                                     onChange={event => setTaskDate(event.target.value)}
                                 />
@@ -135,6 +138,7 @@ const AddMeetingForm = ({submit, show, onHide}) => {
                                 {contacts.length > 0 ? filteredAvailableContacts.map(contact => 
 									<ContactMenuItem
 										key={contact.accountID}
+                                        active={isSelected(contact)}
 										contactItem={contact} 
 										add={addContactSelection} 
                                         remove={removeContactSelection}

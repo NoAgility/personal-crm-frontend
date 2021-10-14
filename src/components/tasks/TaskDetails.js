@@ -39,14 +39,16 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 	 * @returns The ISO formatted date
 	 */
 	const dateFormat = (date) => {
-		const day = date.getDate().toString().padStart(2, "0"),
-		month = (date.getMonth() + 1).toString().padStart(2, "0"),
-		year = date.getFullYear();
+		const day = date.getDate(),
+		month = date.getMonth(),
+		year = date.getFullYear(),
+		hour = date.getHours(),
+		mins = date.getMinutes();
 
 		const formattedDate = year + "-" + month + "-" + day;
 
 		if (formattedDate === "1970-01-01") return "";
-		return formattedDate;
+		return new Date(date).toISOString().substring(0, 19);
 	}
 	const [taskDeadline, setTaskDeadline] = useState(dateFormat(new Date(task.taskDeadline)));
 
@@ -113,16 +115,34 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 	 */
 	const addavailableContactselection = (contact) => {
 		setContactIDsAdded([...contactIDsAdded, contact.accountID]);
+		if (contactIDsRemoved.includes(contact.accountID)) {
+			const index = contactIDsRemoved.indexOf(contact.accountID);
+			if (contactIDsRemoved.length === 1) {
+				setContactIDsRemoved([]);
+			} else {
+				setContactIDsRemoved(contactIDsRemoved.slice(index, 1));
+			}
+        	
+		}
     }
 	/**
 	 * Remove contact from selection
 	 * @param {*} contact The contact to be added
 	 */
     const removeavailableContactselection = (contact) => {
+		if (contactIDsAdded.includes(contact.accountID)) {
+			const index = contactIDsAdded.indexOf(contact.accountID);
+			if (contactIDsAdded.length === 1) {
+				setContactIDsAdded([]);
+			} else {
+				setContactIDsAdded(contactIDsAdded.slice(index, 1));
+			}
+        	
+		}
 		setContactIDsRemoved([...contactIDsRemoved, contact.accountID])
     }
 	const isSelected = (contact) => {
-		return contactIDsSelected.includes(contact.accountID);
+		return contactIDsSelected.includes(contact.accountID) || contactIDsAdded.includes(contact.accountID);
 	}
 	const removeAddedNote = (note) => {
         const index = notesAdded.indexOf(note);
@@ -203,6 +223,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 		setSearchBarInput("");
 	}, [contacts, allContacts, task]);
 
+	console.log(contactIDsRemoved);
 	return (
 		<>
 		<Modal
@@ -244,7 +265,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 							<label className="form-label super-center">
 								Deadline
 								<input className="form-date-input" 
-									type="date" 
+									type="datetime-local" 
 									value={taskDeadline || "" } 
 									onChange={(e) => {
 										setTaskDeadline(e.target.value);
