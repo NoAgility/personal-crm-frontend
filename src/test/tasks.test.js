@@ -36,7 +36,7 @@ test("Unit Test - TasksPage Component renders", async () => {
     await waitFor(() => expect(createTaskButton).not.toBeNull());
 });
 test("Unit Test - TaskList, TaskItem Component renders", async () => {
-    const { container } = render(<TaskList tasks={[{taskName: "Test Task", taskPriority: -1, taskDeadline: new Date(), taskContactAccounts: [], taskNoteList: []}]} label={"date"} editOptions={{update: jest.fn(), delete: jest.fn()}}/>);
+    const { container } = render(<TaskList contacts={[]} allContacts={[]} tasks={[{taskName: "Test Task", taskPriority: -1, taskDeadline: new Date(), taskContactAccounts: [], taskNoteList: []}]} label={"date"} editOptions={{update: jest.fn(), delete: jest.fn()}}/>);
     await waitFor(() => expect(container).toHaveTextContent("Test Task"));
     await waitFor(() => expect(container).toHaveTextContent("Today"));
 });
