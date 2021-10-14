@@ -41,13 +41,15 @@
 
 .message-options {
 	border-radius: 50%;
-	height: 30px;
+	height: 25px;
 	width: 25px;
 	background-color: var(--color-medium);
 	color: var(--color-white);
 	display: grid;
 	place-items: center;
 	place-self: center;
+	margin-left:3px;
+	margin-right:3px;
 }
 
 .message-options-btn {

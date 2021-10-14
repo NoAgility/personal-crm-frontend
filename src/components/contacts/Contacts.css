@@ -59,8 +59,8 @@
 }
 
 .contacts-btn {
-	background-color: var(--color-teal);
-	border-color: var(--color-teal);
+	background-color: var(--color-teal) !important;
+	border-color: var(--color-teal) !important;
 }
 
 .contact-info {
