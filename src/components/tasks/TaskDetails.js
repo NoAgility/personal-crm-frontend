@@ -16,8 +16,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 	const [taskName, setTaskName] = useState(task.taskName);
 	const [availableContacts, setAvailableContacts] = useState(contacts);
 	const [filteredAvailableContacts, setFilteredAvailableContacts] = useState(contacts);
-	const [filteredContactsViewer, setFilteredContactsViewer] = useState(task.taskContactAccounts.filter(
-		(contact) => allContacts.map(contact => contact.accountID).includes(contact.contactID)));
+	const [filteredContactsViewer, setFilteredContactsViewer] = useState(allContacts.filter((contact) => (contact.accountID !== task.accountID)).filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
 	const [editingName, setEditingName] = useState(false);
 	const [taskOwner, setTaskOwner] = useState("");
 	const [notes, setNotes] = useState(task.taskNoteList);
@@ -63,9 +62,9 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 		setNotesAdded([]);
 		setNotesRemoved([]);
 		setNotesChanged([]);
-		setAvailableContactsWrapper(contacts);
-		setFilteredAvailableContactsWrapper(contacts);
-		setFilteredContactsViewerWrapper(allContacts.filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
+		setAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredContactsViewer(allContacts.filter((contact) => (contact.accountID !== task.accountID)).filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
 		setContactIDsAdded([]);
 		setContactIDsRemoved([]);
 		setContactIDsSelected(task.taskContactAccounts.map((c) => c.contactID));
@@ -181,15 +180,6 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 			
 		}
 	}
-	const setAvailableContactsWrapper = (contacts) => {
-		setAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
-	}
-	const setFilteredAvailableContactsWrapper = (contacts) => {
-		setFilteredAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
-	}
-	const setFilteredContactsViewerWrapper = (contacts) => {
-		setFilteredContactsViewer(allContacts.filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
-	}
 	useEffect(() => {
 		const findTaskOwner = () => {
 			for (const contact of allContacts) {
@@ -199,9 +189,9 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 			}
 			return "";
 		}
-		setAvailableContactsWrapper(contacts);
-		setFilteredAvailableContactsWrapper(contacts);
-		setFilteredContactsViewerWrapper(allContacts.filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
+		setAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredContactsViewer(allContacts.filter((contact) => (contact.accountID !== task.accountID)).filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
 		setContactIDsSelected(task.taskContactAccounts.map((c) => c.contactID));
 		setTaskOwner(findTaskOwner());
 		setTaskName(task.taskName);
