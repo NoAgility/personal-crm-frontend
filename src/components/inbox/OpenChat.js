@@ -28,7 +28,6 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
     	messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
   	}
 
-
 	useEffect(() => {
 		scrollToBottom();
 	}, [])
@@ -69,15 +68,15 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
 							return message;
 						} return null;
 					})
-						.map((message) => (
-							<Message
-								key={message.messageID}
-								chat={chat}
-								message={message}
-								onDelete={deleteMessage}
-								onEdit={editMessage}
-							/>
-						))
+					.map((message) => (
+						<Message
+							key={message.messageID}
+							chat={chat}
+							message={message}
+							onDelete={deleteMessage}
+							onEdit={editMessage}
+						/>
+					))
 				):(
 					<></>
 				)}

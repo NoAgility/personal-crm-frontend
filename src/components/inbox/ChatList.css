@@ -40,3 +40,7 @@
 .add-chat-btn:active {
 	filter: brightness(50%);
 }
+
+.chat-btn {
+	background-color: var(--color-blue);
+}
