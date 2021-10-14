@@ -45,12 +45,12 @@ const getColor = (id) => {
 ProfilePic.defaultProps = {
     name: "",
     id: 2,
-    size: "md",
+    size: "sm",
     isGroupChat: false
 }
 
 function ProfilePic( { name, id, size, isGroupChat } ) {
-    // size : lg, md, sm
+    // size : lg, md, sm, xs
 	return (
 		<>
 		<div className={`profile-pic profile-pic-${size}`} style={{backgroundColor: getColor(id)}}>
