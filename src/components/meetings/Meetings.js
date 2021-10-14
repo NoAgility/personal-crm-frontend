@@ -5,6 +5,8 @@ import AddMeetingForm from './AddMeetingForm';
 import MeetingController from './MeetingController';
 import ContactController from '../contacts/ContactController.js'
 import MeetingList from './MeetingList';
+import MeetingInvites from './MeetingInvites';
+import Cookies from 'js-cookie';
 import "./Meetings.css";
 import Sort from '../UIComponents/sort/Sort.js';
 
@@ -14,6 +16,7 @@ const Meetings = (props) => {
     const openModal = () => {setModalShow(true)};
     const hideModal = () => {setModalShow(false)};
     const [meetings, setMeetings] = useState([]);
+    const [meetingInvites, setMeetingInvites] = useState([]);
     const [meetingsByGroup, setMeetingsByGroup] = useState([]);
     const [activeSort, setActiveSort] = useState("date");
 
@@ -26,11 +29,11 @@ const Meetings = (props) => {
         alphaGroupSort();
     };
     /**
-     * Function for wrapping an update meeting call to the backend
+     * Function for wrapping an edit meeting call to the backend
      * @param {*} meeting The new meeting details
      */
-    const updateMeeting = async (meeting) => {
-        await MeetingController.updateMeeting(meeting);
+    const editMeeting = async (meeting) => {
+        await MeetingController.editMeeting(meeting);
         getMeetings();
     }
 
@@ -48,20 +51,64 @@ const Meetings = (props) => {
      * @param {*} meeting Meeting to be added
      */
     const addMeeting = async (meeting) => {
-
         await MeetingController.addMeeting(meeting);
+        getMeetings();
+    };
+
+     /**
+     * Call to backend to accept a meeting
+     * @param {*} meeting Meeting to be accepted
+     */
+      const acceptMeeting = async (meeting) => {
+        await MeetingController.acceptMeetingInvite(meeting);
+        getMeetings();
+    };
+
+     /**
+     * Call to backend to accept a meeting
+     * @param {*} meeting Meeting to be declined
+     */
+      const declineMeeting = async (meeting) => {
+        await MeetingController.declineMeetingInvite(meeting);
+        getMeetings();
+    };
+
+     /**
+     * Call to backend to accept a meeting
+     * @param {*} meeting Meeting to be declined
+     */
+      const addMinute = async (meeting, minute) => {
+        await MeetingController.addMinute(meeting, minute);
+        getMeetings();
+    };
+
+     /**
+     * Call to backend to accept a meeting
+     * @param {*} meeting Meeting to be declined
+     */
+      const deleteMinute = async (meeting, minute) => {
+        await MeetingController.deleteMinute(meeting, minute);
+        getMeetings();
+    };
+
+      /**
+     * Call to backend to accept a meeting
+     * @param {*} meeting Meeting to be declined
+     */
+       const editMinute = async (meeting, minute) => {
+        await MeetingController.editMinute(meeting, minute);
         getMeetings();
     };
 
     /**
     * Groups meetings by dates
-    * @param {*} meetings Meetings to be grouped
+    * @param {*} ms Meetings to be grouped
     * @returns Array of groups of meetings by date
     */
-    const groupByDate = (meetings) => {
+    const groupByDate = (ms) => {
         const reduced = {};
-        meetings.forEach((meeting) => {(
-            reduced[meeting.meetingStart] = reduced[meeting.meetingStart] || [] ).push(meeting);
+        ms.forEach((meeting) => {(
+            reduced[meeting.meetingStart.substring(0,10)] = reduced[meeting.meetingStart.substring(0,10)] || [] ).push(meeting);
         })
         return reduced;
     };
@@ -71,10 +118,10 @@ const Meetings = (props) => {
     //  * null Dates or 1970 January 1 will always be last
     //  * @param {*} meetings Meetings to be sorted
     //  */
-    const sortByDate = (meetings) => {
-        meetings.sort((a, b) => {
-            var dateA = new Date(a.meetingStart);
-            var dateB = new Date(b.meetingStart);
+    const sortByDate = (ms) => {
+        ms.sort((a, b) => {
+            var dateA = new Date(a.meetingStart.substring(0,10));
+            var dateB = new Date(b.meetingStart.substring(0,10));
             if (dateA.toLocaleDateString() === new Date(0).toLocaleDateString()) return 1;
             if (dateB.toLocaleDateString() === new Date(0).toLocaleDateString()) return -1;
             if (dateA < dateB) return -1;
@@ -82,16 +129,16 @@ const Meetings = (props) => {
             return 0;
         }
     )};
-    const sortByAlpha = (meetings) => {
-        meetings.sort((a, b) => {
+    const sortByAlpha = (ms) => {
+        ms.sort((a, b) => {
             if (a.meetingAlpha > b.meetingAlpha) return -1;
             if (a.meetingAlpha < b.meetingAlpha) return 1;
             return 0;
         }
     )};
-    const groupByAlpha = (meetings) => {
+    const groupByAlpha = (ms) => {
         const reduced = {};
-        meetings.forEach((meeting) => {(
+        ms.forEach((meeting) => {(
             reduced[meeting.meetingAlpha] = reduced[meeting.meetingAlpha] || [] ).push(meeting);
         })
         return reduced;
@@ -120,92 +167,50 @@ const Meetings = (props) => {
         }
     ]
 
-    // Gets all the contacts from the backend
+    // Gets all the meetings from the backend
 	const getMeetings = async () => {
 		const data = await MeetingController.fetchMeetings();
-		const ms =  [];
+		const rawMeetings =  [];
+        const rawMeetingInvites =  [];
 		if (data !== undefined && data.length > 0) {
 			for (const meeting of data) {
-                const m = meeting;
+                const rawMeeting = meeting;
+
+                // load participant data
 		        let ps = [];
-			    for (const participant of meeting.meetingParticipants) {
-                    let p = await ContactController.fetchUserByID(participant);
-                    ps.push(p);
+                let accepted = meeting.meetingParticipants[parseInt(Cookies.get('accountID'))];
+                if (Object.keys(meeting.meetingParticipants).length > 0) {
+                    for (const pID of Object.keys(meeting.meetingParticipants)) {
+                        let p = await ContactController.fetchUserByID(pID);
+                        ps.push({
+                            "data" : p,
+                            "accepted": meeting.meetingParticipants[pID]});
+                    }
+                    rawMeeting.meetingParticipants = ps;
+                } else { rawMeeting.meetingParticipants = []; }
+
+                // seperate accepted and non-accepted invites
+                if (accepted) {
+                    rawMeetings.push(rawMeeting);
+                } else {
+                    rawMeetingInvites.push(rawMeeting);
                 }
-                m.meetingParticipants = ps;
-                ms.push(m);
 			}
-			setMeetings(ms);
+			setMeetings(rawMeetings);
+            setMeetingInvites(rawMeetingInvites);
 		}
 
         if (activeSort === 'date') {
-            dateGroupSort(data);
+            dateGroupSort(rawMeetings);
         } else {
-            alphaGroupSort(data);
+            alphaGroupSort(rawMeetings);
         }
-
 	}
 
-	// Load all contacts from back-end
+	// Load all meetings from back-end
 	useEffect(() => {
 		getMeetings();
-
 	}, [])
-
-
-    /**
-     * On render, fetch existing meetings to display to the user.
-     */
-    // useEffect(() => {
-    //     //React throws a warning if I don't encapsulate the dependencies inside useEffect
-    //     //Hence two similar functions
-    //     const dateGroupSortAlt = (data) => {
-    //         sortByDate(data);
-    //         setMeetingsByGroup(groupByDate(data));
-    //     }
-
-    //     const fetchMeetings = async () => {
-    //         // const data = await MeetingController.fetchMeetings();
-
-        //     if (data !== undefined || data.length !== 0) {
-        //         setMeetings(data);
-        //         dateGroupSortAlt(data);
-        //     }
-        // };
-    //     fetchMeetings();
-
-
-    // }, []);
-
-    // useEffect(async () => {
-    //     const getParticipants = async (data) => {
-    //         let ms = [];
-    //         for (var meeting in meetings) {
-    //             const m = meetings[meeting];
-    //             const ps = [];
-    //             const participants = meetings[meeting].meetingParticipants;
-    //             for (var participant in participants) {
-    //                 let  p = await ContactController.fetchUserByID(participants[participant]);
-    //                 ps.push(p);
-    //             }
-    //             m.meetingParticipants = ps;
-    //             ms.push(m);
-    //         }
-    //         return ms;
-    //     }
-
-    //     if (meetings !== undefined || meetings.length !== 0) {
-    //         const ms = await getParticipants(meetings);
-    //         if (ms !== undefined || ms.length !== 0) {
-    //             setMeetings(ms);
-    //             console.log(ms);
-    //         }
-    //     }
-
-
-
-    // }, [meetings] );
-
 
     return (
 		<>
@@ -226,20 +231,27 @@ const Meetings = (props) => {
                         <Sort sortTypes={sortTypes}/>
                     </div>
                 </div>
-                <div className="meetings-container">
-                    {(meetings !== undefined && meetings.length > 0) ?  (
-                        Object.keys(meetingsByGroup)
-                            .map(key => {
-                                return <MeetingList
-                                    key={key}
-                                    label={activeSort}
-                                    meetings={meetingsByGroup[key]}
-                                    editOptions={{update: updateMeeting, delete: deleteMeeting}}
-                                    />
-                                })
-                    ) :( <></>)}
-                    {modalShow ? <AddMeetingForm /*submit={addMeeting}*/ show={modalShow} onHide={hideModal}/> : ""}
-                <p/>
+                <div className="meetings-page-body app-row">
+                    <MeetingInvites
+                        meetings={meetingInvites}
+                        onAccept={acceptMeeting}
+                        onDecline={declineMeeting}
+                    />
+                    <div className="meetings-container">
+                        {(meetings !== undefined && meetings.length > 0) ?  (
+                            Object.keys(meetingsByGroup)
+                                .map(key => {
+                                    return <MeetingList
+                                            key={key}
+                                            label={activeSort}
+                                            meetings={meetingsByGroup[key]}
+                                            meetingOptions={{onEdit:editMeeting, onDelete: deleteMeeting }}
+                                            minuteOptions={{onEdit:editMinute, onDelete: deleteMinute, onAdd: addMinute }}
+                                        />
+                                    })
+                        ) :( <></>)}
+                        {modalShow ? <AddMeetingForm submit={addMeeting} show={modalShow} onHide={hideModal}/> : ""}
+                    </div>
             </div>
         </div>
     </>)

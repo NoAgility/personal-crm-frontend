@@ -38,15 +38,111 @@
 .meeting-submit {
     height: 40px;
     width: 100px;
-    border: none;
+}
+
+.meeting-btn {
     background-color: var(--color-orange);
-    margin-right: 10px;
+    border-style: solid;
+    border-color: var(--color-orange);
+    border-width: 2px;
     border-radius: 10px;
     cursor: pointer;
-    font-family: var(--font);
     color: var(--color-white);
+}
+
+.meeting-btn:hover {
+    background-color: var(--color-orange-dark);
+    border-color: var(--color-orange-dark);
+
+}
+
+.meeting-btn:active {
+    background-color: var(--color-orange-xdark);
+    border-color: var(--color-orange-xdark);
+}
+
+.cancel-btn {
+    height: 40px;
+    width: 100px;
+    background-color: var(--color-dark);
+    margin-right: 10px;
+    border-style: solid;
+    border-color: var(--color-white);
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+.cancel-btn:hover {
+    background-color: var(--color-xdark);
 }
 
 .add-meeting-time {
     width: max-content;
+}
+
+.options-btn {
+    margin-right: 10px;
+    border-style: solid;
+    border-color: var(--color-white);
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+.contact-selector-container {
+    height: 300px;
+    width: 250px;
+
+    background-color: var(--color-dark);
+
+}
+
+.contact-selector-body {
+    overflow: auto;
+    overflow-x: hidden;
+    height: 235px;
+    width: 240px;
+}
+
+
+.contact-checkbox-container {
+    background-color: var(--color-dark);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    border-radius: 5px;
+    gap: 10px;
+    width: 95%;
+}
+
+
+.contact-checkbox-container:hover {
+    background-color: var(--color-medium);
+}
+
+.contact-checkbox-container * {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.contact-checkbox {
+    height: 20px;
+    width: 20px;
+}
+
+.dropdown-small {
+    height: min-content !important;
+}
+
+.dropdown-small button{
+    margin: 0px !important;
+}
+
+.add-meeting-icon {
+    margin-top: auto;
+    margin-bottom: auto;
 }

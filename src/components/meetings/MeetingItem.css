@@ -5,12 +5,29 @@
 	justify-content: start;
 }
 
+.meeting-container-left *{
+    text-align: left;
+}
+
 .meeting-participants-container {
-	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+    width: 528px;
+
+}
+
+.meeting-item-date {
+    margin-left: auto !important;
+}
+
+.meeting-item-options {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+
 }
 
 .meeting-participants-container div{
-	margin: 5px;
+	margin: 4px 4px 4px 0px;
 }
 
 .meeting {
@@ -24,3 +41,4 @@
     width: 100%;
 
 }
+

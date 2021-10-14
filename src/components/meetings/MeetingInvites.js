@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import MeetingInviteItem from './MeetingInviteItem';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdClose } from 'react-icons/md';
 import { Badge } from 'react-bootstrap';
+import "./MeetingInvites.css";
+import { RiHome2Line } from 'react-icons/ri';
 
-import "./Meetings.css";
 const MeetingInvitesList = ({ meetings, onAccept, onDecline }) => {
 	const [expanded, setExpanded] = useState(false);
 
@@ -14,8 +15,15 @@ const MeetingInvitesList = ({ meetings, onAccept, onDecline }) => {
 	}
 
     return (
-		<div className={`meeting-invites-container ${expanded ? 'invites-container-open' : ''}`}>
-			<h2>Invitations</h2>
+		<div className={`meeting-invites-container ${expanded ? 'meeting-invites-container-open' : ''}`}>
+			<div className='invites-header' >
+				<p></p>
+				<h2>Invitations</h2>
+				<button className="close-invites-btn" onClick={toggleExpanded}>
+					<MdClose size={25} colour="white" />
+				</button>
+			</div>
+
        		{meetings.map(m =>
 				<MeetingInviteItem
 					key={m.meetingID}
@@ -26,12 +34,10 @@ const MeetingInvitesList = ({ meetings, onAccept, onDecline }) => {
 				/>)}
 				<button
 					style={meetings.length === 0 ? {display : 'none'} : {display : 'block'}}
-					className={`toggle-meeting-invites ${expanded ? 'toggle-meeting-invites-open' : ''}`}
+					className='toggle-meeting-invites'
 					onClick={toggleExpanded}>
 					<div>
-						<h5>
-							<Badge bg="danger">{meetings.length}</Badge>
-						</h5>
+						<Badge bg="danger">{meetings.length}</Badge>
 					</div>
 				</button>
     	</div>

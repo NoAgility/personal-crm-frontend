@@ -80,7 +80,7 @@ const MeetingController = {
 	 editMeeting: async (meeting) => {
         try {
             const data = {
-                "accountIDs": meeting.contactIDs.length !== 0 ? meeting.contactIDs : [],
+                "meetingID": meeting.meetingID,
                 "meetingName": meeting.meetingName,
                 "meetingDescription": meeting.meetingDescription,
                 "meetingStart": meeting.meetingStart,

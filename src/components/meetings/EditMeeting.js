@@ -1,20 +1,27 @@
-import React, { useState, useEffect, componentDidMount } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./AddMeetingForm.css";
 import "../form.css";
-import { MdClose } from 'react-icons/md';
+import { MdClose, MdGroup, MdOutlineDescription, MdDateRange } from 'react-icons/md';
+import { BiBook } from 'react-icons/bi';
 import MeetingController from './MeetingController';
 import { Modal } from 'react-bootstrap';
 import TaskContactDropdown from '../tasks/TaskContactDropdown';
 import ContactController from '../contacts/ContactController';
+import TimePicker from 'react-times';
+import 'react-times/css/classic/default.css';
 
-const AddMeetingForm = ({submit, show, onHide}) => {
+const EditMeeting = ({ meeting, show, onHide, meetingOptions, toggleIsEditing }) => {
 
-    const [meetingName, setMeetingName] = useState("");
-    const [meetingDescription, setMeetingDescription] = useState("");
-    const [meetingStart, setMeetingStart] = useState("");
-    const [meetingEnd, setMeetingEnd] = useState("");
+    const [meetingName, setMeetingName] = useState((meeting !== undefined) ? meeting.meetingName : "");
+    const [meetingDescription, setMeetingDescription] = useState((meeting !== undefined) ? meeting.meetingDescription : "");
+    const [meetingStart, setMeetingStart] = useState((meeting !== undefined) ? meeting.meetingStart : "");
+    const [meetingEnd, setMeetingEnd] = useState((meeting !== undefined) ? meeting.meetingEnd : "");
     const [contacts, setContacts] = useState([]);
-    const [selectedContactIDs, setSelectedContactIDs] = useState([]);
+    const [selectedContactIDs, setSelectedContactIDs] = useState((meeting !== undefined) ? meeting.meetingParticipants : []);
+
+    const [meetingStartDate, setMeetingStartDate] = useState((meeting !== undefined) ? meeting.meetingStart.substring(0,10) : "");
+    const [meetingStartTime, setMeetingStartTime] = useState((meeting !== undefined) ? meeting.meetingStart.substring(19,11) : "");
+    const [meetingEndTime, setMeetingEndTime] = useState((meeting !== undefined) ? meeting.meetingEnd.substring(19,11) : "");
 
     /**
      * Function to add contact to selection
@@ -33,18 +40,29 @@ const AddMeetingForm = ({submit, show, onHide}) => {
         selectedContactIDs.splice(index, 1);
     }
 
-    /**
-     * Wrapper for onHide function to reset all state
-     * @param {*} e The event being triggered
-     */
-    const handleClose = (e) => {
-		e.preventDefault();
-		setMeetingName("");
-        setMeetingStart("");
-        setMeetingEnd("");
-		onHide();
-	};
+    const handleEdit = (e) => {
+        e.preventDefault();
+        meetingOptions.onEdit({...meeting,
+            "meetingName": meetingName,
+            "meetingDescription": meetingDescription,
+            "meetingStart": meetingStart,
+            "meetingEnd": meetingEnd,
+        });
+        toggleIsEditing();
+    }
 
+    useEffect(() => {
+
+       console.log(contacts)
+    }, [contacts]);
+
+    useEffect(() => {
+        setMeetingStart(meetingStartDate + " " + meetingStartTime)
+    }, [meetingStartDate, meetingStartTime]);
+
+    useEffect(() => {
+        setMeetingEnd(meetingStartDate + " " + meetingEndTime)
+    }, [meetingStartDate, meetingEndTime]);
 
     /**
      * On render, load contacts for them to be addable to the form
@@ -66,69 +84,90 @@ const AddMeetingForm = ({submit, show, onHide}) => {
         getContacts();
     }, []);
     return (
-        <Modal
-            show={show}
-			onHide={onHide}
-            size="md"
-			aria-labelledby="contained-modal-title-vcenter"
-			centered>
-            <div className="close-add-form">
-				<MdClose className="close-button" onClick={handleClose} size={30}/>
-			</div>
-            <Modal.Body>
-                <div className="add-form">
-                    <form className="form-container">
-                        <input
-                            type="text"
-                            className="form-input"
-                            value={meetingName}
-                            placeholder="Add Meeting Name"
-                            onChange={event => setMeetingName(event.target.value)}
-                        />
-						<input
-                            type="text"
-                            className="form-input"
-                            value={meetingDescription}
-                            placeholder="Add Description"
-                            onChange={event => setMeetingDescription(event.target.value)}
-                        />
+        <div className="meeting-details ">
+        <form onSubmit={handleEdit}>
+        <h3>
+            <MdGroup size={25}/>
+            <input
+                type="text"
+                className="form-input"
+                value={meetingName}
+                placeholder="Add Meeting Name"
+                maxLength={45}
+                required
+                onChange={event => setMeetingName(event.target.value)}
+                />
+        </h3>
+        <h3 className="">
+            <MdOutlineDescription size={25}/>
+            <input
+                type="text"
+                className="form-input"
+                value={meetingDescription}
+                placeholder="Add Description"
+                maxLength={100}
+                onChange={event => setMeetingDescription(event.target.value)}
+            />
+        </h3>
+        <div className="app-row">
+            <MdDateRange size={25}/>
+            <input
+                className="form-date-input"
+                type="date"
+                value={meetingStartDate}
+                required
+                onChange={event => setMeetingStartDate(event.target.value)}
+            />
+            <h4>:</h4>
+            <TimePicker
+                    colorPalette="dark" theme="classic" withoutIcon="true"
+                    onTimeChange={(t) => {setMeetingStartTime(t.hour + ':' + t.minute);setMeetingEndTime(t.hour + ':' + t.minute);}}
+                    time={meetingStartTime === '' ? '' : meetingStartTime}
+                    timeConfig={{
+                        step: 15,
+                        unit: 'minute'
+                    }}
+                />
+            <h4>-</h4>
+            <TimePicker
+                colorPalette="dark" theme="classic" withoutIcon="true"
+                onTimeChange={(t) => setMeetingEndTime(t.hour + ':' + t.minute)}
+                time={meetingEndTime === '' ? meetingStartTime : meetingEndTime}
+                timeConfig={{
+                    from: meetingStartTime,
+                    to: '23:45',
+                    step: 15,
+                    unit: 'minute'
+                }}
+            />
+        </div>
+        {/* <div className="app-row">
+            <BiBook size={25}/>
+            <TaskContactDropdown
+                contactItems={contacts}
+                add={addContactSelection}
+                remove={removeContactSelection}/>
+        </div> */}
+        <div className="add-minute-options">
+            <div className="row">
+                <button
+                    className="cancel-btn"
+                    onClick={toggleIsEditing}>
+                    Cancel
+                </button>
+                <button
+                    className="meeting-submit meeting-btn"
+                    type="submit">
+                    Change
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
 
-                        <label className="meeting-form-label">
-                            Start
-                            <input
-                                className="form-date-input"
-                                type="date"
-                                value={meetingStart}
-                                onChange={event => setMeetingStart(event.target.value)}
-                            />
-                        </label>
-						<label className="meeting-form-label">
-                            End
-                            <input
-                                className="form-date-input"
-                                type="date"
-                                value={meetingEnd}
-                                onChange={event => setMeetingEnd(event.target.value)}
-                            />
-                        </label>
-                        <TaskContactDropdown
-                            contactItems={contacts}
-                            add={addContactSelection}
-                            remove={removeContactSelection}/>
-                        <button
-                            className="meeting-submit"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onHide();
-                                submit({meetingName: meetingName,meetingStart: meetingStart, meetingEnd: meetingEnd, contactIDs: selectedContactIDs})
-                                }}>
-                            Submit
-                        </button>
-                    </form>
-                </div>
-            </Modal.Body>
-        </Modal>
+
+
     )
 }
 
-export default AddMeetingForm;
+export default EditMeeting;

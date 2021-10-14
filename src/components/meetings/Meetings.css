@@ -1,12 +1,14 @@
 
 .meetings-page {
-	width: 600px;
+	width:100%;
+    height: 100%;
 }
 .meetings-header {
 	display: flex;
 	flex-direction: row;
-	text-align: left;
-	width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+	width: 600px;
 }
 .meeting-label {
     height: 20px;
@@ -36,6 +38,11 @@
 	background-color: var(--color-orange);
 	border-color: var(--color-orange);
 
+}
+
+.add-btn-long {
+    width: 150px !important;
+	height: 50px !important;
 }
 
 .add-btn {
@@ -76,7 +83,9 @@
 .meetings-sub-header {
 	display: flex;
 	justify-content: flex-end;
-	width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+	width: 600px;
 }
 .meetings-header h1{
 	margin: 20px auto 20px 0px;
@@ -111,6 +120,10 @@
     min-height: 400px;
     min-width: 350px;
     overflow: auto;
+    padding:30px;
+    padding-top:0px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .meetings-section-container {
@@ -198,4 +211,95 @@
 ::-webkit-scrollbar-corner {
     background: var(--color-dark);
     border-radius: 25px;
+}
+
+
+
+
+.meetings-page-body {
+    height: 100%;
+    top:0px;
+    left:0px;
+
+}
+
+.meeting-invite-container {
+    padding:10px;
+    width:200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.meeting-invite-container p{
+    text-align: left;
+}
+
+.small-add-btn {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+}
+.small-add-btn *{
+	padding: 0;
+}
+
+.meeting-details-bottom {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.time_picker_container {
+    /* height: 60px; */
+    width:80px;
+    border-bottom-style: solid;
+    border-color: var(--color-offwhite) ;
+    border-width: 2px;
+    color:var(--color-white);
+    display: grid;
+    place-items: center;
+}
+
+.preview_container {
+    padding:0px !important;
+    width: 50px;
+    height: 25px;
+    line-height: 40px;
+}
+
+.react_times_button {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    background-color: var(--color-dark);
+    color:var(--color-white);
+    box-shadow: none !important;
+    border-radius: 5px;
+    font-family: var(--font);
+    padding:0px !important;
+
+
+}
+
+.react_times_button .wrapper {
+    /* height: 50px; */
+
+}
+
+.classic_theme_container{
+    width: 150px;
+    padding:0px;
+    overflow-x: hidden;
+
+
+}
+
+.modal_container{
+    top: 50px;
+    left: -30px;
 }

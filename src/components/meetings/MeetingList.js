@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import MeetingItem from './MeetingItem';
 import "./Meetings.css";
-const MeetingList = ({meetings, label, editOptions}) => {
+const MeetingList = ({ meetings, label, meetingOptions, minuteOptions }) => {
 
     const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 
@@ -20,19 +20,11 @@ const MeetingList = ({meetings, label, editOptions}) => {
         return formattedDate;
     }
 
-    const formatPriority = (priority) => {
-        let p = priority.toString();
-        return p === "-1" ? "No Priority Set" : "Priority: " + p;
-    }
-
     const getLabel = () => {
         if (label === "date") {
             let date = new Date(meetings[0].meetingStart).toLocaleDateString("en-UK", options);
             return formatDate(date)
         }
-        // else if (label === "priority") {
-        //     return formatPriority(meetings[0].meetingPriority);
-        // }
     }
     return (<div className="meetings-section-container">
         <div className="meeting-title">
@@ -41,8 +33,8 @@ const MeetingList = ({meetings, label, editOptions}) => {
         {meetings.map(m =>
             <MeetingItem
                 key={m.meetingID}
-                // onUpdate={editOptions.update}
-                // onDelete={editOptions.delete}
+                meetingOptions={meetingOptions}
+                minuteOptions={minuteOptions}
                 meeting={m}
             />)}
     </div>)

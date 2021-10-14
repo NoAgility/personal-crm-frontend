@@ -46,6 +46,7 @@ const MeetingInviteDetails = ({ meeting, show, onHide, onAccept, onDecline }) =>
 				<>
 					{ps.slice(0, limit).map((p) => (
 						<ProfilePic
+							key={p.data.accountID}
 							name={p.data.accountName}
 							size={"sm"}
 							id={p.data.accountID}
@@ -56,6 +57,7 @@ const MeetingInviteDetails = ({ meeting, show, onHide, onAccept, onDecline }) =>
 		}
 		return (ps.map((p) => (
 				<ProfilePic
+					key={p.data.accountID}
 					name={p.data.accountName}
 					size={"sm"}
 					id={p.data.accountID}
