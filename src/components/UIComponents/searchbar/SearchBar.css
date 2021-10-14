@@ -59,10 +59,18 @@
 }
 
 .box-sm {
-	width: 250px;
+	width: 210px;
+	height: 30px;
 }
 
 .search-sm {
 	width: 150px;
-	font-size: var(--text-xsmall);
+	height: 20px;
+	font-size: var(--text-small);
+}
+
+.box-sm svg {
+	padding:0px;
+	margin-bottom: auto;
+	margin-top: auto;
 }
