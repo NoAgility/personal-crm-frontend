@@ -1,6 +1,7 @@
 import "./Navbar.css";
 import { BrowserRouter as Router} from 'react-router-dom';
 import { BiTask , BiCalendar, BiPhone, BiMailSend, BiBook} from 'react-icons/bi';
+import { MdClose , MdGroup } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import React, { useState } from "react";
 const Navbar = (props) => {
@@ -27,7 +28,7 @@ const Navbar = (props) => {
                 </li>
                 <li className="nav-item">
                     <button onClick={() => {onClick("/home/meetings")}} className={`nav-button meetings-nav-btn${active === "meetings" ? "-active" : ""}`}>
-                        <BiPhone className="icon" size={30}/>
+                        <MdGroup className="icon" size={30}/>
                         <h4>Meetings</h4>
                     </button>
                 </li>
