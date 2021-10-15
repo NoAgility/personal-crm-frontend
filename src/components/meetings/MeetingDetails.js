@@ -7,8 +7,6 @@ import ContactController from '../contacts/ContactController';
 import ProfilePic from '../UIComponents/profilePic/ProfilePic';
 import CookieManager from '../../util/CookieManager';
 import Minute from './Minute';
-
-
 import  './MeetingDetails.css';
 import './Meetings.css';
 import "../form.css";
@@ -51,25 +49,9 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 		setOpenMinute(false);
 	}
 
-	// const toggleShowMore = () => {
-	// 	if (expanded) {
-	// 		setLimit(minLimit);
-	// 		setExpanded(false);
-	// 	} else {
-	// 		setLimit(meeting.meetingParticipants.length);
-	// 		setExpanded(true);
-	// 	}
-	// }
-
 	const toggleIsEditing = () => {
 		isEditing ? setIsEditing(false) : setIsEditing(true);
 	}
-
-	useEffect(() => {
-        console.log(isEditing)
-	}, [isEditing])
-
-
 
 	const getParticipants = () => {
 		const ps = meeting.meetingParticipants;
@@ -173,9 +155,8 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 								<Accordion.Body className="accordion-participants-list">
 									{meeting.meetingParticipants
 										.map((p) => (
-												<div className="app-row">
+												<div className="app-row" key={p.data.accountID}>
 													<ProfilePic
-														key={p.data.accountID}
 														name={p.data.accountName}
 														size={"xs"}
 														id={p.data.accountID}
@@ -230,13 +211,13 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 								<div className="">
 									{(meeting.meetingMinutes)
 										.map((m) => (
-											<Accordion.Body >
+											<Accordion.Body key={m.minuteID}>
 												<Minute
 													minuteOptions={minuteOptions}
 													meeting={meeting}
 													minute={m}
-													author={meeting.meetingParticipants.filter(e=> {
-														return e.data.accountID === m.accountID
+													author={meeting.meetingParticipants.filter(p=> {
+														return p.data.accountID === m.accountID;
 													  })[0].data
 													}
 												/>

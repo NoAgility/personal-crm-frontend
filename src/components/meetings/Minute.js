@@ -55,12 +55,6 @@ const Minute = ({ meeting, minute, minuteOptions, author }) => {
         return formattedDate;
     }
 
-		// Load all meetings from back-end
-		useEffect(() => {
-			console.log(minute, author);
-		}, [author,minute])
-
-
 
 return (<div>
 		{isEditingMinute ?

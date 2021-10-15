@@ -21,6 +21,7 @@ const MeetingList = ({ meetings, label, meetingOptions, minuteOptions }) => {
     }
 
     const getLabel = () => {
+
         if (label === "date") {
             let date = new Date(meetings[0].meetingStart).toLocaleDateString("en-UK", options);
             return formatDate(date)

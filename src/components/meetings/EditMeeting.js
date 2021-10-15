@@ -52,11 +52,6 @@ const EditMeeting = ({ meeting, show, onHide, meetingOptions, toggleIsEditing })
     }
 
     useEffect(() => {
-
-       console.log(contacts)
-    }, [contacts]);
-
-    useEffect(() => {
         setMeetingStart(meetingStartDate + " " + meetingStartTime)
     }, [meetingStartDate, meetingStartTime]);
 

@@ -56,13 +56,6 @@ const AddMeetingForm = ({ meeting, submit, show, onHide }) => {
     const handleAdd = (e) => {
         e.preventDefault();
         onHide();
-        console.log({
-                meetingName: meetingName,
-                meetingDescription: meetingDescription,
-                meetingStart: meetingStart,
-                meetingEnd: meetingEnd,
-                accountIDs: selectedContactIDs
-            })
         submit({
             meetingName: meetingName,
             meetingDescription: meetingDescription,
@@ -70,8 +63,6 @@ const AddMeetingForm = ({ meeting, submit, show, onHide }) => {
             meetingEnd: meetingEnd,
             accountIDs: selectedContactIDs
         })
-
-
     };
 
     useEffect(() => {
@@ -99,7 +90,6 @@ const AddMeetingForm = ({ meeting, submit, show, onHide }) => {
                 setContacts(cs);
             }
         }
-
         getContacts();
     }, []);
 

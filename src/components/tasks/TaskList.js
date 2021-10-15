@@ -29,7 +29,6 @@ const TaskList = ({tasks, label, editOptions}) => {
 
     const getLabel = () => {
         if (label === "date") {
-            console.log(tasks[0].taskDeadline)
             let date = new Date(tasks[0].taskDeadline).toLocaleDateString("en-US", options);
             return formatDate(date)
         } else if (label === "priority") {
