@@ -10,9 +10,18 @@ const TaskController = {
      */
     fetchTasks: async () => {
         try {
-            const data = await SpringBootAdapterWrapper.get('/task/readTasks').then(res => { return res.data; } )
+            const data = await SpringBootAdapterWrapper.get('/task/readAllTasks').then(res => { return res.data; } )
                 .catch(err => { throw err; });
             return data;
+        } catch (err) {
+            alert("Failed to fetch tasks");
+        }
+    },
+    completeTask: async (task) => {
+        try {
+            const data = {"taskID": task.taskID}
+            const res = await SpringBootAdapterWrapper.post('/task/completeTask', "", data).then(res => { return res.data; } )
+                .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to fetch tasks");
         }
@@ -23,10 +32,11 @@ const TaskController = {
      */
     addTask: async (task) => {
         try {
+            
             const data = {
                 "taskName": task.taskName,
                 ...(task.taskDeadline !== null) && {"deadline": task.taskDeadline},
-                ...(task.taskPriority !== null && task.taskPriority.length > 0) && {"priority": parseInt(task.taskPriority)},
+                ...(task.taskPriority !== null && task.taskPriority !== -1) && {"priority": parseInt(task.taskPriority)},
                 "contactIDs": task.contactIDs.length !== 0 ? task.contactIDs : []
             }
             const res = await SpringBootAdapterWrapper.post('/task/createTask', "", data).then(res => { return res.data; } )
@@ -52,10 +62,10 @@ const TaskController = {
      * Updates a task name for a user
      * @param {*} task The task to be updated
      */
-    updateTaskName: async (task) => {
+    updateTaskName: async (task, newName) => {
         try {
-            const data = { "taskID" : task.taskID, "newTaskName": task.taskName };
-            await SpringBootAdapterWrapper.post('/task/updateTaskNote', "",  data).then(res => { return res.data; } )
+            const data = { "taskID" : task.taskID, "newTaskName": newName };
+            await SpringBootAdapterWrapper.post('/task/updateTask', "",  data).then(res => { return res.data; } )
                 .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to update task note");
@@ -65,13 +75,49 @@ const TaskController = {
      * Updates a task note for a user
      * @param {*} task The task to be updated
      */
-    updateTaskNote: async (task) => {
+    updateTaskNote: async (note) => {
         try {
-            const data = { "taskID" : task.taskID, "taskNote": task.taskNote };
+            const data = { "taskNoteID" : note.taskNoteID, "newTaskNote": note.note };
             await SpringBootAdapterWrapper.post('/task/updateTaskNote', "",  data).then(res => { return res.data; } )
                 .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to update task note");
+        }
+    },
+    addTaskContact: async(task, contactID) => {
+        try {
+            const data = { "taskID" : task.taskID, "contactID": contactID };
+            await SpringBootAdapterWrapper.post('/task/addTaskContact', "",  data).then(res => { return res.data; } )
+                .catch(err => { throw err; });
+        } catch (err) {
+            alert("Failed to update task note");
+        }
+    },
+    deleteTaskContact: async(task, contactID) => {
+        try {
+            const data = { "taskID" : task.taskID, "contactID": contactID };
+            await SpringBootAdapterWrapper.post('/task/deleteContact', "",  data).then(res => { return res.data; } )
+                .catch(err => { throw err; });
+        } catch (err) {
+            alert("Failed to update task note");
+        }
+    },
+    addTaskNote: async (note) => {
+        try {
+            const data = { "taskID" : note.taskID, "taskNote": note.note };
+            await SpringBootAdapterWrapper.post('/task/addTaskNote', "",  data).then(res => { return res.data; } )
+                .catch(err => { throw err; });
+        } catch (err) {
+            alert("Failed to add task note");
+        }
+    },
+    deleteTaskNote: async (note) => {
+        try {
+            const data = { "taskNoteID" : note.taskNoteID};
+            await SpringBootAdapterWrapper.post('/task/deleteTaskNote', "",  data).then(res => { return res.data; } )
+                .catch(err => { throw err; });
+        } catch (err) {
+            alert("Failed to add task note");
         }
     },
     /**
@@ -94,25 +140,12 @@ const TaskController = {
     updatePriority: async (task) => {
         try {
             //If priority is provided
-            if (task.taskPriority) {
-                const data = { 
-                    "taskID" : task.taskID,
-                    ...(task.taskPriority !== null && task.taskPriority.length > 0) && {"priority": parseInt(task.taskPriority)}
-                };
-                await SpringBootAdapterWrapper.post('/task/updatePriority', "",  data).then(res => { return res.data; } )
-                .catch(err => { throw err; });
-            } 
-            //If priority is not provided, POST with -1 representing no priority
-            else {
-                const data = { 
-                    "taskID" : task.taskID,
-                    "priority": -1
-                }
-                await SpringBootAdapterWrapper.post('/task/updatePriority', "",  data).then(res => { return res.data; } )
-                .catch(err => { throw err; });
-            }
-            
-            
+            const data = { 
+                "taskID" : task.taskID,
+                ...(task.taskPriority !== null) ? {"priority": parseInt(task.taskPriority)} : -1
+            };
+            await SpringBootAdapterWrapper.post('/task/updatePriority', "",  data).then(res => { return res.data; } )
+            .catch(err => { throw err; });
         } catch (err) {
             alert("Failed to update task priority");
         }

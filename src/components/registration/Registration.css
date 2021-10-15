@@ -82,6 +82,7 @@ input[type="date"]::-webkit-datetime-edit {
 .form-back {
 	background-color: var(--color-medium);
 	color: var(--color-white);
+	cursor: pointer;
 }
 .error {
     color: #ff335f;

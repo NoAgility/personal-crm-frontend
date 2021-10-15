@@ -1,0 +1,30 @@
+.confirmation {
+    display: flex;
+	flex-direction: row;
+	padding: 50px;
+	padding-left: 100px;
+	padding-right: 100px;
+	height: 40px;
+}
+.confirmation-accept {
+    height: 40px;
+    width: 100px;
+    border: none;
+    background-color: var(--color-purple);
+    margin-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: var(--font);
+    color: var(--color-white);
+}
+.confirmation-cancel {
+    height: 40px;
+    width: 100px;
+    border: none;
+    background-color: var(--color-medium);
+    margin-right: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: var(--font);
+    color: var(--color-white);
+}
