@@ -89,7 +89,7 @@ const EditMeeting = ({ meeting, show, onHide, meetingOptions, toggleIsEditing })
                 value={meetingName}
                 placeholder="Add Meeting Name"
                 maxLength={45}
-                required
+                required={true}
                 onChange={event => setMeetingName(event.target.value)}
                 />
         </h3>
@@ -110,12 +110,12 @@ const EditMeeting = ({ meeting, show, onHide, meetingOptions, toggleIsEditing })
                 className="form-date-input"
                 type="date"
                 value={meetingStartDate}
-                required
+                required={true}
                 onChange={event => setMeetingStartDate(event.target.value)}
             />
             <h4>:</h4>
             <TimePicker
-                    colorPalette="dark" theme="classic" withoutIcon="true"
+                    colorPalette="dark" theme="classic" withoutIcon={true}
                     onTimeChange={(t) => {setMeetingStartTime(t.hour + ':' + t.minute);setMeetingEndTime(t.hour + ':' + t.minute);}}
                     time={meetingStartTime === '' ? '' : meetingStartTime}
                     timeConfig={{
@@ -125,7 +125,7 @@ const EditMeeting = ({ meeting, show, onHide, meetingOptions, toggleIsEditing })
                 />
             <h4>-</h4>
             <TimePicker
-                colorPalette="dark" theme="classic" withoutIcon="true"
+                colorPalette="dark" theme="classic" withoutIcon={true}
                 onTimeChange={(t) => setMeetingEndTime(t.hour + ':' + t.minute)}
                 time={meetingEndTime === '' ? meetingStartTime : meetingEndTime}
                 timeConfig={{
@@ -136,13 +136,7 @@ const EditMeeting = ({ meeting, show, onHide, meetingOptions, toggleIsEditing })
                 }}
             />
         </div>
-        {/* <div className="app-row">
-            <BiBook size={25}/>
-            <TaskContactDropdown
-                contactItems={contacts}
-                add={addContactSelection}
-                remove={removeContactSelection}/>
-        </div> */}
+
         <div className="add-minute-options">
             <div className="row">
                 <button

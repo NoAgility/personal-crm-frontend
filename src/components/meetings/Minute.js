@@ -62,7 +62,7 @@ return (<div>
 				<textarea
 					className="add-minute-text" value={editedMinute}
 					onChange={(e) => {setEditedMinute(e.target.value)}}
-					form="edit-minute" maxLength={100} required="true" />
+					form="edit-minute" maxLength={100} required={true} />
 					 <div className="app-row">
 						<button
 							className="message-options invite-accept"

@@ -162,7 +162,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 														id={p.data.accountID}
 													/>
 													<h6>{p.data.accountName}
-													{p.data.accountID === meeting.meetingCreatorID ? ' (Owner)' : ''}</h6>
+													{p.data.accountID === meeting.meetingCreatorID ? <i>(Owner)</i> : ''}</h6>
 													<h6 className={`participant-tag participant-${p.accepted ? 'coming' : 'invited'}`}>
 														{p.accepted ? 'Coming' : 'Invited'}
 													</h6>
@@ -184,7 +184,9 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 					</button>
 					<div className="add-minute-form-container" style={openMinute ? {display : 'block'} : {display : 'none'}} >
 						<form id="add-minute" onSubmit={handleSaveMinute}>
-							<textarea className="add-minute-text" value={minute} onChange={(e) => {setMinute(e.target.value)}} form="add-minute" maxLength={100} placeholder="Add meeting minutes" required="true" />
+							<textarea className="add-minute-text" value={minute}
+							onChange={(e) => {setMinute(e.target.value)}} form="add-minute"
+							maxLength={100} placeholder="Add meeting minutes" required={true} />
 
 							<div className="add-minute-options">
 								<div className="row">

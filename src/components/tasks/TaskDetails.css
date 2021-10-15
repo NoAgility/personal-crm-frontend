@@ -1,7 +1,4 @@
 .task-details {
-	display: flex;
-	flex-direction: column;
-	place-items: center;
 	min-width: 700px;
 	margin: 0px 25px 0px 25px;
 }
@@ -45,14 +42,21 @@
 	text-align: center;
 }
 .task-complete-btn {
-	background-color: var(--color-medium);
 	border-radius: 5px;
 	height: 30px;
+	width: 20%;
 	color: var(--color-white);
 	font-family: var(--font);
 	font-weight: bold;
 	cursor: pointer;
+	margin:auto;
+
 }
+
+.task-complete-btn:hover {
+	background-color: var(--color-purple-dark);
+}
+
 .unselectable-task-priority {
 	background-color: var(--color-offwhite);
 }
@@ -61,8 +65,7 @@
 	place-items: end;
 }
 .task-details-bottom {
-	display: grid;
-	place-items: center;
+	margin-top: 20px;
 }
 .task-notes-section {
 	border-radius: 10px;
@@ -72,21 +75,24 @@
 }
 .task-details-section {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 }
 .task-contact-container {
-	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	overflow: auto;
-	width: 100%;
-	min-width: 160px;
+	gap:10px;
 	max-height: 240px;
 	min-height: 200px;
-	background-color: var(--color-dark);
+	width: 100%;
+	overflow: auto;
+	border-radius: 10px;
+	padding: 10px;
 }
+
+
+
 .task-contact-viewer-list {
 	list-style: none;
 	padding-left: 0px;
@@ -115,17 +121,17 @@
     font-family: var(--font);
     color: var(--color-white);
 }
-.task-name {
+.task-details-name {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.task-name-h1 {
+.task-details-name-h1 {
 	display: flex;
 	align-items: center;
 	margin-bottom: 0px;
 }
-.task-name-input {
+.task-details-name-input {
 	overflow: auto;
 	max-width: 80%;
 	background-color: var(--color-medium);
@@ -139,10 +145,15 @@
 	height: 40px;
 }
 .task-section-header {
-	display: flex;
+	/* display: flex;
 	justify-content: space-between;
 	align-items: center;
-	max-height: 50px;
+	max-height: 50px; */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 50px;
+
 }
 *::-webkit-scrollbar {
     width: 10px;

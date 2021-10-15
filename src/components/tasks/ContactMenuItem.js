@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import ProfilePic from '../UIComponents/profilePic/ProfilePic';
 
 const ContactMenuItem = ({active, contactItem, add, remove}) => {
 
     const [checked, setChecked] = useState(active || false);
-    const toggleChecked = () => { 
+    const toggleChecked = () => {
         if (!checked) {
             add(contactItem);
         } else {
@@ -11,7 +12,19 @@ const ContactMenuItem = ({active, contactItem, add, remove}) => {
         }
         setChecked(!checked);
     };
-    return (<label><input type="checkbox" checked={checked} onChange={toggleChecked}/>{contactItem.accountName}</label>);
+    return (
+        <div className='contact-checkbox-container'>
+			<input className="contact-checkbox" type="checkbox"  checked={checked} onChange={toggleChecked}/>
+			<ProfilePic
+				key={contactItem.accountID}
+				name={contactItem.accountName}
+				size={"xs"}
+				id={contactItem.accountID}
+			/>
+			<h6>{contactItem.accountName}</h6>
+		</div>
+    );
+
 }
 
 export default ContactMenuItem;

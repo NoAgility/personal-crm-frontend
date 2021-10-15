@@ -15,14 +15,14 @@ const TaskPriorityDropdown = ({change, defaultPriority, owner}) => {
 
         {owner ? <React.Fragment>
             <Dropdown.Toggle id="dropdown-autoclose-outside">
-            Priority: {priority}
+            {priority}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-            {Object.keys(priorities).map(p => 
+            {Object.keys(priorities).map(p =>
                 <Dropdown.Item
                     key={"priority" + p}
-                    onClick={() => { 
+                    onClick={() => {
                         setPriority(p);
                         change(priorities[p])
                         }
@@ -31,9 +31,12 @@ const TaskPriorityDropdown = ({change, defaultPriority, owner}) => {
                 </Dropdown.Item>
             )}
         </Dropdown.Menu>
-        </React.Fragment> : <div className="unselectable-input"><h5>Priority</h5> <div>{priority}</div></div>
+        </React.Fragment> :
+        <div className="unselectable-input">
+            <div>{priority}</div>
+        </div>
         }
-        
+
     </Dropdown>);
 }
 

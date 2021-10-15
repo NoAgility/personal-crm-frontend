@@ -62,7 +62,7 @@ const EditContact = ({ onShow, onHide, contact }) => {
 					<form>
 						<div className="username-selector">
 							<input
-								required
+								required={true}
 								type="text"
 								name="username"
 								id="username"
@@ -74,7 +74,7 @@ const EditContact = ({ onShow, onHide, contact }) => {
 						</div>
 							<div className="dob-selector">
 							<input
-								required
+								required={true}
 								min="1"
 								type="number"
 								name="day"
@@ -99,7 +99,7 @@ const EditContact = ({ onShow, onHide, contact }) => {
 								<option value="12">December</option>
 							</select>
 							<input
-								required
+								required={true}
 								min={((new Date().getFullYear()) - 120).toString()}
 								max={(new Date().getFullYear()).toString()}
 								type="number"

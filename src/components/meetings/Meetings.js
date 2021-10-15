@@ -210,6 +210,7 @@ const Meetings = (props) => {
 	// Load all meetings from back-end
 	useEffect(() => {
 		getMeetings();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
     return (
