@@ -1,0 +1,100 @@
+.landing-page {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-width: 1080px;
+    height: 80px;
+    background-color: var(--color-xdark);
+}
+.banner-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+.banner-header > h1 {
+    margin: auto;
+}
+.information-body {
+    overflow: hidden;
+    min-width: 1080px;
+    height: 60vh;
+    min-height: 590px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../assets/information-background.png);
+    margin-bottom: 40px;
+}
+.information-text {
+    font-family: var(--font);
+    max-width: 500px;
+    font-size: var(--text-big);
+    margin-right: 40px;
+}
+.carousel-container {
+    margin-left: 40px;
+    background-color: rgb(140, 140, 160, 0.7);
+    border-radius: 10px;
+    padding: 20px 20px 0 20px;
+}
+.snippet {
+    height: 40vh;
+}
+.logo {
+    border-radius: 10px;
+    background-color: var(--color-offwhite);
+    margin-right: 20px;
+}
+.login-btn {
+    border: solid;
+    color: var(--color-white);
+    margin: 20px;
+    width: 120px;
+    height: 40px;
+    border-color: var(--color-offwhite);
+    border-width: 2px;
+    background-color: var(--color-medium);
+}
+.signup-btn {
+    border: solid;
+    color: var(--color-white);
+    margin: 20px;
+    margin-right: 80px;
+    width: 120px;
+    height: 40px;
+    border-color: var(--color-offwhite);
+    border-width: 2px;
+    background-color: var(--color-blue);
+}
+.landing-names {
+    background-color: var(--color-medium);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.name-row {
+    color: var(--color-white);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;   
+}
+.name-row > h2 {
+    margin: 40px 80px 40px 80px;
+}
+.copyright {
+    font-family: var(--font);
+    position: absolute;
+
+    right: 20px;
+}

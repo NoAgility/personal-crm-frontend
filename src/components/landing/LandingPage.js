@@ -1,0 +1,72 @@
+import './LandingPage.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import { useHistory } from 'react-router-dom';
+const LandingPage = () => {
+
+    const history = useHistory();
+    const redirect = (route) => {
+        history.push(route);
+    }
+    return <div className="landing-page">
+
+        <div className="banner">
+            <div className="banner-header">
+                <div className="logo">
+                <img src="/landing_logo.png" alt=""/>
+                </div>
+                
+                <h1>NoAgility Personal CRM</h1>
+            </div>
+            
+            <div className="row">
+                <button className="login-btn" onClick={() => redirect("/login")}>Login</button>
+
+                <button className="signup-btn" onClick={() => redirect("/register")}>Sign Up</button>
+            </div>
+        </div>
+
+        <div className="information-body">
+            <div className="information-text">
+                A powerful CRM, made just for your personal needs.
+
+                Connect with your colleagues, manage your schedule, organise your tasks and meetings with ease.
+            </div>
+            <div className="carousel-container">
+                <Carousel
+                    width="700px"
+                    autoPlay={true}
+                    infiniteLoop={true}>
+                    <div>
+                        <img src="/rsz_1contacts.png" alt="Can't be loaded"/>
+                        <p className="legend">Legend 1</p>
+                    </div>
+                    <div>
+                        <img src="/rsz_inbox.png" alt="Can't be loaded"/>
+                        <p className="legend">Legend 2</p>
+                    </div>
+                    <div>
+                        <img src="assets/3.jpeg" alt="Can't be loaded"/>
+                        <p className="legend">Legend 3</p>
+                    </div>
+                </Carousel>
+            </div>
+        </div>
+        <div className="landing-names">
+            <div className="name-row">
+                <h2>Nathan Rearick</h2>
+                <h2>Oscar Rochanakij</h2>
+                <h2>Robert Northby</h2>
+            </div>
+            <div className="name-row">
+                <h2>Lucien Lu</h2>
+                <h2>Ash Mulama</h2>
+            </div>
+        </div>
+        <div className="copyright">
+            This application was created for The University of Melbourne
+        </div>
+    </div>
+}
+
+export default LandingPage;

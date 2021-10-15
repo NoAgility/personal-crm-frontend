@@ -77,6 +77,16 @@ const Registration = (props) => {
         
         history.push('/registration_success');
     }
+
+    const onFocus = (e) => {
+        e.currentTarget.type = "date";
+    };
+    const onBlur = (e) => {
+        e.currentTarget.type = "text";
+        e.currentTarget.placeholder = "Date of Birth";
+        e.currentTarget.value = new Date(DOB).toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
+    };
+    console.log(props.DOB);
     return (
         <div className="background">
             <form className="registration-form" onSubmit={onSubmit}>
@@ -85,25 +95,25 @@ const Registration = (props) => {
                 </h1>
                 <div className="form-field-container">
                     <div data-testid='username-error' className='error'>{errorUsername}</div>
-                    <input data-testid="username" name="username" className="form-input" type="text" value={props.username} placeholder="Username" onChange={ (e) => setUsername(e.target.value) }/>
+                    <input data-testid="username" name="username" className="form-input" type="text" value={username} placeholder="Username" onChange={ (e) => setUsername(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                 <div data-testid='name-error' className='error'>{errorName}</div>
-                    <input data-testid="name" name="name" className="form-input" type="text" value={props.firstName} placeholder="Name" onChange={ (e) => setName(e.target.value) }/>
+                    <input data-testid="name" name="name" className="form-input" type="text" value={name} placeholder="Name" onChange={ (e) => setName(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                     <div data-testid='password-error' className='error'>{errorPassword}</div>
-                    <input data-testid="password" name="password" className="form-input" type={passwordShown ? "text" : "password"} value={props.password} placeholder="Password" onChange={ (e) => setPassword(e.target.value) }/>
+                    <input data-testid="password" name="password" className="form-input" type={passwordShown ? "text" : "password"} value={password} placeholder="Password" onChange={ (e) => setPassword(e.target.value) }/>
                     {passwordShown ? show : hide}
                 </div>
                 <div className="form-field-container">
                     <div data-testid='dob-error'className='error'>{errorDOB}</div>
-                    <input data-testid="DOB" name="DOB" className="form-input" type="date" value={props.DOB} onChange={ (e) => setDOB(e.target.value) }/>
+                    <input data-testid="DOB" className="form-input" name="DOB" onBlur={onBlur} onFocus={onFocus} type="date" value={DOB} onChange={ (e) => setDOB(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                 <div data-testid='general-error' className='error'>{generalError}</div>
                     <button data-testid="submit" name="submit" className="form-submit" type="submit" onClick={ onSubmit }>Submit</button>
-                    <button data-testid="login" name="login" className="form-back" type="button" onClick={ () => { history.push('/login');}}>Back to Login</button>
+                    <button data-testid="login" name="login" className="form-back" type="button" onClick={ () => { history.push('/login');}}>To Login</button>
                 </div>
             </form>
         </div>

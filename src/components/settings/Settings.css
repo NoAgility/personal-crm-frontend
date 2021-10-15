@@ -26,10 +26,12 @@
 
 .close {
 	color: var(--color-white);
+	cursor: pointer;
 }
 
 .close:hover {
 	color: var(--color-white);
+	cursor: pointer;
 }
 
 .form-control {

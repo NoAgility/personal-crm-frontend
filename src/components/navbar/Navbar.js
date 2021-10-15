@@ -6,13 +6,15 @@ import { useState } from "react";
 const Navbar = (props) => {
     const [active, setActive] = useState("/home/calendar");
 
+    const history = useHistory();
+    
     const onClick = (route) => {
         history.push(route);
         const page = route.split("/home/").pop();
         setActive(page);
     }
 
-    const history = useHistory();
+    
     /**
      * Navigation sidebar providing functionality to change app content
      */
