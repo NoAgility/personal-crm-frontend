@@ -13,6 +13,7 @@
 	--color-dark: #3a3b50;
   --color-medium: #585c74;
   --color-teal: #62bbb3;
+  --color-red: #db182c;
 	--color-orange: #d4a46c;
 	--color-purple: #be8bfc;
 	--color-green: #62b96d;
@@ -130,4 +131,11 @@ button {
     padding: 25px;
     padding-bottom: 0px;
     margin-top: 80px;
+}
+.divider {
+  border-top: 3px solid var(--color-offwhite);
+  border-radius: 5px;
+}
+.dropdown-item {
+  cursor: pointer;
 }

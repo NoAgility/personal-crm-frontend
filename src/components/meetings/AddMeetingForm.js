@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./AddMeetingForm.css";
 import "../form.css";
-import { MdClose, MdGroup, MdOutlineDescription, MdDateRange } from 'react-icons/md';
+import { MdClose, MdGroup, MdDescription, MdDateRange } from 'react-icons/md';
 import { BiBook } from 'react-icons/bi';
 import MeetingController from './MeetingController';
 import { Modal } from 'react-bootstrap';
@@ -119,7 +119,7 @@ const AddMeetingForm = ({ meeting, submit, show, onHide }) => {
                             />
                     </h3>
 					<h3 className="">
-                        <MdOutlineDescription className="add-meeting-icon" size={25}/>
+                        <MdDescription className="add-meeting-icon" size={25}/>
                         <input
                             type="text"
                             className="form-input"

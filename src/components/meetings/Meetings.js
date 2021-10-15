@@ -210,7 +210,7 @@ const Meetings = (props) => {
 	// Load all meetings from back-end
 	useEffect(() => {
 		getMeetings();
-	}, )
+	}, [])
 
     return (
 		<>

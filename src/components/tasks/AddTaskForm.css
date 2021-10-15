@@ -1,0 +1,9 @@
+.task-add {
+    color: var(--color-white);
+	display: flex;
+	flex-direction: column;
+	place-items: center center;
+	min-width: 600px;
+	margin: 0px 25px 0px 25px;
+    border-top: none;
+}

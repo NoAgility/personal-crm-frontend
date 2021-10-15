@@ -1,0 +1,66 @@
+.purple-circle {
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.7px solid;
+    border-color: var(--color-purple);
+    cursor: pointer;
+    color: var(--color-purple);
+}
+.red-circle {
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.7px solid;
+    border-color: var(--color-red);
+    cursor: pointer;
+    color: var(--color-red);
+}
+.yellow-circle {
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.7px solid;
+    border-color: var(--color-orange);
+    cursor: pointer;
+    color: var(--color-orange);
+}
+.green-circle {
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.7px solid;
+    border-color: var(--color-green);
+    cursor: pointer;
+    color: var(--color-green);
+}
+.task {
+    color: var(--color-offwhite);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: solid;
+    border-color: var(--color-offwhite);
+    border-width: 1px;
+    margin-bottom: 20px;
+    width: 100%;
+    
+}
+.task-container-left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-white);
+    font-family: var(--font);
+}
+.task-name {
+    cursor: pointer;
+    text-align: left;
+    min-width: 40px;
+    min-height: 25px;
+}

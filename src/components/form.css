@@ -7,6 +7,10 @@
 	cursor: pointer;
 }
 .form-label {
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	justify-content: center;
 	font-weight: bold;
 	font-family: var(--font);
 }
@@ -34,6 +38,7 @@
 	margin-right: 10px;
 }
 .form-date-input {
+	
 	font-family: var(--font);
 	font-size: var(--text-msmall);
 	color: var(--color-white);
@@ -43,6 +48,8 @@
 	border-bottom: solid var(--color-offwhite);
 	border-width: 2px;
 	background-color: var(--color-dark);
+	width: 80%;
+	max-width: 200px;
 }
 .form-container {
     display: flex;

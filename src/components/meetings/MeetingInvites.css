@@ -4,14 +4,14 @@
 	box-shadow: 0px 0px 10px var(--color-black);
     height: 100%;
 	position: fixed;
-	width: 280px;
+	width: 240px;
     top:130px;
     left:-50px;
 	padding:20px;
 }
 
 .meeting-invites-container-open {
-	left: 280px;
+	left: 240px;
 }
 
 .meeting-invites {
@@ -23,7 +23,7 @@
 	color: var(--color-white);
 	position:fixed;
 	top:130px;
-	left:260px;
+	left:240px;
 	padding: 20px;
 	border-radius: 0px 30px 30px 0px;
 	width: 60px;

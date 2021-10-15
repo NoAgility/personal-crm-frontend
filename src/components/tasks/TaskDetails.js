@@ -1,40 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { MdClose } from 'react-icons/md';
-import { Modal } from 'react-bootstrap';
-import ContactController from '../contacts/ContactController';
+import { MdClose, MdAdd, MdModeEdit, MdFace } from 'react-icons/md';
+import { Modal, Accordion } from 'react-bootstrap';
 import  './TaskDetails.css';
 import './Tasks.css';
 import "../form.css";
 import ContactMenuItem from './ContactMenuItem';
+import TaskPriorityDropdown from './TaskPriorityDropdown';
+import TaskNote from './TaskNote';
+import ContactController from '../contacts/ContactController';
+import SearchBar from '../UIComponents/searchbar/SearchBar';
+import Sort from '../UIComponents/sort/Sort';
+const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate}) => {
 
-const TaskDetails = ({task, show, onHide, onUpdate}) => {
-
-	const TaskContact = (contact) => {
-		<div className="task-contact">
-			{contact.accountUsername};
-			<MdClose/>
-		</div>
-	}
-
-	const [contacts, setContacts] = useState([]);
+	
+	const [taskName, setTaskName] = useState(task.taskName);
+	const [availableContacts, setAvailableContacts] = useState(contacts);
+	const [filteredAvailableContacts, setFilteredAvailableContacts] = useState(contacts);
+	const [filteredContactsViewer, setFilteredContactsViewer] = useState(allContacts.filter((contact) => (contact.accountID !== task.accountID)).filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
+	const [editingName, setEditingName] = useState(false);
+	const [taskOwner, setTaskOwner] = useState("");
+	const [notes, setNotes] = useState(task.taskNoteList);
+	const [notesSorted, setNotesSorted] = useState(task.taskNoteList);
 	const [taskPriority, setTaskPriority] = useState(task.taskPriority);
-
-	const [contactsChanged, setContactsChanged] = useState(false);
+	const [taskComplete, setTaskComplete] = useState(task.taskComplete || 0);
+	const [contactIDsAdded, setContactIDsAdded] = useState([]);
+	const [contactIDsRemoved, setContactIDsRemoved] = useState([]);
+	const [contactIDsSelected, setContactIDsSelected] = useState(task.taskContactAccounts.map((contact) => contact.contactID))
+	const [notesChanged, setNotesChanged] = useState([]);
+	const [notesAdded, setNotesAdded] = useState([]);
+	const [notesRemoved, setNotesRemoved] = useState([]);
 	const [taskPriorityChanged, setTaskPriorityChanged] = useState(false);
 	const [taskDeadlineChanged, setTaskDeadlineChanged] = useState(false);
-	const [selectedContactIDs, setSelectedContactIDs] = useState(task.taskContactAccounts.map(data => data.contactID));
-	const [trigger, setTrigger] = useState(true);
 
+	const [searchBarInput, setSearchBarInput] = useState("");
 	/**
 	 * Function for formatting a date to be valid for date input (ISO)
 	 * @param {Date} date The date to be formatted
 	 * @returns The ISO formatted date
 	 */
 	const dateFormat = (date) => {
-		const day = date.getDate().toString().padStart(2, "0"),
-		month = (date.getMonth() + 1).toString().padStart(2, "0"),
-		year = date.getFullYear();
-		return year + "-" + month + "-" + day;
+		const day = date.getDate(),
+		month = date.getMonth(),
+		year = date.getFullYear(),
+		hour = date.getHours(),
+		mins = date.getMinutes();
+
+		const formattedDate = year + "-" + month + "-" + day;
+
+		if (formattedDate === "1970-01-01") return "";
+		return new Date(date).toISOString().substring(0, 19);
 	}
 	const [taskDeadline, setTaskDeadline] = useState(dateFormat(new Date(task.taskDeadline)));
 
@@ -42,150 +56,340 @@ const TaskDetails = ({task, show, onHide, onUpdate}) => {
 	 * Function to be called on Modal close
 	 */
 	const handleClose = () => {
+		setEditingName(false);
 		setTaskPriority(task.taskPriority);
 		setTaskDeadline(dateFormat(new Date(task.taskDeadline)));
 		setTaskPriorityChanged(false);
 		setTaskDeadlineChanged(false);
-		setContactsChanged(false);
+		setNotes(task.taskNoteList);
+		setNotesAdded([]);
+		setNotesRemoved([]);
+		setNotesChanged([]);
+		setAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredContactsViewer(allContacts.filter((contact) => (contact.accountID !== task.accountID)).filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
+		setContactIDsAdded([]);
+		setContactIDsRemoved([]);
+		setContactIDsSelected(task.taskContactAccounts.map((c) => c.contactID));
+		setTaskComplete(task.taskComplete);
 		onHide();
 	}
+
+	const sortNotesByOldestFirst = () => {
+		notes.sort((a, b) => {
+			if (a.taskNoteID > b.taskNoteID) {
+				return 1;
+			} else if (a.taskNoteID < b.taskNoteID) {
+				return -1;
+			} else {
+				return 0;
+			}
+		})
+		setNotesSorted([...notes]);
+	}
+	const sortNotesByNewestFirst = () => {
+		notes.sort((a, b) => {
+			if (a.taskNoteID < b.taskNoteID) {
+				return 1;
+			} else if (a.taskNoteID > b.taskNoteID) {
+				return -1;
+			} else {
+				return 0;
+			}
+		})
+		setNotesSorted([...notes]);
+	}
+	const noteSortTypes = [
+		{
+			label: "Oldest first",
+			sortFunction: sortNotesByOldestFirst
+		},
+		{
+			label: "Newest first",
+			sortFunction: sortNotesByNewestFirst
+		}
+	]
 	/**
 	 * Add contact to selection
 	 * @param {*} contact The contact to be added
 	 */
-	const addContactSelection = (contact) => {
-        setSelectedContactIDs([...selectedContactIDs, contact.accountID]);
+	const addavailableContactselection = (contact) => {
+		setContactIDsAdded([...contactIDsAdded, contact.accountID]);
+		if (contactIDsRemoved.includes(contact.accountID)) {
+			const index = contactIDsRemoved.indexOf(contact.accountID);
+			if (contactIDsRemoved.length === 1) {
+				setContactIDsRemoved([]);
+			} else {
+				setContactIDsRemoved(contactIDsRemoved.slice(index, 1));
+			}
+        	
+		}
     }
 	/**
 	 * Remove contact from selection
 	 * @param {*} contact The contact to be added
 	 */
-    const removeContactSelection = (contact) => {
-        const index = selectedContactIDs.indexOf(contact.accountID);
-        selectedContactIDs.splice(index, 1);
+    const removeavailableContactselection = (contact) => {
+		if (contactIDsAdded.includes(contact.accountID)) {
+			const index = contactIDsAdded.indexOf(contact.accountID);
+			if (contactIDsAdded.length === 1) {
+				setContactIDsAdded([]);
+			} else {
+				setContactIDsAdded(contactIDsAdded.slice(index, 1));
+			}
+        	
+		}
+		setContactIDsRemoved([...contactIDsRemoved, contact.accountID])
     }
 	const isSelected = (contact) => {
-		return selectedContactIDs.includes(contact.accountID);
+		return (contactIDsSelected.includes(contact.accountID) || contactIDsAdded.includes(contact.accountID)) && !contactIDsRemoved.includes(contact.accountID);
 	}
-	//For Firefox (64.0) users
-    const preventNonNumericalInput = (e) => {
-        e = e || window.event;
-        var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
-        var charStr = String.fromCharCode(charCode);
-
-        if (!charStr.match(/^[0-9]+$/))
-            e.preventDefault();
+	const removeAddedNote = (note) => {
+        const index = notesAdded.indexOf(note);
+        notesAdded.splice(index, 1);
     }
-	useEffect(() => {
-
-        const getContacts = async () => {
-            const ids = await ContactController.fetchContacts();
-			let activeCs = [];
-            let cs =  [];
-            if (ids !== undefined && ids.length > 0) {
-                for (const id of ids) {
-                    let contactData = await ContactController.fetchContactData(id);
-                    cs.push(contactData);
-                }
-				setContacts(cs);
-            }
-        }
-
-        getContacts();
-    }, [trigger]);
-
-	const onUpdateWrapper = () => {
+	const removeNote = (note) => {
+        const index = notes.indexOf(note);
+        notes.splice(index, 1);
+    }
+	const addNote = (note) => {
+		setNotesAdded([...notesAdded, note]);
+	}
+	const completeTask = async () => {
+		await onUpdateWrapper({taskComplete: true})
+		
+	}
+	const onUpdateWrapper = (taskComplete) => {
 		const newTask = {}; //
 		Object.assign(newTask, task);
 
 		Object.assign(newTask, {
-			...(contactsChanged) && {contactIDs: selectedContactIDs},
 			...(taskPriorityChanged) && {taskPriority: taskPriority},
 			...(taskDeadlineChanged) && {taskDeadline: taskDeadline}
+			
 		});
 
 		const changes = {
-			taskName: false, // Need to add ability to change
+			taskName: taskName,
 			taskPriority: taskPriorityChanged,
+			taskComplete: taskComplete || false,
 			taskDeadline: taskDeadlineChanged,
-			taskNotes: false // Backend needs to fix this
+			taskNotesAdded: notesAdded,
+			taskNotesChanged: notesChanged,
+			taskNotesRemoved: notesRemoved,
+			taskContactIDsAdded: contactIDsAdded,
+			taskContactIDsRemoved: contactIDsRemoved
 		}
-
 		onUpdate(newTask, changes);
-
-		setTrigger(true);
+		if (taskComplete) handleClose();
 	}
+	const changeContactSearchFilter = (filter) => {
+		setSearchBarInput(filter);
+		if (filter === null || filter.length === 0) {
+			setFilteredAvailableContacts(availableContacts);
+		} else {
+			setFilteredAvailableContacts(availableContacts.filter((contact) => contact.accountName.includes(filter)));
+			
+		}
+	}
+	const changeContactSearchFilterViewer = (filter) => {
+		setSearchBarInput(filter);
+		if (filter === null || filter.length === 0) {
+			setFilteredContactsViewer(allContacts);
+		} else {
+			setFilteredContactsViewer(allContacts.filter((contact) => contact.accountName.includes(filter)));
+			
+		}
+	}
+	useEffect(() => {
+		const findTaskOwner = () => {
+			for (const contact of allContacts) {
+				if (contact.accountID === task.accountID) {
+					return contact.accountName;
+				}
+			}
+			return "";
+		}
+		setAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredAvailableContacts(contacts.filter((contact) => (contact.accountID !== task.accountID)));
+		setFilteredContactsViewer(allContacts.filter((contact) => (contact.accountID !== task.accountID)).filter((contact) => task.taskContactAccounts.map(contact => contact.contactID).includes(contact.accountID)));
+		setContactIDsSelected(task.taskContactAccounts.map((c) => c.contactID));
+		setTaskOwner(findTaskOwner());
+		setTaskName(task.taskName);
+		setTaskPriority(task.taskPriority);
+		setTaskDeadline(dateFormat(new Date(task.taskDeadline)));
+		setNotes(task.taskNoteList);
+		setNotesSorted(task.taskNoteList);
+		setSearchBarInput("");
+	}, [contacts, allContacts, task]);
+
+	console.log(contactIDsRemoved);
 	return (
 		<>
 		<Modal
 			show={show}
-			onHide={onHide}
+			onHide={handleClose}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
 			<div className="task-details-top">
 				<MdClose className="task-close-button" onClick={handleClose} size={30}/>
 			</div>
-			<h1>{task.taskName}</h1>
+			<div className="task-name">
+			{editingName ? <input 
+				className="task-name-input" 
+				type="text" 
+				value={taskName} 
+				onChange={(e) => setTaskName(e.target.value)} 
+				maxlength="45"/> : 
+				<h1 className="task-name-h1">{taskName}</h1>}
+			<MdModeEdit className="edit-task-name-btn" onClick={() => setEditingName(!editingName)}/>
+			</div>
+			
 			<Modal.Body className="task-details">
-
-				<div className="task-details-left">
-					<label className="form-label">
-						Task Notes
-						<textarea
-							value={task.taskNotes}
-							onChange={(e) => {task.taskNotes = e.target.value;}}
-						/>
-					</label>
-					<label className="form-label">
-						Priority
-						<input className="form-input"
-							type="number"
-							placeholder="Enter a number"
-							value={taskPriority !== -1 ? taskPriority : "" }
-							onKeyPress={preventNonNumericalInput}
-							onChange={(e) => {
-								setTaskPriority(e.target.value);
-								setTaskPriorityChanged(true);
-							}}
-						/>
-					</label>
-					<label className="form-label">
-						Deadline
-						<input className="form-date-input"
-							type="date"
-							value={taskDeadline || "" }
-							onChange={(e) => {
-								setTaskDeadline(e.target.value);
-								setTaskDeadlineChanged(true);
-							}}
-						/>
-					</label>
-				</div>
-				<div className="task-details-right">
-					<label className="form-label">Contacts</label>
-					<div className="task-contact-container">
-						{contacts.map(contact =>
-							<ContactMenuItem
-								active={isSelected(contact)}
-								key={contact.accountID}
-								contactItem={contact}
-								add={addContactSelection}
-								remove={removeContactSelection}/>)}
+			<Accordion className="accordion-flush" defaultActiveKey="0">
+				<Accordion.Item eventKey="0">
+					<Accordion.Header className="accordion-header">Basic Details</Accordion.Header>
+					<Accordion.Body>
+						<div className="task-details-section">
+							<div className="row">
+							<TaskPriorityDropdown 
+								change={(p) => {
+									setTaskPriority(p); 
+									setTaskPriorityChanged(true);
+								}} 
+								defaultPriority={taskPriority}
+								owner={task.owner}
+							/>
+							{task.owner ? 
+							<label className="form-label super-center">
+								Deadline
+								<input className="form-date-input" 
+									type="datetime-local" 
+									value={taskDeadline || "" } 
+									onChange={(e) => {
+										setTaskDeadline(e.target.value);
+										setTaskDeadlineChanged(true);
+									}}
+								/> 
+							</label> : 
+							<div className="unselectable-input">
+								<h5>Deadline</h5> 
+								<div>
+									{taskDeadline || "No Deadline"}
+								</div>
+							</div>
+							}
+							</div>
+							{!taskComplete ? <button type="checkbox" className="task-complete-btn" onClick={completeTask}>Complete Task</button> : <div>Task Completed</div>}
+						</div>
+					</Accordion.Body>
+				</Accordion.Item>
+				<Accordion.Item eventKey="1">
+					<Accordion.Header className="accordion-participants-header">Participants</Accordion.Header>
+					<Accordion.Body>
+					{task.owner ?
+					
+					<div className="accordion-body">
+						<div className="task-section-header"><h5>Add or remove a contact</h5>
+						
+							<SearchBar 
+								name="contact" 
+								width="xsm" 
+								colorMode="light" 
+								onSubmit={(e) => { e.preventDefault();}} 
+								value={searchBarInput} 
+								placeHolder="Contact Name" 
+								onChange={(e) => { changeContactSearchFilter(e.target.value);}}/>
+						</div>
+						<div className="divider"/>
+							<div className="task-contact-container">
+								<div className="task-contact-owner"><MdFace/><b>{taskOwner}</b> <i>(Owner)</i></div>
+								{filteredAvailableContacts.map(contact => 
+									<ContactMenuItem 
+										active={isSelected(contact)} 
+										key={contact.accountID}
+										contactItem={contact} 
+										add={addavailableContactselection} 
+										remove={removeavailableContactselection}/>)}
+							</div>
+						</div> 
+						: <div className="accordion-body">
+						<div className="task-section-header"><h5>You are not the owner of this task</h5>
+						
+							<SearchBar 
+								name="contact" 
+								width="xsm" 
+								colorMode="light" 
+								onSubmit={(e) => { e.preventDefault();}} 
+								value={searchBarInput} 
+								placeHolder="Contact Name" 
+								onChange={(e) => { changeContactSearchFilterViewer(e.target.value);}}/>
+						</div>
+						<div className="divider"/>
+							<div className="task-contact-container">
+								<div className="task-contact-owner"><MdFace/><b>{taskOwner}</b> <i>(Owner)</i></div>
+								<ul className="task-contact-viewer-list">{filteredContactsViewer.map((contact) => (<li>{contact.accountName}</li>))}</ul>
+							</div>
+						</div>}
+					</Accordion.Body>
+				</Accordion.Item>
+				<Accordion.Item eventKey="2">
+					<Accordion.Header className="accordion-header">Notes</Accordion.Header>
+					<Accordion.Body className="accordion-body">
+					
+					<div className="task-section-header"><h5>Add notes to your task</h5>
+						<Sort sortTypes={noteSortTypes}/>
 					</div>
-				</div>
-
-
-			</Modal.Body>
+					<div className="task-notes-section">
+						{notesAdded.map((note, index) => 
+							<TaskNote 
+								key={"new" + index}
+								note={note}
+								onChange={() => {}}
+								onDelete={(note) => {
+									removeAddedNote(note);
+								}}
+							/>)
+						}
+						{notesSorted.map((note) => <TaskNote 
+							key={note.taskNoteID}
+							note={note}
+							onChange={(note) => {
+								setNotesChanged([...notesChanged, note]);
+							}}
+							onDelete={(note) => {
+								setNotesRemoved([...notesRemoved, note]);
+								removeNote(note);
+							}}/>)
+						}
+					</div>
+					<div className="task-notes-header">
+						<div className="task-note-add">
+						<MdAdd className="add-note-btn"
+							onClick={() => {
+								var note = {
+									taskID: task.taskID,
+									note: ""
+								};
+								addNote(note);
+							}}/>
+						</div>
+					</div>
+					</Accordion.Body>
+				</Accordion.Item>
+			</Accordion>
 			<div className="task-details-bottom">
 				<button className="task-submit" onClick={
 					() => {
 						onUpdateWrapper()
-						onHide();
+						handleClose();
 					}
 				}>Save</button>
 			</div>
-
+			</Modal.Body>
+			
+			
 		</Modal>
 		</>
 	)
