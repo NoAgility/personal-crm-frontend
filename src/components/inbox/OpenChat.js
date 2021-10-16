@@ -24,7 +24,7 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
 
 	const messagesEndRef = useRef(null)
 
- 	 const scrollToBottom = () => {
+ 	const scrollToBottom = () => {
     	messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
   	}
 

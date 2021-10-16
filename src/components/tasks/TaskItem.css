@@ -60,3 +60,8 @@
     margin-left: 10px;
     margin-bottom: 0px;
 }
+.task-item-date {
+    margin-left: auto !important;
+    margin-right: 40px;
+    color: var(--color-offwhite);
+}

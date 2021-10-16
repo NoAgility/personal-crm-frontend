@@ -62,8 +62,8 @@ test("Unit Test - MeetingList, MeetingItem Component renders", async () => {
 		/>);
 
     await waitFor(() => expect(container).toHaveTextContent("Test Meeting 1"));
-    await waitFor(() => expect(container).toHaveTextContent("13:30 - 14:30"));
-    await waitFor(() => expect(container).toHaveTextContent("Tuesday, 26 October 2021"));
+    await waitFor(() => expect(container).toHaveTextContent("1:30 PM - 2:30 PM"));
+    await waitFor(() => expect(container).toHaveTextContent("Tuesday, October 26, 2021"));
 	const profilePic1 = container.querySelector(".profile-pic");
 	await waitFor(() => expect(profilePic1).not.toBeNull());
     await waitFor(() => expect(profilePic1).toHaveTextContent("T"));
@@ -102,14 +102,14 @@ test("Unit Test - MeetingDetails Component renders", async () => {
 		/></div>, {container: document.body});
 
 	const meetingDetails = container.querySelector(".meeting-details");
-	await waitFor(() => expect(meetingDetails).not.toBeNull());
-	await waitFor(() => expect(meetingDetails).toHaveTextContent("Test Meeting 2"));
-	await waitFor(() => expect(meetingDetails).toHaveTextContent("Test Description 2"));
-	await waitFor(() => expect(meetingDetails).toHaveTextContent("Tuesday, 26 October 2021 : 13:30 - 14:30"));
+	await waitFor(() => expect(meetingDetails.textContent).not.toBeNull());
+	await waitFor(() => expect(meetingDetails.textContent).toContain("Test Meeting 2"));
+	await waitFor(() => expect(meetingDetails.textContent).toContain("Test Description 2"));
+	await waitFor(() => expect(meetingDetails.textContent).toContain("Tuesday, October 26, 2021  :  1:30 PM - 2:30 PM"));
 	const profilePic1 = meetingDetails.querySelector(".profile-pic");
 	await waitFor(() => expect(profilePic1).not.toBeNull());
-	await waitFor(() => expect(profilePic1).toHaveTextContent("T"));
-	await waitFor(() => expect(meetingDetails).toHaveTextContent("add minutes"));
+	await waitFor(() => expect(profilePic1.textContent).toContain("T"));
+	await waitFor(() => expect(meetingDetails.textContent).toContain("Add minutes"));
 
 	unmount();
 });

@@ -104,7 +104,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
-			<div className="modal-top ">
+			<div className="modal-top">
 				<FiEdit2 className="modal-header-button"
 					style={{display: `${meeting.meetingCreatorID === userID ? 'block' : 'none'}`}}
 					onClick={!isEditing ? () => {setIsEditing(true)} : () => {setIsEditing(false)}} size={25}/>
@@ -180,7 +180,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 							<div className="small-add-btn meeting-btn">
 								<MdAdd size={20} color={'white'}/>
 							</div>
-							<h6>add minutes</h6>
+							<h6>Add minutes</h6>
 					</button>
 					<div className="add-minute-form-container" style={openMinute ? {display : 'block'} : {display : 'none'}} >
 						<form id="add-minute" onSubmit={handleSaveMinute}>

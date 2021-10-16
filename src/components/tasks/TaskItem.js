@@ -13,7 +13,7 @@ const prioritiesColorMap = {
     "-1": "circle purple-circle"
 }
 
-const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, searchContact}) => {
+const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, searchContact, isOverdue}) => {
     const [modalShow, setModalShow] = useState(false);
     const [completeConfirmShow, setCompleteConfirmShow] = useState(false);
     const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
@@ -52,6 +52,7 @@ const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, 
             show={modalShow}
             onUpdate={onUpdate}
 			onHide={() => {setModalShow(false);}}
+            onDelete={onDelete}
             searchContact={searchContact}/>
             <span className={prioritiesColorMap[priority]} onClick={() => { task.taskComplete || setCompleteConfirmShow(true)}}>{task.taskComplete ? <MdCheck className="tick-icon"/> : ""}</span>
         <div className="task-container-left" >
@@ -59,17 +60,7 @@ const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, 
                 <h6>{task.taskName}</h6>
             </div>
 
-            <div className="meeting-item-date">{getDisplayDate()}</div>
-
-            <Dropdown className="task-options">
-			<Dropdown.Toggle id="button-dropdown-body"  className="dropdown-button" >
-				<MdMoreHoriz className="edit-task-options" size={30}/>
-			</Dropdown.Toggle>
-
-			<Dropdown.Menu className="task-options-dropdown" variant="dark">
-				<Dropdown.Item className="delete-btn" onClick={() => setDeleteConfirmShow(true)}>Delete</Dropdown.Item>
-			</Dropdown.Menu>
-		</Dropdown>
+            <div className="task-item-date">{isOverdue ? "Overdue" : getDisplayDate()}</div>
         </div>
     </div>
 }

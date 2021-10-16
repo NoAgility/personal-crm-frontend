@@ -14,7 +14,7 @@ const ContactMenuItem = ({active, contactItem, add, remove}) => {
     };
     return (
         <div className='contact-checkbox-container'>
-			<input className="contact-checkbox" type="checkbox"  checked={checked} onChange={toggleChecked}/>
+			<input className="task-contact-checkbox" type="checkbox"  checked={checked} onChange={toggleChecked}/>
 			<ProfilePic
 				key={contactItem.accountID}
 				name={contactItem.accountName}

@@ -29,7 +29,7 @@ beforeAll(() => {
         writable: true,
         value: 'status=active',
     });
-
+    window.HTMLElement.prototype.scrollIntoView = function() {};
     CookieManager.eraseCookies();
 
 });
@@ -136,7 +136,7 @@ test("ETE Test - Register -> Login -> create chat", async () => {
 
         var {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><Contacts/></div>, {container: document.body});
 
-        const createContact = container.getElementsByClassName("create-contact-btn")[0];
+        const createContact = container.querySelector(".add-btn");
         fireEvent.click(createContact);
 
         var searchBar = container.querySelector(".search-input")
@@ -276,7 +276,7 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
 
         var {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><Contacts/></div>, {container: document.body});
 
-        const createContact = container.getElementsByClassName("create-contact-btn")[0];
+        const createContact = container.querySelector(".add-btn");
         fireEvent.click(createContact);
 
         var searchBar = container.querySelector(".search-input")
@@ -438,7 +438,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
 
         var {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><Contacts/></div>, {container: document.body});
 
-        const createContact = container.getElementsByClassName("create-contact-btn")[0];
+        const createContact = container.querySelector(".add-btn");
         fireEvent.click(createContact);
 
         var searchBar = container.querySelector(".search-input")
@@ -488,8 +488,6 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
 
         fireEvent.click(send);
 
-        console.debug(document.cookie);
-
         await waitFor(() => expect(inbox_container.querySelector(".message-text")).not.toBeNull());
 		// expect a 'message-container'
 		const sentMessage = await inbox_container.getElementsByClassName("message-container-user")[0];
@@ -510,8 +508,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         fireEvent.focus(optionsBtnMessage);
 
         const deleteMessage = await inbox_container.getElementsByClassName("message-options-btn")[1];
-
-        console.debug(inbox_container.innerHTML);
+        
 		await waitFor(() => expect(deleteMessage).not.toBeNull());
 
         fireEvent.click(deleteMessage);

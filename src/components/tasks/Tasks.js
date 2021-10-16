@@ -145,6 +145,9 @@ const TaskPage = (props) => {
      */
     const sortByDate = (tasks) => {
         tasks.sort((a, b) => {
+            if (a.taskDeadline === null && b.taskDeadline === null) return 0;
+            if (a.taskDeadline === null) return 1;
+            if (b.taskDeadline === null) return -1;
             var dateA = new Date(a.taskDeadline ? a.taskDeadline.substring(0,10) : "");
             var dateB = new Date(b.taskDeadline ? b.taskDeadline.substring(0,10) : "");
             if (dateA.toLocaleDateString() === new Date(0).toLocaleDateString()) return 1;
