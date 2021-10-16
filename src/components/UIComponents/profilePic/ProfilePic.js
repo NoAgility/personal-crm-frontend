@@ -1,4 +1,7 @@
 import "./ProfilePic.css"
+import { GrGroup } from 'react-icons/gr';
+import React from 'react';
+
 
 // extracts the initials from an accountName
 const getInitials = (name) => {
@@ -42,16 +45,17 @@ const getColor = (id) => {
 ProfilePic.defaultProps = {
     name: "",
     id: 2,
-    size: "md"
+    size: "sm",
+    isGroupChat: false
 }
 
-function ProfilePic( { name, id, size } ) {
-    // size : lg, md, sm
+function ProfilePic( { name, id, size, isGroupChat } ) {
+    // size : lg, md, sm, xs
 	return (
 		<>
 		<div className={`profile-pic profile-pic-${size}`} style={{backgroundColor: getColor(id)}}>
 			<h1 className={`pp-${size}`}>
-				{getInitials(name)}
+				{isGroupChat ? <GrGroup /> : getInitials(name)}
 			</h1>
 		</div>
 		</>

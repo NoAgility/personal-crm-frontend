@@ -1,0 +1,8 @@
+.unselectable-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-color: var(--color-dark);
+    border-radius: 15px;
+}

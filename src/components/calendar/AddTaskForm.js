@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import "./Calendar.css";
 import "./EventController";
 const AddTaskForm = (props) => {
@@ -20,12 +20,12 @@ const AddTaskForm = (props) => {
             <form className="form" onSubmit={onSubmit}>
                 <div className="input">
                     <input type="text" className="form-input" value={name} placeholder="Task Name" onChange={event => setName(event.target.value)}/>
-                    
+
                 </div>
                 <div className="input">
                     <input type="text" className="form-input" value={notes} placeholder="Notes" onChange={event => setNotes(event.target.value)}/>
                 </div>
-                
+
                 <div>
                     <label className="form-label">Deadline</label>
                     <input className="form-time-input" type="time" value={time} onChange={event => setTime(event.target.value)}/>
@@ -36,7 +36,7 @@ const AddTaskForm = (props) => {
                 </div>
             </form>
         </div>
-    ) 
+    )
 }
 
 export default AddTaskForm;

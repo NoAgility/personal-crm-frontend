@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ProfilePic from "../UIComponents/profilePic/ProfilePic"
+import ProfilePic from "../UIComponents/profilePic/ProfilePic";
 import SearchBar from '../UIComponents/searchbar/SearchBar';
-import ContactController from '../contacts/ContactController.js'
+import ContactController from '../contacts/ContactController.js';
 import  './ClosedChat.css'
 
 const ClosedChat = ({ createChat }) => {
@@ -71,6 +71,10 @@ const ClosedChat = ({ createChat }) => {
 				<div className="create-chat-result">
 					{queryFound ? queryResult(result.accountName, result.accountUsername, result.accountID) : noResult()}
 				</div>
+
+
+
+
 
 			</div>
 		</div>

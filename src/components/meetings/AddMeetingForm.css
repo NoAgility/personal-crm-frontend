@@ -1,0 +1,148 @@
+.meeting-form-container {
+    display: flex;
+    background-color: var(--color-medium);
+    border-radius: 10px;
+    justify-content:flex-start;
+    align-items:center;
+    width: 55%;
+    padding-bottom: 10px;
+    max-width: 500px;
+    min-width: 350px;
+}
+.meeting-form-date-input {
+	font-family: var(--font);
+	font-size: var(--text-msmall);
+	color: var(--color-offwhite);
+	padding: 5px;
+	outline: none;
+	border-style: none;
+	border-bottom: solid var(--color-offwhite);
+	border-width: 2px;
+	background-color: var(--color-dark);
+	width: 50%;
+}
+.meeting-form-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px 5px 5px;
+    color: var(--color-offwhite);
+    font-size: var(--text-msmall);
+    font-family: var(--font);
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.meeting-submit {
+    height: 40px;
+    width: 100px;
+}
+
+.meeting-btn {
+    background-color: var(--color-orange);
+    border-style: solid;
+    border-color: var(--color-orange);
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+.meeting-btn:hover {
+    background-color: var(--color-orange-dark);
+    border-color: var(--color-orange-dark);
+
+}
+
+.meeting-btn:active {
+    background-color: var(--color-orange-xdark);
+    border-color: var(--color-orange-xdark);
+}
+
+.cancel-btn {
+    height: 40px;
+    width: 100px;
+    background-color: var(--color-dark);
+    margin-right: 10px;
+    border-style: solid;
+    border-color: var(--color-white);
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+.cancel-btn:hover {
+    background-color: var(--color-xdark);
+}
+
+.add-meeting-time {
+    width: max-content;
+}
+
+.options-btn {
+    margin-right: 10px;
+    border-style: solid;
+    border-color: var(--color-white);
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+.contact-selector-container {
+    height: 300px;
+    width: 250px;
+
+    background-color: var(--color-dark);
+
+}
+
+.contact-selector-body {
+    overflow: auto;
+    overflow-x: hidden;
+    height: 235px;
+    width: 240px;
+}
+
+
+.contact-checkbox-container {
+    background-color: var(--color-dark);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    border-radius: 5px;
+    gap: 10px;
+    width: 95%;
+}
+
+
+.contact-checkbox-container:hover {
+    background-color: var(--color-medium);
+}
+
+.contact-checkbox-container * {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.contact-checkbox {
+    height: 20px;
+    width: 20px;
+}
+
+.dropdown-small {
+    height: min-content !important;
+}
+
+.dropdown-small button{
+    margin: 0px !important;
+}
+
+.add-meeting-icon {
+    margin-top: auto;
+    margin-bottom: auto;
+}

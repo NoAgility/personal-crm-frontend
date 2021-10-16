@@ -7,6 +7,10 @@
 	cursor: pointer;
 }
 .form-label {
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	justify-content: center;
 	font-weight: bold;
 	font-family: var(--font);
 }
@@ -24,7 +28,7 @@
     font-family: var(--font-family);
     background-color: var(--color-dark);
     font-size: var(--text-medium);
-    color: var(--color-offwhite);
+    color: var(--color-white);
     border-color: var(--color-offwhite);
     height: 40px;
 }
@@ -34,16 +38,18 @@
 	margin-right: 10px;
 }
 .form-date-input {
+	
 	font-family: var(--font);
 	font-size: var(--text-msmall);
-	color: var(--color-offwhite);
+	color: var(--color-white);
 	padding: 5px;
 	outline: none;
 	border-style: none;
 	border-bottom: solid var(--color-offwhite);
 	border-width: 2px;
 	background-color: var(--color-dark);
-	width: 55%;
+	width: 80%;
+	max-width: 200px;
 }
 .form-container {
     display: flex;
@@ -51,4 +57,8 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+}
+
+::-webkit-calendar-picker-indicator {
+	background-color: var(--color-dark);
 }

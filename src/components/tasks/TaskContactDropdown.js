@@ -1,5 +1,6 @@
 import { Dropdown } from 'react-bootstrap';
 import ContactMenuItem from './ContactMenuItem';
+import React from 'react';
 
 const TaskContactDropdown = ({contactItems, add, remove}) => {
     return (<Dropdown className="d-inline mx-2">
@@ -8,11 +9,11 @@ const TaskContactDropdown = ({contactItems, add, remove}) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-            {contactItems.map(contact => 
-                <ContactMenuItem 
+            {contactItems.map(contact =>
+                <ContactMenuItem
                     key={contact.accountID}
-                    contactItem={contact} 
-                    add={add} 
+                    contactItem={contact}
+                    add={add}
                     remove={remove}/>)}
         </Dropdown.Menu>
     </Dropdown>);
