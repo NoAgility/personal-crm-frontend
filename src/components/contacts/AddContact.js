@@ -111,7 +111,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 					value={usernameSearch}
 					onChange={event => {setUsernameSearch(event.target.value)}}
 				/>
-
+				<div className="row-spacer"/>
 				<div>{queryFound ? queryResult(result.accountName, result.accountUsername, result.accountID) : noResult()}</div>
 
 			</Modal.Body>

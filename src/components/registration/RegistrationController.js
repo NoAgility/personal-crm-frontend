@@ -9,16 +9,21 @@ const RegistrationController = {
      * Register a user
      * @param {*} userDetails The user details to register with
      */
-    Register : async (userDetails) => {
-        var flag = await SpringBootAdapterWrapper.post(`/account/create`, {}, {
+    register : async (userDetails) => {
+        var res = await SpringBootAdapterWrapper.post(`/account/create`, {}, {
             username: userDetails.username,
             password: userDetails.password,
-            name: userDetails.name,
+            name: userDetails.fName + " " + userDetails.lName,
             dob: userDetails.dob,
-        }).then(response => { return true; }).catch(err => {return false;});
-        if (!flag) {
-            throw new Error("Failed to create account, please try again later");
-        }
+        }).then(response => { return true; }).catch(err => {
+            if (err.response.status.toString().includes('50')) {
+                throw new Error("Failed to create account, please try again later");
+            } else if (err.response.status.toString().includes('40')) {
+                throw new Error("Account username is taken");
+            }
+        });
+
+        return res;
     },
     /**
      * Checks if valid username
@@ -58,20 +63,32 @@ const RegistrationController = {
         if (userDetails.password === undefined || userDetails.password.length === 0) {
             throw new Error('Please provide a password');
         }
-        if (userDetails.password.length < 4) {
-            throw new Error('Password must be at least 4 characters long');
+        if (userDetails.password.length < 8) {
+            throw new Error('Password must be at least 8 characters long');
         }
     },
     /**
-     * Checks if name is valid
+     * Checks if first name is valid
      * @param {*} userDetails The user details to check
      */
-    isValidName : (userDetails) => {
-        if (userDetails.name === undefined || userDetails.name.length === 0) {
-            throw new Error('Name must not be empty!')
+    isValidFName : (userDetails) => {
+        if (userDetails.fName === undefined || userDetails.fName.length === 0) {
+            throw new Error('First name must not be empty!')
         }
-        if (userDetails.name.match(/^.*[^A-Za-z ].*$/)) {
-            throw new Error('Name must only contain letters')
+        if (userDetails.fName.match(/^.*[^A-Za-z ].*$/)) {
+            throw new Error('First name must only contain letters')
+        }
+    },
+    /**
+     * Checks if last name is valid
+     * @param {*} userDetails The user details to check
+     */
+     isValidLName : (userDetails) => {
+        if (userDetails.lName === undefined || userDetails.lName.length === 0) {
+            throw new Error('Last name must not be empty!')
+        }
+        if (userDetails.fName.match(/^.*[^A-Za-z ].*$/)) {
+            throw new Error('First name must only contain letters')
         }
     },
     /**

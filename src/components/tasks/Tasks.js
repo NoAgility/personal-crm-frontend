@@ -279,7 +279,7 @@ const TaskPage = (props) => {
                     <h1>Tasks</h1>
                     <button
                         data-testid="add-task"
-                        className="create-task-btn"
+                        className="add-btn tasks-btn"
                         onClick={() => { openModal() }}>
                         <MdAdd size={22}/>
                         <h4>Add</h4>
