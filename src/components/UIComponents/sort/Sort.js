@@ -19,7 +19,7 @@ const Sort = ({ sortTypes }) => {
 			<Dropdown.Menu variant="dark">
 				{sortTypes
 					.map((type) => (
-					<Dropdown.Item 
+					<Dropdown.Item
 						onClick={type.sortFunction}
 						key={type.label}>
 						{type.label}

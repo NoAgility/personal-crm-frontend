@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import "./Calendar.css";
 import "./EventController";
 const AddMeetingForm = (props) => {
@@ -19,12 +19,12 @@ const AddMeetingForm = (props) => {
             <form className="form" onSubmit={onSubmit}>
                 <div className="input">
                     <input type="text" className="form-input" value={name} placeholder="Meeting Name" onChange={event => setName(event.target.value)}/>
-                    
+
                 </div>
                 <div className="input">
                     <input type="number" className="form-input" value={minutes} placeholder="Meeting Minutes" onChange={event => setMinutes(event.target.value)}/>
                 </div>
-                
+
                 <div>
                     <label className="form-label">At</label>
                     <input className="form-time-input" type="time" value={time} onChange={event => setTime(event.target.value)}/>
@@ -35,7 +35,7 @@ const AddMeetingForm = (props) => {
                 </div>
             </form>
         </div>
-    ) 
+    )
 }
 
 export default AddMeetingForm;

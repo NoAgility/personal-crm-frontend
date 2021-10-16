@@ -9,6 +9,7 @@ const ChatItem = ({ chat, lastMessage, openChat, onDelete, firstParticipant }) =
 	// openChat : a function to open the chat in the chat window
 	// onDelete : a function to delete the the chat
 	// firstParticipant : the user object of the other contact in the chat
+	const isGroupChat = (chat.chatParticipants.length > 2) ? true : false
 
 	return (
 		<>
@@ -18,10 +19,11 @@ const ChatItem = ({ chat, lastMessage, openChat, onDelete, firstParticipant }) =
 						name={firstParticipant.accountUsername}
 						id={firstParticipant.accountID}
 						size="md"
+						isGroupChat={isGroupChat}
 					/>
 					<div className="column chat-description">
 						<h5>{firstParticipant.accountName}</h5>
-						<p>{lastMessage}</p>
+						<p>{lastMessage.length < 25 ? lastMessage : lastMessage.substring(0,25).concat(" ...")}</p>
 					</div>
 				</div>
 
