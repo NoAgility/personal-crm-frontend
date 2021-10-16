@@ -86,7 +86,6 @@ const TaskPage = (props) => {
      * @param {*} task Task to be added
      */
     const addTask = async (task) => {
-        console.log(task)
         await TaskController.addTask(task);
         getTasks();
         getContacts();
