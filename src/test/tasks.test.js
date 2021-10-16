@@ -52,6 +52,7 @@ test("Unit Test - TaskDetails Component renders", async () => {
     onDelete={jest.fn}
     />, {container: document.body});
 
+    
     await waitFor(() => expect(container.textContent).not.toBeNull());
     await waitFor(() => expect(container.textContent).toContain("Test Task"));
     await waitFor(() => expect(container.textContent).toContain("Priority : None"));
