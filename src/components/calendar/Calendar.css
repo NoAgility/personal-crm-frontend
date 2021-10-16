@@ -1,12 +1,15 @@
 
 
 .calendar {
-    height: calc(100%-130px);
+    display:grid;
+    height: 100%;
     width: 100%;
     color: #ffffff;
-    z-index: -1;
+    z-index: 1;
 }
-
+.fc .fc-scrollgrid-section-body table {
+    height: 79vh !important;
+}
 .mini-menu {
     z-index: 3;
     position: absolute;
@@ -27,23 +30,6 @@ li:not(:first-child) {
     flex-direction: column;
     padding: 3px 3px 3px 3px;
 }
-.menu-button:active {
-    outline: none;
-    color: #8b8b8b;
-}
-.menu-button:focus {
-    outline: none;
-}
-.menu-button {
-    position: relative;
-    z-index: 3;
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    padding: 0 0 0 0;
-    cursor: pointer;
-}
 .menu-icon {
     width: 30px;
     height: 30px;
@@ -60,4 +46,12 @@ li:not(:first-child) {
     height: 250px;
     bottom: 20%;
     right: 0%
+}
+.fc-popover {
+    background-color: var(--color-medium) !important;
+}
+.fc-popover-header {
+    font-family: var(--font);
+    font-weight: bold;
+    background-color: var(--color-medium) !important;
 }

@@ -33,7 +33,7 @@ beforeAll(() => {
 test("Unit Test - TasksPage Component renders", async () => {
     const { container } = render(<TaskPage/>);
 
-    const createTaskButton = container.querySelector(".create-task-btn");
+    const createTaskButton = container.querySelector(".add-btn");
     await waitFor(() => expect(createTaskButton).not.toBeNull());
 });
 test("Unit Test - TaskList, TaskItem Component renders for today", async () => {
@@ -79,17 +79,20 @@ test("ETE Test - Register -> Login -> Create Task -> See Task", async () => {
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
-        var name = screen.getByPlaceholderText('Name');
+        const fname = screen.getByPlaceholderText('First Name');
+        const lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
         
         fireEvent.change(username, {target: {value: 'task_test_user_1'}});
         fireEvent.change(password, {target: {value: 'password'}});
-        fireEvent.change(name, {target: {value: 'testname'}});
+        fireEvent.change(fname, {target: {value: 'testname'}});
+        fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('task_test_user_1'));
         await waitFor(() => expect(password).toHaveValue('password'));
-        await waitFor(() => expect(name).toHaveValue('testname'));
+        await waitFor(() => expect(fname).toHaveValue('testname'));
+        await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
         
         var submit = screen.getByTestId('submit');
@@ -127,7 +130,7 @@ test("ETE Test - Register -> Login -> Create Task -> See Task", async () => {
          */
         const {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><TaskPage/></div>, {container: document.body});
 
-        const addTaskBtn = container.querySelector(".create-task-btn");
+        const addTaskBtn = container.querySelector(".add-btn");
 
         await waitFor(() => expect(addTaskBtn).not.toBeNull());
         

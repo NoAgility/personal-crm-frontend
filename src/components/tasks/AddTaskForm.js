@@ -15,7 +15,7 @@ const AddTaskForm = ({submit, show, onHide}) => {
     const [taskName, setTaskName] = useState("");
     const [taskPriority, setTaskPriority] = useState(-1);
     const [taskDate, setTaskDate] = useState("");
-    const [taskTime, setTaskTime] = useState("");
+    const [taskTime, setTaskTime] = useState("00:00:00");
     const [taskDateTime, setTaskDateTime] = useState("");
     const [contacts, setContacts] = useState([]);
     const [selectedContactIDs, setSelectedContactIDs] = useState([]);
@@ -72,7 +72,9 @@ const AddTaskForm = ({submit, show, onHide}) => {
      * updates TaskDateTime when date or time input change
      */
     useEffect(() => {
-        setTaskDateTime(taskDate + ' '+ taskTime)
+        if (taskDate !== "" && taskTime !== "") {
+            setTaskDateTime(taskDate + ' '+ taskTime)
+        }
     }, [taskDate, taskTime]);
 
     /**

@@ -86,7 +86,6 @@ const TaskPage = (props) => {
      * @param {*} task Task to be added
      */
     const addTask = async (task) => {
-        console.log(task)
         await TaskController.addTask(task);
         getTasks();
         getContacts();
@@ -280,7 +279,7 @@ const TaskPage = (props) => {
                     <h1>Tasks</h1>
                     <button
                         data-testid="add-task"
-                        className="create-task-btn"
+                        className="add-btn tasks-btn"
                         onClick={() => { openModal() }}>
                         <MdAdd size={22}/>
                         <h4>Add</h4>

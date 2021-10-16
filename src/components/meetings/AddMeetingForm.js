@@ -21,8 +21,8 @@ const AddMeetingForm = ({ meeting, submit, show, onHide }) => {
     const [selectedContactIDs, setSelectedContactIDs] = useState((meeting !== undefined) ? meeting.meetingParticipants : []);
 
     const [meetingStartDate, setMeetingStartDate] = useState((meeting !== undefined) ? meeting.meetingStart.substring(0,10) : "");
-    const [meetingStartTime, setMeetingStartTime] = useState((meeting !== undefined) ? meeting.meetingStart.substring(19,11) : "");
-    const [meetingEndTime, setMeetingEndTime] = useState((meeting !== undefined) ? meeting.meetingEnd.substring(19,11) : "");
+    const [meetingStartTime, setMeetingStartTime] = useState((meeting !== undefined) ? meeting.meetingStart.substring(19,11) : "00:00:00");
+    const [meetingEndTime, setMeetingEndTime] = useState((meeting !== undefined) ? meeting.meetingEnd.substring(19,11) : "00:00:00");
 
     /**
      * Function to add contact to selection

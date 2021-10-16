@@ -29,6 +29,13 @@
 	padding: 5px;
 }
 
+/*
+* Hi Ash, I had to do this, otherwise long names squish the profile pic.
+*/
+.meeting-details > h6 {
+	width: 60%;
+}
+
 .show-more-meeting-participants {
 	color: var(--color-offwhite);
 	border-radius: 30px;

@@ -5,8 +5,7 @@ import { Dropdown } from 'react-bootstrap';
 import {FiMoreHorizontal} from 'react-icons/fi';
 import "./MeetingItem.css";
 import ProfilePic from '../UIComponents/profilePic/ProfilePic';
-import DeleteItem from '../UIComponents/deleteItem/DeleteItem';
-import AddMeetingForm from './AddMeetingForm';
+import Confirmation from '../UIComponents/confirm/Confirmation';
 import CookieManager from '../../util/CookieManager';
 
 const MeetingItem = ({ meeting, meetingOptions, minuteOptions }) => {
@@ -15,7 +14,7 @@ const MeetingItem = ({ meeting, meetingOptions, minuteOptions }) => {
 	const overLimit = (meeting.meetingParticipants.length > minLimit) ? true : false;
     const [modalShow, setModalShow] = useState(false);
     const [limit, setLimit] = useState(minLimit);
-
+	const [confirmShow, setConfirmShow] = useState(false);
 
     const handleDelete = () => {
         meetingOptions.onDelete(meeting);
@@ -68,6 +67,13 @@ const MeetingItem = ({ meeting, meetingOptions, minuteOptions }) => {
 	}
 
     return <div className="meeting">
+			<Confirmation
+			show={confirmShow}
+			onHide={() => setConfirmShow(false)}
+			msg="Delete Meeting?"
+			accept={handleDelete}
+			cancel={() => {}}
+			/>
             <MeetingDetails
                 meeting={meeting}
                 show={modalShow}
@@ -95,7 +101,7 @@ const MeetingItem = ({ meeting, meetingOptions, minuteOptions }) => {
             </Dropdown.Toggle>
             <Dropdown.Menu className="contact-options-dropdown" variant="dark">
                 <Dropdown.Item disabled={meeting.meetingCreatorID === parseInt(CookieManager.getCookie('accountID')) ? false : true }
-                    onClick={handleDelete}>Delete</Dropdown.Item>
+                    onClick={() => setConfirmShow(true)}>Delete</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
     </div>

@@ -9,6 +9,7 @@
     cursor: pointer;
     display: grid;
     place-items: center;
+    margin-bottom: 5px;
 }
 
 .purple-circle {

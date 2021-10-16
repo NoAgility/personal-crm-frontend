@@ -20,6 +20,9 @@ const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, 
     const priority = Object.entries(prioritiesColorMap).filter(p => p[0] === task.taskPriority.toString())[0][0];
 
     const getDisplayDate = () => {
+        if (task.taskDeadline === null) {
+            return ("")
+        }
 		const dateOptions = { month: 'long', day: 'numeric'};
 		const timeOptions = {hour: 'numeric', minute: 'numeric'};
 		const start = new Date(task.taskDeadline);
@@ -61,6 +64,16 @@ const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, 
             </div>
 
             <div className="task-item-date">{isOverdue ? "Overdue" : getDisplayDate()}</div>
+
+            <Dropdown className="task-options">
+			<Dropdown.Toggle id="button-dropdown-body"  className="dropdown-button" >
+				<MdMoreHoriz className="edit-task-options" size={30}/>
+			</Dropdown.Toggle>
+
+			<Dropdown.Menu className="task-options-dropdown" variant="dark">
+				<Dropdown.Item className="delete-btn" onClick={() => setDeleteConfirmShow(true)}>Delete</Dropdown.Item>
+			</Dropdown.Menu>
+		</Dropdown>
         </div>
     </div>
 }
