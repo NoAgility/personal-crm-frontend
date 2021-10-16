@@ -33,7 +33,7 @@ beforeAll(() => {
 test("Unit Test - TasksPage Component renders", async () => {
     const { container } = render(<TaskPage/>);
 
-    const createTaskButton = container.querySelector(".create-task-btn");
+    const createTaskButton = container.querySelector(".add-btn");
     await waitFor(() => expect(createTaskButton).not.toBeNull());
 });
 test("Unit Test - TaskList, TaskItem Component renders for today", async () => {
@@ -130,7 +130,7 @@ test("ETE Test - Register -> Login -> Create Task -> See Task", async () => {
          */
         const {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><TaskPage/></div>, {container: document.body});
 
-        const addTaskBtn = container.querySelector(".create-task-btn");
+        const addTaskBtn = container.querySelector(".add-btn");
 
         await waitFor(() => expect(addTaskBtn).not.toBeNull());
         

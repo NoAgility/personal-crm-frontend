@@ -265,7 +265,7 @@ test("ETE - Register -> Login -> Add Contact -> See Contact -> Remove Contact", 
         var item = container.getElementsByClassName("contact-item");
         await waitFor(() => expect(item.length).toBe(1));
 
-        const dropdownBtn = container.querySelector(".edit-contact-options");
+        const dropdownBtn = container.querySelector(".contact-options").querySelector(".dropdown-button");
         await waitFor(() => expect(dropdownBtn).toBeInTheDocument());
 
         fireEvent.click(dropdownBtn);
@@ -274,6 +274,11 @@ test("ETE - Register -> Login -> Add Contact -> See Contact -> Remove Contact", 
 
         fireEvent.click(deleteBtn);
 
+        const confirmAccept = container.querySelector(".confirmation-accept");
+
+        await waitFor(() => expect(confirmAccept).not.toBeNull());
+        
+        fireEvent.click(confirmAccept);
         item = container.getElementsByClassName("contact-item");
         await waitFor(() => expect(item.length).toBe(0));
 
