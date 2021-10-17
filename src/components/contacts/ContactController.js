@@ -19,9 +19,7 @@ const ContactController = {
 		try {
 			const res = await SpringBootAdapterWrapper.get(`/account/get?id=${contact.contactID}`).then(
 				response => {
-					const data = response.data;
-					data.contactCreatedOn = contact.contactCreatedOn;
-					return data;
+					return response.data;
 				}
 			);
 			return res;
@@ -76,6 +74,16 @@ const ContactController = {
 			console.log(err)
 		}
 	},
+
+	// Update a contact
+	updateContact: async (contact) => {
+		try {
+			const res = await SpringBootAdapterWrapper.post("/contact/update", "", contact);
+			return res;
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
 }
 

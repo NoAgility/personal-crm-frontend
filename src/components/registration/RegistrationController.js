@@ -75,7 +75,7 @@ const RegistrationController = {
         if (userDetails.fName === undefined || userDetails.fName.length === 0) {
             throw new Error('First name must not be empty!')
         }
-        if (userDetails.fName.match(/^.*[^A-Za-z ].*$/)) {
+        if (userDetails.fName.match(/^.*[^A-Za-z].*$/)) {
             throw new Error('First name must only contain letters')
         }
     },
@@ -87,7 +87,7 @@ const RegistrationController = {
         if (userDetails.lName === undefined || userDetails.lName.length === 0) {
             throw new Error('Last name must not be empty!')
         }
-        if (userDetails.fName.match(/^.*[^A-Za-z ].*$/)) {
+        if (userDetails.fName.match(/^.*[^A-Za-z].*$/)) {
             throw new Error('First name must only contain letters')
         }
     },

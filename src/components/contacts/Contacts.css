@@ -59,8 +59,13 @@
 }
 
 .contacts-btn {
-	background-color: var(--color-teal) !important;
-	border-color: var(--color-teal) !important;
+	background-color: var(--color-teal);
+    border-style: solid;
+    border-color: var(--color-teal);
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-white);
 }
 
 .contact-info {

@@ -6,7 +6,7 @@ import { Dropdown } from 'react-bootstrap';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import Confirmation from '../UIComponents/confirm/Confirmation';
 
-const Contact = ({ contact, onDelete }) => {
+const Contact = ({ contact, onDelete, onUpdate }) => {
 	// contact: the contact object
 	// onDelete: a function to delete a contact
 
@@ -45,6 +45,8 @@ const Contact = ({ contact, onDelete }) => {
 					contact={contact}
 					show={modalShow}
 					onHide={() => setModalShow(false)}
+					onDelete={onDelete}
+					onUpdate={onUpdate}
 				/>
 			</li>
 		</>
