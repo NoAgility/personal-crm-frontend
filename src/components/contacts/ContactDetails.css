@@ -4,9 +4,10 @@
 
 .contact-details {
 	display: flex;
-	flex-direction: row;
-	place-items: center;
-	margin: 50px;
+	flex-direction: column;
+	justify-content: flex-end;
+	margin: 20px;
+	padding: 0;
 }
 
 .contact-details-left {
@@ -16,23 +17,90 @@
 	place-items: center;
 	padding: 25px;
 }
-
+.contact-details-top {
+	display: flex;
+	flex-direction: row;
+	vertical-align: center;
+	place-items: center;
+	padding: 25px;
+}
+.contact-details-line {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+}
+.contact-details-line-nonedit {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+.no-icon-left {
+	margin-left: 25px;
+}
+.contact-details-line-nonedit > h7{
+	font-family: var(--font);
+	margin: 5px;
+}
+.faint {
+	color: var(--color-offwhite);
+	font-style: italic;
+}
+.contact-details-container-nonedit {
+	margin-left: 40px;
+}
+.contact-form-input {
+    font-family: var(--font-family);
+    font-size: var(--text-msmall);
+	text-indent: 5px;
+    color: var(--color-white);
+	margin: 5px;
+	outline: none;
+	border-style: none;
+	border-bottom: solid var(--color-white);
+	border-color: var(--color-offwhite);
+	border-width: 2px;
+	background-color: var(--color-dark);
+	width: 80%;
+}
+.contact-form-input::placeholder {
+	color: var(--color-offwhite);
+	font-family: var(--font);
+	font-style: italic;
+}
+.contact-details-icon {
+	width: 25px;
+	height: 25px;
+}
 .contact-details-right {
+	display: flex;
+	flex-direction: column;
 	margin: auto;
-	padding:50px;
+	padding:25px;
 	padding-left: 0px;
 	padding-top: 0px;
-	width: max-content;
+	width: 400px;
 }
 
 .contact-details-right h1{
-	margin:20px;
+	margin-bottom: 10px;
 }
 
 .contact-details-right h5{
-	margin:20px;
+	color: var(--color-offwhite);
 }
-
+.contact-details-right h6{
+	color: var(--color-offwhite);
+}
+.contact-signature {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.contact-signature > h1 {
+	margin-right: 5px;
+}
 .edit-contact-btn, .add-contact-btn, .cancel-add-contact-btn, .delete-contact-btn {
 	border-radius: 10px;
 	border-style: solid;
@@ -134,11 +202,6 @@ input[type=number] {
 
 .username-selector input {
 	width:90%;
-}
-
-.contact-details-top {
-	display: grid;
-	place-items: end;
 }
 
 #button-dropdown-body::before {

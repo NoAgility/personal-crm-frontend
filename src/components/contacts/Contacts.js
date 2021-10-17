@@ -27,6 +27,12 @@ const Contacts = (props) => {
 		getContacts();
 	}
 
+	// Update a contact
+	const updateContact = async (contact) => {
+		await ContactController.updateContact(contact); // Added to the back-end
+		getContacts();
+	}
+
 	// Sort Contacts alphabetically or by date added
 	const sortByName = (x,y) => x.accountName > y.accountName
 	const sortByDate = (x,y) => x.contactCreatedOn > y.contactCreatedOn
@@ -54,13 +60,13 @@ const Contacts = (props) => {
 
 	// Gets all the contacts from the backend
 	const getContacts = async () => {
-		const ids = await ContactController.fetchContacts();
+		const data = await ContactController.fetchContacts();
 		let cs =  [];
 		let cIDs = [];
-		if (ids !== undefined && ids.length > 0) {
-			for (const id of ids) {
-				let contactData = await ContactController.fetchContactData(id);
-				cs.push(contactData);
+		if (data !== undefined && data.length > 0) {
+			for (const dat of data) {
+				let contactData = await ContactController.fetchContactData({contactID: dat.contactID});
+				cs.push(Object.assign(contactData, dat));
 				cIDs.push(contactData.accountID);
 			}
 			setContacts(cs);
@@ -109,6 +115,7 @@ const Contacts = (props) => {
 									key={contact.accountID}
 									contact={contact}
 									onDelete={deleteContact}
+									onUpdate={updateContact}
 								/>
 							))}
 					</ul>
