@@ -68,7 +68,7 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 				</div>
 
 			<Modal.Body className="contact-details">
-				
+
 				<div className="contact-details-top">
 					<div className="contact-details-left">
 						<ProfilePicture
@@ -84,7 +84,7 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 						</div>
 						<div className="contact-details-line"><h6>Date of Birth: {contact.accountDOB}</h6></div>
 						{!isEditing ? <div className="contact-details-container-nonedit">
-							
+
 							<div className="contact-details-line-nonedit"><MdMailOutline className="contact-details-icon"/>{email !== "" ? <h7>{email}</h7> : <h7 className="faint">Email</h7>}</div>
 							<div className="contact-details-line-nonedit"><MdPhone className="contact-details-icon"/>{phone !== "" ? <h7>{phone}</h7> : <h7 className="faint">Phone</h7>}</div>
 							<div className="contact-details-line-nonedit"><MdOutlineHouse className="contact-details-icon"/>{address !== "" ? <h7>{address}</h7> : <h7 className="faint">Address</h7>}</div>
@@ -110,7 +110,7 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 								Cancel
 							</button>
 							<button
-								className="meeting-submit task-btn"
+								className="meeting-submit contacts-btn"
 								type="submit"
 								onClick={onSubmit}>
 								Save
@@ -119,7 +119,7 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 					</div>
 				</div>
 			</Modal.Body>
-			
+
 		</Modal>
 		</>
 	)
