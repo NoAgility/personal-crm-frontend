@@ -1,0 +1,54 @@
+.meeting-invites-container {
+	border-radius: 0px 30px 0px 0px;
+	background-color: var(--color-xdark);
+	box-shadow: 0px 0px 10px var(--color-black);
+    height: 100%;
+	position: fixed;
+	width: 240px;
+    top:130px;
+    left:-50px;
+	padding:20px;
+}
+
+.meeting-invites-container-open {
+	left: 240px;
+}
+
+.meeting-invites {
+	overflow: auto;
+}
+
+.toggle-meeting-invites {
+	background-color: var(--color-xdark);
+	color: var(--color-white);
+	position:fixed;
+	top:130px;
+	left:235px;
+	padding: 20px;
+	border-radius: 0px 30px 30px 0px;
+	width: 30px;
+}
+
+.close-invites-btn {
+	background-color: var(--color-xdark);
+	color: var(--color-white);
+	justify-self: end;
+}
+
+.invites-header {
+	display: grid;
+	grid-template-columns: auto auto auto;
+
+}
+
+.invites-header h1{
+	justify-self: end;
+}
+
+.invite-accept:hover {
+	background-color: var(--color-orange-dark);
+}
+
+.invite-decline:hover {
+	background-color: var(--color-red);
+}

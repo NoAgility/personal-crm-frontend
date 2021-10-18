@@ -55,7 +55,7 @@ const TaskController = {
             await SpringBootAdapterWrapper.post('/task/deleteTask', "",  jsonTaskID).then(res => { return res.data; } )
                 .catch(err => { throw err; });
         } catch (err) {
-            alert("Failed to create task");
+            alert("Failed to delete task");
         }
     },
     /**

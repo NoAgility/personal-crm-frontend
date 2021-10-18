@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BiHide, BiShow} from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
 import LoginControllerWrapper from './LoginControllerWrapper';
@@ -31,8 +31,9 @@ const Login = () => {
     const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
 	return (
         <div data-testid="container" className="login-container">
-            {error}
+            <button className="landing-back-button" onClick={() => history.push("/landing")}>Back to Landing</button>
             <form className="login-form" onSubmit={onSubmit}>
+                <h6>{error}</h6>
                 <h1>Login</h1>
                 <div data-testid='general-error' className='error'>{generalError}</div>
                 <div className="input">

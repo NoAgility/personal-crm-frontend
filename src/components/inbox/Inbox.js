@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import ChatList from "./ChatList"
 import ChatController from './ChatController.js'
+import ContactController from '../contacts/ContactController.js'
 import ClosedChat from "./ClosedChat"
 import OpenChat from "./OpenChat"
 import Cookies from 'js-cookie';
 import  './Inbox.css'
+import { RiNumbersFill } from 'react-icons/ri';
 
 const Inbox = () => {
 
 	const [chatOpen, setChatOpen] = useState(false);
 	const [activeChat, setActiveChat] = useState();
 	const [chats, setChats] = useState([]);
+	const [user, setUser] = useState();
 
 	// Opens a window to create a new chat
 	const initiateCreateChat = () => {
@@ -73,21 +76,28 @@ const Inbox = () => {
 
 	// read in all the chats from the backend
 	const getChats = async () => {
+		const data = await ContactController.fetchUserByID(parseInt(Cookies.get('accountID')));
+		if (data !== undefined) {
+			setUser(data);
+		}
 		const cs = await ChatController.fetchChats();
 		if (cs !== undefined && cs.length > 0) {
 			setChats(cs);
+			return cs;
+		} else {
+			setChats([]);
 			return cs;
 		}
 	}
 
 	// Finds the first participant in a chat that is not the user
-	const findFirstParticipant = (chat) => {
+	const findFirstParticipant =  (chat) => {
 		for (let p in chat.chatParticipants) {
 			if (chat.chatParticipants[p].accountID !== parseInt(Cookies.get('accountID'))) {
 				return chat.chatParticipants[p];
 			}
 		}
-		return null;
+		return user;
 	}
 
 	// call getChats() upon loading the page
@@ -120,7 +130,9 @@ const Inbox = () => {
 					sendMessage={sendMessage}
 					editMessage={editMessage}
 				/>
-			) : (<ClosedChat createChat={createChat} />)}
+			) : <>
+				<ClosedChat createChat={createChat} />
+			</>}
 		</div>
 	)
 }

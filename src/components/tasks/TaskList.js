@@ -19,9 +19,21 @@ const TaskList = ({tasks, contacts, allContacts, label, editOptions, isComplete,
      * @returns The formatted date
      */
     const formatDate = (date) => {
+        const getDisplayDate = (date) => {
+            const dateOptions = { month: 'long', day: 'numeric'};
+            const timeOptions = {hour: 'numeric', minute: 'numeric'};
+            const start = new Date(date);
+            let outDate = "";
+            let time = "\n";
+            if (start.getDate()) {
+                outDate = start.toLocaleDateString("en-UK", dateOptions);
+                time += start.toLocaleTimeString("en-UK", timeOptions);
+            }
+            return date;
+        }
         var tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
-        var formattedDate = new Date(0).toLocaleDateString("en-US", options) === date ? "No deadline" : date;
+        var formattedDate = new Date(0).toLocaleDateString("en-US", options) === date ? "No deadline" : getDisplayDate(date);
         formattedDate = tomorrow.toLocaleDateString("en-US", options) === date ? "Tomorrow" : formattedDate;
         formattedDate = new Date().toLocaleDateString("en-US", options) === date ? "Today" : formattedDate;
         formattedDate = isOverdue ? "Overdue" : formattedDate;
@@ -55,6 +67,7 @@ const TaskList = ({tasks, contacts, allContacts, label, editOptions, isComplete,
             onDelete={editOptions.delete} 
             onComplete={editOptions.complete}
             searchContact={editOptions.searchContact}
+            isOverdue={isOverdue}
             task={t}
             contacts={contacts}
             allContacts={allContacts || []}

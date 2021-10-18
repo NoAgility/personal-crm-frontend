@@ -79,7 +79,7 @@
 	border-color: var(--color-offwhite);
 }
 
-.dropdown-menu :hover {
+.dropdown-menu-header:hover {
 	background-color: var(--color-dark);
 	color: var(--color-white);
 }

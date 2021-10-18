@@ -1,9 +1,10 @@
 .landing-page {
     overflow: hidden;
-    height: 100%;
+    height: 100vh;
     width: 100%;
     padding: 0;
     margin: 0;
+    background-color: var(--color-xdark);
 }
 .banner {
     display: flex;
@@ -26,29 +27,33 @@
 .information-body {
     overflow: hidden;
     min-width: 1080px;
-    height: 60vh;
+    height: 70vh;
     min-height: 590px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-image: url(../../assets/information-background.png);
+    background-image: url(../../assets/landing-background.png);
+    background-size: 100% 100%;
     margin-bottom: 40px;
 }
 .information-text {
     font-family: var(--font);
+    width: 40%;
     max-width: 500px;
     font-size: var(--text-big);
     margin-right: 40px;
+    margin-left: 40px;
 }
 .carousel-container {
+    width: 40%;
     margin-left: 40px;
     background-color: rgb(140, 140, 160, 0.7);
     border-radius: 10px;
     padding: 20px 20px 0 20px;
 }
 .snippet {
-    height: 40vh;
+    height: 30vh;
 }
 .logo {
     border-radius: 10px;
@@ -77,20 +82,26 @@
     background-color: var(--color-blue);
 }
 .landing-names {
-    background-color: var(--color-medium);
+    position: absolute;
+    background-color: var(--color-xdark);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 20px;
+    width: 100%;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    bottom: 0;
 }
 .name-row {
-    color: var(--color-white);
+    color: var(--color-offwhite);
     display: flex;
     flex-direction: row;
     justify-content: center;   
 }
-.name-row > h2 {
-    margin: 40px 80px 40px 80px;
+.name-row > h3 {
+    bottom: 0;
+    width: 20%;
+    margin: 0px 40px 0px 40px;
 }
 .copyright {
     font-family: var(--font);

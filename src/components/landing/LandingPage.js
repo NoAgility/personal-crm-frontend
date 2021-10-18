@@ -34,37 +34,36 @@ const LandingPage = () => {
             </div>
             <div className="carousel-container">
                 <Carousel
-                    width="700px"
                     autoPlay={true}
-                    infiniteLoop={true}>
+                    infiniteLoop={true}
+                    showStatus={false}
+                    dynamicHeight={true}>
                     <div>
                         <img src="/rsz_1contacts.png" alt="Can't be loaded"/>
-                        <p className="legend">Legend 1</p>
+                    </div>
+                    <div>
+                        <img src="/rsz_meetings.png" alt="Can't be loaded"/>
+                    </div>
+                    <div>
+                        <img src="/rsz_tasks.png" alt="Can't be loaded"/>
+                    </div>
+                    <div>
+                        <img src="/rsz_calendar.png" alt="Can't be loaded"/>
                     </div>
                     <div>
                         <img src="/rsz_inbox.png" alt="Can't be loaded"/>
-                        <p className="legend">Legend 2</p>
-                    </div>
-                    <div>
-                        <img src="assets/3.jpeg" alt="Can't be loaded"/>
-                        <p className="legend">Legend 3</p>
                     </div>
                 </Carousel>
             </div>
         </div>
         <div className="landing-names">
             <div className="name-row">
-                <h2>Nathan Rearick</h2>
-                <h2>Oscar Rochanakij</h2>
-                <h2>Robert Northby</h2>
+                <h3>Ash Mulama</h3>
+                <h3>Lucien Lu</h3>
+                <h3>Nathan Rearick</h3>
+                <h3>Oscar Rochanakij</h3>
+                <h3>Robert Northby</h3>
             </div>
-            <div className="name-row">
-                <h2>Lucien Lu</h2>
-                <h2>Ash Mulama</h2>
-            </div>
-        </div>
-        <div className="copyright">
-            This application was created for The University of Melbourne
         </div>
     </div>
 }

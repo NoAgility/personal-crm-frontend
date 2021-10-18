@@ -8,7 +8,8 @@ const Registration = (props) => {
     const history = useHistory();
 
     const [username, setUsername] = useState("");
-    const [name, setName] = useState("");
+    const [FName, setFName] = useState("");
+    const [LName, setLName] = useState("");
     const [password, setPassword] = useState("");
     const [DOB, setDOB] = useState("");
     const [errorUsername, setErrorUsername] = useState("");
@@ -36,46 +37,63 @@ const Registration = (props) => {
      */
     const onSubmit = async (e) => {
         e.preventDefault();
-        setGeneralError("Loading...");
         var userDetails = {
             username: username,
             password: password,
-            name: name,
+            fName: FName.trim(),
+            lName: LName.trim(),
             dob: DOB
         }
-        var errorFlag = false;
 
         /**
          * Collect all the possible username checks and call them against the user input
          */
-        const chain = {
-            errorFunction: [setErrorUsername, setErrorUsername, setErrorName, setErrorPassword, setErrorDOB],
-            command: [RegistrationController.isValidUsername, RegistrationController.isTakenUsername, RegistrationController.isValidName, RegistrationController.isValidPassword, RegistrationController.isValidDOB]
-        }
-        for (var i = 0; i < chain.errorFunction.length; i++) {
-            try {
-                await chain.command[i](userDetails);
-                chain.errorFunction[i]("");
-            } catch (err) {
-                chain.errorFunction[i](err.toString());
-                errorFlag = true;
-            }
-        }
-        if (errorFlag) { setGeneralError("Failed"); return; }
+        const chain = [
+                { 
+                    func: async () => {
+                        setErrorUsername("");
+                        await RegistrationController.isValidUsername(userDetails);
+                    },
+                    errCallback: setErrorUsername
+                },
+                {
+                    func: async () => {
+                        setErrorName("");
+                        await RegistrationController.isValidFName(userDetails);
+                    },
+                    errCallback: setErrorName
+                },
+                {
+                    func: async () => {
+                        setErrorName("");
+                        await RegistrationController.isValidLName(userDetails);
+                    },
+                    errCallback: setErrorName
+                },
+                {
+                    func: async () => {
+                        setErrorPassword("");
+                        await RegistrationController.isValidPassword(userDetails);
+                    },
+                errCallback: setErrorPassword
+                },
+                {
+                    func: async () => {
+                        setErrorPassword("");
+                        await RegistrationController.isValidDOB(userDetails);
+                    },
+                errCallback: setErrorDOB
+                },
+            ];
+        const promises = [];
+        var flag = true;
+        chain.forEach(pair => promises.push(pair.func().catch(err => { flag = false; pair.errCallback(err.toString().slice(7))})));
+        await Promise.allSettled(promises);
 
-        /**
-         * If the user gets to this stage, checks have completed, so register
-         */
-        try {
-            RegistrationController.Register(userDetails);
-        } catch (err) {
-            setGeneralError(err)
-            return;
-        }
-        
-        setGeneralError("Done");
-        
-        history.push('/registration_success');
+            /**
+             * If the user gets to this stage, checks have completed, so register
+             */
+        flag && RegistrationController.register(userDetails).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
     }
 
     const onFocus = (e) => {
@@ -86,9 +104,10 @@ const Registration = (props) => {
         e.currentTarget.placeholder = "Date of Birth";
         e.currentTarget.value = new Date(DOB).toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
     };
-    console.log(props.DOB);
+
     return (
         <div className="background">
+            <button className="landing-back-button" onClick={() => history.push("/landing")}>Back to Landing</button>
             <form className="registration-form" onSubmit={onSubmit}>
                 <h1>
                     Create An Account
@@ -99,7 +118,8 @@ const Registration = (props) => {
                 </div>
                 <div className="form-field-container">
                 <div data-testid='name-error' className='error'>{errorName}</div>
-                    <input data-testid="name" name="name" className="form-input" type="text" value={name} placeholder="Name" onChange={ (e) => setName(e.target.value) }/>
+                    <input data-testid="fname" name="fname" className="form-input" type="text" value={FName} placeholder="First Name" onChange={ (e) => setFName(e.target.value) }/>
+                    <input data-testid="lname" name="lname" className="form-input" type="text" value={LName} placeholder="Last Name" onChange={ (e) => setLName(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                     <div data-testid='password-error' className='error'>{errorPassword}</div>

@@ -44,17 +44,17 @@ const Settings = (props) => {
 					<h2>Account Settings</h2>
 				</Modal.Title>
 			</Modal.Header>
-			<Modal.Body classname="settings-content">
+			<Modal.Body className="settings-content">
 				
-				<div classname="settings-item">
+				<div className="settings-item">
 					<h3>Account Username</h3>
 					<div>{userDetails.accountUsername}</div>
 				</div>
-				<div classname="settings-item">
+				<div className="settings-item">
 					<h3>Account Name</h3>
 					<div>{userDetails.accountName}</div>
 				</div>
-				<div classname="settings-item">
+				<div className="settings-item">
 					<h3>Permanently deactivate account</h3>
 					<p>This will immediately disable your account and prevent access to all of your data including tasks,
 						contacts, meetings and more. This can’t be undone.</p>

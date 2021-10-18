@@ -25,10 +25,10 @@ const TaskPage = (props) => {
         dateGroupSort();
     };
     const setSortByPriority = () => {
-        setActiveSort("priority"); 
+        setActiveSort("priority");
         priorityGroupSort();
     };
-    
+
     const completeTask = async(task) => {
         await TaskController.completeTask(task);
         getTasks();
@@ -38,7 +38,7 @@ const TaskPage = (props) => {
      * @param {*} task The new task details
      * @param {*} changes The attributes that have changed
      */
-    
+
     const updateTask = async (task, changes) => {
         var requests = []
         if (changes.taskName) {
@@ -69,10 +69,10 @@ const TaskPage = (props) => {
             requests.push(TaskController.completeTask(task));
         }
         await Promise.all(requests).then(() => {getTasks();});
-        
+
     }
-    
-    
+
+
     /**
      * Function to call to the backend to delete task for user
      * @param {*} task Task to be deleted
@@ -122,8 +122,8 @@ const TaskPage = (props) => {
      * @param {*} tasks Tasks to be grouped
      * @returns Array of groups of tasks by date
      */
-    const groupByDate = (tasks) => { 
-        const reduced = {}; 
+    const groupByDate = (tasks) => {
+        const reduced = {};
         tasks.forEach((task) => {
             if (task.taskComplete) {
                 (reduced["complete"] = reduced["complete"] || []).push(task);
@@ -132,7 +132,7 @@ const TaskPage = (props) => {
             } else if (new Date() > new Date(task.taskDeadline) && !task.taskComplete) {
                 (reduced["overdue"] = reduced["overdue"] || []).push(task);
             } else {
-                (reduced[task.taskDeadline] = reduced[task.taskDeadline] || []).push(task); 
+                (reduced[task.taskDeadline.substring(0, 11)] = reduced[task.taskDeadline.substring(0, 11)] || []).push(task);
             }
         })
         return reduced;
@@ -144,8 +144,11 @@ const TaskPage = (props) => {
      */
     const sortByDate = (tasks) => {
         tasks.sort((a, b) => {
-            var dateA = new Date(a.taskDeadline);
-            var dateB = new Date(b.taskDeadline);
+            if (a.taskDeadline === null && b.taskDeadline === null) return 0;
+            if (a.taskDeadline === null) return 1;
+            if (b.taskDeadline === null) return -1;
+            var dateA = new Date(a.taskDeadline ? a.taskDeadline.substring(0,10) : "");
+            var dateB = new Date(b.taskDeadline ? b.taskDeadline.substring(0,10) : "");
             if (dateA.toLocaleDateString() === new Date(0).toLocaleDateString()) return 1;
             if (dateB.toLocaleDateString() === new Date(0).toLocaleDateString()) return -1;
             if (dateA < dateB) return -1;
@@ -160,13 +163,13 @@ const TaskPage = (props) => {
             return 0;
         }
     )};
-    const groupByPriority = (tasks) => { 
-        const reduced = {}; 
+    const groupByPriority = (tasks) => {
+        const reduced = {};
         tasks.forEach((task) => {
             if (task.taskComplete) {
                 (reduced["complete"] = reduced["complete"] || []).push(task);
             } else {
-                (reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task); 
+                (reduced[task.taskPriority] = reduced[task.taskPriority] || [] ).push(task);
             }
         })
         return reduced;
@@ -216,7 +219,7 @@ const TaskPage = (props) => {
         };
         const fetchContacts = async (promises) => {
             const ids = await ContactController.fetchContacts();
-            
+
             let cs =  [];
             if (ids !== undefined && ids.length > 0) {
                 for (const id of ids) {
@@ -232,7 +235,7 @@ const TaskPage = (props) => {
             sortByDate(data);
             setTasksByGroup(groupByDate(data));
         }
-        
+
         //Fetch contacts first for 2nd Degree contact search to not cause concurrency issues.
         fetchContacts().then(() => fetchTasks());
     }, []);
@@ -240,7 +243,7 @@ const TaskPage = (props) => {
     /**
      * Add an event listener to tasks so when fetchTasks is called or changes to the task objects,
      * fetch 2nd degree contacts and update contacts array accordingly
-     * 
+     *
      * This way, 2nd degree contacts will also show up in the task participants.
      */
     useEffect(() => {
@@ -260,7 +263,7 @@ const TaskPage = (props) => {
                 }
                 promises.push(ContactController.fetchContactData({contactID: task.accountID}).then(res => cs.push(res)));
             }
-            
+
             //Combine 2nd degree contacts with first degree contacts for them to show up in task details.
             Promise.all(promises).then(() => {setAllContacts(uniqueContacts(cs))});
         }
@@ -270,13 +273,14 @@ const TaskPage = (props) => {
     if (allContacts === undefined) {
         return null;
     }
+
     return (<React.Fragment>
             <div className="tasks-page">
                 <div className="tasks-header">
                     <h1>Tasks</h1>
-                    <button 
-                        data-testid="add-task" 
-                        className="create-task-btn" 
+                    <button
+                        data-testid="add-task"
+                        className="add-btn tasks-btn"
                         onClick={() => { openModal() }}>
                         <MdAdd size={22}/>
                         <h4>Add</h4>
@@ -289,8 +293,8 @@ const TaskPage = (props) => {
                 </div>
                 <div className="tasks-container">
                     {Object.keys(tasksByGroup).filter(key => key !== "complete")
-                        .map(key => { 
-                            return <TaskList 
+                        .map(key => {
+                            return <TaskList
                                 key={key}
                                 contacts={contacts}
                                 allContacts={allContacts}
@@ -300,8 +304,8 @@ const TaskPage = (props) => {
                                 isComplete={false}
                                 isOverdue={key === "overdue"}/>
                                 })}
-                    {Object.keys(tasksByGroup).includes("complete") ? 
-                        <TaskList 
+                    {Object.keys(tasksByGroup).includes("complete") ?
+                        <TaskList
                             key="complete"
                             contacts={contacts}
                             allContacts={allContacts}
@@ -311,9 +315,9 @@ const TaskPage = (props) => {
                             isComplete={true}
                             isOverdue={false}/>
                         : ""}
-                    {modalShow ? <AddTaskForm 
-                        submit={addTask} 
-                        show={modalShow} 
+                    {modalShow ? <AddTaskForm
+                        submit={addTask}
+                        show={modalShow}
                         onHide={hideModal}
                         /> : ""
                     }

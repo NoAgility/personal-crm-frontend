@@ -19,8 +19,21 @@ const ContactController = {
 		try {
 			const res = await SpringBootAdapterWrapper.get(`/account/get?id=${contact.contactID}`).then(
 				response => {
+					return response.data;
+				}
+			);
+			return res;
+		} catch (err) {
+			console.log(err)
+		}
+	},
+
+	// Fetch a user by their accountID
+	fetchUserByID: async (accountID) => {
+		try {
+			const res = await SpringBootAdapterWrapper.get(`/account/get?id=${accountID}`).then(
+				response => {
 					const data = response.data;
-					data.contactCreatedOn = contact.contactCreatedOn;
 					return data;
 				}
 			);
@@ -61,6 +74,16 @@ const ContactController = {
 			console.log(err)
 		}
 	},
+
+	// Update a contact
+	updateContact: async (contact) => {
+		try {
+			const res = await SpringBootAdapterWrapper.post("/contact/update", "", contact);
+			return res;
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
 }
 

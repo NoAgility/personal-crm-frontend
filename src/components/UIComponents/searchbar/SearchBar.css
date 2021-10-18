@@ -27,7 +27,10 @@
 }
 
 /* Color Modes */
-
+.transparent {
+	background-color: transparent;
+	color: var(--color-white)
+}
 .dark {
 	background-color: var(--color-dark);
 	color: var(--color-white);
@@ -59,7 +62,8 @@
 }
 
 .box-sm {
-	width: 250px;
+	width: 210px;
+	height: 30px;
 }
 .box-xsm {
 	display: flex;
@@ -70,6 +74,14 @@
 
 .search-sm {
 	width: 150px;
+	height: 20px;
+	font-size: var(--text-small);
+}
+
+.box-sm svg {
+	padding:0px;
+	margin-bottom: auto;
+	margin-top: auto;
 	font-size: var(--text-xsmall);
 }
 .search-xsm {

@@ -78,3 +78,15 @@ input::placeholder {
 	cursor: pointer;
 }
 
+.landing-back-button {
+	background-color: var(--color-medium-transparent);
+	font-family: var(--font);
+	color: var(--color-white);
+	position: absolute;
+	border: none;
+	left: 15px;
+	top: 15px;
+	width: 160px;
+	height: 50px;
+	border-radius: 10px;
+}
