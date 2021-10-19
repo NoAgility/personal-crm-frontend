@@ -8,47 +8,9 @@
 	text-align: left;
 	width: 100%;
 }
-.task-label {
-    height: 20px;
-    margin-right: 10px;
-    width: 20px;
-    border-radius: 50%;
-    border: 1.5px solid;
-    border-color: var(--color-purple);
-}
-.task-label-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-purple);
-    height: 20px;
-    margin-right: 10px;
-    width: 20px;
-    border-radius: 50%;
-    border: 1.5px solid;
-    border-color: var(--color-purple);
-    color: var(--color-dark);
-    text-align: top;
-    font-size: 28px;
-}
-.create-task-btn {
-    color: var(--color-white);
-    margin: 20px 0px 20px auto;
-	background-color: var(--color-blue);
-	border-radius: 30px;
-	width: 90px;
-	height: 50px;
-	cursor: pointer;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	padding-left: 5px;
-	padding-right: 12px;
-}
-.create-task-btn * {
-	margin: auto;
-	text-align: center;
-	font-size: var(--text-small);
+.tasks-btn {
+    background-color: var(--color-purple) !important;
+    border-color: var(--color-purple) !important;
 }
 .tasks-sub-header {
 	display: flex;
@@ -98,18 +60,6 @@
     color: var(--color-medium);
     width: 100%;
     margin-bottom: 20px;
-}
-
-.task-submit {
-    height: 40px;
-    width: 100px;
-    border: none;
-    background-color: var(--color-purple);
-    margin-right: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-family: var(--font);
-    color: var(--color-white);
 }
 .task-cancel {
     color: var(--color-white);
@@ -165,38 +115,6 @@
     margin-bottom: 0;
     width: 100%;
 }
-.task-container-left {
-    display: flex;
-    justify-content: flex-start;
-    cursor: pointer;
-}
-.task {
-    color: var(--color-offwhite);
-    display: flex;
-    justify-content: space-between;
-    border-bottom: solid;
-    border-color: var(--color-offwhite);
-    border-width: 1px;
-    margin-bottom: 20px;
-    width: 100%;
-    
-}
-.task-add {
-    border-top: solid;
-    border-color: var(--color-offwhite);
-    border-width: 1px;
-    margin-right: 6.5%;
-    padding-top: 2px;
-    display: flex;
-    justify-content: flex-start;
-    color: var(--color-offwhite);
-    font-size: var(--text-small);
-    font-family: var(--font);
-    width: 48.5%;
-    max-width: 500px;
-    min-width: 350px;
-    align-items: center;
-}
 .task-alias {
     display: flex;
     align-items: left;
@@ -209,7 +127,8 @@
     justify-content: center;
     margin-bottom: 20px;
 }
-.task-date {
+.task-label {
+    color: var(--color-offwhite);
     width: 65%;
     display: flex;
     justify-content: center;

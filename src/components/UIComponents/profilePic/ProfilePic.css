@@ -17,7 +17,13 @@
 }
 
 .pp-sm {
-	font-size: var(--text-medium);
+	font-size: var(--text-small);
+	font-weight: normal;
+}
+
+.pp-xs {
+	font-size: var(--text-xsmall);
+	font-weight: normal;
 }
 
 .profile-pic-lg {
@@ -31,6 +37,12 @@
 }
 
 .profile-pic-sm {
-	width: 75px;
-	height: 75px;
+	width: 50px;
+	height: 50px;
 }
+
+.profile-pic-xs {
+	width: 30px;
+	height: 30px;
+}
+

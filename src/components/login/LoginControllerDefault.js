@@ -1,6 +1,8 @@
 import SpringBootAdapterWrapper from '../../util/SpringBootAdapterWrapper'
 import { Redirect } from "react-router-dom";
 import LoginController from "./LoginController"
+import React from 'react';
+
 
 /**
  * Real time application implementation of Login Controller, assumes use of a browser
@@ -18,7 +20,7 @@ LoginControllerDefault.login = async (user) => {
 	if (!user.username || !user.password) {
 		throw new Error("Please provide an username and a password");
 	}
-	
+
 	var data;
 	var flag = await SpringBootAdapterWrapper.post(`/authenticate/login`, {}, {
 		username: user.username,

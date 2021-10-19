@@ -1,18 +1,21 @@
 import "./Navbar.css";
-import React, { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import { BiTask , BiCalendar, BiPhone, BiMailSend, BiBook} from 'react-icons/bi';
+import { MdClose , MdGroup } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
-import { useState } from "react";
+import React, { useState } from "react";
 const Navbar = (props) => {
     const [active, setActive] = useState("/home/calendar");
 
+    const history = useHistory();
+    
     const onClick = (route) => {
         history.push(route);
         const page = route.split("/home/").pop();
         setActive(page);
     }
 
-    const history = useHistory();
+    
     /**
      * Navigation sidebar providing functionality to change app content
      */
@@ -26,8 +29,8 @@ const Navbar = (props) => {
                     </button>
                 </li>
                 <li className="nav-item">
-                    <button onClick={() => {onClick("/home/meetings")}} className={`nav-button meetings-nav-btn${active === "index.html" ? "-active" : ""}`}>
-                        <BiPhone className="icon" size={30}/>
+                    <button onClick={() => {onClick("/home/meetings")}} className={`nav-button meetings-nav-btn${active === "meetings" ? "-active" : ""}`}>
+                        <MdGroup className="icon" size={30}/>
                         <h4>Meetings</h4>
                     </button>
                 </li>

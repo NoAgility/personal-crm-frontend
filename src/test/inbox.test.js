@@ -29,7 +29,7 @@ beforeAll(() => {
         writable: true,
         value: 'status=active',
     });
-
+    window.HTMLElement.prototype.scrollIntoView = function() {};
     CookieManager.eraseCookies();
 
 });
@@ -55,17 +55,20 @@ test("ETE Test - Register -> Login -> create chat", async () => {
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
-        var name = screen.getByPlaceholderText('Name');
+        var fname = screen.getByPlaceholderText('First Name');
+        var lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_sender_1'}});
         fireEvent.change(password, {target: {value: 'password'}});
-        fireEvent.change(name, {target: {value: 'testname'}});
+        fireEvent.change(fname, {target: {value: 'testname'}});
+        fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_sender_1'));
         await waitFor(() => expect(password).toHaveValue('password'));
-        await waitFor(() => expect(name).toHaveValue('testname'));
+        await waitFor(() => expect(fname).toHaveValue('testname'));
+        await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
@@ -88,17 +91,20 @@ test("ETE Test - Register -> Login -> create chat", async () => {
         </MemoryRouter>);
         username = screen.getByPlaceholderText('Username');
         password = screen.getByPlaceholderText('Password');
-        name = screen.getByPlaceholderText('Name');
+        fname = screen.getByPlaceholderText('First Name');
+        lname = screen.getByPlaceholderText('Last Name');
         dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_receiver_1'}});
         fireEvent.change(password, {target: {value: 'password'}});
-        fireEvent.change(name, {target: {value: 'testname'}});
+        fireEvent.change(fname, {target: {value: 'testname'}});
+        fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_receiver_1'));
         await waitFor(() => expect(password).toHaveValue('password'));
-        await waitFor(() => expect(name).toHaveValue('testname'));
+        await waitFor(() => expect(fname).toHaveValue('testname'));
+        await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
@@ -136,7 +142,7 @@ test("ETE Test - Register -> Login -> create chat", async () => {
 
         var {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><Contacts/></div>, {container: document.body});
 
-        const createContact = container.getElementsByClassName("create-contact-btn")[0];
+        const createContact = container.querySelector(".add-btn");
         fireEvent.click(createContact);
 
         var searchBar = container.querySelector(".search-input")
@@ -195,17 +201,20 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
-        var name = screen.getByPlaceholderText('Name');
+        var fname = screen.getByPlaceholderText('First Name');
+        var lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_sender_2'}});
         fireEvent.change(password, {target: {value: 'password'}});
-        fireEvent.change(name, {target: {value: 'testname'}});
+        fireEvent.change(fname, {target: {value: 'testname'}});
+        fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_sender_2'));
         await waitFor(() => expect(password).toHaveValue('password'));
-        await waitFor(() => expect(name).toHaveValue('testname'));
+        await waitFor(() => expect(fname).toHaveValue('testname'));
+        await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
@@ -228,17 +237,20 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
         </MemoryRouter>);
         username = screen.getByPlaceholderText('Username');
         password = screen.getByPlaceholderText('Password');
-        name = screen.getByPlaceholderText('Name');
+        fname = screen.getByPlaceholderText('First Name');
+        lname = screen.getByPlaceholderText('Last Name');
         dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_receiver_2'}});
         fireEvent.change(password, {target: {value: 'password'}});
-        fireEvent.change(name, {target: {value: 'testname'}});
+        fireEvent.change(fname, {target: {value: 'testname'}});
+        fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_receiver_2'));
         await waitFor(() => expect(password).toHaveValue('password'));
-        await waitFor(() => expect(name).toHaveValue('testname'));
+        await waitFor(() => expect(fname).toHaveValue('testname'));
+        await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
@@ -276,7 +288,7 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
 
         var {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><Contacts/></div>, {container: document.body});
 
-        const createContact = container.getElementsByClassName("create-contact-btn")[0];
+        const createContact = container.querySelector(".add-btn");
         fireEvent.click(createContact);
 
         var searchBar = container.querySelector(".search-input")
@@ -357,17 +369,20 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
-        var name = screen.getByPlaceholderText('Name');
+        var fname = screen.getByPlaceholderText('First Name');
+        var lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_sender_3'}});
         fireEvent.change(password, {target: {value: 'password'}});
-        fireEvent.change(name, {target: {value: 'testname'}});
+        fireEvent.change(fname, {target: {value: 'testname'}});
+        fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_sender_3'));
         await waitFor(() => expect(password).toHaveValue('password'));
-        await waitFor(() => expect(name).toHaveValue('testname'));
+        await waitFor(() => expect(fname).toHaveValue('testname'));
+        await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
@@ -390,17 +405,20 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         </MemoryRouter>);
         username = screen.getByPlaceholderText('Username');
         password = screen.getByPlaceholderText('Password');
-        name = screen.getByPlaceholderText('Name');
+        fname = screen.getByPlaceholderText('First Name');
+        lname = screen.getByPlaceholderText('Last Name');
         dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_receiver_3'}});
         fireEvent.change(password, {target: {value: 'password'}});
-        fireEvent.change(name, {target: {value: 'testname'}});
+        fireEvent.change(fname, {target: {value: 'testname'}});
+        fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_receiver_3'));
         await waitFor(() => expect(password).toHaveValue('password'));
-        await waitFor(() => expect(name).toHaveValue('testname'));
+        await waitFor(() => expect(fname).toHaveValue('testname'));
+        await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
@@ -438,7 +456,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
 
         var {container, getByTestId, getByPlaceholderText, getByText, unmount} = render(<div><Contacts/></div>, {container: document.body});
 
-        const createContact = container.getElementsByClassName("create-contact-btn")[0];
+        const createContact = container.querySelector(".add-btn");
         fireEvent.click(createContact);
 
         var searchBar = container.querySelector(".search-input")
@@ -488,8 +506,6 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
 
         fireEvent.click(send);
 
-        console.debug(document.cookie);
-
         await waitFor(() => expect(inbox_container.querySelector(".message-text")).not.toBeNull());
 		// expect a 'message-container'
 		const sentMessage = await inbox_container.getElementsByClassName("message-container-user")[0];
@@ -510,8 +526,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         fireEvent.focus(optionsBtnMessage);
 
         const deleteMessage = await inbox_container.getElementsByClassName("message-options-btn")[1];
-
-        console.debug(inbox_container.innerHTML);
+        
 		await waitFor(() => expect(deleteMessage).not.toBeNull());
 
         fireEvent.click(deleteMessage);

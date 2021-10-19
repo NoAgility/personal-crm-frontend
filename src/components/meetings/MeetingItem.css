@@ -1,0 +1,44 @@
+.meeting-container-left {
+    width: 100%;
+    cursor: pointer;
+	display: grid;
+	justify-content: start;
+}
+
+.meeting-container-left *{
+    text-align: left;
+}
+
+.meeting-participants-container {
+	padding-top: 5px;
+	padding-bottom: 5px;
+    width: 528px;
+
+}
+
+.meeting-item-date {
+    margin-left: auto !important;
+}
+
+.meeting-item-options {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+
+}
+
+.meeting-participants-container div{
+	margin: 4px 4px 4px 0px;
+}
+
+.meeting {
+    color: var(--color-white);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid;
+    border-color: var(--color-offwhite);
+    border-width: 1px;
+    margin-bottom: 20px;
+    width: 100%;
+
+}
+

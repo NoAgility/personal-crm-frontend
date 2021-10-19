@@ -15,21 +15,26 @@
 	border-color: var(--color-offwhite);
 }
 
-.modal-body div {
+.modal-body {
+	margin-bottom: 25px;
+}
+
+.settings-content {
 	margin-bottom: 25px;
 	text-align:left;
 }
-
-.modal-body div *{
+.settings-content div *{
 	margin: 5px;
 }
 
 .close {
 	color: var(--color-white);
+	cursor: pointer;
 }
 
 .close:hover {
 	color: var(--color-white);
+	cursor: pointer;
 }
 
 .form-control {

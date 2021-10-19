@@ -1,0 +1,68 @@
+.circle {
+    height: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1.7px solid;
+    border-width: 2.5px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    margin-bottom: 5px;
+}
+
+.purple-circle {
+    border-color: var(--color-purple);
+    color: var(--color-purple);
+}
+
+.red-circle {
+    border-color: var(--color-red);
+    color: var(--color-red);
+}
+.yellow-circle {
+    border-color: var(--color-yellow);
+    color: var(--color-yellow);
+}
+.green-circle {
+    border-color: var(--color-green);
+    color: var(--color-green);
+}
+.task {
+    color: var(--color-offwhite);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: solid;
+    border-color: var(--color-offwhite);
+    border-width: 1px;
+    margin-bottom: 20px;
+    width: 100%;
+
+}
+.task-container-left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-white);
+    font-family: var(--font);
+}
+.task-name {
+    cursor: pointer;
+    text-align: left;
+    min-width: 40px;
+    min-height: 25px;
+    width: 100%;
+}
+
+.task-name h6{
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+.task-item-date {
+    margin-left: auto !important;
+    margin-right: 40px;
+    color: var(--color-offwhite);
+}

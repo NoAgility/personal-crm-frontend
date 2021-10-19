@@ -1,0 +1,50 @@
+.task-add {
+    color: var(--color-white);
+	min-width: 600px;
+	margin: 0px 25px 0px 25px;
+    border-top: none;
+}
+
+.task-btn {
+    background-color: var(--color-purple);
+    border-style: solid;
+    border-color: var(--color-purple);
+    border-width: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+.task-btn:hover {
+    background-color: var(--color-task-dark);
+    border-color: var(--color-task-dark);
+
+}
+
+.task-btn:active {
+    background-color: var(--color-task-xdark);
+    border-color: var(--color-task-xdark);
+}
+
+.task-add-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.task-add-details-section h6{
+    margin: 0px;
+}
+
+.task-add-basic-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.task-deadline-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-left: 10px;
+}

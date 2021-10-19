@@ -1,5 +1,5 @@
 .inbox-contacts {
-	width: 380px;
+	width: 350px;
 	height: 100%;
 	border-right-style: solid;
 	border-color: var(--color-offwhite);
@@ -35,4 +35,12 @@
 	cursor: pointer;
 	display: grid;
 	place-items: center;
+}
+
+.add-chat-btn:active {
+	filter: brightness(50%);
+}
+
+.chat-btn {
+	background-color: var(--color-blue);
 }

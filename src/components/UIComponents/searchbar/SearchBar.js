@@ -1,5 +1,7 @@
 import "./SearchBar.css";
 import {BiSearch} from 'react-icons/bi';
+import React from 'react';
+
 
 const SearchBar = ({ name, width, colorMode, onSubmit, placeholder, value, onChange }) => {
 	// name: name of search query
@@ -14,7 +16,7 @@ const SearchBar = ({ name, width, colorMode, onSubmit, placeholder, value, onCha
 		<form onSubmit={onSubmit}>
 			<div className={`search-box ${colorMode} box-${width}`}>
 				<div className="search-button">
-					<BiSearch className={`search-icon ${colorMode}`} size={25} onClick={onSubmit}/>
+					<BiSearch className={`search-icon ${colorMode}`} size={width === "sm" ? 20 : 25} onClick={onSubmit}/>
 				</div>
 				<input
 					className={`search-input ${colorMode} search-${width}`}
