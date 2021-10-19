@@ -84,6 +84,9 @@ const Inbox = () => {
 		if (cs !== undefined && cs.length > 0) {
 			setChats(cs);
 			return cs;
+		} else {
+			setChats([]);
+			return cs;
 		}
 	}
 

@@ -107,6 +107,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 		setContactIDsRemoved([]);
 		setContactIDsSelected(task.taskContactAccounts.map((c) => c.contactID));
 		setTaskComplete(task.taskComplete);
+		setIsEditing(false);
 		onHide();
 	}
 

@@ -15,6 +15,7 @@ import axios from 'axios';
 import PrivateRoute from './util/PrivateRoute';
 import AuthService from './util/AuthService';
 import Dashboard from './Dashboard';
+import LandingPage from './components/landing/LandingPage';
 
 function App() {
 	axios.defaults.adapter = require('axios/lib/adapters/http');
@@ -23,13 +24,17 @@ function App() {
 				<Switch>
 					<Redirect 
 						exact from="/"
-						to="/login"
+						to="/landing"
 					/> 
 					{ AuthService.isLoggedIn() ? 
 						<Redirect 
 							exact from = "/login"
 							to = "/home"
 							/> : "" } 
+					<Route
+						exact path = "/landing"
+						component = {LandingPage}
+					/>
 					<Route 
 						exact path = "/login"
 						component = {Login}

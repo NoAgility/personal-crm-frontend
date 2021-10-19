@@ -31,7 +31,7 @@ const Login = () => {
     const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
 	return (
         <div data-testid="container" className="login-container">
-
+            <button className="landing-back-button" onClick={() => history.push("/landing")}>Back to Landing</button>
             <form className="login-form" onSubmit={onSubmit}>
                 <h6>{error}</h6>
                 <h1>Login</h1>

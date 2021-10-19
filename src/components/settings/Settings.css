@@ -23,17 +23,18 @@
 	margin-bottom: 25px;
 	text-align:left;
 }
-
 .settings-content div *{
 	margin: 5px;
 }
 
 .close {
 	color: var(--color-white);
+	cursor: pointer;
 }
 
 .close:hover {
 	color: var(--color-white);
+	cursor: pointer;
 }
 
 .form-control {

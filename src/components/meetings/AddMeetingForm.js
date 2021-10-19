@@ -45,11 +45,11 @@ const AddMeetingForm = ({ meeting, submit, show, onHide }) => {
      * Wrapper for onHide function to reset all state
      * @param {*} e The event being triggered
      */
-    const handleClose = (e) => {
-		e.preventDefault();
+    const handleClose = () => {
 		setMeetingName("");
         setMeetingStart("");
         setMeetingEnd("");
+        setSelectedContactIDs([]);
 		onHide();
 	};
 
@@ -96,7 +96,7 @@ const AddMeetingForm = ({ meeting, submit, show, onHide }) => {
     return (
         <Modal
             show={show}
-			onHide={onHide}
+			onHide={handleClose}
             size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>

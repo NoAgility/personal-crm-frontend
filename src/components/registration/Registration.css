@@ -81,7 +81,15 @@ input[type="date"]::-webkit-datetime-edit {
 }
 .form-back {
 	background-color: var(--color-medium);
+	font-family: var(--font);
+	font-size: var(--text-small);
+	font-weight: bold;
 	color: var(--color-white);
+	border-radius: 8px;
+	border-style: none;
+	margin-bottom: 10px;
+	height: 48px;
+	width: 80%;
 	cursor: pointer;
 }
 .error {

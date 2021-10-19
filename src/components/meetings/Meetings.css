@@ -191,6 +191,7 @@
     justify-content: center;
     font-size: var(--text-msmall);
     font-family: var(--font);
+    color: var(--color-offwhite);
     font-weight: bold;
 }
 ::-webkit-scrollbar {

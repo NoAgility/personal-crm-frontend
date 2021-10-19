@@ -59,7 +59,7 @@
 }
 
 .contacts-btn {
-	background-color: var(--color-teal);
+	background-color: var(--color-teal) !important;
     border-style: solid;
     border-color: var(--color-teal);
     border-width: 2px;

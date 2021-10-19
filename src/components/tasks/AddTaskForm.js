@@ -44,11 +44,11 @@ const AddTaskForm = ({submit, show, onHide}) => {
      * Wrapper for onHide function to reset all state
      * @param {*} e The event being triggered
      */
-    const handleClose = (e) => {
-		e.preventDefault();
+    const handleClose = () => {
 		setTaskName("");
         setTaskPriority(-1);
         setTaskDate("");
+        setSelectedContactIDs([]);
 		onHide();
 	};
 
@@ -101,7 +101,7 @@ const AddTaskForm = ({submit, show, onHide}) => {
     return (
         <Modal
             show={show}
-			onHide={onHide}
+			onHide={handleClose}
             size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>

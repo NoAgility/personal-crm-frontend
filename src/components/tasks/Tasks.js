@@ -132,7 +132,7 @@ const TaskPage = (props) => {
             } else if (new Date() > new Date(task.taskDeadline) && !task.taskComplete) {
                 (reduced["overdue"] = reduced["overdue"] || []).push(task);
             } else {
-                (reduced[task.taskDeadline] = reduced[task.taskDeadline] || []).push(task);
+                (reduced[task.taskDeadline.substring(0, 11)] = reduced[task.taskDeadline.substring(0, 11)] || []).push(task);
             }
         })
         return reduced;
@@ -273,6 +273,7 @@ const TaskPage = (props) => {
     if (allContacts === undefined) {
         return null;
     }
+
     return (<React.Fragment>
             <div className="tasks-page">
                 <div className="tasks-header">
