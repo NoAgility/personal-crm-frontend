@@ -99,6 +99,7 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
 							id="newMessage"
 							placeholder=""
 							value={newMessage}
+							maxLength={1000}
 							onChange={event => {setNewMessage(event.target.value)}}
 						>
 						</input>

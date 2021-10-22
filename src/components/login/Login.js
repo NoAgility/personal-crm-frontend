@@ -44,6 +44,7 @@ const Login = () => {
                         value={username}
                         placeholder="Username"
                         className="login-input"
+                        maxLength={45}
                         onChange={event => {setUsername(event.target.value)}}
                     />
                 </div>
@@ -55,6 +56,7 @@ const Login = () => {
                         value={password}
                         placeholder="Password"
                         className="login-input"
+                        maxLength={45}
                         onChange={event => {setPassword(event.target.value)}}
                     />
                     {passwordShown ? show : hide}

@@ -5,6 +5,7 @@ import Contact from './Contact.js'
 import AddContact from './AddContact.js'
 import  './Contacts.css'
 import Sort from '../UIComponents/sort/Sort.js';
+import ContactReferral from './ContactReferral.js';
 
 const Contacts = (props) => {
 
@@ -83,13 +84,17 @@ const Contacts = (props) => {
 		<div className="contacts-page">
 			<div className="contact-header">
 				<h1>Contacts</h1>
-				<button
-					data-testid="add-contact"
-					className="add-btn contacts-btn"
-					onClick={() => setModalShow(true)}>
-					<MdAdd size={22}/>
-					<h4>Add</h4>
-				</button>
+
+				<div className="contact-btns">
+					<ContactReferral/>
+					<button
+						data-testid="add-contact"
+						className="add-btn contacts-btn"
+						onClick={() => setModalShow(true)}>
+						<MdAdd size={22}/>
+						<h4>Add</h4>
+					</button>
+				</div>
 			</div>
 
 			<AddContact

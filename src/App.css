@@ -124,6 +124,8 @@ button {
 }
 
 .app-body {
+    background-color: var(--color-dark);
+    color: var(--color-white);
     height: calc(100vh - 105px);
     margin-left: 240px;
     display: grid;

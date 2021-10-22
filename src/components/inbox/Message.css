@@ -1,6 +1,12 @@
+.message-outer-container {
+	display: grid;
+	width: 100%;
+}
+
 .message-container {
 	display: flex;
 	flex-direction: row;
+	width:min-content;
 }
 
 .message {
@@ -26,11 +32,11 @@
 }
 
 .message-container-user {
-	justify-self: end;
+	justify-self: flex-end;
 }
 
 .message-container-contact {
-	justify-self: start;
+	justify-self: flex-start;
 }
 
 .message-options-container {
@@ -41,15 +47,18 @@
 
 .message-options {
 	border-radius: 50%;
-	height: 25px;
-	width: 25px;
+	height: 33px;
+	width: 33px;
 	background-color: var(--color-medium);
 	color: var(--color-white);
 	display: grid;
 	place-items: center;
 	place-self: center;
+	margin:0px;
+	padding:0px;
 	margin-left:3px;
 	margin-right:3px;
+
 }
 
 .message-options-btn {

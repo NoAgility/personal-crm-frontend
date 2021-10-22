@@ -26,8 +26,28 @@ const RegistrationController = {
         return res;
     },
     /**
+     * Register a user with a referral link
+     * @param {*} userDetails The user details to register with
+     */
+     registerReferral : async (userDetails, referralUsername) => {
+        var res = await SpringBootAdapterWrapper.post(`/account/create?referral=${referralUsername}`, {}, {
+            username: userDetails.username,
+            password: userDetails.password,
+            name: userDetails.fName + " " + userDetails.lName,
+            dob: userDetails.dob,
+        }).then(response => { return true; }).catch(err => {
+            if (err.response.status.toString().includes('50')) {
+                throw new Error("Failed to create account, please try again later");
+            } else if (err.response.status.toString().includes('40')) {
+                throw new Error("Account username is taken");
+            }
+        });
+
+        return res;
+    },
+    /**
      * Checks if valid username
-     * @param {*} userDetails The user details to check 
+     * @param {*} userDetails The user details to check
      */
     isValidUsername : async (userDetails) => {
 
@@ -38,7 +58,7 @@ const RegistrationController = {
         if (userDetails.username.length < 3) {
             throw new Error('Username must be at least 3 characters long');
         }
-    
+
         //Check for non-word characters
         if (userDetails.username.match(/^.*[\W].*$/)) {
             throw new Error('Username must only contain a-z, 0-9 and _');
