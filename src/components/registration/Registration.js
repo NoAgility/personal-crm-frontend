@@ -5,7 +5,8 @@ import './Registration.css';
 import RegistrationController from './RegistrationController';
 const Registration = (props) => {
 
-    const { referral } = useParams()
+    // Get the referral parameter from the url in "/register/referral/:referral"
+    const { referral } = useParams();
 
     const history = useHistory();
 
@@ -98,7 +99,7 @@ const Registration = (props) => {
         if (referral === undefined) {
             flag && RegistrationController.register(userDetails).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
         } else {
-            RegistrationController.registerReferral(userDetails, referral).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
+            flag && RegistrationController.registerReferral(userDetails, referral).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
         }
     }
 
