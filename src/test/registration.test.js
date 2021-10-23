@@ -15,9 +15,6 @@ beforeAll(() => {
 test("Integration Test - Successful registration", async () => {
 
     axios.defaults.adapter = require('axios/lib/adapters/http');
-    
-
-    
     await act( async () => {
         let testHistory, testLocation;
         render(<MemoryRouter intialEntries={"/registration"}>
@@ -128,7 +125,16 @@ test("Unit Test - Username input too short", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
         const fname = screen.getByPlaceholderText('First Name');
@@ -160,7 +166,16 @@ test("Unit Test - Username not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const password = screen.getByPlaceholderText('Password');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
@@ -188,7 +203,16 @@ test("Unit Test - Password input too short", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
         const fname = screen.getByPlaceholderText('First Name');
@@ -219,7 +243,16 @@ test("Unit Test - Password not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
@@ -247,7 +280,16 @@ test("Unit Test - Name contains non-alphabet characters", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
         const fname = screen.getByPlaceholderText('First Name');
@@ -278,7 +320,16 @@ test("Unit Test - Name not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        const container = render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
         const dob = screen.getByTestId('DOB');
@@ -303,7 +354,16 @@ test("Unit Test - DOB not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
         const fname = screen.getByPlaceholderText('First Name');

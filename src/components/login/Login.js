@@ -11,7 +11,6 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [generalError, setGeneralError] = useState("");
-    const [redirect, setRedirect] = useState("");
 
     // submits the login information
     const onSubmit = async (e) => {
