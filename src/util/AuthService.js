@@ -6,7 +6,7 @@ const AuthService = {
 	 * @returns {boolean} true if user is logged in
 	 */
 	isLoggedIn : function() {
-		return CookieManager.getCookie("jwt") != null;
+		return CookieManager.getCookie("jwt") !== null;
 	},
 	/**
 	 * Logs the user out

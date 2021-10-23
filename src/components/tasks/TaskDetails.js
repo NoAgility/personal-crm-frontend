@@ -61,7 +61,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 
 		const formattedDate = year + "-" + month + "-" + day;
 
-		
+
 		return new Date(date).toISOString().substring(0, 19);
 	}
 	const getDisplayDate = () => {
@@ -295,7 +295,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 				type="text"
 				value={taskName}
 				onChange={(e) => setTaskName(e.target.value)}
-				maxLength="45"/> :
+				maxLength={45}/> :
 				<h1 className="task-details-name-h1">{taskName}</h1>}
 			</div>
 
@@ -305,7 +305,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 					<Accordion.Header className="accordion-header">Basic Details</Accordion.Header>
 					<Accordion.Body>
 					<div className="task-add-details-section">
-						
+
 							{isEditing ?
 							<>
 							<div className="task-basic-details-section">
@@ -369,7 +369,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 									</div>
 								</>
 							}
-							
+
 						</div>
 					</Accordion.Body>
 				</Accordion.Item>

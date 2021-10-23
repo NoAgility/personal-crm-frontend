@@ -1,6 +1,7 @@
 import "./Settings.css";
 import React, { useState, useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { MdClose } from 'react-icons/md'
 import SettingsController from "./SettingsController.js";
 import CookieManager from "../../util/CookieManager";
 import Confirmation from "../UIComponents/confirm/Confirmation";
@@ -39,13 +40,13 @@ const Settings = (props) => {
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
-			<Modal.Header closeButton closeVariant="white">
-				<Modal.Title id="contained-modal-title-vcenter">
+			<div className="modal-top-settings">
 					<h2>Account Settings</h2>
-				</Modal.Title>
-			</Modal.Header>
+					<MdClose className="modal-header-button" onClick={props.onHide} size={30}/>
+				</div>
+
 			<Modal.Body className="settings-content">
-				
+
 				<div className="settings-item">
 					<h3>Account Username</h3>
 					<div>{userDetails.accountUsername}</div>

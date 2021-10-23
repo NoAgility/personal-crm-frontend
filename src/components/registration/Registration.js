@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { BiHide, BiShow} from 'react-icons/bi';
 import './Registration.css';
 import RegistrationController from './RegistrationController';
 const Registration = (props) => {
+
+    // Get the referral parameter from the url in "/register/referral/:referral"
+    const { referral } = useParams();
 
     const history = useHistory();
 
@@ -18,7 +21,7 @@ const Registration = (props) => {
     const [errorDOB, setErrorDOB] = useState("");
     const [generalError, setGeneralError] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
-    
+
     /**
      * Function to make password visible
      */
@@ -30,7 +33,7 @@ const Registration = (props) => {
      */
     const show = <BiShow className="show-hide-icon" onClick={togglePassword}/>;
     const hide = <BiHide className="show-hide-icon" onClick={togglePassword}/>;
-    
+
     /**
      * Function called on submission of registration form
      * @param {*} e The triggering event
@@ -49,7 +52,7 @@ const Registration = (props) => {
          * Collect all the possible username checks and call them against the user input
          */
         const chain = [
-                { 
+                {
                     func: async () => {
                         setErrorUsername("");
                         await RegistrationController.isValidUsername(userDetails);
@@ -93,7 +96,11 @@ const Registration = (props) => {
             /**
              * If the user gets to this stage, checks have completed, so register
              */
-        flag && RegistrationController.register(userDetails).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
+        if (referral === undefined) {
+            flag && RegistrationController.register(userDetails).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
+        } else {
+            flag && RegistrationController.registerReferral(userDetails, referral).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
+        }
     }
 
     const onFocus = (e) => {
@@ -118,12 +125,12 @@ const Registration = (props) => {
                 </div>
                 <div className="form-field-container">
                 <div data-testid='name-error' className='error'>{errorName}</div>
-                    <input data-testid="fname" name="fname" className="form-input" type="text" value={FName} placeholder="First Name" onChange={ (e) => setFName(e.target.value) }/>
-                    <input data-testid="lname" name="lname" className="form-input" type="text" value={LName} placeholder="Last Name" onChange={ (e) => setLName(e.target.value) }/>
+                    <input data-testid="fname" name="fname" className="form-input" type="text" value={FName} placeholder="First Name" maxLength={45} onChange={ (e) => setFName(e.target.value) }/>
+                    <input data-testid="lname" name="lname" className="form-input" type="text" value={LName} placeholder="Last Name" maxLength={45} onChange={ (e) => setLName(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                     <div data-testid='password-error' className='error'>{errorPassword}</div>
-                    <input data-testid="password" name="password" className="form-input" type={passwordShown ? "text" : "password"} value={password} placeholder="Password" onChange={ (e) => setPassword(e.target.value) }/>
+                    <input data-testid="password" name="password" className="form-input" type={passwordShown ? "text" : "password"} value={password} placeholder="Password" maxLength={45} onChange={ (e) => setPassword(e.target.value) }/>
                     {passwordShown ? show : hide}
                 </div>
                 <div className="form-field-container">
