@@ -57,7 +57,7 @@ function ContactReferral({ link }) {
 				<div className='referral-link-container'>
 					<input
 						id="referral-link"
-						value={`http://localhost:3000/register/referral/${username}`}
+						value={`${process.env.REACT_APP_FRONTEND_URL}/register/referral/${username}`}
 						readOnly={true}
 						/>
 					<OverlayTrigger show={show} placement="right" overlay={popover}>
