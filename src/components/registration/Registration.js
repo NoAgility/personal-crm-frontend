@@ -14,10 +14,12 @@ const Registration = (props) => {
     const [FName, setFName] = useState("");
     const [LName, setLName] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordConfirm, setPasswordConfirm] = useState("");
     const [DOB, setDOB] = useState("");
     const [errorUsername, setErrorUsername] = useState("");
     const [errorName, setErrorName] = useState("");
     const [errorPassword, setErrorPassword] = useState("");
+    const [errorPasswordConfirm, setErrorPasswordConfirm] = useState("");
     const [errorDOB, setErrorDOB] = useState("");
     const [generalError, setGeneralError] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
@@ -40,6 +42,11 @@ const Registration = (props) => {
      */
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        if (password !== passwordConfirm) {
+            setErrorPassword("Passwords do not match!");
+            return;
+        }
         var userDetails = {
             username: username,
             password: password,
@@ -121,21 +128,24 @@ const Registration = (props) => {
                 </h1>
                 <div className="form-field-container">
                     <div data-testid='username-error' className='error'>{errorUsername}</div>
-                    <input data-testid="username" name="username" className="form-input" type="text" value={username} placeholder="Username" onChange={ (e) => setUsername(e.target.value) }/>
+                    <input data-testid="username" name="username" className="registration-form-input" type="text" value={username} placeholder="Username" maxLength={45} onChange={ (e) => setUsername(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                 <div data-testid='name-error' className='error'>{errorName}</div>
-                    <input data-testid="fname" name="fname" className="form-input" type="text" value={FName} placeholder="First Name" maxLength={45} onChange={ (e) => setFName(e.target.value) }/>
-                    <input data-testid="lname" name="lname" className="form-input" type="text" value={LName} placeholder="Last Name" maxLength={45} onChange={ (e) => setLName(e.target.value) }/>
+                    <input data-testid="fname" name="fname" className="registration-form-input" type="text" value={FName} placeholder="First Name" maxLength={45} onChange={ (e) => setFName(e.target.value) }/>
+                    <input data-testid="lname" name="lname" className="registration-form-input" type="text" value={LName} placeholder="Last Name" maxLength={45} onChange={ (e) => setLName(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                     <div data-testid='password-error' className='error'>{errorPassword}</div>
-                    <input data-testid="password" name="password" className="form-input" type={passwordShown ? "text" : "password"} value={password} placeholder="Password" maxLength={45} onChange={ (e) => setPassword(e.target.value) }/>
-                    {passwordShown ? show : hide}
+                    <div>
+                        <input data-testid="password" name="password" className="registration-form-input" type={passwordShown ? "text" : "password"} value={password} placeholder="Password" maxLength={45} onChange={ (e) => setPassword(e.target.value) }/>
+                        {passwordShown ? show : hide}
+                    </div>
+                    <input data-testid="password" name="password" className="registration-form-input" type="password" value={passwordConfirm} placeholder="Confirm Password" maxLength={45} onChange={ (e) => setPasswordConfirm(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                     <div data-testid='dob-error'className='error'>{errorDOB}</div>
-                    <input data-testid="DOB" className="form-input" name="DOB" onBlur={onBlur} onFocus={onFocus} type="date" value={DOB} onChange={ (e) => setDOB(e.target.value) }/>
+                    <input data-testid="DOB" className="registration-form-input" name="DOB" onBlur={onBlur} onFocus={onFocus} type="date" value={DOB} onChange={ (e) => setDOB(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                 <div data-testid='general-error' className='error'>{generalError}</div>
