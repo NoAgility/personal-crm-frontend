@@ -92,11 +92,11 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 							<div className="contact-details-line-nonedit"><MdBusinessCenter className="contact-details-icon"/>{jobTitle !== "" ? <h7>{jobTitle}</h7> : <h7 className="faint">Job Title</h7>}</div>
 						</div> :
 						<>
-							<div className="contact-details-line"><MdMailOutline className="contact-details-icon"/><input className="contact-form-input" placeholder="Email" type="text" maxLength={255} onChange={(e) => setEmail(e.target.value)} value={email}/></div>
-							<div className="contact-details-line"><MdPhone className="contact-details-icon"/><input className="contact-form-input" placeholder="Phone" type="number" maxLength={20} onChange={(e) => setPhone(e.target.value)} value={phone}/></div>
-							<div className="contact-details-line"><MdOutlineHouse className="contact-details-icon"/><input className="contact-form-input" placeholder="Address" type="text" maxLength={255} onChange={(e) => setAddress(e.target.value)} value={address}/></div>
-							<div className="contact-details-line"><MdApartment className="contact-details-icon"/><input className="contact-form-input" placeholder="Company" type="text" maxLength={255} onChange={(e) => setCompany(e.target.value)} value={company}/></div>
-							<div className="contact-details-line"><MdBusinessCenter className="contact-details-icon"/><input className="contact-form-input" placeholder="Job Title" type="text" maxLength={255} onChange={(e) => setJobTitle(e.target.value)} value={jobTitle}/></div>
+							<div className="contact-details-line"><MdMailOutline className="contact-details-icon"/><input className="contact-form-input" placeholder="Email" type="text" maxLength={45} onChange={(e) => setEmail(e.target.value)} value={email}/></div>
+							<div className="contact-details-line"><MdPhone className="contact-details-icon"/><input className="contact-form-input" placeholder="Phone" type="tel" maxLength={20} onChange={(e) => setPhone(e.target.value)} value={phone}/></div>
+							<div className="contact-details-line"><MdOutlineHouse className="contact-details-icon"/><input className="contact-form-input" placeholder="Address" type="text" maxLength={45} onChange={(e) => setAddress(e.target.value)} value={address}/></div>
+							<div className="contact-details-line"><MdApartment className="contact-details-icon"/><input className="contact-form-input" placeholder="Company" type="text" maxLength={45} onChange={(e) => setCompany(e.target.value)} value={company}/></div>
+							<div className="contact-details-line"><MdBusinessCenter className="contact-details-icon"/><input className="contact-form-input" placeholder="Job Title" type="text" maxLength={45} onChange={(e) => setJobTitle(e.target.value)} value={jobTitle}/></div>
 						</>
 						}
 					</div>

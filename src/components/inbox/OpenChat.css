@@ -1,5 +1,5 @@
 .chat {
-	width:100%;
+	width: calc(100vw - 670px);
 	height: calc(100vh - 105px);
 	display: flex;
 	flex-flow: column;
@@ -13,12 +13,24 @@
 	padding-right: 20px;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
+	width: calc(100% - 40px);
+}
+
+.chat-header-name {
+	display: flex;
+	flex-direction: row;
+	width: calc(100% - 400px)
+
 }
 
 .chat-header .name{
 	text-align: left;
-	margin: auto;
+	margin-top: auto;
+	margin-bottom: auto;
 	margin-left:20px;
+	width: calc(100% - 90px);
+
 }
 
 .chat-body {
@@ -27,6 +39,7 @@
 	padding: 10px;
 	flex-grow: 1;
 	overflow: auto;
+	width: 100%;
 }
 
 .chat-input-container {

@@ -23,6 +23,16 @@
 	align-items: center;
 	justify-items: start ;
 	padding-left: 20px;
+	width: 200px;
+}
+.chat-description > h5 {
+	text-align: left;
+	width: 200px;
+}
+.chat-description > p {
+	text-align: left;
+
+	width: 200px;
 }
 
 .chat-description *{
@@ -33,4 +43,9 @@
 	display: flex;
 	flex-direction: row;
 	width:100%;
+}
+
+.inbox-contact-item-info > .profile-pic {
+	margin-top: auto;
+	margin-bottom: auto;
 }

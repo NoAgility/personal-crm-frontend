@@ -67,7 +67,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 				id={id}
 				size="md"
 			/>
-			<div className="column">
+			<div className="column contact-search-name">
 				<h4>{name}</h4>
 				<h6>@{username}</h6>
 			</div>

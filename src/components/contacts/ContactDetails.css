@@ -35,6 +35,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-start;
+	width: 100%;
 }
 .no-icon-left {
 	margin-left: 25px;
@@ -42,6 +43,8 @@
 .contact-details-line-nonedit > h7{
 	font-family: var(--font);
 	margin: 5px;
+	width: 300px;
+	text-align: left;
 }
 .faint {
 	color: var(--color-offwhite);
@@ -94,12 +97,16 @@
 	color: var(--color-offwhite);
 }
 .contact-signature {
-	display: flex;
 	margin-left: 40px;
-	align-items: center;
+	width: 360px;
 }
 .contact-signature > h1 {
 	margin-right: 5px;
+	text-align: left;
+}
+.contact-signature > h5 {
+	margin-right: 5px;
+	text-align: left;
 }
 .edit-contact-btn, .add-contact-btn, .cancel-add-contact-btn, .delete-contact-btn {
 	border-radius: 10px;
