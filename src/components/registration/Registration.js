@@ -132,8 +132,8 @@ const Registration = (props) => {
                 </div>
                 <div className="form-field-container">
                 <div data-testid='name-error' className='error'>{errorName}</div>
-                    <input data-testid="fname" name="fname" className="registration-form-input" type="text" value={FName} placeholder="First Name" maxLength={45} onChange={ (e) => setFName(e.target.value) }/>
-                    <input data-testid="lname" name="lname" className="registration-form-input" type="text" value={LName} placeholder="Last Name" maxLength={45} onChange={ (e) => setLName(e.target.value) }/>
+                    <input data-testid="fname" name="fname" className="registration-form-input" type="text" value={FName} placeholder="First Name" maxLength={22} onChange={ (e) => setFName(e.target.value) }/>
+                    <input data-testid="lname" name="lname" className="registration-form-input" type="text" value={LName} placeholder="Last Name" maxLength={22} onChange={ (e) => setLName(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                     <div data-testid='password-error' className='error'>{errorPassword}</div>

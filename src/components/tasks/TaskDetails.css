@@ -122,6 +122,9 @@
     height: 25px;
     width: 25px;
 }
+.contact-checkbox-container h6 {
+    width: 450px;
+}
 .task-contact-viewer-list {
 	list-style: none;
 	padding-left: 0px;
@@ -156,9 +159,8 @@
 	align-items: center;
 }
 .task-details-name-h1 {
-	display: flex;
-	align-items: center;
 	margin-bottom: 0px;
+	width: 650px;
 }
 .task-details-name-input {
 	font-family: var(--font-family);

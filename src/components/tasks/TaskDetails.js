@@ -313,7 +313,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 				value={taskName}
 				onChange={(e) => setTaskName(e.target.value)}
 				maxLength={45}/> :
-				<div className="task-details-name-header"><BiTask/><h1 className="task-details-name-h1">{taskName.length < 30 ? taskName : taskName.substring(0,30).concat(" ...")}</h1></div>}
+				<div className="task-details-name-header"><BiTask/><h1 className="task-details-name-h1">{taskName}</h1></div>}
 			</div>
 
 			<Modal.Body className="task-details">

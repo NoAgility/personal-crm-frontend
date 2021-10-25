@@ -16,17 +16,17 @@ const TaskNote = ({note, onChange, onDelete}) => {
         setDesc(e.target.value);
     }
     return <div className="note-container">
-        <textarea 
-            className="task-note" 
-            value={note.note} 
+        <textarea
+            className="task-note"
+            value={note.note}
             onChange={(e) => {
-                onChangeBase(e); 
+                onChangeBase(e);
                 if (!changed) {
                     onChange(note);
                     setChanged(true);
                 }
             }}
-            maxLength="500"
+            maxLength={500}
             >
 
         </textarea>

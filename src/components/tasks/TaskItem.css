@@ -42,12 +42,15 @@
 
 }
 .task-container-left {
-    width: 100%;
+    width:100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: var(--color-white);
     font-family: var(--font);
+}
+.task-container-left h6 {
+    width:450px;
 }
 .task-name {
     cursor: pointer;

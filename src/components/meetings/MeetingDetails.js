@@ -227,7 +227,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 							<Accordion.Item  eventKey={0}>
 							<Accordion.Header className="accordion-header">View Minutes</Accordion.Header>
 
-								<div className="">
+								<div className="minute-container">
 									{(meeting.meetingMinutes)
 										.map((m) => (
 											<Accordion.Body key={m.minuteID}>
