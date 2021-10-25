@@ -42,13 +42,14 @@
 
 }
 .task-container-left {
-    width: 100%;
+    width:100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: var(--color-white);
     font-family: var(--font);
 }
+
 .task-name {
     cursor: pointer;
     text-align: left;
@@ -56,13 +57,15 @@
     min-height: 25px;
     width: 100%;
 }
-
+.task-name h6 {
+    width:400px;
+}
 .task-name h6{
     margin-left: 10px;
     margin-bottom: 0px;
 }
 .task-item-date {
     margin-left: auto !important;
-    margin-right: 40px;
+    margin-right: 20px;
     color: var(--color-offwhite);
 }

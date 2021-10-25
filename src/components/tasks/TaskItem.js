@@ -57,13 +57,16 @@ const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, 
 			onHide={() => {setModalShow(false);}}
             onDelete={onDelete}
             searchContact={searchContact}/>
-            <span className={prioritiesColorMap[priority]} onClick={() => { task.taskComplete || setCompleteConfirmShow(true)}}>{task.taskComplete ? <MdCheck className="tick-icon"/> : ""}</span>
+        <span className={prioritiesColorMap[priority]}
+            onClick={() => { task.taskComplete || setCompleteConfirmShow(true)}}>
+            {task.taskComplete ? <MdCheck className="tick-icon"/> : ""}
+        </span>
         <div className="task-container-left" >
             <div className="task-name" onClick={() => {if (!modalShow) setModalShow(true)}}>
                 <h6>{task.taskName}</h6>
             </div>
 
-            <div className="task-item-date">{isOverdue ? "Overdue" : getDisplayDate()}</div>
+            <div className="task-item-date">{task.taskComplete ? "Complete" : isOverdue ? "Overdue" : getDisplayDate()}</div>
 
             <Dropdown className="task-options">
 			<Dropdown.Toggle id="button-dropdown-body"  className="dropdown-button" >

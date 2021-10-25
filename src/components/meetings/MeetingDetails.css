@@ -102,6 +102,10 @@
 	max-height: 250px;
 }
 
+.accordion-participants-list h6 {
+	width: 370px;
+}
+
 
 .add-minute-btn {
     background-color: inherit;
@@ -128,6 +132,10 @@
 	margin-top: auto;
 }
 
+.meeting-details-name h1 {
+	width: 500px;
+}
+
 .offwhite {
 	color: var(--color-offwhite)
 }
@@ -138,9 +146,17 @@
 
 }
 
-
-
+.participant-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.participant-row > h6 {
+	margin: 0;
+}
 .participant-tag {
+	width: 80px !important;
+	text-align: right;
 	justify-self: flex-end;
 	margin-left:auto;
 }
@@ -172,10 +188,16 @@
 }
 
 .minute-content p {
+	width: 55%;
 	margin-top: auto;
 	margin-bottom: auto;
 }
 
 .minute-date {
 	place-self: center;
+}
+
+.minute-container {
+	max-height: 400px;
+	overflow: auto;
 }

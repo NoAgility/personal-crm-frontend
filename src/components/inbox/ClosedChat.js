@@ -20,7 +20,7 @@ const ClosedChat = ({ createChat }) => {
 				id={id}
 				size="md"
 			/>
-			<div className="column">
+			<div className="column contact-search-name">
 				<h4>{name}</h4>
 				<h6>@{username}</h6>
 			</div>
@@ -43,14 +43,21 @@ const ClosedChat = ({ createChat }) => {
 		setResult({});
 
 		// search for username
-		const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
-			return res.data;});
-		if (contact) {
-			setQueryFound(true);
-			setResult(contact);
-		} else {
+		try {
+			const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
+				return res.data;}).catch(setQueryFound(false));
+			if (contact) {
+				setQueryFound(true);
+				setResult(contact);
+			} else {
+				setHasSearched(true);
+			}
+		} catch (err) {
+			//Couldn't fetch account by username
+			setQueryFound(false);
 			setHasSearched(true);
 		}
+		
 	}
 
 	return (
