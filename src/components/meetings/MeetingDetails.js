@@ -27,6 +27,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 	const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
 
 	const handleClose = () => {
+		setIsEditing(false);
 		onHide();
 	}
 
@@ -117,7 +118,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
             cancel={() => {}}/>
 		<Modal
 			show={show}
-			onHide={onHide}
+			onHide={handleClose}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
