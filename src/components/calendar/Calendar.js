@@ -12,12 +12,21 @@ export default function Calendar() {
 	const [meetings, setMeetings] = useState([]);
 	const [height, setHeight] = useState("100%");
 
+	/**
+	 * Fetch the tasks of the user
+	 */
 	const fetchTasks = () => {
 		EventController.fetchTasks().then(res => setTasks(res));
 	}
+	/**
+	 * Fetch the meetings of the user
+	 */
 	const fetchMeetings = () => {
 		EventController.fetchMeetings().then(res => setMeetings(res));
 	}
+	/**
+	 * On render, fetch all the relevant events
+	 */
 	useEffect(() => {
 		EventController.fetchPublicHolidays().then(res => setPublicHolidays(res));
 		EventController.fetchTasks().then(res => setTasks(res));

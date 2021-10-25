@@ -4,7 +4,7 @@ import MeetingController from '../meetings/MeetingController';
 const EventController = {
     
     /**
-     * Method to fetch events
+     * Function to fetch public holidays
      */
     fetchPublicHolidays: async () => {
         try{
@@ -16,6 +16,9 @@ const EventController = {
 			console.log(err)
 		}
     },
+	/**
+     * Function to fetch user tasks
+     */
     fetchTasks: async () => {
         try{
 			const res = await TaskController.fetchTasks().then(
@@ -26,6 +29,9 @@ const EventController = {
 			console.log(err)
 		}
     },
+	/**
+     * Function to fetch user meetings
+     */
     fetchMeetings: async () => {
         try{
 			const res = await MeetingController.fetchMeetings().then(
@@ -36,6 +42,9 @@ const EventController = {
 			console.log(err)
 		}
     },
+	/**
+     * Function to add user task
+     */
     addTask: async (task) => {
 		try {
 			const res = await TaskController.addTask(task).then(res => { return res; });
@@ -44,6 +53,9 @@ const EventController = {
 			console.log(err);
 		}
 	},
+	/**
+     * Function to add user meeting
+     */
 	addMeeting: async (meeting) => {
 		try {
 			const res = await MeetingController.addMeeting(meeting).then(res => { return res; });

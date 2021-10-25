@@ -6,6 +6,11 @@ const TaskNote = ({note, onChange, onDelete}) => {
 
     const [desc, setDesc] = useState(note.note);
     const [changed, setChanged] = useState(false);
+
+    /**
+     * Method for changing the description of the note.
+     * @param {Event} e The change event triggered
+     */
     const onChangeBase = (e) => {
         note.note = e.target.value;
         setDesc(e.target.value);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdClose, MdAdd, MdModeEdit, MdFace, MdDateRange } from 'react-icons/md';
 import { FiEdit2 } from 'react-icons/fi';
+import { BiTask } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Modal, Accordion } from 'react-bootstrap';
 import  './TaskDetails.css';
@@ -296,7 +297,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 				value={taskName}
 				onChange={(e) => setTaskName(e.target.value)}
 				maxLength={45}/> :
-				<h1 className="task-details-name-h1">{taskName}</h1>}
+				<div className="task-details-name-header"><BiTask/><h1 className="task-details-name-h1">{taskName.length < 30 ? taskName : taskName.substring(0,30).concat(" ...")}</h1></div>}
 			</div>
 
 			<Modal.Body className="task-details">

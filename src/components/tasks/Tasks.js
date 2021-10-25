@@ -156,6 +156,10 @@ const TaskPage = (props) => {
             return 0;
         }
     )};
+    /**
+     * Function to sort tasks by priority
+     * @param {*} tasks The tasks to be sorted
+     */
     const sortByPriority = (tasks) => {
         tasks.sort((a, b) => {
             if (a.taskPriority > b.taskPriority) return -1;
@@ -163,6 +167,11 @@ const TaskPage = (props) => {
             return 0;
         }
     )};
+    /**
+     * Function to group tasks by priority
+     * @param {*} tasks The tasks to be grouped
+     * @returns Arrays of tasks grouped by priority
+     */
     const groupByPriority = (tasks) => {
         const reduced = {};
         tasks.forEach((task) => {

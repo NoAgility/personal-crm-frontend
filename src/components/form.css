@@ -31,6 +31,11 @@
     color: var(--color-white);
     border-color: var(--color-offwhite);
     height: 40px;
+	outline: none;
+    border-style: none;
+    border-bottom: solid var(--color-offwhite);
+	width: 80%;
+	border-width: 2px;
 }
 .form-close-button {
 	cursor: pointer;

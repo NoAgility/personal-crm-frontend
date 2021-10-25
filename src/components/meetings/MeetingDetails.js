@@ -53,6 +53,10 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 		isEditing ? setIsEditing(false) : setIsEditing(true);
 	}
 
+	/**
+	 * Method for converting the meeting participants into JSX components
+	 * @returns A list of participant UI components
+	 */
 	const getParticipants = () => {
 		const ps = meeting.meetingParticipants;
 		if (ps.length > limit) {
@@ -79,6 +83,10 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 		)))
 	}
 
+	/**
+	 * Formatting method for the display date
+	 * @returns the display date
+	 */
 	const getDisplayDate = () => {
 		const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 		const timeOptions = {hour: 'numeric', minute: 'numeric'};

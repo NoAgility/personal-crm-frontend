@@ -161,14 +161,29 @@
 	margin-bottom: 0px;
 }
 .task-details-name-input {
-	overflow: auto;
-	max-width: 80%;
-	background-color: var(--color-medium);
-	border-radius: 5px;
-	color: var(--color-white);
+	font-family: var(--font-family);
+    background-color: var(--color-dark);
+    font-size: var(--text-medium);
+    color: var(--color-white);
+    border-color: var(--color-offwhite);
+    height: 40px;
+	outline: none;
+    border-style: none;
+    border-bottom: solid var(--color-offwhite);
+	border-width: 2px;
 	text-align: center;
 	font-size: var(--text-big);
-  	font-weight: bold;
+}
+.task-details-name-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.task-details-name-header > svg{
+	height: 25px;
+	width: 25px;
+	margin-right: 5px;
+
 }
 .task-contact-search-bar {
 	height: 40px;
