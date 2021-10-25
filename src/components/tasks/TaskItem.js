@@ -66,7 +66,7 @@ const TaskItem = ({task, contacts, allContacts, onUpdate, onDelete, onComplete, 
                 <h6>{task.taskName}</h6>
             </div>
 
-            <div className="task-item-date">{isOverdue ? "Overdue" : getDisplayDate()}</div>
+            <div className="task-item-date">{task.taskComplete ? "Complete" : isOverdue ? "Overdue" : getDisplayDate()}</div>
 
             <Dropdown className="task-options">
 			<Dropdown.Toggle id="button-dropdown-body"  className="dropdown-button" >
