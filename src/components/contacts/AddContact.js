@@ -46,17 +46,24 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 		setResult({});
 
 		// search for username
-		const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
-			return res.data;});
-		if (contact) {
-			setQueryFound(true);
-			setResult(contact);
-			if (contactIDs.includes(contact.accountID)) {
-				setAddComplete(true);
+		try {
+			const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
+				return res.data;});
+			if (contact) {
+				setQueryFound(true);
+				setResult(contact);
+				if (contactIDs.includes(contact.accountID)) {
+					setAddComplete(true);
+				}
+			} else {
+				setHasSearched(true);
 			}
-		} else {
+		} catch (err) {
+			//Failed to fetch account
+			setQueryFound(false);
 			setHasSearched(true);
 		}
+		
 	}
 
 	// A component to display a contact search result

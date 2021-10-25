@@ -43,14 +43,21 @@ const ClosedChat = ({ createChat }) => {
 		setResult({});
 
 		// search for username
-		const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
-			return res.data;});
-		if (contact) {
-			setQueryFound(true);
-			setResult(contact);
-		} else {
+		try {
+			const contact = await ContactController.fetchUserByUsername(usernameSearch).then(res => {
+				return res.data;}).catch(setQueryFound(false));
+			if (contact) {
+				setQueryFound(true);
+				setResult(contact);
+			} else {
+				setHasSearched(true);
+			}
+		} catch (err) {
+			//Couldn't fetch account by username
+			setQueryFound(false);
 			setHasSearched(true);
 		}
+		
 	}
 
 	return (

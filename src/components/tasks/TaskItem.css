@@ -49,9 +49,7 @@
     color: var(--color-white);
     font-family: var(--font);
 }
-.task-container-left h6 {
-    width:450px;
-}
+
 .task-name {
     cursor: pointer;
     text-align: left;
@@ -59,7 +57,9 @@
     min-height: 25px;
     width: 100%;
 }
-
+.task-name h6 {
+    width:400px;
+}
 .task-name h6{
     margin-left: 10px;
     margin-bottom: 0px;

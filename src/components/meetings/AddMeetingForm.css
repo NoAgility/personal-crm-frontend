@@ -94,7 +94,7 @@
 
 .contact-selector-container {
     height: 300px;
-    width: 250px;
+    width: 270px;
 
     background-color: var(--color-dark);
 
@@ -104,9 +104,12 @@
     overflow: auto;
     overflow-x: hidden;
     height: 235px;
-    width: 240px;
+    width: 260px;
 }
 
+.contact-selector-body h6 {
+    width: 140px;
+}
 
 .contact-checkbox-container {
     background-color: var(--color-dark);

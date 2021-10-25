@@ -146,9 +146,17 @@
 
 }
 
-
-
+.participant-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.participant-row > h6 {
+	margin: 0;
+}
 .participant-tag {
+	width: 80px !important;
+	text-align: right;
 	justify-self: flex-end;
 	margin-left:auto;
 }

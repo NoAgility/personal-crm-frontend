@@ -172,7 +172,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 								<Accordion.Body className="accordion-participants-list">
 									{meeting.meetingParticipants
 										.map((p) => (
-												<div className="app-row" key={p.data.accountID}>
+												<div className="participant-row" key={p.data.accountID}>
 													<ProfilePic
 														name={p.data.accountName}
 														size={"xs"}

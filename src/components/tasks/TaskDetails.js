@@ -116,6 +116,9 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 		onHide();
 	}
 
+	/**
+	 * Sort task notes by oldest first
+	 */
 	const sortNotesByOldestFirst = () => {
 		notes.sort((a, b) => {
 			if (a.taskNoteID > b.taskNoteID) {
@@ -128,6 +131,9 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 		})
 		setNotesSorted([...notes]);
 	}
+	/**
+	 * Sort task notes by newest first
+	 */
 	const sortNotesByNewestFirst = () => {
 		notes.sort((a, b) => {
 			if (a.taskNoteID < b.taskNoteID) {
@@ -200,6 +206,10 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 		await onUpdateWrapper({taskComplete: true})
 
 	}
+	/**
+	 * Wrapper function for update
+	 * @param {*} taskComplete Optional parameter indicating if the task is complete
+	 */
 	const onUpdateWrapper = (taskComplete) => {
 		const newTask = {};
 		Object.assign(newTask, task);
@@ -224,6 +234,10 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 		onUpdate(newTask, changes);
 		if (taskComplete) handleClose();
 	}
+	/**
+	 * On change callback function to filter the contacts based on user input
+	 * @param {*} filter The input filter by
+	 */
 	const changeContactSearchFilter = (filter) => {
 		setSearchBarInput(filter);
 		if (filter === null || filter.length === 0) {
@@ -233,6 +247,10 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 
 		}
 	}
+	/**
+	 * On change callback function to filter the contacts based on user input (Viewer mode)
+	 * @param {*} filter The input filter by
+	 */
 	const changeContactSearchFilterViewer = (filter) => {
 		setSearchBarInput(filter);
 		if (filter === null || filter.length === 0) {
@@ -242,6 +260,9 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 
 		}
 	}
+	/**
+	 * On render and updates to contacts or task, refresh data and reset input fields.
+	 */
 	useEffect(() => {
 		const findTaskOwner = () => {
 			for (const contact of allContacts) {

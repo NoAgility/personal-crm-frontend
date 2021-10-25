@@ -36,6 +36,7 @@
 .chat-body {
 	display: grid;
 	align-content: start;
+	margin-top: 20px;
 	padding: 10px;
 	flex-grow: 1;
 	overflow: auto;

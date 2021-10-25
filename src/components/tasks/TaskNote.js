@@ -30,7 +30,7 @@ const TaskNote = ({note, onChange, onDelete}) => {
             >
 
         </textarea>
-        <MdDelete className="task-note-delete" onClick={() => {onDelete(note);}}/>
+        <MdDelete className="task-note-delete" size={25} onClick={() => {onDelete(note);}}/>
     </div>
 }
 

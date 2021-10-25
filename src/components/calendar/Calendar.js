@@ -10,7 +10,6 @@ export default function Calendar() {
 	const [publicHolidays, setPublicHolidays] = useState([]);
 	const [tasks, setTasks] = useState([]);
 	const [meetings, setMeetings] = useState([]);
-	const [height, setHeight] = useState("100%");
 
 	/**
 	 * Fetch the tasks of the user
@@ -45,7 +44,7 @@ export default function Calendar() {
 				initialView='dayGridMonth'
 				selectable={true}
 				dayMaxEvents={true}
-				height={height}/>
+				height="100%"/>
 				
 		</div>
 		<AddEventMenu
