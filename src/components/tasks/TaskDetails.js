@@ -4,9 +4,6 @@ import { FiEdit2 } from 'react-icons/fi';
 import { BiTask } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Modal, Accordion } from 'react-bootstrap';
-import  './TaskDetails.css';
-import './Tasks.css';
-import "../form.css";
 import { Dropdown } from 'react-bootstrap';
 import ContactMenuItem from './ContactMenuItem';
 import TaskPriorityDropdown from './TaskPriorityDropdown';
@@ -15,6 +12,10 @@ import SearchBar from '../UIComponents/searchbar/SearchBar';
 import Sort from '../UIComponents/sort/Sort';
 import ProfilePic from '../UIComponents/profilePic/ProfilePic';
 import TimePicker from 'react-times';
+import Confirmation from '../UIComponents/confirm/Confirmation';
+import  './TaskDetails.css';
+import './Tasks.css';
+import "../form.css";
 
 const priorities = {
     "High": 1,
@@ -47,6 +48,9 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 
 	const [isEditing, setIsEditing] = useState(false);
 	const [searchBarInput, setSearchBarInput] = useState("");
+
+	const [completeConfirmShow, setCompleteConfirmShow] = useState(false);
+	const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
 	/**
 	 * Function for formatting a date to be valid for date input (ISO)
 	 * @param {Date} date The date to be formatted
@@ -268,6 +272,18 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 
 	return (
 		<>
+		<Confirmation
+            show={completeConfirmShow}
+            onHide={() => {setCompleteConfirmShow(false);}}
+            msg={"Complete Task?"}
+            accept={() => completeTask()}
+            cancel={() => {}}/>
+        <Confirmation
+            show={deleteConfirmShow}
+            onHide={() => {setDeleteConfirmShow(false);}}
+            msg={"Delete Task?"}
+            accept={() => {onDelete(task); handleClose();}}
+            cancel={() => {}}/>
 		<Modal
 			show={show}
 			onHide={handleClose}
@@ -285,7 +301,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 					</Dropdown.Toggle>
 					<Dropdown.Menu className="contact-options-dropdown" variant="dark">
 						<Dropdown.Item disabled={task.owner === true ? false : true }
-							onClick={() => {onDelete(task); handleClose();}}>Delete</Dropdown.Item>
+							onClick={() => {setDeleteConfirmShow(true)}}>Delete</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
 				<MdClose className="modal-header-button" onClick={handleClose} size={30}/>
@@ -362,7 +378,7 @@ const TaskDetails = ({task, contacts, allContacts, show, onHide, onUpdate, onDel
 											</div>
 										</div>
 										{!taskComplete ?
-										<button type="checkbox" className="task-complete-btn task-btn" onClick={completeTask}>
+										<button type="checkbox" className="task-complete-btn task-btn" onClick={() => {setCompleteConfirmShow(true);}}>
 											Complete Task
 										</button>
 										: <div className="task-complete-btn">Task Completed</div>

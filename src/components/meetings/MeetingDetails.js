@@ -7,6 +7,7 @@ import ContactController from '../contacts/ContactController';
 import ProfilePic from '../UIComponents/profilePic/ProfilePic';
 import CookieManager from '../../util/CookieManager';
 import Minute from './Minute';
+import Confirmation from '../UIComponents/confirm/Confirmation';
 import  './MeetingDetails.css';
 import './Meetings.css';
 import "../form.css";
@@ -22,6 +23,8 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 	const [openMinute, setOpenMinute] = useState(false);
 	const [minute, setMinute] = useState('');
 	const userID = parseInt(CookieManager.getCookie('accountID'));
+
+	const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
 
 	const handleClose = () => {
 		onHide();
@@ -106,6 +109,12 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 
 	return (
 		<>
+        <Confirmation
+            show={deleteConfirmShow}
+            onHide={() => {setDeleteConfirmShow(false);}}
+            msg={"Delete Task?"}
+            accept={() => {handleDelete(); handleClose();}}
+            cancel={() => {}}/>
 		<Modal
 			show={show}
 			onHide={onHide}
@@ -123,7 +132,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 					</Dropdown.Toggle>
 					<Dropdown.Menu className="contact-options-dropdown" variant="dark">
 						<Dropdown.Item disabled={meeting.meetingCreatorID === userID ? false : true }
-							onClick={handleDelete}>Delete</Dropdown.Item>
+							onClick={() => {setDeleteConfirmShow(true);}}>Delete</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
 				<MdClose className="modal-header-button" onClick={handleClose} size={30}/>
