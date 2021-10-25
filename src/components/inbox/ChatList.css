@@ -1,14 +1,17 @@
 .inbox-contacts {
-	width: 350px;
-	height: 100%;
+	width: 375px;
+	height: calc(100vh - 105px);
 	border-right-style: solid;
 	border-color: var(--color-offwhite);
 	border-width: 2px;
-	padding-right: 25px;
+	display: flex;
+  	flex-flow: column;
 }
 
 .inbox-contact-header {
 	margin-bottom: 20px;
+	height: 117px;
+	padding-right: 25px;
 }
 
 .inbox-contact-header-top {
@@ -18,13 +21,15 @@
 	margin-bottom: 20px;
 }
 
-.inbox-ul {
-	padding:25px;
-	padding-left: 0px;
+.inbox-contact-list {
 	margin: 0px;
 	width:100%;
 	overflow:auto;
-	height: 68vh;
+	flex-grow: 1;
+}
+
+.inbox-ul {
+	padding:0px;
 }
 
 .add-chat-btn {
