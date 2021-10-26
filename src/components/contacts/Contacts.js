@@ -35,10 +35,30 @@ const Contacts = (props) => {
 	}
 
 	// Sort Contacts alphabetically or by date added
-	const sortByName = (x,y) => x.accountName > y.accountName
-	const sortByDate = (x,y) => x.contactCreatedOn > y.contactCreatedOn
-	const toggleSortName = () => setSortType('name')
-	const toggleSortDate = () => setSortType('date')
+	const sortByName = (x,y) => {
+		let xName = x.accountName, yName = y.accountName;
+
+		return xName.localeCompare(yName);
+	}
+	const sortByDate = (x,y) => {
+		let xCreatedOn = new Date(x.contactCreatedOn), yCreatedOn = new Date(y.contactCreatedOn);
+
+		if (xCreatedOn > yCreatedOn) {
+			return -1;
+		} else if (xCreatedOn < yCreatedOn) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	const toggleSortName = () => {
+		contacts.sort(sortByName);
+		setContacts([...contacts]);
+	}
+	const toggleSortDate = () => {
+		contacts.sort(sortByDate);
+		setContacts([...contacts]);
+	}
 	const sortTypes = [
 		{
 			label:"Sort alphabetically",
