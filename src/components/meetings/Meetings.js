@@ -135,8 +135,8 @@ const Meetings = (props) => {
      */
     const sortByAlpha = (ms) => {
         ms.sort((a, b) => {
-            if (a.meetingAlpha > b.meetingAlpha) return -1;
-            if (a.meetingAlpha < b.meetingAlpha) return 1;
+            if (a.meetingName.toLowerCase() < b.meetingName.toLowerCase()) return -1;
+            if (a.meetingName.toLowerCase() > b.meetingName.toLowerCase()) return 1;
             return 0;
         }
     )};
@@ -148,7 +148,7 @@ const Meetings = (props) => {
     const groupByAlpha = (ms) => {
         const reduced = {};
         ms.forEach((meeting) => {(
-            reduced[meeting.meetingAlpha] = reduced[meeting.meetingAlpha] || [] ).push(meeting);
+            reduced[meeting.meetingName] = reduced[meeting.meetingName] || [] ).push(meeting);
         })
         return reduced;
     };
