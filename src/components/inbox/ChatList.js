@@ -49,7 +49,8 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 	};
 	const toggleSortContacted = () => {
 		localChats.sort((x,y) => {
-			let xMsgT = getLastMessage(x).messageTime, yMsgT = getLastMessage(y).messageTime;
+			var xMsgT = getLastMessage(x).messageTime, yMsgT = getLastMessage(y).messageTime;
+			console.log(xMsgT, yMsgT);
 			if (xMsgT === 0 && yMsgT === 0) {
 				return 0;
 			} else if (xMsgT === 0) {
@@ -57,6 +58,8 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 			} else if (yMsgT === 0) {
 				return -1;
 			}
+			xMsgT = new Date(getLastMessage(x).messageTime);
+			yMsgT = new Date(getLastMessage(y).messageTime);
 			if (xMsgT < yMsgT) {
 				return 1;
 			} else if (yMsgT > xMsgT) {

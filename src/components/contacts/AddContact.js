@@ -21,8 +21,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 	const [result, setResult] = useState({});
 
 	// Closes the add contact modal and resets the states
-	const handleClose = (e) => {
-		e.preventDefault();
+	const handleClose = () => {
 		setUsernameSearch("");
 		setResult({});
 		setQueryFound(false);
@@ -30,9 +29,11 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 		onHide(false);
 		setHasSearched(false);
 	}
-
+	const changeInput = (e) => {
+		setUsernameSearch(e.target.value);
+	}
 	// Adds a contact
-	const handleAdd = (e) => {
+	const handleAdd = () => {
 		setAddComplete(true);
 		onAdd(result);
 		contactIDs.push(result.accountID);
@@ -41,6 +42,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 	// Searchs for the input username
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		isAdded && setAddComplete(false);
 		// reset search results
 		setQueryFound(false);
 		setResult({});
@@ -97,7 +99,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 	return (
 		<Modal
 			show={show}
-			onHide={onHide}
+			onHide={handleClose}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
@@ -116,7 +118,7 @@ const AddContact = ({show, onHide, onAdd, contactIDs}) => {
 					onSubmit={onSubmit}
 					placeholder="Username"
 					value={usernameSearch}
-					onChange={event => {setUsernameSearch(event.target.value)}}
+					onChange={event => {changeInput(event)}}
 				/>
 				<div className="row-spacer"/>
 				<div>{queryFound ? queryResult(result.accountName, result.accountUsername, result.accountID) : noResult()}</div>
