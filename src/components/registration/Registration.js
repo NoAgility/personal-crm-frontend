@@ -135,8 +135,9 @@ const Registration = (props) => {
                 </div>
                 <div className="form-field-container">
                     <div data-testid='dob-error'className='error'>{errorDOB}</div>
-                    <input data-testid="DOB" className="registration-form-input" name="DOB" onBlur={() => {setDOBisFocused(false)}} onFocus={() => {setDOBisFocused(true)}} placeholder={DOBisFocused ? "" : "Date of Birth"} type={DOBisFocused ? "date" : "text"} 
-                    value={DOBisFocused ? DOB : DOB !== "" ? new Date(DOB).toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' }) : ""} onChange={ (e) => setDOB(e.target.value) }/>
+                    <div className="dob-label">Date of Birth</div>
+                    <input data-testid="DOB" className="registration-form-input" name="DOB" type="date" 
+                    value={DOB} onChange={ (e) => setDOB(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                 <div data-testid='general-error' className='error'>{generalError}</div>

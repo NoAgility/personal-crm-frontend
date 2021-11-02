@@ -55,7 +55,7 @@ test("Integration Test - Successful Login", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
         
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -123,7 +123,7 @@ test("Integration Test - Unsuccessful Login", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
         
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);

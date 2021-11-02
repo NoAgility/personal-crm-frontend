@@ -72,7 +72,7 @@ test("ETE Test - Register -> Login -> create chat", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -111,7 +111,7 @@ test("ETE Test - Register -> Login -> create chat", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -224,7 +224,7 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -263,7 +263,7 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -398,7 +398,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -437,7 +437,7 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
+        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
 
         var submit = screen.getByTestId('submit');
         fireEvent.click(submit);
