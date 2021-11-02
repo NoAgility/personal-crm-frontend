@@ -46,7 +46,7 @@ test("Integration Test - Successful registration", async () => {
         await waitFor(() => expect(password).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
         
         const submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -82,7 +82,7 @@ test("Integration Test - Username Taken", async () => {
             await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
             await waitFor(() => expect(fname).toHaveValue('testname'));
             await waitFor(() => expect(lname).toHaveValue('testname'));
-            await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+            await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
             
             const submit = await screen.getByTestId('submit');
             fireEvent.click(submit);
@@ -159,7 +159,7 @@ test("Unit Test - Username input too short", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
         
         const submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -199,7 +199,7 @@ test("Unit Test - Username not inputted", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
         
         const submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -241,7 +241,7 @@ test("Unit Test - Password input too short", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('te'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
         
         const submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -277,7 +277,7 @@ test("Unit Test - Password not inputted", async () => {
         await waitFor(() => expect(username).toHaveValue('testusername'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
-        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
         
         const submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -319,7 +319,7 @@ test("Unit Test - Name contains non-alphabet characters", async () => {
         await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname123'));
         await waitFor(() => expect(lname).toHaveValue('testname123'));
-        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
         
         const submit = screen.getByTestId('submit');
         fireEvent.click(submit);
@@ -355,7 +355,7 @@ test("Unit Test - Name not inputted", async () => {
         await waitFor(() => expect(username).toHaveValue('testusername'));
         await waitFor(() => expect(password).toHaveValue('testpassword'));
         await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
-        await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
+        await waitFor(() => expect(dob).toHaveValue('08/01/2000'));
         
         const submit = screen.getByTestId('submit');
         fireEvent.click(submit);
