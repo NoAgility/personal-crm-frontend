@@ -62,7 +62,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 			yMsgT = new Date(getLastMessage(y).messageTime);
 			if (xMsgT < yMsgT) {
 				return 1;
-			} else if (yMsgT > xMsgT) {
+			} else if (xMsgT > yMsgT) {
 				return -1;
 			} else {
 				return 0;
