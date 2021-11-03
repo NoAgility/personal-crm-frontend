@@ -23,7 +23,7 @@ const Registration = (props) => {
     const [errorDOB, setErrorDOB] = useState("");
     const [generalError, setGeneralError] = useState("");
     const [passwordShown, setPasswordShown] = useState(false);
-
+    const [DOBisFocused, setDOBisFocused] = useState(false);
     /**
      * Function to make password visible
      */
@@ -109,16 +109,6 @@ const Registration = (props) => {
             flag && RegistrationController.registerReferral(userDetails, referral).then(() => history.push('/registration_success')).catch(err => setErrorUsername(err.toString()));
         }
     }
-
-    const onFocus = (e) => {
-        e.currentTarget.type = "date";
-    };
-    const onBlur = (e) => {
-        e.currentTarget.type = "text";
-        e.currentTarget.placeholder = "Date of Birth";
-        e.currentTarget.value = new Date(DOB).toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
-    };
-
     return (
         <div className="background">
             <button className="landing-back-button" onClick={() => history.push("/landing")}>Back to Landing</button>
@@ -145,7 +135,9 @@ const Registration = (props) => {
                 </div>
                 <div className="form-field-container">
                     <div data-testid='dob-error'className='error'>{errorDOB}</div>
-                    <input data-testid="DOB" className="registration-form-input" name="DOB" onBlur={onBlur} onFocus={onFocus} type="date" value={DOB} onChange={ (e) => setDOB(e.target.value) }/>
+                    <div className="dob-label">Date of Birth</div>
+                    <input data-testid="DOB" className="registration-form-input" name="DOB" type="date" 
+                    value={DOB} onChange={ (e) => setDOB(e.target.value) }/>
                 </div>
                 <div className="form-field-container">
                 <div data-testid='general-error' className='error'>{generalError}</div>
