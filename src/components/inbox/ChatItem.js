@@ -27,7 +27,7 @@ const ChatItem = ({ chat, lastMessage, openChat, onDelete, firstParticipant }) =
 					</div>
 				</div>
 
-				<DeleteItem item={chat} onDelete={onDelete} />
+				<DeleteItem item={chat} onDelete={onDelete} msg="Delete Chat?"/>
 			</li>
 
 		</>
