@@ -61,7 +61,7 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 		<Confirmation
             show={confirmDeleteShow}
             onHide={() => {setConfirmDeleteShow(false);}}
-            msg={"Delete Task?"}
+            msg={"Delete Contact?"}
             accept={() => {onDelete(contact); handleClose();}}
             cancel={() => {}}/>
 		<Modal

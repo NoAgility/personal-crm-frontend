@@ -113,7 +113,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
         <Confirmation
             show={deleteConfirmShow}
             onHide={() => {setDeleteConfirmShow(false);}}
-            msg={"Delete Task?"}
+            msg={"Delete Meeting?"}
             accept={() => {handleDelete(); handleClose();}}
             cancel={() => {}}/>
 		<Modal
