@@ -23,11 +23,11 @@ const ChatItem = ({ chat, lastMessage, openChat, onDelete, firstParticipant }) =
 					/>
 					<div className="column chat-description">
 						<h5>{firstParticipant.accountName}</h5>
-						<p>{lastMessage.length < 25 ? lastMessage : lastMessage.substring(0,25).concat(" ...")}</p>
+						<p>{lastMessage.length < 20 ? lastMessage : lastMessage.substring(0,20).concat(" ...")}</p>
 					</div>
 				</div>
 
-				<DeleteItem item={chat} onDelete={onDelete} />
+				<DeleteItem item={chat} onDelete={onDelete} msg="Delete Chat?"/>
 			</li>
 
 		</>

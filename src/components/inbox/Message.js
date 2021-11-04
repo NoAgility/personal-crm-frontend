@@ -59,13 +59,14 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 
 	// An input component in which the user can retype their message
 	const editMessage = (
-		<form className="row" onSubmit={onSubmit} onCancel={onCancel}>
+		<form className="app-row" onSubmit={onSubmit} onCancel={onCancel}>
 			<input
 				className="search-input edit-message-input"
 				type="text"
 				name="editedMessage"
 				id="editedMessage"
 				value={editedMessage}
+				maxLength={1000}
 				onChange={event => {setEditedMessage(event.target.value)}}
 			>
 			</input>
@@ -74,14 +75,14 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 	)
 
 	return (
-		<div className={`message-container message-container-${sender()}`}
+		<div className="message-outer-container"
 			onMouseEnter={e => {
 				setVisibility('grid');
 			}}
 			onMouseLeave={e => {
 				setVisibility('none');
-			}}
-		>
+			}}>
+		<div className={`message-container message-container-${sender()}`}>
 			<div className='message-options-container' style={{display: `${visibility}`}}>
 				{(message.accountID === parseInt(CookieManager.getCookie('accountID'))) ? overlay : <></>}
 			</div>
@@ -89,6 +90,7 @@ const Message = ({ chat, message, onDelete, onEdit }) => {
 				{isGroupChat && message.accountID !== parseInt(CookieManager.getCookie('accountID')) ? <p>name</p> : <></> }
 				{isEditing ? editMessage : <h6 className="message-text">{editedMessage}</h6>}
 			</div>
+		</div>
 		</div>
 	)
 }

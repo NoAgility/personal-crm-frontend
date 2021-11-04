@@ -15,9 +15,6 @@ beforeAll(() => {
 test("Integration Test - Successful registration", async () => {
 
     axios.defaults.adapter = require('axios/lib/adapters/http');
-    
-
-    
     await act( async () => {
         let testHistory, testLocation;
         render(<MemoryRouter intialEntries={"/registration"}>
@@ -32,13 +29,15 @@ test("Integration Test - Successful registration", async () => {
     );
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
+        const passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         const fname = screen.getByPlaceholderText('First Name');
-            const lname = screen.getByPlaceholderText('Last Name');
+        const lname = screen.getByPlaceholderText('Last Name');
         const dob = screen.getByTestId('DOB');
         const generalError = screen.getByTestId('general-error');
         
         fireEvent.change(username, {target: {value: 'testusername'}});
         fireEvent.change(password, {target: {value: 'testpassword'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'testpassword'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
@@ -65,6 +64,7 @@ test("Integration Test - Username Taken", async () => {
 
             const username = await screen.getByPlaceholderText('Username');
             const password = await screen.getByPlaceholderText('Password');
+            const passwordConfirm = await screen.getByPlaceholderText('Confirm Password');
             const fname = screen.getByPlaceholderText('First Name');
             const lname = screen.getByPlaceholderText('Last Name');
             const dob = await screen.getByTestId('DOB');
@@ -72,12 +72,14 @@ test("Integration Test - Username Taken", async () => {
             
             fireEvent.change(username, {target: {value: 'testusername1'}});
             fireEvent.change(password, {target: {value: 'testpassword'}});
+            fireEvent.change(passwordConfirm, {target: {value: 'testpassword'}});
             fireEvent.change(fname, {target: {value: 'testname'}});
             fireEvent.change(lname, {target: {value: 'testname'}});
             fireEvent.change(dob, {target: {value: '2000-08-01'}});
     
             await waitFor(() => expect(username).toHaveValue('testusername1'));
             await waitFor(() => expect(password).toHaveValue('testpassword'));
+            await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
             await waitFor(() => expect(fname).toHaveValue('testname'));
             await waitFor(() => expect(lname).toHaveValue('testname'));
             await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -119,7 +121,6 @@ test("Integration Test - Username Taken", async () => {
         //Attempt a registration with the same username
         register();
         const usernameError = screen.getByTestId('username-error');
-        const generalError = screen.getByTestId('general-error');
         await waitFor(() => expect(usernameError).toHaveTextContent('Account username is taken'));
     });
 });
@@ -128,23 +129,34 @@ test("Unit Test - Username input too short", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
+        const passwordConfirm = await screen.getByPlaceholderText('Confirm Password');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
         const dob = screen.getByTestId('DOB');
         const usernameError = screen.getByTestId('username-error');
-        const generalError = screen.getByTestId('general-error');
         
         fireEvent.change(username, {target: {value: 'te'}});
         fireEvent.change(password, {target: {value: 'testpassword'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'testpassword'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('te'));
         await waitFor(() => expect(password).toHaveValue('testpassword'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -160,20 +172,31 @@ test("Unit Test - Username not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const password = screen.getByPlaceholderText('Password');
+        const passwordConfirm = await screen.getByPlaceholderText('Confirm Password');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
         const dob = screen.getByTestId('DOB');
         const usernameError = screen.getByTestId('username-error');
-        const generalError = screen.getByTestId('general-error');
         
         fireEvent.change(password, {target: {value: 'testpassword'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'testpassword'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(password).toHaveValue('testpassword'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -188,23 +211,34 @@ test("Unit Test - Password input too short", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
+        const passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
         const dob = screen.getByTestId('DOB');
         const passwordError = screen.getByTestId('password-error');
-        const generalError = screen.getByTestId('general-error');
         
         fireEvent.change(username, {target: {value: 'testusername'}});
         fireEvent.change(password, {target: {value: 'te'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'te'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('testusername'));
         await waitFor(() => expect(password).toHaveValue('te'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('te'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -219,13 +253,21 @@ test("Unit Test - Password not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
         const dob = screen.getByTestId('DOB');
         const passwordError = screen.getByTestId('password-error');
-        const generalError = screen.getByTestId('general-error');
 
         fireEvent.change(username, {target: {value: 'testusername'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
@@ -247,23 +289,34 @@ test("Unit Test - Name contains non-alphabet characters", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
+        const passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
         const dob = screen.getByTestId('DOB');
         const nameError = screen.getByTestId('name-error');
-        const generalError = screen.getByTestId('general-error');
         
         fireEvent.change(username, {target: {value: 'testusername'}});
         fireEvent.change(password, {target: {value: 'testpassword'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'testpassword'}});
         fireEvent.change(fname, {target: {value: 'testname123'}});
         fireEvent.change(lname, {target: {value: 'testname123'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('testusername'));
         await waitFor(() => expect(password).toHaveValue('testpassword'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname123'));
         await waitFor(() => expect(lname).toHaveValue('testname123'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -278,19 +331,30 @@ test("Unit Test - Name not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        const container = render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
+        const passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         const dob = screen.getByTestId('DOB');
         const nameError = screen.getByTestId('name-error');
-        const generalError = screen.getByTestId('general-error');
         
         fireEvent.change(username, {target: {value: 'testusername'}});
         fireEvent.change(password, {target: {value: 'testpassword'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'testpassword'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('testusername'));
         await waitFor(() => expect(password).toHaveValue('testpassword'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
         
         const submit = screen.getByTestId('submit');
@@ -303,21 +367,32 @@ test("Unit Test - DOB not inputted", async () => {
     axios.defaults.adapter = require('axios/lib/adapters/http');
     
     await act( async () => {
-        render(<Registration/>);
+        let testHistory, testLocation;
+        render(<MemoryRouter intialEntries={"/registration"}>
+        <Registration/>
+        <Route
+            path="*"
+            render={({history, location}) => {
+                testHistory = history;
+                testLocation = location;
+            }}/>
+        </MemoryRouter>);
         const username = screen.getByPlaceholderText('Username');
         const password = screen.getByPlaceholderText('Password');
+        const passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
         const dobError = screen.getByTestId('dob-error');
-        const generalError = screen.getByTestId('general-error');
         
         fireEvent.change(username, {target: {value: 'testusername'}});
         fireEvent.change(password, {target: {value: 'testpassword'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'testpassword'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
 
         await waitFor(() => expect(username).toHaveValue('testusername'));
         await waitFor(() => expect(password).toHaveValue('testpassword'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('testpassword'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         

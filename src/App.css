@@ -20,6 +20,7 @@
 	--color-green: #62b96d;
 	--color-blue: #54a3fb;
 	--color-red: #f54949;
+  --color-yellow: #e9e644;
   --color-teal-dark: #5aa8a2;
 	--color-orange-dark: #be9463;
 	--color-purple-dark: #ae7fe7;
@@ -56,7 +57,7 @@ body {
   text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, h7, p {
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -124,12 +125,14 @@ button {
 }
 
 .app-body {
+    background-color: var(--color-dark);
+    color: var(--color-white);
     height: calc(100vh - 105px);
     margin-left: 240px;
     display: grid;
     align-items: start;
     justify-items: center;
-    padding: 25px;
+    padding: 15px 25px 5px 25px;
     padding-bottom: 0px;
     margin-top: 80px;
 }
@@ -153,4 +156,13 @@ a {
 .row-spacer {
   width: 100%;
   height: 20px;
+}
+
+.modal-dialog {
+  display: flex;
+  justify-content: center;
+}
+.modal {
+  left: 240px !important;
+  width: calc(100% - 240px) !important;
 }

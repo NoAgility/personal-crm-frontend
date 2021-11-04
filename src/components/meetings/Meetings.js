@@ -129,26 +129,43 @@ const Meetings = (props) => {
             return 0;
         }
     )};
+    /**
+     * Custom sorter for meeting alpha
+     * @param {*} ms An array of meeting objects
+     */
     const sortByAlpha = (ms) => {
         ms.sort((a, b) => {
-            if (a.meetingAlpha > b.meetingAlpha) return -1;
-            if (a.meetingAlpha < b.meetingAlpha) return 1;
+            if (a.meetingName.toLowerCase() < b.meetingName.toLowerCase()) return -1;
+            if (a.meetingName.toLowerCase() > b.meetingName.toLowerCase()) return 1;
             return 0;
         }
     )};
+    /**
+     * Method to group meetings by their alpha
+     * @param {*} ms An array of meeting objects
+     * @returns Arrays of meeting objects grouped by alpha
+     */
     const groupByAlpha = (ms) => {
         const reduced = {};
         ms.forEach((meeting) => {(
-            reduced[meeting.meetingAlpha] = reduced[meeting.meetingAlpha] || [] ).push(meeting);
+            reduced[meeting.meetingName] = reduced[meeting.meetingName] || [] ).push(meeting);
         })
         return reduced;
     };
+    /**
+     * Function to sort then group meetings by date
+     * @param {*} data The meetings to be sorted
+     */
     const dateGroupSort = (data) => {
         let toSort = data !== undefined ? data : meetings !== null ? meetings : [];
         setActiveSort("date");
         sortByDate(toSort);
         setMeetingsByGroup(groupByDate(toSort));
     }
+    /**
+     * Function to sort then group meetings by alpha
+     * @param {*} data The meetings to be sorted
+     */
     const alphaGroupSort = (data) => {
         let toSort = data !== undefined ? data : meetings !== null ? meetings : [];
         setActiveSort("alpha");

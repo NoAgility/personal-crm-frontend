@@ -8,7 +8,11 @@
     z-index: 1;
 }
 .fc .fc-scrollgrid-section-body table {
-    height: 79vh !important;
+    height: 80.7vh !important;
+    overflow-y: hidden !important;
+}
+.fc-daygrid-day-top {
+    height: 50%;
 }
 .mini-menu {
     z-index: 3;
@@ -54,4 +58,26 @@ li:not(:first-child) {
     font-family: var(--font);
     font-weight: bold;
     background-color: var(--color-medium) !important;
+}
+
+.fc-event-title {
+    max-width: 100% !important;
+}
+
+.fc-event-main-frame {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+}
+
+.fc-header-toolbar {
+    margin-bottom: 10px !important;
+}
+.fc-event-time {
+    min-width: 65px;
+}
+.fc-button {
+    background-color: var(--color-medium) !important;
+    color: var(--color-white);
 }

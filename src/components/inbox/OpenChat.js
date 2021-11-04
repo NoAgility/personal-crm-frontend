@@ -44,12 +44,14 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
 	return (
 		<div className="chat">
 			<div className="chat-header">
-				<ProfilePicture
-					name={firstParticipant.accountUsername}
-					id={firstParticipant.accountID}
-					size="md"
-				/>
-				<h1 className="name">{firstParticipant.accountName}</h1>
+				<div className="chat-header-name">
+					<ProfilePicture
+						name={firstParticipant.accountUsername}
+						id={firstParticipant.accountID}
+						size="md"
+					/>
+					<h1 className="name">{firstParticipant.accountName}</h1>
+				</div>
 				<SearchBar
 					name="username"
 					colorMode="dark"
@@ -99,6 +101,7 @@ const OpenChat = ({ chat, firstParticipant, deleteMessage, sendMessage, editMess
 							id="newMessage"
 							placeholder=""
 							value={newMessage}
+							maxLength={1000}
 							onChange={event => {setNewMessage(event.target.value)}}
 						>
 						</input>

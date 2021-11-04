@@ -17,9 +17,17 @@ const AddEventMenu = ({fetchTasks, fetchMeetings}) => {
     const toggleExpand = () => {setExpand(!expand);};
     
 
+    /**
+     * Function to add a task
+     * @param {*} task The task details
+     */
     const addTask = (task) => {
         EventController.addTask(task).then(() => fetchTasks());
     }
+    /**
+     * Function to add a meeting
+     * @param {*} meeting The meeting details
+     */
     const addMeeting = (meeting) => {
         EventController.addMeeting(meeting).then(() => fetchMeetings());
     }

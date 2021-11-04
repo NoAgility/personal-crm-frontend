@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdClose, MdMailOutline, MdPhone, MdApartment, MdPersonOutline, MdOutlineHouse, MdBusinessCenter } from 'react-icons/md';
 import ProfilePicture from "../UIComponents/profilePic/ProfilePic"
+import Confirmation from '../UIComponents/confirm/Confirmation';
 import { Modal, Dropdown } from 'react-bootstrap';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { FiEdit2 } from 'react-icons/fi';
@@ -17,6 +18,13 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 	const [address, setAddress] = useState(contact.contactAddress || "");
 	const [isEditing, setIsEditing] = useState(false);
 
+	const [confirmDeleteShow, setConfirmDeleteShow] = useState(false);
+
+	/**
+	 * On submit callback function when contact details has been saved
+	 * 
+	 * Call the update function
+	 */
 	const onSubmit = () => {
 		const req = {
 			contactID: contact.contactID,
@@ -35,8 +43,12 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 		setPhone(contact.contactPhone || "");
 		setAddress(contact.contactAddress || "");
 		setCompany(contact.contactCompany || "");
+		setIsEditing(false);
 		onHide();
 	}
+	/**
+	 * On render, set existing values or default values
+	 */
 	useEffect(() => {
 		setJobTitle(contact.contactJobTitle || "");
 		setEmail(contact.contactEmail || "");
@@ -46,6 +58,12 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 	}, [contact]);
 	return (
 		<>
+		<Confirmation
+            show={confirmDeleteShow}
+            onHide={() => {setConfirmDeleteShow(false);}}
+            msg={"Delete Contact?"}
+            accept={() => {onDelete(contact); handleClose();}}
+            cancel={() => {}}/>
 		<Modal
 			show={show}
 			onHide={handleClose}
@@ -61,7 +79,7 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 						</Dropdown.Toggle>
 						<Dropdown.Menu className="contact-options-dropdown" variant="dark">
 							<Dropdown.Item
-								onClick={() => {onDelete(contact); handleClose();}}>Delete</Dropdown.Item>
+								onClick={() => {setConfirmDeleteShow(true);}}>Delete</Dropdown.Item>
 						</Dropdown.Menu>
 					</Dropdown>
 					<MdClose className="modal-header-button" onClick={handleClose} size={30}/>
@@ -92,18 +110,18 @@ const ContactDetails = ({ contact, show, onHide, onDelete, onUpdate }) => {
 							<div className="contact-details-line-nonedit"><MdBusinessCenter className="contact-details-icon"/>{jobTitle !== "" ? <h7>{jobTitle}</h7> : <h7 className="faint">Job Title</h7>}</div>
 						</div> :
 						<>
-							<div className="contact-details-line"><MdMailOutline className="contact-details-icon"/><input className="contact-form-input" placeholder="Email" type="text" onChange={(e) => setEmail(e.target.value)} value={email}/></div>
-							<div className="contact-details-line"><MdPhone className="contact-details-icon"/><input className="contact-form-input" placeholder="Phone" type="number" onChange={(e) => setPhone(e.target.value)} value={phone}/></div>
-							<div className="contact-details-line"><MdOutlineHouse className="contact-details-icon"/><input className="contact-form-input" placeholder="Address" type="text" onChange={(e) => setAddress(e.target.value)} value={address}/></div>
-							<div className="contact-details-line"><MdApartment className="contact-details-icon"/><input className="contact-form-input" placeholder="Company" type="text" onChange={(e) => setCompany(e.target.value)} value={company}/></div>
-							<div className="contact-details-line"><MdBusinessCenter className="contact-details-icon"/><input className="contact-form-input" placeholder="Job Title" type="text" onChange={(e) => setJobTitle(e.target.value)} value={jobTitle}/></div>
+							<div className="contact-details-line"><MdMailOutline className="contact-details-icon"/><input className="contact-form-input" placeholder="Email" type="text" maxLength={45} onChange={(e) => setEmail(e.target.value)} value={email}/></div>
+							<div className="contact-details-line"><MdPhone className="contact-details-icon"/><input className="contact-form-input" placeholder="Phone" type="tel" maxLength={20} onChange={(e) => setPhone(e.target.value)} value={phone}/></div>
+							<div className="contact-details-line"><MdOutlineHouse className="contact-details-icon"/><input className="contact-form-input" placeholder="Address" type="text" maxLength={45} onChange={(e) => setAddress(e.target.value)} value={address}/></div>
+							<div className="contact-details-line"><MdApartment className="contact-details-icon"/><input className="contact-form-input" placeholder="Company" type="text" maxLength={45} onChange={(e) => setCompany(e.target.value)} value={company}/></div>
+							<div className="contact-details-line"><MdBusinessCenter className="contact-details-icon"/><input className="contact-form-input" placeholder="Job Title" type="text" maxLength={45} onChange={(e) => setJobTitle(e.target.value)} value={jobTitle}/></div>
 						</>
 						}
 					</div>
 				</div>
 				<div className="task-details-bottom">
 					<div className="add-minute-options">
-						<div className="row">
+						<div className="app-row">
 							<button
 								className="cancel-btn"
 								onClick={() => {handleClose()}}>

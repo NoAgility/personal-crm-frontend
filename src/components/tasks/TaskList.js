@@ -41,6 +41,11 @@ const TaskList = ({tasks, contacts, allContacts, label, editOptions, isComplete,
         return formattedDate;
     }
 
+    /**
+     * Method for formatting the priority header
+     * @param {} priority the priority of the tasks
+     * @returns the formatted priority
+     */
     const formatPriority = (priority) => {
         var p = priority.toString();
         p = p === "-1" ? "No Priority Set" : "Priority: " + p;
@@ -49,6 +54,10 @@ const TaskList = ({tasks, contacts, allContacts, label, editOptions, isComplete,
         return p;
     }
 
+    /**
+     * Method for formatting the header of a task list
+     * @returns the formatted label for the list
+     */
     const getLabel = () => {
         if (label === "date") {
             let date = new Date(tasks[0].taskDeadline).toLocaleDateString("en-US", options);
@@ -67,7 +76,7 @@ const TaskList = ({tasks, contacts, allContacts, label, editOptions, isComplete,
             onDelete={editOptions.delete} 
             onComplete={editOptions.complete}
             searchContact={editOptions.searchContact}
-            isOverdue={isOverdue}
+            isOverdue={isOverdue || (t.taskDeadline && new Date() > new Date(t.taskDeadline))}
             task={t}
             contacts={contacts}
             allContacts={allContacts || []}

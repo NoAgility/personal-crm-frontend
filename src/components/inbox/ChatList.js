@@ -18,6 +18,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 
 	const [sortType, setSortType] = useState('age');
 	const [chatSearch, setChatSearch] = useState("");
+	const [localChats, setLocalChats] = useState(chats)
 	const [contacts, setContacts] = useState([]);
     const [selectedContactIDs, setSelectedContactIDs] = useState([]);
 
@@ -38,14 +39,50 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
         selectedContactIDs.splice(index, 1);
     }
 
-
 	// functions for sorting the chats
-	const sortByName = (x,y) => findFirstParticipant(x).accountName > findFirstParticipant(y).accountName;
-	const sortByContacted = (x,y) => getLastMessage(x).messageTime < getLastMessage(y).messageTime;
-	const sortByAge = (x,y) => x.chatCreation < y.chatCreation;
-	const toggleSortName = () => setSortType('name');
-	const toggleSortContacted = () => setSortType('contacted');
-	const toggleSortAge = () => setSortType('age');
+	const toggleSortName = () => {
+		localChats.sort((x,y) => {
+			let xName = findFirstParticipant(x).accountName.toLowerCase(), yName = findFirstParticipant(y).accountName.toLowerCase();
+			return xName.localeCompare(yName);
+		})
+		setLocalChats([...localChats]);
+	};
+	const toggleSortContacted = () => {
+		localChats.sort((x,y) => {
+			var xMsgT = getLastMessage(x).messageTime, yMsgT = getLastMessage(y).messageTime;
+			if (xMsgT === 0 && yMsgT === 0) {
+				return 0;
+			} else if (xMsgT === 0) {
+				return 1;
+			} else if (yMsgT === 0) {
+				return -1;
+			}
+			xMsgT = new Date(getLastMessage(x).messageTime);
+			yMsgT = new Date(getLastMessage(y).messageTime);
+			if (xMsgT < yMsgT) {
+				return 1;
+			} else if (xMsgT > yMsgT) {
+				return -1;
+			} else {
+				return 0;
+			}
+		})
+		setLocalChats([...localChats]);
+	}
+	const toggleSortAge = () => {
+		localChats.sort((x,y) => {
+			let xChatC = new Date(x.chatCreation), yChatC = new Date(y.chatCreation);
+			
+			if (xChatC < yChatC) {
+				return 1;
+			} else if (xChatC > yChatC) {
+				return -1;
+			} else {
+				return 0;
+			};
+		});
+		setLocalChats([...localChats]);
+	}
 
 	const sortTypes = [
 		{
@@ -61,17 +98,6 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 			sortFunction: toggleSortAge,
 		},
 	];
-
-	// sets the sortType based on the state
-	const chatOrder = () => {
-		if (sortType === 'name') {
-			return sortByName;
-		} else if (sortType === 'contacted') {
-			return sortByContacted;
-		} else {
-			return sortByAge;
-		}
-	}
 
 	// gets the most recent message
 	const getLastMessage = (chat) => {
@@ -109,7 +135,10 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 
         getContacts();
     }, []);
-
+	useEffect(() => {
+		setLocalChats(chats);
+	}, [chats]);
+	
 	return (
 		<div className="inbox-contacts">
 			<div className="inbox-contact-header">
@@ -141,8 +170,7 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 			<div className="inbox-contact-list">
 				{(chats !== undefined && chats.length > 0) ? (
 					<ul className="inbox-ul">
-							{chats
-								.sort(chatOrder())
+							{localChats
 								.filter((chat) => {
 									if(chatSearch === ""
 										|| findFirstParticipant(chat).accountName.toLowerCase().includes(chatSearch.toLowerCase())) {

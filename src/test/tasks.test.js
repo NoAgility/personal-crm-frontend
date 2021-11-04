@@ -79,18 +79,21 @@ test("ETE Test - Register -> Login -> Create Task -> See Task", async () => {
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
+        var passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         const fname = screen.getByPlaceholderText('First Name');
         const lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
         
         fireEvent.change(username, {target: {value: 'task_test_user_1'}});
         fireEvent.change(password, {target: {value: 'password'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'password'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('task_test_user_1'));
         await waitFor(() => expect(password).toHaveValue('password'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));

@@ -26,6 +26,7 @@ const SearchBar = ({ name, width, colorMode, onSubmit, placeholder, value, onCha
 					value={value}
 					placeholder={placeholder}
 					onChange={onChange}
+					maxLength={1000}
 				>
 				</input>
 

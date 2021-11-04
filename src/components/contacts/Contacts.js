@@ -5,13 +5,13 @@ import Contact from './Contact.js'
 import AddContact from './AddContact.js'
 import  './Contacts.css'
 import Sort from '../UIComponents/sort/Sort.js';
+import ContactReferral from './ContactReferral.js';
 
 const Contacts = (props) => {
 
 	const [contacts, setContacts] = useState([]);
 	const [contactIDs, setContactIDs] = useState([]);
 	const [modalShow, setModalShow] = React.useState(false);
-	const [sortType, setSortType] = useState('name');
 
 	// Delete a contact
 	const deleteContact = async (contact) => {
@@ -34,10 +34,30 @@ const Contacts = (props) => {
 	}
 
 	// Sort Contacts alphabetically or by date added
-	const sortByName = (x,y) => x.accountName > y.accountName
-	const sortByDate = (x,y) => x.contactCreatedOn > y.contactCreatedOn
-	const toggleSortName = () => setSortType('name')
-	const toggleSortDate = () => setSortType('date')
+	const sortByName = (x,y) => {
+		let xName = x.accountName, yName = y.accountName;
+
+		return xName.localeCompare(yName);
+	}
+	const sortByDate = (x,y) => {
+		let xCreatedOn = new Date(x.contactCreatedOn), yCreatedOn = new Date(y.contactCreatedOn);
+
+		if (xCreatedOn > yCreatedOn) {
+			return -1;
+		} else if (xCreatedOn < yCreatedOn) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	const toggleSortName = () => {
+		contacts.sort(sortByName);
+		setContacts([...contacts]);
+	}
+	const toggleSortDate = () => {
+		contacts.sort(sortByDate);
+		setContacts([...contacts]);
+	}
 	const sortTypes = [
 		{
 			label:"Sort alphabetically",
@@ -48,15 +68,6 @@ const Contacts = (props) => {
 			sortFunction: toggleSortDate,
 		},
 	]
-
-	// Sets the sort order based on the state
-	const contactOrder = () => {
-		if (sortType === 'name') {
-			return sortByName;
-		} else {
-			return sortByDate;
-		}
-	}
 
 	// Gets all the contacts from the backend
 	const getContacts = async () => {
@@ -83,13 +94,17 @@ const Contacts = (props) => {
 		<div className="contacts-page">
 			<div className="contact-header">
 				<h1>Contacts</h1>
-				<button
-					data-testid="add-contact"
-					className="add-btn contacts-btn"
-					onClick={() => setModalShow(true)}>
-					<MdAdd size={22}/>
-					<h4>Add</h4>
-				</button>
+
+				<div className="contact-btns">
+					<ContactReferral/>
+					<button
+						data-testid="add-contact"
+						className="add-btn contacts-btn"
+						onClick={() => setModalShow(true)}>
+						<MdAdd size={22}/>
+						<h4>Add</h4>
+					</button>
+				</div>
 			</div>
 
 			<AddContact
@@ -109,7 +124,6 @@ const Contacts = (props) => {
 				{contacts.length > 0 ? (
 					<ul className="contact-list-group">
 							{contacts
-								.sort(contactOrder())
 								.map((contact) => (
 								<Contact
 									key={contact.accountID}

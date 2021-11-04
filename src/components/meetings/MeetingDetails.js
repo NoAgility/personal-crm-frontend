@@ -7,6 +7,7 @@ import ContactController from '../contacts/ContactController';
 import ProfilePic from '../UIComponents/profilePic/ProfilePic';
 import CookieManager from '../../util/CookieManager';
 import Minute from './Minute';
+import Confirmation from '../UIComponents/confirm/Confirmation';
 import  './MeetingDetails.css';
 import './Meetings.css';
 import "../form.css";
@@ -23,7 +24,10 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 	const [minute, setMinute] = useState('');
 	const userID = parseInt(CookieManager.getCookie('accountID'));
 
+	const [deleteConfirmShow, setDeleteConfirmShow] = useState(false);
+
 	const handleClose = () => {
+		setIsEditing(false);
 		onHide();
 	}
 
@@ -53,6 +57,10 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 		isEditing ? setIsEditing(false) : setIsEditing(true);
 	}
 
+	/**
+	 * Method for converting the meeting participants into JSX components
+	 * @returns A list of participant UI components
+	 */
 	const getParticipants = () => {
 		const ps = meeting.meetingParticipants;
 		if (ps.length > limit) {
@@ -79,6 +87,10 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 		)))
 	}
 
+	/**
+	 * Formatting method for the display date
+	 * @returns the display date
+	 */
 	const getDisplayDate = () => {
 		const dateOptions = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 		const timeOptions = {hour: 'numeric', minute: 'numeric'};
@@ -98,9 +110,15 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 
 	return (
 		<>
+        <Confirmation
+            show={deleteConfirmShow}
+            onHide={() => {setDeleteConfirmShow(false);}}
+            msg={"Delete Meeting?"}
+            accept={() => {handleDelete(); handleClose();}}
+            cancel={() => {}}/>
 		<Modal
 			show={show}
-			onHide={onHide}
+			onHide={handleClose}
 			size="md"
 			aria-labelledby="contained-modal-title-vcenter"
 			centered>
@@ -115,7 +133,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 					</Dropdown.Toggle>
 					<Dropdown.Menu className="contact-options-dropdown" variant="dark">
 						<Dropdown.Item disabled={meeting.meetingCreatorID === userID ? false : true }
-							onClick={handleDelete}>Delete</Dropdown.Item>
+							onClick={() => {setDeleteConfirmShow(true);}}>Delete</Dropdown.Item>
 					</Dropdown.Menu>
 				</Dropdown>
 				<MdClose className="modal-header-button" onClick={handleClose} size={30}/>
@@ -155,7 +173,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 								<Accordion.Body className="accordion-participants-list">
 									{meeting.meetingParticipants
 										.map((p) => (
-												<div className="app-row" key={p.data.accountID}>
+												<div className="participant-row" key={p.data.accountID}>
 													<ProfilePic
 														name={p.data.accountName}
 														size={"xs"}
@@ -210,7 +228,7 @@ const MeetingDetails = ({meeting, show, onHide, meetingOptions, minuteOptions}) 
 							<Accordion.Item  eventKey={0}>
 							<Accordion.Header className="accordion-header">View Minutes</Accordion.Header>
 
-								<div className="">
+								<div className="minute-container">
 									{(meeting.meetingMinutes)
 										.map((m) => (
 											<Accordion.Body key={m.minuteID}>

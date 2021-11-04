@@ -99,7 +99,7 @@ const EditMeeting = ({ meeting, show, onHide, meetingOptions, toggleIsEditing })
                 className="form-input"
                 value={meetingDescription}
                 placeholder="Add Description"
-                maxLength={100}
+                maxLength={255}
                 onChange={event => setMeetingDescription(event.target.value)}
             />
         </h3>

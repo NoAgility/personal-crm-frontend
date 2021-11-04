@@ -22,32 +22,37 @@ function App() {
 
 	return ( <Router>
 				<Switch>
-					<Redirect 
+					<Redirect
 						exact from="/"
 						to="/landing"
-					/> 
-					{ AuthService.isLoggedIn() ? 
-						<Redirect 
+					/>
+					{ AuthService.isLoggedIn() ?
+						<Redirect
 							exact from = "/login"
 							to = "/home"
-							/> : "" } 
+							/> : "" }
 					<Route
 						exact path = "/landing"
 						component = {LandingPage}
 					/>
-					<Route 
+					<Route
 						exact path = "/login"
 						component = {Login}
-					/> 
-					<Route 
+					/>
+					<Route
+						exact path = "/register/referral/:referral"
+						component = {Registration}
+					/>
+					<Route
 						exact path = "/register"
 						component = {Registration}
-					/> 
-					<Route 
+					/>
+
+					<Route
 						exact path = "/registration_success"
 						component = {RegistrationSuccess}
-					/> 
-					<PrivateRoute 
+					/>
+					<PrivateRoute
 						path = "/home"
 						component = {
 							() => {
@@ -56,12 +61,12 @@ function App() {
 								<Navbar/>
 								<div className="app-body scroll-container">
 									<Dashboard/>
-								</div> 
+								</div>
 								</React.Fragment>);
 							}
 						}
 					/>
-				</Switch> 
+				</Switch>
 			</Router>
 		);
 	}

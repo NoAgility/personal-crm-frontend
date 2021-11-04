@@ -55,18 +55,21 @@ test("ETE Test - Register -> Login -> create chat", async () => {
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
+        var passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         var fname = screen.getByPlaceholderText('First Name');
         var lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_sender_1'}});
         fireEvent.change(password, {target: {value: 'password'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'password'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_sender_1'));
         await waitFor(() => expect(password).toHaveValue('password'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -91,18 +94,21 @@ test("ETE Test - Register -> Login -> create chat", async () => {
         </MemoryRouter>);
         username = screen.getByPlaceholderText('Username');
         password = screen.getByPlaceholderText('Password');
+        passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         fname = screen.getByPlaceholderText('First Name');
         lname = screen.getByPlaceholderText('Last Name');
         dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_receiver_1'}});
         fireEvent.change(password, {target: {value: 'password'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'password'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_receiver_1'));
         await waitFor(() => expect(password).toHaveValue('password'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -201,18 +207,21 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
+        var passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         var fname = screen.getByPlaceholderText('First Name');
         var lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_sender_2'}});
         fireEvent.change(password, {target: {value: 'password'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'password'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_sender_2'));
         await waitFor(() => expect(password).toHaveValue('password'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -237,18 +246,21 @@ test("ETE Test - Register -> Login -> create chat -> send message", async () => 
         </MemoryRouter>);
         username = screen.getByPlaceholderText('Username');
         password = screen.getByPlaceholderText('Password');
+        passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         fname = screen.getByPlaceholderText('First Name');
         lname = screen.getByPlaceholderText('Last Name');
         dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_receiver_2'}});
         fireEvent.change(password, {target: {value: 'password'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'password'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_receiver_2'));
         await waitFor(() => expect(password).toHaveValue('password'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -369,18 +381,21 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         );
         var username = screen.getByPlaceholderText('Username');
         var password = screen.getByPlaceholderText('Password');
+        var passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         var fname = screen.getByPlaceholderText('First Name');
         var lname = screen.getByPlaceholderText('Last Name');
         var dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_sender_3'}});
         fireEvent.change(password, {target: {value: 'password'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'password'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_sender_3'));
         await waitFor(() => expect(password).toHaveValue('password'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));
@@ -405,18 +420,21 @@ test("ETE Test - Register -> Login -> create chat -> send message -> read messag
         </MemoryRouter>);
         username = screen.getByPlaceholderText('Username');
         password = screen.getByPlaceholderText('Password');
+        passwordConfirm = screen.getByPlaceholderText('Confirm Password');
         fname = screen.getByPlaceholderText('First Name');
         lname = screen.getByPlaceholderText('Last Name');
         dob = screen.getByTestId('DOB');
 
         fireEvent.change(username, {target: {value: 'inbox_test_receiver_3'}});
         fireEvent.change(password, {target: {value: 'password'}});
+        fireEvent.change(passwordConfirm, {target: {value: 'password'}});
         fireEvent.change(fname, {target: {value: 'testname'}});
         fireEvent.change(lname, {target: {value: 'testname'}});
         fireEvent.change(dob, {target: {value: '2000-08-01'}});
 
         await waitFor(() => expect(username).toHaveValue('inbox_test_receiver_3'));
         await waitFor(() => expect(password).toHaveValue('password'));
+        await waitFor(() => expect(passwordConfirm).toHaveValue('password'));
         await waitFor(() => expect(fname).toHaveValue('testname'));
         await waitFor(() => expect(lname).toHaveValue('testname'));
         await waitFor(() => expect(dob).toHaveValue('2000-08-01'));

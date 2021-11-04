@@ -11,7 +11,6 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [generalError, setGeneralError] = useState("");
-    const [redirect, setRedirect] = useState("");
 
     // submits the login information
     const onSubmit = async (e) => {
@@ -44,6 +43,7 @@ const Login = () => {
                         value={username}
                         placeholder="Username"
                         className="login-input"
+                        maxLength={45}
                         onChange={event => {setUsername(event.target.value)}}
                     />
                 </div>
@@ -55,6 +55,7 @@ const Login = () => {
                         value={password}
                         placeholder="Password"
                         className="login-input"
+                        maxLength={45}
                         onChange={event => {setPassword(event.target.value)}}
                     />
                     {passwordShown ? show : hide}

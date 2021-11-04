@@ -10,14 +10,22 @@ export default function Calendar() {
 	const [publicHolidays, setPublicHolidays] = useState([]);
 	const [tasks, setTasks] = useState([]);
 	const [meetings, setMeetings] = useState([]);
-	const [height, setHeight] = useState("100%");
 
+	/**
+	 * Fetch the tasks of the user
+	 */
 	const fetchTasks = () => {
 		EventController.fetchTasks().then(res => setTasks(res));
 	}
+	/**
+	 * Fetch the meetings of the user
+	 */
 	const fetchMeetings = () => {
 		EventController.fetchMeetings().then(res => setMeetings(res));
 	}
+	/**
+	 * On render, fetch all the relevant events
+	 */
 	useEffect(() => {
 		EventController.fetchPublicHolidays().then(res => setPublicHolidays(res));
 		EventController.fetchTasks().then(res => setTasks(res));
@@ -36,7 +44,7 @@ export default function Calendar() {
 				initialView='dayGridMonth'
 				selectable={true}
 				dayMaxEvents={true}
-				height={height}/>
+				height="100%"/>
 				
 		</div>
 		<AddEventMenu

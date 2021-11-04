@@ -69,6 +69,7 @@ const EditContact = ({ onShow, onHide, contact }) => {
 								value={username}
 								placeholder="Username"
 								className="contact-input"
+								maxLength={45}
 								onChange={event => {setUsername(event.target.value)}}>
 							</input>
 						</div>
