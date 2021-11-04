@@ -50,7 +50,6 @@ const ChatList = ({ chats, createChat, openChat, onDelete, findFirstParticipant 
 	const toggleSortContacted = () => {
 		localChats.sort((x,y) => {
 			var xMsgT = getLastMessage(x).messageTime, yMsgT = getLastMessage(y).messageTime;
-			console.log(xMsgT, yMsgT);
 			if (xMsgT === 0 && yMsgT === 0) {
 				return 0;
 			} else if (xMsgT === 0) {
