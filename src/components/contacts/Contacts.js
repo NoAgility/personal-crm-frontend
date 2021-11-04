@@ -12,7 +12,6 @@ const Contacts = (props) => {
 	const [contacts, setContacts] = useState([]);
 	const [contactIDs, setContactIDs] = useState([]);
 	const [modalShow, setModalShow] = React.useState(false);
-	const [sortType, setSortType] = useState('name');
 
 	// Delete a contact
 	const deleteContact = async (contact) => {
@@ -70,15 +69,6 @@ const Contacts = (props) => {
 		},
 	]
 
-	// Sets the sort order based on the state
-	const contactOrder = () => {
-		if (sortType === 'name') {
-			return sortByName;
-		} else {
-			return sortByDate;
-		}
-	}
-
 	// Gets all the contacts from the backend
 	const getContacts = async () => {
 		const data = await ContactController.fetchContacts();
@@ -134,7 +124,6 @@ const Contacts = (props) => {
 				{contacts.length > 0 ? (
 					<ul className="contact-list-group">
 							{contacts
-								.sort(contactOrder())
 								.map((contact) => (
 								<Contact
 									key={contact.accountID}
